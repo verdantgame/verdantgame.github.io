@@ -1,0 +1,39 @@
+html {	
+	overflow-y: auto!important;
+	min-width: auto!important;
+}
+
+/* * {
+	user-select: none;
+} */
+
+#container {
+    width: 1180px;
+    margin: 0 auto;
+}
+
+#mainVerdantTitle {
+    display: block;
+    text-align: center;
+    margin: 20px 0px 0px;
+}
+
+#mainVerdantTitle img {
+    width: 360px;
+    margin-bottom: 0px;
+    margin-left: 13px;
+}
+
+#setupLayer .subtitle {
+    font-style: italic;
+    text-align: center;
+    width: 440px;
+    margin: 15px auto 15px;
+	font-size:16px;
+	line-height:22px;
+}
+
+#workInProgress {
+	text-align: center;
+	margin: 40px 0px;
+}
