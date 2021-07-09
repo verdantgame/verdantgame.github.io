@@ -58,7 +58,7 @@ function setupCarousel(){
     $('.slideshow-block > .slideshow-animation').html(carouselHTML);
     setTimeout(function(){
         initSmoothScrolling('.slideshow-block','smoothscroll');
-    }, 200);
+    }, 100);
 }
 
 function initSmoothScrolling(container,animation){
