@@ -103,6 +103,11 @@ $(document).on(touchEvent, '#startGame', function(){
 	$('#gameLayer').show();
 });
 
+$(document).on(touchEvent, '#backToStart', function(){
+	$('.gameView').removeClass('gameView');
+	$('.layer').hide();
+	$('#setupLayer').show();
+});
 
 function countInArray(array, what) {
     var count = 0;
