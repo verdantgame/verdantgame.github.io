@@ -1,11 +1,18 @@
-function preload(arrayOfImages) {
-    $(arrayOfImages).each(function(){
-        let my_image = new Image();
-        my_image.src = this;
-    });
-}
-
-preload([
+const preload = src => new Promise(function(resolve, reject) {
+    const img = new Image();
+    img.onload = function() {
+      resolve(img);
+    }
+    img.onerror = reject;
+    img.src = src;
+  });
+  
+  const preloadAll = sources =>
+    Promise.all(
+      sources.map(
+        preload));
+  
+  const sources = [
     'img/title-under-construction.jpg',
     'img/demo-carousel/g-0-0.jpg',
     'img/demo-carousel/g-0-1.jpg',
@@ -37,5 +44,8 @@ preload([
     'img/demo-carousel/p-4-0.jpg',
     'img/demo-carousel/p-4-1.jpg',
     'img/demo-carousel/p-4-2.jpg',
-    'img/demo-carousel/p-4-3.jpg'
-]);
+    'img/demo-carousel/p-4-3.jpg'];
+  
+  preloadAll(sources)
+    .then(images => initFuncs())
+    .catch(err => console.error('Failed', err));
