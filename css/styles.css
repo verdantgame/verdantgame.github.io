@@ -35,7 +35,7 @@ html {
 #mainVerdantTitle {
     display: block;
     text-align: center;
-    margin: 20px 0px 0px;
+    margin: 20px 0px 18px;
 }
 
 #mainVerdantTitle img {
@@ -48,9 +48,9 @@ html {
     font-style: italic;
     text-align: center;
     width: 440px;
-    margin: 15px auto 15px;
-	font-size:16px;
-	line-height:22px;
+    margin: 0px auto 15px;
+    font-size: 16px;
+    line-height: 22px;
 }
 
 #homepageButtonContainer {
@@ -73,6 +73,12 @@ html {
 }
 
 .frontPageEl {
-    width:50%;
-    margin:30px auto 0px;
+    width: 50%;
+    margin: 40px auto 0px;
+}
+
+#backToStart {
+    width: 120px;
+    margin: 0 auto;
+    display: block;
 }
