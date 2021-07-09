@@ -7,6 +7,26 @@ html {
 	user-select: none;
 } */
 
+.slideshow-block {
+    overflow: hidden;
+    width: 100%;
+    height: 227px;
+    margin: 30px auto;
+}
+
+.slideshow-animation {
+    width: auto;
+    height: 100px;
+    font-size: 0px;
+}
+
+.slideshow-animation div {
+    display: inline-block;
+    width: auto;
+    float: none;
+    padding: 0 20px;
+}
+
 #container {
     width: 1180px;
     margin: 0 auto;
@@ -33,11 +53,26 @@ html {
 	line-height:22px;
 }
 
-#workInProgress {
-	text-align: center;
-	margin: 40px 0px;
+#homepageButtonContainer {
+    margin: 30px auto 20px;
+    width: 360px;
 }
 
-#workInProgress ion-icon {
-    height: 24px;
+#homepageButtonContainer .button {
+    display:block;
+    margin: 0px 10px;
+    width: 160px;
+}
+
+#setupLayer {
+    display: block;
+}
+
+.layer {
+    display: none;
+}
+
+.frontPageEl {
+    width:50%;
+    margin:30px auto 0px;
 }
