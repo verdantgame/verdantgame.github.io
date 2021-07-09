@@ -1,8 +1,12 @@
 // If device is touch capable, use touch as the trigger, otherwise the user is using a desktop computer so use click
 var touchEvent = 'ontouchstart' in window ? 'touchstart' : 'click';
 
-$(document).ready(function(){
+function initFuncs(){
     setupCarousel();
+}
+
+$(document).ready(function(){
+    
 })
 
 function setupCarousel(){
@@ -58,7 +62,7 @@ function setupCarousel(){
     $('.slideshow-block > .slideshow-animation').html(carouselHTML);
     setTimeout(function(){
         initSmoothScrolling('.slideshow-block','smoothscroll');
-    }, 100);
+    }, 50);
 }
 
 function initSmoothScrolling(container,animation){
