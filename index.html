@@ -13,11 +13,11 @@
 	<link rel="stylesheet" type="text/css" href="css/styles.css">
 
 	<!-- Favicon code -->
-	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-	<link rel="manifest" href="/site.webmanifest">
-	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+	<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+	<link rel="manifest" href="site.webmanifest">
+	<link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5">
 	<meta name="msapplication-TileColor" content="#da532c">
 	<meta name="theme-color" content="#ffffff">
 
@@ -41,16 +41,41 @@
 	<div id="container">
 
 		<p id="mainVerdantTitle" class="title">
-			<img src="img/title.jpg" alt="Verdant Title Image" />
+			<img src="img/title-under-construction.jpg" alt="Verdant Title Image" />
 		</p>
 
 		<div id="setupLayer" class="layer">
 			<p class="subtitle is-6">Verdant is a puzzly spatial card and token drafting game about houseplant collection and care, for 1-5 players, ages 10+.</p>
+
+			<div id="homepageButtonContainer" class="buttons">
+				<button id="frontPageGameInstructionsButton" class="button is-info" title="Instructions">Instructions</button>
+				<button id="startGame" class="button is-success startCommenceButton" title="Start Game">Start Game</button>
+			</div>
+
+			<article id="demoDisclaimer" class="message is-success frontPageEl">
+				<div class="message-header">
+					<p>Heads up!</p>
+					<button class="delete" aria-label="delete"></button>
+				</div>
+				<div class="message-body">
+					This online demo of Verdant only showcases a small amount of the available content! By backing on Kickstarter you get access to much...<strong>MUCH MORE</strong>, including the following plants and variable game goals:
+
+					<div class="slideshow-block">
+						<div class="slideshow-animation"></div>
+					</div>
+
+				</div>
+			</article>
+
 		</div>
 
-		<p id="workInProgress" class="subtitle is-3">
-			<ion-icon name="construct-outline"></ion-icon> UNDER DEVELOPMENT <ion-icon name="construct-outline"></ion-icon>
-		</p>
+		<div id="gameLayer" class="layer">
+			<p class="title is-4 has-text-centered">Game Layer</p>
+		</div>
+
+		<div id="goalsLayer" class="layer">
+			<p class="title is-4 has-text-centered">Goal Layer</p>
+		</div>
 
 	</div>
 
