@@ -1,6 +1,7 @@
 function preload(arrayOfImages) {
     $(arrayOfImages).each(function(){
-        $('<img/>')[0].src = this;
+        let my_image = new Image();
+        my_image.src = this;
     });
 }
 
