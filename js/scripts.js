@@ -5,10 +5,6 @@ function initFuncs(){
     setupCarousel();
 }
 
-$(document).ready(function(){
-    
-})
-
 function setupCarousel(){
     let carouselRaw = [
         {   
@@ -62,7 +58,7 @@ function setupCarousel(){
     $('.slideshow-block > .slideshow-animation').html(carouselHTML);
     setTimeout(function(){
         initSmoothScrolling('.slideshow-block','smoothscroll');
-    }, 50);
+    }, 10);
 }
 
 function initSmoothScrolling(container,animation){
