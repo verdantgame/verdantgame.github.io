@@ -11,7 +11,7 @@ html {
     overflow: hidden;
     width: 100%;
     height: 227px;
-    margin: 30px auto;
+    margin: 15px auto 10px;
 }
 
 .slideshow-animation {
@@ -72,9 +72,13 @@ html {
     display: none;
 }
 
-.frontPageEl {
-    width: 50%;
+#demoDisclaimer {
+    width: 64%;
     margin: 40px auto 0px;
+}
+
+#demoDisclaimer .message-body p {
+    margin-bottom: 13px;
 }
 
 #backToStart {
