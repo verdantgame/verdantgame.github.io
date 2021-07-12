@@ -77,7 +77,7 @@ function initSmoothScrolling(container,animation){
     var maxSlidesVisible = Math.ceil(slidesVisible);
 
     // count slides to determine animation speed
-    var speed = slidesNumber*3;
+    var speed = slidesNumber*2;
     // append the tail	
     $(container+'>div>div').slice(0,maxSlidesVisible).clone().appendTo($(container+'>div'));	
 
@@ -92,6 +92,8 @@ function initSmoothScrolling(container,animation){
     //   Insert styles to html
     $("<style type='text/css'>@keyframes "+animation+" { 0% { margin-left: 0px; } 100% { margin-left: -"+totalAnimationWidth+"px; } } "+container+">div>div:first-child { -webkit-animation: "+animation+" "+speed+"s linear infinite; -moz-animation: "+animation+" "+speed+"s linear infinite; -ms-animation: "+animation+" "+speed+"s linear infinite; -o-animation: "+animation+" "+speed+"s linear infinite; animation: "+animation+" "+speed+"s linear infinite; }</style>").appendTo("head");	
 }
+
+var rulesURL = 'files/rules.pdf';
 
 $(document).on(touchEvent, '#frontPageGameInstructionsButton', function(){
 	openInNewTab(rulesURL);
