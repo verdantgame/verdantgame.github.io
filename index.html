@@ -21,8 +21,10 @@
 	<meta name="msapplication-TileColor" content="#da532c">
 	<meta name="theme-color" content="#ffffff">
 
-	<!-- Font for Scoring Table -->
-	<link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap" rel="stylesheet">
+	<!-- Font for Titles -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Serif+Text&display=swap" rel="stylesheet">
 
 	<!-- Global site tag (gtag.js) - Google Analytics -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-F576KC8537"></script>
@@ -37,7 +39,7 @@
 </head>
 
 <body>
-
+	<div id="full-bg"></div>
 	<div id="container">
 
 		<p id="mainVerdantTitle" class="title">
@@ -54,8 +56,7 @@
 
 			<article id="demoDisclaimer" class="message is-success">
 				<div class="message-body">
-					<p>Hi!</p>
-					<p>Welcome to the Verdant online demo! This is a browser-based version of the game that is intended to allow you to test out the experience of playing Verdant! The demo is an introductory game to give you a small sampling of the content from the full game. The final board game will have more than double the number of unique plant cards and feature dozens of end game scoring cards that can be mixed and matched to create nearly endless different puzzles!</p>
+					<p>Hi! Welcome to the Verdant online demo! This is a browser-based version of the game that is intended to allow you to test out the experience of playing Verdant! The demo is an introductory game to give you a small sampling of the content from the full game. The final board game will have more than double the number of unique plant cards and feature dozens of end game scoring cards that can be mixed and matched to create nearly endless different puzzles!</p>
 					<p>In order to learn the game, please click on the links to access the PDF rulebook and rules/playthrough videos of the game.</p>
 					<p>We hope you enjoy the demo! If you liked what you played, you can make a pledge to receive a physical copy of the game <strong>for just $29!</strong> Please spread the word about the demo, challenge your friends to see who can create the most verdant home, and share your results on social media!</p>
 					<p>#VerdantGame @flatoutgames</p>
@@ -74,14 +75,50 @@
 		</div>
 
 		<div id="gameLayer" class="layer">
-			<p class="title is-4 has-text-centered">Game Layer</p>
-			<button id="backToStart" class="button is-danger" title="Start Game">Back</button>
-		</div>
+			<!-- <p class="title is-4 has-text-centered">Game Layer</p> -->
+			<!-- <button id="backToStart" class="button is-danger" title="Start Game">Help</button> -->
 
-		<div id="goalsLayer" class="layer">
-			<p class="title is-4 has-text-centered">Goal Layer</p>
-		</div>
+			<div id="gameSectionsParent">
 
+				<div id="marketSection" class="gameSection expanded initSetup">
+					<div class="inactive">
+						<ion-icon name="expand"></ion-icon>
+					</div>
+					<div class="gameSectionBorder outerBorder">
+						<div class="gameSectionBorder innerBorder">
+							<div class="bgOverlay"></div>
+							<img class="gameSectionBg" src="img/bg.jpg" alt="">
+							<div class="gameSectionContent">
+								<p id="marketTitle" class="title is-3 has-text-centered">Market</p>
+								<div id="marketCardColumns"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div id="tableauSection" class="gameSection minimized showExpand initSetup">
+					<div class="inactive">
+						<ion-icon name="expand"></ion-icon>
+					</div>
+					<div class="gameSectionBorder outerBorder">
+						<div class="gameSectionBorder innerBorder">
+							<div class="bgOverlay"></div>
+							<img class="gameSectionBg" src="img/bg.jpg" alt="">
+							<div class="gameSectionContent">
+								<p id="playerTableauTitle" class="title is-3 has-text-centered">Player's Home</p>
+								<div id="homeContentContainer">
+									<div id="playerInfoContainer">
+										<div id="cardToPlace"></div>
+									</div>
+									<div id="mapContainer"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
 	</div>
 
 	<script type="module" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.esm.js"></script>
