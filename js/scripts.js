@@ -1,8 +1,20 @@
 // If device is touch capable, use touch as the trigger, otherwise the user is using a desktop computer so use click
 var touchEvent = 'ontouchstart' in window ? 'touchstart' : 'click';
 
+var allPlantCards = [];
+var allRoomCards = [];
+var allItemTokens = [];
+var allPlantPots = [];
+
+var initialPlantCards = [];
+var initialRoomCards = [];
+var initialItemTokens = [];
+var initialPlantPots = [];
+
 function initFuncs(){
     setupCarousel();
+    setupDrawPiles();
+    initiateMap();
 }
 
 function setupCarousel(){
@@ -57,11 +69,253 @@ function setupCarousel(){
 
     $('.slideshow-block > .slideshow-animation').html(carouselHTML);
     setTimeout(function(){
-        initSmoothScrolling('.slideshow-block','smoothscroll');
+        initSlideshow('.slideshow-block','smoothscroll');
     }, 100);
 }
 
-function initSmoothScrolling(container,animation){
+function setupDrawPiles(){
+    // create and shuffle plant card draw pile array
+    allPlantCards = shuffle(plantCards);
+
+    // create and shuffle room card draw pile array
+    let initRoomCards = [];
+    for (const [key, value] of Object.entries(roomCards)) {
+        for (let i = 0; i < value.length; i++) {
+            let thisRoomCard = {
+                'cardType': 'room',
+                'plantType': key,
+                'img': key,
+                'lighting': value[i],
+                'item': 'none'
+            }
+            initRoomCards.push(thisRoomCard);
+        }
+    }
+
+    allRoomCards = shuffle(initRoomCards);
+
+    // create and shuffle item tokens draw pile array
+
+    // var plantTypes = ['flowering', 'foliage', 'succulent', 'unusual', 'vining'];
+
+    let initItemTokens = [];
+    for (const [key, value] of Object.entries(itemsAndNurtureItems)) {
+        for (let i = 0; i < value.length; i++) {
+            if(key == 'items') {
+                for (let j = 0; j < plantTypes.length; j++) {
+                    initItemTokens.push(`${key}_${plantTypes[j]}-${itemsAndNurtureItems[key][i]}`);
+                }
+            } else if(key == 'itemsNurture') {
+                for (let j = 0; j < 15; j++) {
+                    initItemTokens.push(`${key}_${itemsAndNurtureItems[key][i]}`);
+                }
+            }
+            
+        }
+    }
+
+    // create and shuffle available plant pots
+
+    let plantPots = ['concrete', 'wood', 'porcelain'];
+    for (let i = 0; i < plantPots.length; i++) {
+        for (let j = 0; j < 15; j++) {
+            let randNum = Math.floor(Math.random() * 3);
+            allPlantPots.push(`${plantPots[i]}-${randNum}`);
+        }
+    }
+    
+    allItemTokens = shuffle(initItemTokens);
+
+    console.log(`allPlantCards: `, allPlantCards);
+    console.log(`allRoomCards: `, allRoomCards);
+    console.log(`allItemTokens: `, allItemTokens);
+    console.log(`allPlantPots: `, allPlantPots);
+
+    setupInitialCardsAndItems();
+
+}
+
+function setupInitialCardsAndItems() {
+
+	// since there are 4 tiles to be generated, the below loop is actioned 4 times
+	for (let i = 0; i < 4; i++) {
+		// the first tile is spliced and stored in the "thisTile" variable
+		let thisPlantCard = allPlantCards.splice(0, 1);
+        let thisRoomCard = allRoomCards.splice(0, 1);
+        let thisItemToken = allItemTokens.splice(0, 1);
+        let thisPlantPot = allPlantPots.splice(0, 1);
+
+		// finally push the tile information into the "initialTiles" variable which will eventually hold the information for all 4 initial tiles to be displayed
+
+        initialPlantCards.push(thisPlantCard[0]);
+        initialItemTokens.push(thisItemToken[0]);
+        initialRoomCards.push(thisRoomCard[0]);
+        initialPlantPots.push(thisPlantPot[0]);
+	}
+
+	let initialMarketHTML = '';
+
+	// again, since there are 4 combinations of tiles+tokens container, the below loop is actioned 4 times
+	for (let k = 0; k < 4; k++) {
+		// the below code generates the HTML to store information for each tile and token combination and then inserts it into the DOM
+		initialMarketHTML += `
+            <div class="marketColumn" column="${k}">
+                <div class="plantPotContainer startingPos">
+                    <img class="plantPot" src="img/pots/${initialPlantPots[k]}.png" alt="" />
+                </div>
+                <div class="cardsAndItemContainer">
+                    ${generateCard(initialPlantCards[k], 'plant', 'init')}
+                    ${generateItem(initialItemTokens[k], 'init')}
+                    ${generateCard(initialRoomCards[k], 'room', 'init')}
+                </div>
+            </div>
+        `;
+	}
+
+	$('#marketCardColumns').append(initialMarketHTML);
+
+}
+
+let mapData = [];
+let mapLoopLimit = 0;
+var mapRowsColumnsIndexes = {
+	rows: {},
+	columns: {}
+};
+
+function initiateMap() {
+
+	let numRows = 5;
+	let numColumns = 9;
+
+	// mapData = []
+	let i;
+	let j;
+	let k;
+	let l;
+
+	// loop through all rows
+	for (i = 0, j = 0; i < numRows; i++) {
+
+		mapRowsColumnsIndexes.rows['row' + j] = i;
+
+		// j = 0 ROW START
+		// i < 5 ROW DURATION (11 rows)
+		// end result = rows = [16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26];
+		mapData[i] = [];
+		// loop through all the children of the currently targetted row - which represents the columns
+		for (k = 0, l = 0; k < numColumns; k++) {
+
+			mapRowsColumnsIndexes.columns['column' + l] = k;
+
+			// l = 14 COLUMNS START
+			// k < 12 COLUMNS DURATION (12 columns)
+			// end result = columns = [14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25];
+			mapData[i][k] = {
+				// every map hex is blank to start with
+				row: j,
+				column: l,
+				placedCard: false,
+                placedItem: false
+			}
+			l++;
+		}
+		j++;
+	}
+
+	// now that the starting template for the map has been creatd (as well as the starting tile information), the map is generated
+	generateMap();
+}
+
+function generateMap() {
+	// the map HTML script
+	var mapHTML = `<div id="mapHiddenOverlay">`;
+	for (let i = 0; i < mapData.length; i++) {
+		for (let j = 0; j < mapData[i].length; j++) {
+			mapHTML += `<div id="row-${mapData[i][j].row}-column-${mapData[i][j].column}" class="mapTileContainer row-${mapData[i][j].row} column-${mapData[i][j].column}"></div>`;
+		}
+	}
+    mapHTML += `
+        </div>
+            <div class="zoomOptions">
+                <img zoomType="zoomIn" class="zoomIn zoomOption inactiveZoom" src="img/zoomIn-inactive.png" />
+                <img zoomType="zoomOut" class="zoomOut zoomOption activeZoom" src="img/zoomOut.png" />
+            </div>
+            <div class="mapNavigation">
+                <img class="navBackground" src="img/woodCircle.png" />
+                <img direction="up" class="upArrow navArrow" src="img/arrow.png" />
+                <img direction="right" class="rightArrow navArrow" src="img/arrow.png" />
+                <img direction="down" class="downArrow navArrow" src="img/arrow.png" />
+                <img direction="left" class="leftArrow navArrow" src="img/arrow.png" />
+            </div>
+
+            <div id="placedTileOptions">
+                <button id="cancelTilePlacement" class="button is-danger">Cancel</button>
+                <button id="confirmTilePlacement" class="button is-success">Confirm</button>
+            </div>
+    `;
+	// the map is generated and all the exisiting information has been replaced
+	$('#homeContentContainer #mapContainer').html(mapHTML);
+}
+
+$(document).on('mouseenter','#marketSection.gameSection:not(.expandAnimation) #marketCardColumns .marketColumn .cardsAndItemContainer',function(){
+	$(this).closest('.marketColumn').addClass('activeColumn');
+    $(this).closest('#marketCardColumns').addClass('activeColumnView');
+});
+
+$(document).on('mouseleave','#marketSection.gameSection:not(.expandAnimation) #marketCardColumns .marketColumn .cardsAndItemContainer',function(){
+	$('.activeColumn').addClass('deactivedColumn').removeClass('activeColumn');
+    $('.activeColumnView').removeClass('activeColumnView');
+    setTimeout(function(){
+        $('.deactivedColumn').removeClass('deactivedColumn');
+    }, 100);
+});
+
+function generateCard(thisCard, cardType, mode) {
+	var thisCardHTML = `
+        <div class="flip-card flip-back flip-${cardType}${mode == 'init' ? ` startingPos` : ``}">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img class="${cardType}Back" src="img/${cardType}s/back.jpg" alt="" />
+                </div>
+                <div class="flip-card-back">
+                    <div class="cardContainer" type="${cardType}"${cardType == 'plant' ? ` lighting="${thisCard.lighting.length}"` : ``}>
+                        <img class="${cardType}" src="img/${cardType}s/${thisCard.img}.jpg" alt="" />
+                        ${cardType == 'plant' ? `
+                            <img class="plantBanner" src="img/plants/icons/banners/${thisCard.plantType}.png" alt="" />
+                            <img class="plantSymbol" src="img/plants/icons/symbols/${thisCard.plantType}.png" alt="" />
+                            <img class="plantVerdancy" src="img/plants/icons/verdancy/${thisCard.verdancyRequired}.png" alt="" />
+                            <img class="plantVPs" src="img/plants/icons/vp/${thisCard.vps}.png" alt="" />
+                        ` : ``}
+    `;
+
+    for (let i = 0; i < thisCard.lighting.length; i++) {
+        thisCardHTML += `
+            ${cardType == 'room' ? `<div class="lightingIconContainer" lighting-container="${i}">` : ``}
+                <img class="lightingIcon" src="img/lighting/${thisCard.lighting[i]}.png" lighting-icon="${i}" alt="" />
+            ${cardType == 'room' ? `</div>` : ``}
+        `;
+    }
+
+    thisCardHTML += `
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+
+	// return the HTML so that whenever the function is called, will now be a placeholder for the above HTML
+	return thisCardHTML;
+}
+
+function generateItem(thisItem, mode) {
+    let itemDetails = thisItem.split('_');
+    let thisItemHTML = `<img class="itemToken${mode == 'init' ? ` startingPos` : ``}" src="img/${itemDetails[0]}/${itemDetails[1]}.png" />`
+	// return the HTML so that whenever the function is called, will now be a placeholder for the above HTML
+	return thisItemHTML;
+}
+
+function initSlideshow(container, animation){
     /*
     * @param {String} container Class or ID of the animation container
     * @param {String} animation Name of the animation, e.g. smoothscroll
@@ -99,16 +353,117 @@ $(document).on(touchEvent, '#frontPageGameInstructionsButton', function(){
 	openInNewTab(rulesURL);
 });
 
+let initMarketInterval;
+let initMarketFlipCardsInterval;
+
 $(document).on(touchEvent, '#startGame', function(){
 	$('body').addClass('gameView');
-	$('.layer').hide();
-	$('#gameLayer').show();
+	$('.layer').fadeOut();
+    setTimeout(function(){
+        $('#gameLayer').fadeIn();
+        setTimeout(function(){
+            initMarketInterval = setInterval(initMarketFunc, 150);    
+        }, 400);
+    }, 400);
+	
+    $('#gameLayer #gameSectionsParent .minimized ion-icon[name="expand"]').show();
 });
 
-$(document).on(touchEvent, '#backToStart', function(){
-	$('.gameView').removeClass('gameView');
-	$('.layer').hide();
-	$('#setupLayer').show();
+let currentColumn = 3;
+let currentMarketItem = 0;
+
+function initMarketFunc(){
+    let marketItemClasses = ['.plantPotContainer', '.cardsAndItemContainer .flip-plant', '.cardsAndItemContainer .itemToken', '.cardsAndItemContainer .flip-room'];
+    $(`.marketColumn[column="${currentColumn}"] ${marketItemClasses[currentMarketItem]}`).removeClass('startingPos');
+    currentColumn--;
+    if(currentColumn == -1 && (currentMarketItem + 1) < marketItemClasses.length) {
+        currentColumn = 3;
+        currentMarketItem++;
+    } else if(currentColumn == -1 && (currentMarketItem + 1) == marketItemClasses.length) {
+        clearInterval(initMarketInterval);
+        currentColumn = 3;
+        currentMarketItem = 0;
+        setTimeout(function(){
+            initMarketFlipCardsInterval = setInterval(flipInitMarketCards, 150);    
+        }, 1000)
+    }
+}
+
+function flipInitMarketCards() {
+    let marketFlipCardClasses = ['.cardsAndItemContainer .flip-plant .flip-card-inner', '.cardsAndItemContainer .flip-room .flip-card-inner'];
+    $(`.marketColumn[column="${currentColumn}"] ${marketFlipCardClasses[currentMarketItem]}`).css('transform', 'rotateY(180deg) translate3d(0, 0, 1px)'); 
+    currentColumn--;
+    if(currentColumn == -1 && (currentMarketItem + 1) < marketFlipCardClasses.length) {
+        currentColumn = 3;
+        currentMarketItem++;
+    } else if(currentColumn == -1 && (currentMarketItem + 1) == marketFlipCardClasses.length) {
+        clearInterval(initMarketFlipCardsInterval);
+        setTimeout(function(){
+
+            $('.cardsAndItemContainer .flip-plant .flip-card-inner .flip-card-back .cardContainer').each(function(){
+                let columnNum = $(this).closest('.marketColumn').attr('column');
+                $(this).prependTo(`.marketColumn[column="${columnNum}"] .cardsAndItemContainer`);
+            });
+
+            $('.cardsAndItemContainer .flip-room .flip-card-inner .flip-card-back .cardContainer').each(function(){
+                let columnNum = $(this).closest('.marketColumn').attr('column');
+                $(this).appendTo(`.marketColumn[column="${columnNum}"] .cardsAndItemContainer`);
+            });
+
+            $('.flip-card').remove();
+
+            setTimeout(function(){
+                initPlayersHome();
+            }, 300);
+
+        }, 500);
+    }
+}
+
+function initPlayersHome() {
+    $('#marketSection').addClass('minimized').removeClass('expanded');
+    $('#tableauSection').addClass('expanded').removeClass('minimized');
+
+    // target the next tile information in the allTiles array
+    // splicing the first item removes it from the array and transfers the information into the "thisTile" variable
+
+    let startingPlant = allPlantCards.splice(0, 1);
+    let startingRoom = allRoomCards.splice(0, 1);
+
+    let startingPlantHTML = generateCard(startingPlant[0], 'plant', 'init');
+    let startingRoomHTML = generateCard(startingRoom[0], 'room', 'init');
+
+    $('#playerInfoContainer #cardToPlace').append(startingPlantHTML);
+    $('#mapContainer #mapHiddenOverlay #row-2-column-4').append(startingRoomHTML);
+
+    setTimeout(function(){
+        $('#playerInfoContainer #cardToPlace .flip-plant.startingPos').removeClass('startingPos')
+        $('#mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room.startingPos').removeClass('startingPos')
+    }, 500);
+
+    setTimeout(function(){
+        $('#playerInfoContainer #cardToPlace .flip-plant .flip-card-inner').css('transform', 'rotateY(180deg) translate3d(0, 0, 1px)'); 
+        $('#mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room .flip-card-inner').css('transform', 'rotateY(180deg) translate3d(0, 0, 1px)'); 
+    }, 3000);
+
+    setTimeout(function(){
+        $('.initSetup').removeClass('initSetup');
+    }, 3500);
+
+}
+
+// $(document).on(touchEvent, '#backToStart', function(){
+// 	$('.gameView').removeClass('gameView');
+// 	$('.layer').hide();
+// 	$('#setupLayer').show();
+// });
+
+$(document).on(touchEvent, '#gameLayer #gameSectionsParent .minimized:not(.initSetup)', function(){
+    $('#gameLayer #gameSectionsParent .expanded').addClass('minimized').removeClass('expanded');
+    $(this).addClass('expanded expandAnimation').removeClass('minimized');
+    setTimeout(function(){
+        $('.expanded.expandAnimation').removeClass('expandAnimation');
+    }, 500)
 });
 
 function countInArray(array, what) {
