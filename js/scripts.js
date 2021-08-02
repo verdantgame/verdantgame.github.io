@@ -238,20 +238,20 @@ function generateMap() {
     mapHTML += `
         </div>
             <div class="zoomOptions">
-                <img zoomType="zoomIn" class="zoomIn zoomOption inactiveZoom" src="img/zoomIn-inactive.png" />
-                <img zoomType="zoomOut" class="zoomOut zoomOption activeZoom" src="img/zoomOut.png" />
+                <!--img zoomType="zoomIn" class="zoomIn zoomOption inactiveZoom" src="img/zoomIn-inactive.png" /-->
+                <!--img zoomType="zoomOut" class="zoomOut zoomOption activeZoom" src="img/zoomOut.png" /-->
             </div>
             <div class="mapNavigation">
-                <img class="navBackground" src="img/woodCircle.png" />
-                <img direction="up" class="upArrow navArrow" src="img/arrow.png" />
-                <img direction="right" class="rightArrow navArrow" src="img/arrow.png" />
-                <img direction="down" class="downArrow navArrow" src="img/arrow.png" />
-                <img direction="left" class="leftArrow navArrow" src="img/arrow.png" />
+                <!--img class="navBackground" src="img/woodCircle.png" /-->
+                <!--img direction="up" class="upArrow navArrow" src="img/arrow.png" /-->
+                <!--img direction="right" class="rightArrow navArrow" src="img/arrow.png" /-->
+                <!--img direction="down" class="downArrow navArrow" src="img/arrow.png" /-->
+                <!--img direction="left" class="leftArrow navArrow" src="img/arrow.png" /-->
             </div>
 
             <div id="placedTileOptions">
-                <button id="cancelTilePlacement" class="button is-danger">Cancel</button>
-                <button id="confirmTilePlacement" class="button is-success">Confirm</button>
+                <!--button id="cancelTilePlacement" class="button is-danger">Cancel</button-->
+                <!--button id="confirmTilePlacement" class="button is-success">Confirm</button-->
             </div>
     `;
 	// the map is generated and all the exisiting information has been replaced
