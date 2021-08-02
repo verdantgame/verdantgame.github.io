@@ -1,200 +1,278 @@
-var plantCards = {
-    'flowering': [
-        {   // flowering-0
-            'name': 'African Violet',
-            'id': 'africanViolet',
-            'lighting': ['half'],
-            'verdancyRequired': 4,
-            'vps': 4
-        },{  // flowering-1
-            'name': 'Bird of Paradise',
-            'id': 'birdParadise',
-            'lighting': ['full', 'half'],
-            'verdancyRequired': 8,
-            'vps': 9
-        },{  // flowering-2
-            'name': 'Angel Wing Begonia',
-            'id': 'angelWingBegonia',
-            'lighting': ['full', 'half', 'none'],
-            'verdancyRequired': 7,
-            'vps': 7
-        },{  // flowering-3
-            'name': 'Peace Lily',
-            'id': 'peaceLily',
-            'lighting': ['half', 'none'],
-            'verdancyRequired': 5,
-            'vps': 5
-        },{  // flowering-4
-            'name': 'Bush Lily',
-            'id': 'bushLily',
-            'lighting': ['half'],
-            'verdancyRequired': 5,
-            'vps': 6
-        },{  // flowering-5
-            'name': 'Amaryllis',
-            'id': 'amaryllis',
-            'lighting': ['full', 'half'],
-            'verdancyRequired': 4,
-            'vps': 3
-        }
-    ],
-    'foliage': [
-        {   // foliage-0
-            'name': 'Lucky Bamboo',
-            'id': 'luckyBamboo',
-            'lighting': ['full', 'half'],
-            'verdancyRequired': 6,
-            'vps': 6
-        },{  // foliage-1
-            'name': 'Snake Plant',
-            'id': 'snakePlant',
-            'lighting': ['full', 'half', 'none'],
-            'verdancyRequired': 7,
-            'vps': 7
-        },{  // foliage-2
-            'name': 'ZZ Plant',
-            'id': 'zzPlant',
-            'lighting': ['full', 'half', 'none'],
-            'verdancyRequired': 6,
-            'vps': 5
-        },{  // foliage-3
-            'name': 'Coin Plant',
-            'id': 'coinPlant',
-            'lighting': ['half'],
-            'verdancyRequired': 4,
-            'vps': 4
-        },{  // foliage-4
-            'name': 'Prayer Plant',
-            'id': 'prayerPlant',
-            'lighting': ['half', 'none'],
-            'verdancyRequired': 4,
-            'vps': 3
-        },{  // foliage-5
-            'name': 'Swiss Cheese Plant',
-            'id': 'swissCheesePlant',
-            'lighting': ['half', 'none'],
-            'verdancyRequired': 7,
-            'vps': 8
-        }
-    ],
-    'succulent': [
-        {   // succulent-0
-            'name': 'Mexican Snowball',
-            'id': 'mexicanSnowball',
-            'lighting': ['full', 'half'],
-            'verdancyRequired': 3,
-            'vps': 2
-        },{  // succulent-1
-            'name': 'Zebra Haworthia',
-            'id': 'zebraHaworthia',
-            'lighting': ['full', 'half', 'none'],
-            'verdancyRequired': 4,
-            'vps': 2
-        },{  // succulent-2
-            'name': 'Candelabra Cactus',
-            'id': 'candelbraCactus',
-            'lighting': ['full'],
-            'verdancyRequired': 8,
-            'vps': 10
-        },{  // succulent-3
-            'name': 'Aloe',
-            'id': 'aloe',
-            'lighting': ['full'],
-            'verdancyRequired': 5,
-            'vps': 6
-        },{  // succulent-4
-            'name': 'Jade',
-            'id': 'jade',
-            'lighting': ['full', 'half'],
-            'verdancyRequired': 7,
-            'vps': 8
-        },{  // succulent-5
-            'name': 'Panda Plant',
-            'id': 'pandaPlant',
-            'lighting': ['full', 'half'],
-            'verdancyRequired': 6,
-            'vps': 6
-        }
-    ],
-    'unusual': [
-        {   // unusual-0
-            'name': 'Chenille Plant',
-            'id': 'chenillePlant',
-            'lighting': ['full', 'half'],
-            'verdancyRequired': 8,
-            'vps': 9
-        },{  // unusual-1
-            'name': 'Nerve Plant',
-            'id': 'nervePlant',
-            'lighting': ['full', 'half', 'none'],
-            'verdancyRequired': 4,
-            'vps': 2
-        },{  // unusual-2
-            'name': 'Ficus Bonsai',
-            'id': 'ficusBonsai',
-            'lighting': ['full', 'half'],
-            'verdancyRequired': 4,
-            'vps': 3
-        },{  // unusual-3
-            'name': 'Rabbit\'s Foot Fern',
-            'id': 'rabbitsFootFern',
-            'lighting': ['half', 'none'],
-            'verdancyRequired': 5,
-            'vps': 5
-        },{  // unusual-4
-            'name': 'Living Stone',
-            'id': 'livingStone',
-            'lighting': ['full'],
-            'verdancyRequired': 3,
-            'vps': 3
-        },{  // unusual-5
-            'name': 'Corkscrew Plant',
-            'id': 'corkscrewPlant',
-            'lighting': ['full', 'half'],
-            'verdancyRequired': 3,
-            'vps': 2
-        }
-    ],
-    'vining': [
-        {   // vining-0
-            'name': 'Black-Eyed Susan Vine',
-            'id': 'blackeyedSusanVine',
-            'lighting': ['full'],
-            'verdancyRequired': 7,
-            'vps': 9
-        },{  // vining-1
-            'name': 'Inch Plant',
-            'id': 'inchPlant',
-            'lighting': ['full', 'half'],
-            'verdancyRequired': 5,
-            'vps': 5
-        },{  // vining-2
-            'name': 'Hoya',
-            'id': 'hoya',
-            'lighting': ['full', 'half', 'none'],
-            'verdancyRequired': 8,
-            'vps': 8
-        },{  // vining-3
-            'name': 'Arrowhead Vine',
-            'id': 'arrowheadVine',
-            'lighting': ['half', 'none'],
-            'verdancyRequired': 4,
-            'vps': 3
-        },{  // vining-4
-            'name': 'Devil\s Ivy',
-            'id': 'devilsIvy',
-            'lighting': ['half', 'none'],
-            'verdancyRequired': 9,
-            'vps': 11
-        },{  // vining-5
-            'name': 'Jasmine',
-            'id': 'jasmine',
-            'lighting': ['full', 'half'],
-            'verdancyRequired': 9,
-            'vps': 11
-        }
-    ]
-};
+var plantTypes = ['flowering', 'foliage', 'succulent', 'unusual', 'vining'];
+
+var plantCards = [
+    {   // flowering-0
+        'cardType': 'plant',
+        'plantType': 'flowering',
+        'name': 'African Violet',            
+        'id': 'africanViolet',            
+        'img': 'flowering-0',
+        'lighting': ['half'],
+        'verdancyRequired': 4,
+        'vps': 4
+    },{  // flowering-1
+        'cardType': 'plant',
+        'plantType': 'flowering',
+        'name': 'Bird of Paradise',            
+        'id': 'birdParadise',            
+        'img': 'flowering-1',
+        'lighting': ['full', 'half'],
+        'verdancyRequired': 8,
+        'vps': 9
+    },{  // flowering-2
+        'cardType': 'plant',
+        'plantType': 'flowering',
+        'name': 'Angel Wing Begonia',            
+        'id': 'angelWingBegonia',            
+        'img': 'flowering-2',
+        'lighting': ['full', 'half', 'none'],
+        'verdancyRequired': 7,
+        'vps': 7
+    },{  // flowering-3
+        'cardType': 'plant',
+        'plantType': 'flowering',
+        'name': 'Peace Lily',            
+        'id': 'peaceLily',            
+        'img': 'flowering-3',
+        'lighting': ['half', 'none'],
+        'verdancyRequired': 5,
+        'vps': 5
+    },{  // flowering-4
+        'cardType': 'plant',
+        'plantType': 'flowering',
+        'name': 'Bush Lily',            
+        'id': 'bushLily',            
+        'img': 'flowering-4',
+        'lighting': ['half'],
+        'verdancyRequired': 5,
+        'vps': 6
+    },{  // flowering-5
+        'cardType': 'plant',
+        'plantType': 'flowering',
+        'name': 'Amaryllis',            
+        'id': 'amaryllis',            
+        'img': 'flowering-5',
+        'lighting': ['full', 'half'],
+        'verdancyRequired': 4,
+        'vps': 3
+    },{   // foliage-0
+        'cardType': 'plant',
+        'plantType': 'foliage',
+        'name': 'Lucky Bamboo',
+        'id': 'luckyBamboo',
+        'img': 'foliage-0',
+        'lighting': ['full', 'half'],
+        'verdancyRequired': 6,
+        'vps': 6
+    },{  // foliage-1
+        'cardType': 'plant',
+        'plantType': 'foliage',
+        'name': 'Snake Plant',
+        'id': 'snakePlant',
+        'img': 'foliage-1',
+        'lighting': ['full', 'half', 'none'],
+        'verdancyRequired': 7,
+        'vps': 7
+    },{  // foliage-2
+        'cardType': 'plant',
+        'plantType': 'foliage',
+        'name': 'ZZ Plant',
+        'id': 'zzPlant',
+        'img': 'foliage-2',
+        'lighting': ['full', 'half', 'none'],
+        'verdancyRequired': 6,
+        'vps': 5
+    },{  // foliage-3
+        'cardType': 'plant',
+        'plantType': 'foliage',
+        'name': 'Coin Plant',
+        'id': 'coinPlant',
+        'img': 'foliage-3',
+        'lighting': ['half'],
+        'verdancyRequired': 4,
+        'vps': 4
+    },{  // foliage-4
+        'cardType': 'plant',
+        'plantType': 'foliage',
+        'name': 'Prayer Plant',
+        'id': 'prayerPlant',
+        'img': 'foliage-4',
+        'lighting': ['half', 'none'],
+        'verdancyRequired': 4,
+        'vps': 3
+    },{  // foliage-5
+        'cardType': 'plant',
+        'plantType': 'foliage',
+        'name': 'Swiss Cheese Plant',
+        'id': 'swissCheesePlant',
+        'img': 'foliage-5',
+        'lighting': ['half', 'none'],
+        'verdancyRequired': 7,
+        'vps': 8
+    },{   // succulent-0
+        'cardType': 'plant',
+        'plantType': 'succulent',
+        'name': 'Mexican Snowball',
+        'id': 'mexicanSnowball',
+        'img': 'succulent-0',
+        'lighting': ['full', 'half'],
+        'verdancyRequired': 3,
+        'vps': 2
+    },{  // succulent-1
+        'cardType': 'plant',
+        'plantType': 'succulent',
+        'name': 'Zebra Haworthia',
+        'id': 'zebraHaworthia',
+        'img': 'succulent-1',
+        'lighting': ['full', 'half', 'none'],
+        'verdancyRequired': 4,
+        'vps': 2
+    },{  // succulent-2
+        'cardType': 'plant',
+        'plantType': 'succulent',
+        'name': 'Candelabra Cactus',
+        'id': 'candelbraCactus',
+        'img': 'succulent-2',
+        'lighting': ['full'],
+        'verdancyRequired': 8,
+        'vps': 10
+    },{  // succulent-3
+        'cardType': 'plant',
+        'plantType': 'succulent',
+        'name': 'Aloe',
+        'id': 'aloe',
+        'img': 'succulent-3',
+        'lighting': ['full'],
+        'verdancyRequired': 5,
+        'vps': 6
+    },{  // succulent-4
+        'cardType': 'plant',
+        'plantType': 'succulent',
+        'name': 'Jade',
+        'id': 'jade',
+        'img': 'succulent-4',
+        'lighting': ['full', 'half'],
+        'verdancyRequired': 7,
+        'vps': 8
+    },{  // succulent-5
+        'cardType': 'plant',
+        'plantType': 'succulent',
+        'name': 'Panda Plant',
+        'id': 'pandaPlant',
+        'img': 'succulent-5',
+        'lighting': ['full', 'half'],
+        'verdancyRequired': 6,
+        'vps': 6
+    },{   // unusual-0
+        'cardType': 'plant',
+        'plantType': 'unusual',
+        'name': 'Chenille Plant',
+        'id': 'chenillePlant',
+        'img': 'unusual-0',
+        'lighting': ['full', 'half'],
+        'verdancyRequired': 8,
+        'vps': 9
+    },{  // unusual-1
+        'cardType': 'plant',
+        'plantType': 'unusual',
+        'name': 'Nerve Plant',
+        'id': 'nervePlant',
+        'img': 'unusual-1',
+        'lighting': ['full', 'half', 'none'],
+        'verdancyRequired': 4,
+        'vps': 2
+    },{  // unusual-2
+        'cardType': 'plant',
+        'plantType': 'unusual',
+        'name': 'Ficus Bonsai',
+        'id': 'ficusBonsai',
+        'img': 'unusual-2',
+        'lighting': ['full', 'half'],
+        'verdancyRequired': 4,
+        'vps': 3
+    },{  // unusual-3
+        'cardType': 'plant',
+        'plantType': 'unusual',
+        'name': 'Rabbit\'s Foot Fern',
+        'id': 'rabbitsFootFern',
+        'img': 'unusual-3',
+        'lighting': ['half', 'none'],
+        'verdancyRequired': 5,
+        'vps': 5
+    },{  // unusual-4
+        'cardType': 'plant',
+        'plantType': 'unusual',
+        'name': 'Living Stone',
+        'id': 'livingStone',
+        'img': 'unusual-4',
+        'lighting': ['full'],
+        'verdancyRequired': 3,
+        'vps': 3
+    },{  // unusual-5
+        'cardType': 'plant',
+        'plantType': 'unusual',
+        'name': 'Corkscrew Plant',
+        'id': 'corkscrewPlant',
+        'img': 'unusual-5',
+        'lighting': ['full', 'half'],
+        'verdancyRequired': 3,
+        'vps': 2
+    },{   // vining-0
+        'cardType': 'plant',
+        'plantType': 'vining',
+        'name': 'Black-Eyed Susan Vine',
+        'id': 'blackeyedSusanVine',
+        'img': 'vining-0',
+        'lighting': ['full'],
+        'verdancyRequired': 7,
+        'vps': 9
+    },{  // vining-1
+        'cardType': 'plant',
+        'plantType': 'vining',
+        'name': 'Inch Plant',
+        'id': 'inchPlant',
+        'img': 'vining-1',
+        'lighting': ['full', 'half'],
+        'verdancyRequired': 5,
+        'vps': 5
+    },{  // vining-2
+        'cardType': 'plant',
+        'plantType': 'vining',
+        'name': 'Hoya',
+        'id': 'hoya',
+        'img': 'vining-2',
+        'lighting': ['full', 'half', 'none'],
+        'verdancyRequired': 8,
+        'vps': 8
+    },{  // vining-3
+        'cardType': 'plant',
+        'plantType': 'vining',
+        'name': 'Arrowhead Vine',
+        'id': 'arrowheadVine',
+        'img': 'vining-3',
+        'lighting': ['half', 'none'],
+        'verdancyRequired': 4,
+        'vps': 3
+    },{  // vining-4
+        'cardType': 'plant',
+        'plantType': 'vining',
+        'name': 'Devil\s Ivy',
+        'id': 'devilsIvy',
+        'img': 'vining-4',
+        'lighting': ['half', 'none'],
+        'verdancyRequired': 9,
+        'vps': 11
+    },{  // vining-5
+        'cardType': 'plant',
+        'plantType': 'vining',
+        'name': 'Jasmine',
+        'id': 'jasmine',
+        'img': 'vining-5',
+        'lighting': ['full', 'half'],
+        'verdancyRequired': 9,
+        'vps': 11
+    }
+];
 
 var roomCards = {
     'flowering': [  // lighting key = ['top', 'right', 'bottom', 'left']
@@ -257,4 +335,9 @@ var roomCards = {
         ['none', 'none', 'half', 'full'], // vining-room-8
         ['full', 'none', 'none', 'half'], // vining-room-9
     ]
+};
+
+var itemsAndNurtureItems = {
+    'items': ['bird', 'cat', 'chair', 'dog', 'fish', 'lamp', 'shelf', 'sofa', 'table'], // 9 items in each 5 room colors = 45 total
+    'itemsNurture': ['fertilizer', 'trowel', 'watering-can'] // 15 each = 45 total
 };
