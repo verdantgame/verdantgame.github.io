@@ -258,12 +258,12 @@ function generateMap() {
 	$('#homeContentContainer #mapContainer').html(mapHTML);
 }
 
-$(document).on('mouseenter','#marketSection.gameSection:not(.expandAnimation) #marketCardColumns .marketColumn .cardsAndItemContainer',function(){
+$(document).on('mouseenter','#marketSection.gameSection:not(.expandAnimation):not(.initSetup) #marketCardColumns .marketColumn .cardsAndItemContainer',function(){
 	$(this).closest('.marketColumn').addClass('activeColumn');
     $(this).closest('#marketCardColumns').addClass('activeColumnView');
 });
 
-$(document).on('mouseleave','#marketSection.gameSection:not(.expandAnimation) #marketCardColumns .marketColumn .cardsAndItemContainer',function(){
+$(document).on('mouseleave','#marketSection.gameSection:not(.expandAnimation):not(.initSetup) #marketCardColumns .marketColumn .cardsAndItemContainer',function(){
 	$('.activeColumn').addClass('deactivedColumn').removeClass('activeColumn');
     $('.activeColumnView').removeClass('activeColumnView');
     setTimeout(function(){
@@ -276,7 +276,9 @@ function generateCard(thisCard, cardType, mode) {
         <div class="flip-card flip-back flip-${cardType}${mode == 'init' ? ` startingPos` : ``}">
             <div class="flip-card-inner">
                 <div class="flip-card-front">
-                    <img class="${cardType}Back" src="img/${cardType}s/back.jpg" alt="" />
+                    <div class="backOfCardContainer">
+                        <img class="${cardType}Back" src="img/${cardType}s/back.jpg" alt="" />
+                    </div>
                 </div>
                 <div class="flip-card-back">
                     <div class="cardContainer" type="${cardType}"${cardType == 'plant' ? ` lighting="${thisCard.lighting.length}"` : ``}>
@@ -385,7 +387,7 @@ function initMarketFunc(){
         currentMarketItem = 0;
         setTimeout(function(){
             initMarketFlipCardsInterval = setInterval(flipInitMarketCards, 150);    
-        }, 1000)
+        }, 1000);
     }
 }
 
@@ -447,9 +449,12 @@ function initPlayersHome() {
     }, 3000);
 
     setTimeout(function(){
-        $('.initSetup').removeClass('initSetup');
+        $('#homeContentContainer #playerInfoContainer #cardToPlace .flip-plant .flip-card-inner .flip-card-back .cardContainer').prependTo('#homeContentContainer #playerInfoContainer #cardToPlace');
+        $('#homeContentContainer #playerInfoContainer #cardToPlace .flip-plant').remove();
+        $('#homeContentContainer #mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room .flip-card-inner .flip-card-back .cardContainer').prependTo('#homeContentContainer #mapContainer #mapHiddenOverlay #row-2-column-4');
+        $('#homeContentContainer #mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room').remove();
+        $('.initSetup').removeClass('initSetup'); 
     }, 3500);
-
 }
 
 // $(document).on(touchEvent, '#backToStart', function(){
