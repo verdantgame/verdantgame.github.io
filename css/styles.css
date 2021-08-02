@@ -3,21 +3,24 @@ html {
 	min-width: auto!important;
 }
 
-/* * {
+.minimized {
 	user-select: none;
-} */
+}
 
 body {
-    width: 539px;
+    width: 100%;
+    max-width: 539px;
     margin: 0 auto;
-    /* color: #003722!important; */
+    line-height: 0;
+}
+
+p {
+    line-height: 23px;
 }
 
 #gameLayer .title {
     font-family: 'DM Serif Display', serif;
-    /* font-family: 'DM Serif Text', serif; */
     color: #003722!important;
-    margin: 1% 0% 3% 0%!important;
     font-weight: 300;
 }
 
@@ -86,7 +89,7 @@ body {
 }
 
 #demoDisclaimer {
-    width: 90%;
+    /* width: 90%; */
     margin: 0px auto 0px;
 }
 
@@ -120,7 +123,7 @@ body {
 #gameLayer #gameSectionsParent .gameSection .gameSectionBorder {
     height: 100%;
     width: 100%;
-    padding: .5%;
+    padding: 2.5px;
     border-radius: 3%;
 }
 
@@ -155,7 +158,7 @@ body {
 
 #gameLayer #gameSectionsParent .gameSection .gameSectionContent {
     position: relative;
-    padding-top: 1%;
+    padding-top: 5px;
 }
 
 #gameSectionsParent .gameSection.expanded .inactive {
@@ -189,14 +192,14 @@ body {
 
 #gameLayer #gameSectionsParent #marketSection.minimized .inactive ion-icon[name="expand"] {
     font-size: 65px;
-    top: 33%;
-    left: 43.7%;
+    top: 71px;
+    left: 224px;
 }
 
 #gameLayer #gameSectionsParent #tableauSection.minimized .inactive ion-icon[name="expand"] {
     font-size: 135px;
-    top: 35%;
-    left: 37%;
+    top: 185px;
+    left: 190px;
 }
 
 #gameLayer #gameSectionsParent .gameSection.minimized:not(.initSetup):hover .inactive ion-icon[name="expand"] {
@@ -229,8 +232,8 @@ body {
 
 #marketSection #marketTitle,
 #tableauSection #playerTableauTitle {
-    margin-top: 0%!important;
-    margin-bottom: 0%!important;
+    margin-top: 0px;
+    margin-bottom: 0px;
     opacity: 1;
     height: 45px;
     transition: all .5s ease-in-out;
@@ -242,18 +245,18 @@ body {
     opacity:0;
 }
 
-#marketSection #marketCardColumns {
-    padding: 0% 4%;
+#marketSection #marketCardColumns { 
+    padding: 0px 20px;
 }
 
 #marketSection #marketCardColumns .marketColumn {
-    width: 23%;
+    width: 105px;
     float: left;
     margin: 0px 0px 0px 12px;
 }
 
 #marketSection #marketCardColumns .plantPotContainer {
-    width: 53%;
+    width: 55px;
     height: 49px;
     margin: 0px auto 0px;
     display: block;
@@ -363,143 +366,142 @@ body {
 
 .cardContainer[type="plant"] .lightingIcon {
     position: absolute;
-    top: 1.5%;
-    width: 11%;
+    top: 2.5px;
+    width: 11.5px;
     transition: all .5s ease-in-out;
 }
 
 #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] .lightingIcon {
-    top: 32%;
-    width: 17%;
+    width: 18px;
 }
 
 .cardContainer[type="plant"] .plantBanner {
     position: absolute;
-    top: 0%;
-    left: 5%;
-    width: 18%;
-    height: 22%;
+    top: 0px;
+    left: 5px;
+    width: 19px;
+    height: 36px;
     z-index: 0;
     transition: all .5s ease-in-out;
 }
 
 #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] .plantBanner {
-    left: 3%;
-    width: 27%;
-    height: 96%;
+    left: 3px;
+    width: 28px;
+    height: 57.5px;
 }
 
 .cardContainer[type="plant"] .plantSymbol {
     position: absolute;
-    top: 4%;
-    left: 7%;
-    width: 14%;
+    top: 6.5px;
+    left: 7.5px;
+    width: 14.5px;
     transition: all .5s ease-in-out;
 }
 
 #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] .plantSymbol {
-    top: 23%;
-    width: 21%;
-    left: 5.9%;
+    top: 14px;
+    width: 22px;
+    left: 6px;
 }
 
 .cardContainer[type="plant"] .plantVerdancy {
     position: absolute;
-    top: 2%;
-    right: 6%;
-    width: 17%;
+    top: 3px;
+    right: 6px;
+    width: 18px;
     transition: all .5s ease-in-out;
 }
 
 #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] .plantVerdancy {
-    top: 6%;
-    right: 1%;
-    width: 24%;
+    top: 3.5px;
+    right: 1px;
+    width: 25px;
 }
 
 .cardContainer[type="plant"] .plantVPs {
     position: absolute;
-    top: 13%;
-    right: 3%;
-    width: 15%;
+    top: 21px;
+    right: 3px;
+    width: 15px;
     transition: all .5s ease-in-out;
 }
 
 #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] .plantVPs {
-    top: 53%;
-    width: 24%;
-    right: 2%;
+    top: 32px;
+    width: 25px;
+    right: 2px;
 }
 
 .cardContainer[type="plant"][lighting="1"] .lightingIcon[lighting-icon="0"] {
-    left: 45%;
+    left: 51px;
 }
 
 #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="1"] .lightingIcon[lighting-icon="0"] {
-    left: 44%;
-    top: 32%;
+    left: 46px;
+    top: 19px;
 }
 
 .cardContainer[type="plant"][lighting="2"] .lightingIcon[lighting-icon="0"] {
-    left: 39%;
-}
-
-#marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="2"] .lightingIcon[lighting-icon="0"] {
-    left: 44%;
-    top: 17%;
+    left: 46px;
 }
 
 .cardContainer[type="plant"][lighting="2"] .lightingIcon[lighting-icon="1"] {
-    left: 51%;
+    left: 59px;
+}
+
+#marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="2"] .lightingIcon[lighting-icon="0"] {
+    left: 46px;
+    top: 10px;
 }
 
 #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="2"] .lightingIcon[lighting-icon="1"] {
-    left: 44%;
-    top: 49%;
+    left: 46px;
+    top: 29px;
 }
 
 .cardContainer[type="plant"][lighting="3"] .lightingIcon[lighting-icon="0"] {
-    left: 34%;
-}
-
-#marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="3"] .lightingIcon[lighting-icon="0"] {
-    left: 44%;
-    top: 6%;
+    left: 39px;
 }
 
 .cardContainer[type="plant"][lighting="3"] .lightingIcon[lighting-icon="1"] {
-    left: 46%;
-}
-
-#marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="3"] .lightingIcon[lighting-icon="1"] {
-    left: 44%;
-    top: 36%;
+    left: 52px;
 }
 
 .cardContainer[type="plant"][lighting="3"] .lightingIcon[lighting-icon="2"] {
-    left: 58%;
+    left: 65px;
+}
+
+#marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="3"] .lightingIcon[lighting-icon="0"] {
+    left: 46px;
+    top: 2.5px;
+}
+
+#marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="3"] .lightingIcon[lighting-icon="1"] {
+    left: 46px;
+    top: 21.5px;
 }
 
 #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="3"] .lightingIcon[lighting-icon="2"] {
-    left: 44%;
-    top: 66%;
+    left: 46px;
+    top: 39.5px;
 }
 
 #marketSection #marketCardColumns .marketColumn .itemToken {
-    width: 44%;
-    margin: 9% auto 7%;
+    width: 46px;
+    margin: 9.5px auto 7.5px;
     position:relative;
     left: 0px;
     display: block;
     transition: left 1s ease-in-out, width .5s ease-in-out, margin .5s ease-in-out;
 }
 
-#marketSection #marketCardColumns .marketColumn .itemToken.startingPos {
-    left:-500px;
+#marketSection.minimized #marketCardColumns .marketColumn .itemToken {
+    width: 39px;
 }
 
-#marketSection.minimized #marketCardColumns .marketColumn .itemToken {
-    width: 37%;
+#marketSection #marketCardColumns .marketColumn .itemToken.startingPos {
+    left: -500px;
 }
 
 .cardContainer[type="room"] .lightingIconContainer {
@@ -515,13 +517,13 @@ body {
 }
 
 .cardContainer[type="room"] .lightingIconContainer .lightingIcon {
-    width: 67%;
+    width: 15.7px;
     margin: 3.3px;
     transition: all .5s ease-in-out;
 }
 
 #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer .lightingIcon {
-    width: 70%;
+    width: 17px;
 }
 
 .cardContainer[type="room"] .lightingIconContainer[lighting-container="0"] {
@@ -540,15 +542,15 @@ body {
     margin-top: 4.3px;
     margin-right: 3.3px;
     margin-bottom: 3.3px;
-    margin-left: 4px;
+    margin-left: 3px;
 }
 
 #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer[lighting-container="0"] .lightingIcon {
-    margin-top: 4.3px;
+    margin-top: 3px;
 }
 
 #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer[lighting-container="2"] .lightingIcon {
-    margin-top: 3.3px;
+    margin-top: 4.3px;
 }
 
 .cardContainer[type="room"] .lightingIconContainer[lighting-container="1"] {
@@ -567,7 +569,7 @@ body {
     margin-top: 3.3px;
     margin-right: 3.3px;
     margin-bottom: 3.3px;
-    margin-left: 2.3px;
+    margin-left: 3.3px;
 }
 
 .cardContainer[type="room"] .lightingIconContainer[lighting-container="2"] {
@@ -578,7 +580,7 @@ body {
 }
 
 #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer[lighting-container="2"] {
-    bottom: -5px;
+    bottom: -2px;
     left: 40.5px;
 }
 
@@ -600,12 +602,12 @@ body {
     margin-top: 3.3px;
     margin-right: 3.3px;
     margin-bottom: 3.3px;
-    margin-left: 5.3px;
+    margin-left: 3.3px;
 }
 
 #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer[lighting-container="3"] {
     top: 25.2px;
-    left: -1px;
+    left: 0px;
 }
 
 
@@ -632,7 +634,7 @@ body {
     left: -500px;
 }
 
-.actionCard, .flip-card {
+.flip-card {
     height: 164px;
 }
 
@@ -701,7 +703,6 @@ body {
     transition: none !important;
 }
 
-
 #homeContentContainer {
     border: 1px solid green;
     width: 98%;
@@ -711,7 +712,7 @@ body {
 
 #homeContentContainer #playerInfoContainer {
     border: 1px solid red;
-    width: 27%;
+    width: 130px;
     height: 460px;
     float: left;
     margin-right: 12px;
@@ -719,7 +720,7 @@ body {
 
 #homeContentContainer #mapContainer {
     border: 1px solid blue;
-    width: 68%;
+    width: 330px;
     height: 460px;
     float: left;
     margin-right: 0px;
@@ -749,7 +750,7 @@ body {
 }
 
 #homeContentContainer #playerInfoContainer #cardToPlace {
-    width: 81.5%;
+    width: 105px;
     margin: 10px auto;
 }
 
@@ -780,4 +781,400 @@ body {
 #homeContentContainer #mapContainer .mapNavigation,
 #homeContentContainer #mapContainer #placedTileOptions {
     display:none;
+}
+
+@media screen and (max-width: 539px) {
+
+    #gameLayer #gameSectionsParent #marketSection {
+        top: 1vw;
+    }
+
+    #mainVerdantTitle {
+        margin: 1vw 0px 1vw;
+    }
+
+    #mainVerdantTitle img {
+        width: 44vw;
+    }
+
+    #gameLayer #gameSectionsParent {
+        width: 97%;
+    }
+
+    #gameLayer #gameSectionsParent .gameSection {
+        height: 103vw;
+    }
+
+    #gameLayer #gameSectionsParent .gameSection .gameSectionBg {
+        max-width: 105%;
+        width: 100%;
+        height: 102vw!important;
+    }
+
+    #gameLayer #gameSectionsParent .gameSection .gameSectionContent {
+        padding-top: .8vw;
+    }
+
+    #gameLayer #gameSectionsParent .gameSection .gameSectionBorder.innerBorder {
+        border: .3vw solid #41a742;
+    }
+
+    #gameLayer #gameSectionsParent #marketSection.minimized {
+        height: 40vw;
+    }
+
+    #gameLayer #gameSectionsParent #marketSection.minimized .inactive ion-icon[name="expand"] {
+        font-size: 12vw;
+        top: 13vw;
+        left: 41.5vw;
+    }
+
+    #gameLayer #gameSectionsParent .gameSection .gameSectionBorder {
+        padding: .4vw;
+        border-radius: 2vw;
+    }
+
+    #marketSection #marketTitle, #tableauSection #playerTableauTitle {
+        height: 8.3vw;
+        font-size: 5.2vw;
+    }
+
+    #marketSection #marketCardColumns {
+        padding: 0vw 0vw 0vw 1vw;
+    }
+
+    #marketSection #marketCardColumns .marketColumn {
+        width: 21.1vw;
+        margin: 0vw 0vw 0vw 2.5vw;
+    }
+
+    #marketSection #marketCardColumns .plantPotContainer {
+        width: 10.3vw;
+        height: 9.1vw;
+    }
+
+    #marketSection #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] {
+        /* height: 32.8vw; */
+        height: 32.3vw;
+    }
+
+    #marketSection #marketCardColumns .marketColumn .cardsAndItemContainer .flip-plant .flip-card-inner .flip-card-front .backOfCardContainer {
+        height: 32.3vw;
+    }
+
+    .cardContainer[type="plant"] .plantBanner {
+        left: .9vw;
+        width: 3.5vw;
+        height: 6.6vw;
+    }
+
+    .cardContainer[type="plant"] .plantSymbol {
+        top: 1.3vw;
+        left: 1.4vw;
+        width: 2.7vw;
+    }
+
+    .cardContainer[type="plant"] .plantVerdancy {
+        top: .5vw;
+        right: 1.1vw;
+        width: 3.3vw;
+    }
+
+    .cardContainer[type="plant"] .plantVPs {
+        top: 3.8vw;
+        right: .6vw;
+        width: 2.85vw;
+    }
+
+    .cardContainer[type="plant"] .lightingIcon {
+        top: .2vw;
+        width: 2.6vw;
+    }
+
+    .cardContainer[type="plant"][lighting="1"] .lightingIcon[lighting-icon="0"] {
+        left: 9.6vw;
+    }
+
+    .cardContainer[type="plant"][lighting="2"] .lightingIcon[lighting-icon="0"] {
+        left: 7.8vw;
+    }
+
+    .cardContainer[type="plant"][lighting="2"] .lightingIcon[lighting-icon="1"] {
+        left: 10.7vw;
+    }
+
+    .cardContainer[type="plant"][lighting="3"] .lightingIcon[lighting-icon="0"] {
+        left: 6.5vw;
+    }
+
+    .cardContainer[type="plant"][lighting="3"] .lightingIcon[lighting-icon="1"] {
+        left: 9.3vw;
+    }
+
+    .cardContainer[type="plant"][lighting="3"] .lightingIcon[lighting-icon="2"] {
+        left: 11.9vw;
+    }
+
+    #marketSection #marketCardColumns .marketColumn .itemToken {
+        width: 8.6vw;
+        margin: 2vw auto 1.5vw;
+    }
+
+    #marketSection #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="room"] {
+        height: 32.9vw;
+    }
+
+    .flip-room .flip-card-inner .flip-card-front .backOfCardContainer {
+        height: 32.9vw;
+    }
+
+    .cardContainer[type="room"] .lightingIconContainer[lighting-container="0"] {
+        width: 4.55vw;
+        height: 4vw;
+        top: 0vw;
+        left: 8.18vw;
+        border-bottom-right-radius: 3.1vw;
+        border-bottom-left-radius: 3.1vw;
+    }
+
+    .cardContainer[type="room"] .lightingIconContainer[lighting-container="1"] {
+        width: 4vw;
+        height: 4.65vw;
+        top: 14vw;
+        left: 16.9vw;
+        border-top-left-radius: 3.1vw;
+        border-bottom-left-radius: 3.1vw;
+    }
+
+    .cardContainer[type="room"] .lightingIconContainer[lighting-container="2"] {
+        width: 4.55vw;
+        height: 4vw;
+        bottom: 0.1vw;
+        left: 8.18vw;
+        border-top-left-radius: 3.1vw;
+        border-top-right-radius: 3.1vw;
+    }
+
+    .cardContainer[type="room"] .lightingIconContainer[lighting-container="3"] {
+        width: 4vw;
+        height: 4.65vw;
+        top: 14vw;
+        left: 0vw;
+        border-top-right-radius: 3.1vw;
+        border-bottom-right-radius: 3.1vw;
+    }
+
+    .cardContainer[type="room"] .lightingIconContainer .lightingIcon {
+        width: 3.4vw;
+    }
+
+    .cardContainer[type="room"] .lightingIconContainer[lighting-container="0"] .lightingIcon {
+        margin-top: .1vw;
+        margin-right: 0vw;
+        margin-bottom: 0vw;
+        margin-left: .7vw;
+    }
+
+    .cardContainer[type="room"] .lightingIconContainer[lighting-container="1"] .lightingIcon {
+        margin-top: .9vw;
+        margin-right: 0vw;
+        margin-bottom: 0vw;
+        margin-left: .45vw;
+    }
+
+    .cardContainer[type="room"] .lightingIconContainer[lighting-container="2"] .lightingIcon {
+        margin-top: .3vw;
+        margin-right: 0vw;
+        margin-bottom: 0vw;
+        margin-left: .65vw;
+    }
+
+    .cardContainer[type="room"] .lightingIconContainer[lighting-container="3"] .lightingIcon {
+        margin-top: .9vw;
+        margin-right: 0vw;
+        margin-bottom: 0vw;
+        margin-left: .3vw;
+    }
+
+    #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer[lighting-container="0"] {
+        top: 0.6vw;
+        left: 8.18vw;
+    }
+
+    #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer[lighting-container="1"] {
+        top: 4.9vw;
+        left: 16.7vw;
+    }
+
+    #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer[lighting-container="2"] {
+        bottom: -0vw;
+        left: 8.18vw;
+    }
+
+    #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer[lighting-container="3"] {
+        top: 4.9vw;
+        left: 0.3vw;
+    }
+
+    #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer .lightingIcon {
+        width: 3.4vw;
+    }
+
+    #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer[lighting-container="0"] .lightingIcon {
+        margin-top: .1vw;
+    }
+
+    /* #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer[lighting-container="1"] .lightingIcon {
+
+    } */
+
+    #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer[lighting-container="2"] .lightingIcon {
+        margin-top: .6vw;
+    }
+
+    #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer[lighting-container="3"] .lightingIcon {
+        margin-left: .2vw;
+    }
+
+    #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] .plantBanner {
+        left: .7vw;
+        width: 5.2vw;
+        height: 10.6vw;
+    }
+
+    #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] .plantSymbol {
+        top: 2.7vw;
+        width: 4.1vw;
+        left: 1.1vw;
+    }
+
+    #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] .plantVerdancy {
+        top: .65vw;
+        right: .2vw;
+        width: 4.7vw;
+    }
+    
+    #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] .plantVPs {
+        top: 6vw;
+        width: 4.7vw;
+        right: .4vw;
+    }
+
+    #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] .lightingIcon {
+        width: 3.5vw;
+        left: 8.55vw;
+    }
+
+    #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="1"] .lightingIcon[lighting-icon="0"] {
+        top: 3.6vw;
+        left: 8.55vw;
+    }
+
+    #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="2"] .lightingIcon[lighting-icon="0"] {
+        top: 1.9vw;
+        left: 8.55vw;
+    }
+
+    #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="2"] .lightingIcon[lighting-icon="1"] {
+        top: 5.5vw;
+        left: 8.55vw;
+    }
+
+    #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="3"] .lightingIcon[lighting-icon="0"] {
+        top: .8vw;
+        left: 8.55vw;
+    }
+
+    #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="3"] .lightingIcon[lighting-icon="1"] {
+        top: 4.2vw;
+        left: 8.55vw;
+    }
+
+    #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="3"] .lightingIcon[lighting-icon="2"] {
+        top: 7.5vw;
+        left: 8.55vw;
+    }
+
+    #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] {
+        height: 11.3vw;
+    }
+
+    #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="room"] {
+        height: 13vw;
+    }
+
+    #marketSection.minimized #marketCardColumns .marketColumn .itemToken {
+        width: 7.2vw;
+    }
+
+    .flip-card {
+        height: 32.7vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection.expanded {
+        top: 46vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection.minimized {
+        top: 78vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection.minimized .inactive ion-icon[name="expand"] {
+        font-size: 29vw;
+        top: 38vw;
+        left: 34vw;
+    }
+
+    #homeContentContainer {
+        border: .1vw solid green;
+        height: 89vw;
+    }
+
+    #homeContentContainer #playerInfoContainer {
+        width: 24vw;
+        height: 88vw;
+        margin-right: 2.2vw;
+    }
+
+    #homeContentContainer #playerInfoContainer #cardToPlace {
+        width: 19.5vw;
+        margin: 2vw auto;
+    }
+
+    .cardContainer {
+        height: 30.5vw;
+    }
+
+    .backOfCardContainer {
+        height: 30.5vw;
+        overflow: hidden;
+    }
+
+    #homeContentContainer #mapContainer {
+        border: .1vw solid blue;
+        width: 63vw;
+        height: 88vw;
+        margin-right: 0vw;
+    }
+
+    #homeContentContainer #mapContainer #mapHiddenOverlay {
+        top: -39vw;
+        left: -63.5vw;
+        width: 195vw;
+        height: 151vw;
+    }
+
+    #homeContentContainer #mapContainer #mapHiddenOverlay .mapTileContainer {
+        height: 33vw;
+        width: 21.2vw;
+        margin: .1vw;
+    }
+
+    #homeContentContainer #mapContainer #mapHiddenOverlay .mapTileContainer .cardContainer {
+        height: 33.3vw;
+    }
+
+    .flip-card {
+        height: 33vw;
+    }
 }
