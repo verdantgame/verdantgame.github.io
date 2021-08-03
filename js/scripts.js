@@ -357,8 +357,8 @@ function initMarketFunc(){
         currentMarketItem++;
         clearInterval(initMarketInterval);
         setTimeout(function(){
-            initMarketInterval = setInterval(initMarketFunc, 350);
-        }, 350)
+            initMarketInterval = setInterval(initMarketFunc, 150);
+        }, 250)
     } else if(currentColumn == -1 && (currentMarketItem + 1) == marketItemClasses.length) {
         clearInterval(initMarketInterval);
         currentColumn = 3;
