@@ -165,11 +165,11 @@ p {
     padding-top: 5px;
 }
 
-#container.wideScreenView #gameSectionsParent .gameSection.expanded .inactive {
+#gameSectionsParent .gameSection.expanded .inactive {
     display:none;
 }
 
-#container.wideScreenView #gameSectionsParent .gameSection.minimized .inactive {
+#gameSectionsParent .gameSection.minimized .inactive {
     background-color: #0f0f0ffa;
     width: 100%;
     height: 100%;
@@ -180,13 +180,13 @@ p {
     transition: all .7s ease-in-out;
 }
 
-#container.wideScreenView #gameSectionsParent .gameSection.minimized:not(.initSetup):hover .inactive {
+#gameSectionsParent .gameSection.minimized:not(.initSetup):hover .inactive {
     cursor: hand;
     cursor: pointer;
     opacity: 0.5;
 }
 
-#container.wideScreenView #gameLayer #gameSectionsParent .gameSection.minimized .inactive ion-icon[name="expand"] {
+#gameLayer #gameSectionsParent .gameSection.minimized .inactive ion-icon[name="expand"] {
     font-weight: bold;
     position: absolute;
     color: #FFF;
@@ -194,19 +194,19 @@ p {
     transition: all .2s ease-in-out;
 }
 
-#container.wideScreenView #gameLayer #gameSectionsParent #marketSection.minimized .inactive ion-icon[name="expand"] {
+#gameLayer #gameSectionsParent #marketSection.minimized .inactive ion-icon[name="expand"] {
     font-size: 65px;
     top: 71px;
     left: 224px;
 }
 
-#container.wideScreenView #gameLayer #gameSectionsParent #tableauSection.minimized .inactive ion-icon[name="expand"] {
+#gameLayer #gameSectionsParent #tableauSection.minimized .inactive ion-icon[name="expand"] {
     font-size: 135px;
     top: 185px;
     left: 190px;
 }
 
-#container.wideScreenView #gameLayer #gameSectionsParent .gameSection.minimized:not(.initSetup):hover .inactive ion-icon[name="expand"] {
+#gameLayer #gameSectionsParent .gameSection.minimized:not(.initSetup):hover .inactive ion-icon[name="expand"] {
     opacity: 1;
 }
 
