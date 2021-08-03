@@ -46,6 +46,7 @@ p {
 
 #container {
     margin: 0 auto;
+    position: relative;
 }
 
 #mainVerdantTitle {
@@ -86,10 +87,13 @@ p {
 
 .layer {
     display: none;
+    position: absolute;
+    top: 101px;
+    width: 100%;
 }
 
 #demoDisclaimer {
-    /* width: 90%; */
+    width: 93%;
     margin: 0px auto 0px;
 }
 
@@ -319,14 +323,16 @@ p {
     margin: 0px 0px 0px 0px;
 }
 
-.cardContainer {
+.cardContainer,
+.backOfCardContainer {
     position: relative;
     height: 164px;
     background-color: #f7efda;
     overflow: hidden;
 }
 
-#marketSection #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer {
+#marketSection #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer,
+#marketSection #marketCardColumns .marketColumn .cardsAndItemContainer .backOfCardContainer {
     left: 0px;
     transition: left 1s ease-in-out;
 }
@@ -335,7 +341,8 @@ p {
     left: -500px;
 } */
 
-#marketSection #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] {
+#marketSection #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"],
+#marketSection #marketCardColumns .marketColumn .cardsAndItemContainer .flip-plant .backOfCardContainer {
     height: 164px;
     transition: height .8s ease-in-out;
 }
@@ -344,7 +351,8 @@ p {
     height: 60px;
 }
 
-#marketSection #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="room"] {
+#marketSection #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="room"],
+#marketSection #marketCardColumns .marketColumn .cardsAndItemContainer .flip-room .backOfCardContainer {
     height: 164px;
     transition: height .8s ease-in-out;
 }
@@ -362,7 +370,8 @@ p {
     opacity: .15;
 }
 
-.cardContainer[type="room"] .room {
+.cardContainer[type="room"] .room,
+.flip-room .roomBack {
     top: 0px;
     left: 0px;
     position: absolute;
@@ -639,14 +648,13 @@ p {
 }
 
 .flip-card {
-    height: 164px;
-}
-
-.flip-card {
     display:block;
     background-color: transparent;
+    height: 164px;
     perspective: 1000px; /* Remove this if you don't want the 3D effect */
     margin: 0 auto;
+    border-radius: 9px;
+    overflow: hidden;
 }
 
 /* This container is needed to position the front and back side */
@@ -679,25 +687,6 @@ p {
     transform: rotateY(180deg) translate3d(0, 0, 1px);
     -webkit-transform: rotateY(180deg) translate3d(0, 0, 1px);
     -moz-transform: rotateY(180deg) translate3d(0, 0, 1px);
-}
-
-.removeCard, .helpImage {
-    display:block;
-    position: absolute;
-    top: 0;
-    width: 60px;
-    cursor:hand;
-    cursor:pointer;
-}
-
-.removeCard {
-    cursor: hand;
-    cursor: pointer;
-    left: 0;
-}
-
-.helpImage {
-    right: 0;
 }
 
 .notransition {
@@ -748,7 +737,8 @@ p {
     position: relative;
 }
 
-#homeContentContainer #mapContainer #mapHiddenOverlay .mapTileContainer .cardContainer {
+#homeContentContainer #mapContainer #mapHiddenOverlay .mapTileContainer .cardContainer,
+#homeContentContainer #mapContainer #mapHiddenOverlay .mapTileContainer .backOfCardContainer {
     position: relative;
     height: 164px;
 }
@@ -789,8 +779,16 @@ p {
 
 @media screen and (max-width: 539px) {
 
+    #container {
+        padding-bottom: 10vw;
+    }
+
+    .layer {
+        top: 22.3vw;
+    }
+
     #mainVerdantTitle {
-        margin: 3vw 0px 2vw;
+        margin: 3vw 0vw 0vw;
     }
 
     #mainVerdantTitle img {
@@ -826,8 +824,8 @@ p {
     }
 
     #demoDisclaimer .message-body p {
-        font-size: 4vw;
-        line-height: 5.5vw;
+        font-size: 3.9vw;
+        line-height: 5.3vw;
         margin-bottom: 3vw;
     }
 
@@ -931,12 +929,8 @@ p {
         height: 9.1vw;
     }
 
-    #marketSection #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] {
-        /* height: 32.8vw; */
-        height: 32.3vw;
-    }
-
-    #marketSection #marketCardColumns .marketColumn .cardsAndItemContainer .flip-plant .flip-card-inner .flip-card-front .backOfCardContainer {
+    #marketSection #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"],
+    #marketSection #marketCardColumns .marketColumn .cardsAndItemContainer .flip-plant .backOfCardContainer {
         height: 32.3vw;
     }
 
@@ -998,11 +992,8 @@ p {
         margin: 2vw auto 1.5vw;
     }
 
-    #marketSection #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="room"] {
-        height: 32.9vw;
-    }
-
-    .flip-room .flip-card-inner .flip-card-front .backOfCardContainer {
+    #marketSection #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="room"],
+    #marketSection #marketCardColumns .marketColumn .cardsAndItemContainer .flip-room .backOfCardContainer {
         height: 32.9vw;
     }
 
@@ -1186,6 +1177,7 @@ p {
     }
 
     .flip-card {
+        border-radius: 1.7vw;
         height: 32.7vw;
     }
 
@@ -1219,13 +1211,9 @@ p {
         margin: 2vw auto;
     }
 
-    .cardContainer {
-        height: 30.5vw;
-    }
-
+    .cardContainer,
     .backOfCardContainer {
         height: 30.5vw;
-        overflow: hidden;
     }
 
     #homeContentContainer #mapContainer {
@@ -1237,7 +1225,7 @@ p {
 
     #homeContentContainer #mapContainer #mapHiddenOverlay {
         top: -39vw;
-        left: -63.5vw;
+        left: -64.5vw;
         width: 195vw;
         height: 151vw;
     }
