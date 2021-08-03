@@ -338,7 +338,7 @@ $(document).on(touchEvent, '#startGame', function(){
     setTimeout(function(){
         $('#gameLayer').fadeIn();
         setTimeout(function(){
-            initMarketInterval = setInterval(initMarketFunc, 350);    
+            initMarketInterval = setInterval(initMarketFunc, 200);    
         }, 400);
     }, 400);
 	
@@ -357,7 +357,7 @@ function initMarketFunc(){
         currentMarketItem++;
         clearInterval(initMarketInterval);
         setTimeout(function(){
-            initMarketInterval = setInterval(initMarketFunc, 150);
+            initMarketInterval = setInterval(initMarketFunc, 200);
         }, 250)
     } else if(currentColumn == -1 && (currentMarketItem + 1) == marketItemClasses.length) {
         clearInterval(initMarketInterval);
