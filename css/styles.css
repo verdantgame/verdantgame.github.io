@@ -72,13 +72,13 @@ p {
 
 #homepageButtonContainer {
     margin: 20px auto 27px;
-    width: 360px;
+    width: 320px;
 }
 
 #homepageButtonContainer .button {
-    display:block;
+    display: block;
     margin: 0px 10px;
-    width: 160px;
+    width: 140px;
 }
 
 #setupLayer {
