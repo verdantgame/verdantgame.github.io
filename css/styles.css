@@ -779,8 +779,8 @@ p {
 
 @media screen and (max-width: 539px) {
 
-    #container {
-        padding-bottom: 10vw;
+    #container #setupLayer {
+        height: 209vw;
     }
 
     .layer {
