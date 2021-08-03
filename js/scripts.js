@@ -232,12 +232,25 @@ function generateMap() {
 	$('#homeContentContainer #mapContainer').html(mapHTML);
 }
 
-$(document).on('mouseenter','#marketSection.gameSection:not(.expandAnimation):not(.initSetup) #marketCardColumns .marketColumn .cardsAndItemContainer',function(){
+$(document).on('mouseenter','#container.wideScreenView #marketSection.gameSection:not(.expandAnimation):not(.initSetup) #marketCardColumns .marketColumn .cardsAndItemContainer',function(){
 	$(this).closest('.marketColumn').addClass('activeColumn');
     $(this).closest('#marketCardColumns').addClass('activeColumnView');
 });
 
-$(document).on('mouseleave','#marketSection.gameSection:not(.expandAnimation):not(.initSetup) #marketCardColumns .marketColumn .cardsAndItemContainer',function(){
+$(document).on('mouseleave','#container.wideScreenView #marketSection.gameSection:not(.expandAnimation):not(.initSetup) #marketCardColumns .marketColumn .cardsAndItemContainer',function(){
+	$('.activeColumn').addClass('deactivedColumn').removeClass('activeColumn');
+    $('.activeColumnView').removeClass('activeColumnView');
+    setTimeout(function(){
+        $('.deactivedColumn').removeClass('deactivedColumn');
+    }, 100);
+});
+
+$(document).on(touchEvent,'#container.mobileView #marketSection.gameSection:not(.expandAnimation):not(.initSetup) #marketCardColumns .marketColumn .cardsAndItemContainer',function(){
+	$(this).closest('.marketColumn').addClass('activeColumn');
+    $(this).closest('#marketCardColumns').addClass('activeColumnView');
+});
+
+$(document).on(touchEvent,'#container.mobileView #marketSection.gameSection:not(.expandAnimation):not(.initSetup) #marketCardColumns .marketColumn .cardsAndItemContainer',function(){
 	$('.activeColumn').addClass('deactivedColumn').removeClass('activeColumn');
     $('.activeColumnView').removeClass('activeColumnView');
     setTimeout(function(){
