@@ -369,42 +369,9 @@ function initMarketFunc(){
     }
 }
 
-// function flipInitMarketCards() {
-//     let marketFlipCardClasses = ['.cardsAndItemContainer .flip-plant .flip-card-inner', '.cardsAndItemContainer .flip-room .flip-card-inner'];
-//     $(`.marketColumn[column="${currentColumn}"] ${marketFlipCardClasses[currentMarketItem]}`).css('transform', 'rotateY(180deg) translate3d(0, 0, 1px)'); 
-//     currentColumn--;
-//     if(currentColumn == -1 && (currentMarketItem + 1) < marketFlipCardClasses.length) {
-//         currentColumn = 3;
-//         currentMarketItem++;
-//     } else if(currentColumn == -1 && (currentMarketItem + 1) == marketFlipCardClasses.length) {
-//         clearInterval(initMarketFlipCardsInterval);
-//         setTimeout(function(){
-
-//             $('.cardsAndItemContainer .flip-plant .flip-card-inner .flip-card-back .cardContainer').each(function(){
-//                 let columnNum = $(this).closest('.marketColumn').attr('column');
-//                 $(this).prependTo(`.marketColumn[column="${columnNum}"] .cardsAndItemContainer`);
-//             });
-
-//             $('.cardsAndItemContainer .flip-room .flip-card-inner .flip-card-back .cardContainer').each(function(){
-//                 let columnNum = $(this).closest('.marketColumn').attr('column');
-//                 $(this).appendTo(`.marketColumn[column="${columnNum}"] .cardsAndItemContainer`);
-//             });
-            
-//             $('.flip-card').remove();
-
-//             setTimeout(function(){
-//                 initPlayersHome();
-//             }, 300);
-
-//         }, 550);
-//     }
-// }
-
 function flipInitMarketCards() {
     let marketFlipCardClasses = ['.cardsAndItemContainer .flip-plant .flip-card-inner', '.cardsAndItemContainer .flip-room .flip-card-inner'];
-    if(currentColumn != 3) {
-        $(`.marketColumn[column="${currentColumn}"] ${marketFlipCardClasses[currentMarketItem]}`).css('transform', 'rotateY(180deg) translate3d(0, 0, 1px)'); 
-    }
+    $(`.marketColumn[column="${currentColumn}"] ${marketFlipCardClasses[currentMarketItem]}`).css('transform', 'rotateY(180deg) translate3d(0, 0, 1px)'); 
     currentColumn--;
     if(currentColumn == -1 && (currentMarketItem + 1) < marketFlipCardClasses.length) {
         currentColumn = 3;
@@ -415,19 +382,15 @@ function flipInitMarketCards() {
 
             $('.cardsAndItemContainer .flip-plant .flip-card-inner .flip-card-back .cardContainer').each(function(){
                 let columnNum = $(this).closest('.marketColumn').attr('column');
-                if(columnNum == 3) return false;
                 $(this).prependTo(`.marketColumn[column="${columnNum}"] .cardsAndItemContainer`);
             });
 
             $('.cardsAndItemContainer .flip-room .flip-card-inner .flip-card-back .cardContainer').each(function(){
                 let columnNum = $(this).closest('.marketColumn').attr('column');
-                if(columnNum == 3) return false;
                 $(this).appendTo(`.marketColumn[column="${columnNum}"] .cardsAndItemContainer`);
             });
-
-            $('.marketColumn[column="0"] .flip-card').remove();
-            $('.marketColumn[column="1"] .flip-card').remove();
-            $('.marketColumn[column="2"] .flip-card').remove();
+            
+            $('.flip-card').remove();
 
             setTimeout(function(){
                 initPlayersHome();
@@ -471,12 +434,6 @@ function initPlayersHome() {
         $('.initSetup').removeClass('initSetup'); 
     }, 4050);
 }
-
-// $(document).on(touchEvent, '#backToStart', function(){
-// 	$('.gameView').removeClass('gameView');
-// 	$('.layer').hide();
-// 	$('#setupLayer').show();
-// });
 
 $(document).on(touchEvent, '#gameLayer #gameSectionsParent .minimized:not(.initSetup)', function(){
     $('#gameLayer #gameSectionsParent .expanded').addClass('minimized').removeClass('expanded');
