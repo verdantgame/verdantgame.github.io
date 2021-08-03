@@ -338,7 +338,7 @@ $(document).on(touchEvent, '#startGame', function(){
     setTimeout(function(){
         $('#gameLayer').fadeIn();
         setTimeout(function(){
-            initMarketInterval = setInterval(initMarketFunc, 250);    
+            initMarketInterval = setInterval(initMarketFunc, 350);    
         }, 400);
     }, 400);
 	
@@ -355,12 +355,16 @@ function initMarketFunc(){
     if(currentColumn == -1 && (currentMarketItem + 1) < marketItemClasses.length) {
         currentColumn = 3;
         currentMarketItem++;
+        clearInterval(initMarketInterval);
+        setTimeout(function(){
+            initMarketInterval = setInterval(initMarketFunc, 350);
+        }, 350)
     } else if(currentColumn == -1 && (currentMarketItem + 1) == marketItemClasses.length) {
         clearInterval(initMarketInterval);
         currentColumn = 3;
         currentMarketItem = 0;
         setTimeout(function(){
-            initMarketFlipCardsInterval = setInterval(flipInitMarketCards, 250);    
+            initMarketFlipCardsInterval = setInterval(flipInitMarketCards, 350);    
         }, 1000);
     }
 }
@@ -386,7 +390,9 @@ function flipInitMarketCards() {
                 $(this).appendTo(`.marketColumn[column="${columnNum}"] .cardsAndItemContainer`);
             });
 
-            $('.flip-card').remove();
+            setTimeout(function(){
+                $('.flip-card').remove();
+            }, 20);
 
             setTimeout(function(){
                 initPlayersHome();
@@ -424,11 +430,14 @@ function initPlayersHome() {
 
     setTimeout(function(){
         $('#homeContentContainer #playerInfoContainer #cardToPlace .flip-plant .flip-card-inner .flip-card-back .cardContainer').prependTo('#homeContentContainer #playerInfoContainer #cardToPlace');
-        $('#homeContentContainer #playerInfoContainer #cardToPlace .flip-plant').remove();
         $('#homeContentContainer #mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room .flip-card-inner .flip-card-back .cardContainer').prependTo('#homeContentContainer #mapContainer #mapHiddenOverlay #row-2-column-4');
-        $('#homeContentContainer #mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room').remove();
         $('.initSetup').removeClass('initSetup'); 
     }, 4000);
+
+    setTimeout(function(){
+        $('#homeContentContainer #playerInfoContainer #cardToPlace .flip-plant').remove();
+        $('#homeContentContainer #mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room').remove();
+    }, 4020);
 }
 
 // $(document).on(touchEvent, '#backToStart', function(){
