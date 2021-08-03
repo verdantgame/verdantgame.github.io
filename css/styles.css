@@ -337,24 +337,22 @@ p {
     transition: left 1s ease-in-out;
 }
 
-/* #marketSection #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer.startingPos {
-    left: -500px;
-} */
+#marketSection #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"],
+#marketSection #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="room"] {
+    transition: height .8s ease-in-out;
+}
 
 #marketSection #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"],
-#marketSection #marketCardColumns .marketColumn .cardsAndItemContainer .flip-plant .backOfCardContainer {
+#marketSection #marketCardColumns .marketColumn .cardsAndItemContainer .flip-plant,
+#marketSection #marketCardColumns .marketColumn .cardsAndItemContainer .flip-plant .backOfCardContainer,
+#marketSection #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="room"],
+#marketSection #marketCardColumns .marketColumn .cardsAndItemContainer .flip-room,
+#marketSection #marketCardColumns .marketColumn .cardsAndItemContainer .flip-room .backOfCardContainer {
     height: 164px;
-    transition: height .8s ease-in-out;
 }
 
 #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] {
     height: 60px;
-}
-
-#marketSection #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="room"],
-#marketSection #marketCardColumns .marketColumn .cardsAndItemContainer .flip-room .backOfCardContainer {
-    height: 164px;
-    transition: height .8s ease-in-out;
 }
 
 #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="room"] {
@@ -623,8 +621,6 @@ p {
     left: 0px;
 }
 
-
-
 /* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
 
 .flip-card.flip-back.flip-plant {
@@ -653,6 +649,11 @@ p {
     height: 164px;
     perspective: 1000px; /* Remove this if you don't want the 3D effect */
     margin: 0 auto;
+    overflow: hidden;
+}
+
+.cardContainer,
+.flip-card {
     border-radius: 9px;
     overflow: hidden;
 }
@@ -661,8 +662,6 @@ p {
 .flip-card-inner {
     position: relative;
     width: 100%;
-    /* height: 100%; */
-    text-align: center;
     overflow: visible !important;
     transition: transform 0.8s;
     transform-style: preserve-3d;
@@ -677,9 +676,9 @@ p {
     position: absolute;
     width: 100%;
     /* height: 100%; */
-    /* backface-visibility: hidden;
+    backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
-    -moz-backface-visibility: hidden; */
+    -moz-backface-visibility: hidden;
 }
 
 /* Style the back side */
@@ -920,7 +919,7 @@ p {
     }
 
     #marketSection #marketCardColumns .marketColumn {
-        width: 21.1vw;
+        width: 20.9vw;
         margin: 0vw 0vw 0vw 2.5vw;
     }
 
@@ -930,8 +929,9 @@ p {
     }
 
     #marketSection #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"],
+    #marketSection #marketCardColumns .marketColumn .cardsAndItemContainer .flip-plant,
     #marketSection #marketCardColumns .marketColumn .cardsAndItemContainer .flip-plant .backOfCardContainer {
-        height: 32.3vw;
+        height: 32.7vw;
     }
 
     .cardContainer[type="plant"] .plantBanner {
@@ -993,6 +993,7 @@ p {
     }
 
     #marketSection #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="room"],
+    #marketSection #marketCardColumns .marketColumn .cardsAndItemContainer .flip-room,
     #marketSection #marketCardColumns .marketColumn .cardsAndItemContainer .flip-room .backOfCardContainer {
         height: 32.9vw;
     }
@@ -1045,7 +1046,7 @@ p {
     }
 
     .cardContainer[type="room"] .lightingIconContainer[lighting-container="1"] .lightingIcon {
-        margin-top: .9vw;
+        margin-top: .67vw;
         margin-right: 0vw;
         margin-bottom: 0vw;
         margin-left: .45vw;
@@ -1059,7 +1060,7 @@ p {
     }
 
     .cardContainer[type="room"] .lightingIconContainer[lighting-container="3"] .lightingIcon {
-        margin-top: .9vw;
+        margin-top: .67vw;
         margin-right: 0vw;
         margin-bottom: 0vw;
         margin-left: .3vw;
@@ -1177,8 +1178,12 @@ p {
     }
 
     .flip-card {
-        border-radius: 1.7vw;
         height: 32.7vw;
+    }
+
+    .cardContainer,
+    .flip-card {
+        border-radius: 1.7vw;
     }
 
     #gameLayer #gameSectionsParent #tableauSection.expanded {
@@ -1207,13 +1212,13 @@ p {
     }
 
     #homeContentContainer #playerInfoContainer #cardToPlace {
-        width: 19.5vw;
+        width: 20.9vw;
         margin: 2vw auto;
     }
 
     .cardContainer,
     .backOfCardContainer {
-        height: 30.5vw;
+        height: 32.7vw;
     }
 
     #homeContentContainer #mapContainer {
@@ -1231,16 +1236,14 @@ p {
     }
 
     #homeContentContainer #mapContainer #mapHiddenOverlay .mapTileContainer {
-        height: 33vw;
-        width: 21.2vw;
+        height: 32.9vw;
+        width: 20.9vw;
         margin: .1vw;
     }
 
-    #homeContentContainer #mapContainer #mapHiddenOverlay .mapTileContainer .cardContainer {
-        height: 33.3vw;
+    #homeContentContainer #mapContainer #mapHiddenOverlay .mapTileContainer .cardContainer,
+    #homeContentContainer #mapContainer #mapHiddenOverlay .mapTileContainer .backOfCardContainer {
+        height: 32.9vw;
     }
 
-    .flip-card {
-        height: 33vw;
-    }
 }
