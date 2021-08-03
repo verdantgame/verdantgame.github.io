@@ -1,4 +1,5 @@
 html {	
+    overflow-y: hidden!important;
 	min-width: auto!important;
 }
 
@@ -64,7 +65,7 @@ p {
     font-style: italic;
     text-align: center;
     width: 440px;
-    margin: 0px auto 15px;
+    margin: 11px auto 15px;
     font-size: 16px;
     line-height: 22px;
 }
@@ -87,7 +88,7 @@ p {
 .layer {
     display: none;
     position: absolute;
-    top: 101px;
+    top: 89px;
     width: 100%;
 }
 
@@ -126,23 +127,26 @@ p {
 #gameLayer #gameSectionsParent .gameSection .gameSectionBorder {
     height: 100%;
     width: 100%;
-    padding: 2.5px;
-    border-radius: 3%;
+    border-radius: 10px;
 }
 
 #gameLayer #gameSectionsParent .gameSection .gameSectionBorder.outerBorder {
     border: 1px solid #41a742;
+    padding: 1px;
 }
 
 #gameLayer #gameSectionsParent .gameSection .gameSectionBorder.innerBorder {
     border: 2px solid #41a742;
     position: relative;
+    overflow: hidden;
 }
 
 #gameLayer #gameSectionsParent .gameSection .bgOverlay {
-    opacity: .5;
-    width: 100%;
-    height: 100%;
+    opacity: .4;
+    width: 104%;
+    height: 104%;
+    top: -2%;
+    left: -2%;
     z-index: -8;
     position: absolute;
     background-color: #ffffff;
@@ -151,12 +155,13 @@ p {
 #gameLayer #gameSectionsParent .gameSection .gameSectionBg {
     opacity: 0.6;
     position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: auto;
+    top: -2%;
+    left: -2%;
+    width: 104%;
+    max-width: 104%;
+    height: 104%;
     z-index: -9;
-    border-radius: 3%;
+    border-radius: 10px;
 }
 
 #gameLayer #gameSectionsParent .gameSection .gameSectionContent {
@@ -284,7 +289,8 @@ p {
     z-index: 0;
     cursor:hand;
     cursor:pointer;
-    transition: all .2s ease-in-out;
+    top:0px;
+    transition: transform .2s ease-in-out, top .2s ease-in-out, opacity .2s ease-in-out;
     opacity: 1;
 }
 
@@ -299,13 +305,15 @@ p {
 } */
 
 #marketSection #marketCardColumns .marketColumn.activeColumn .cardsAndItemContainer {
-    transform: scale(1.6);
+    transform: scale(1.3);
+    top: -35px;
     position: relative;
     z-index: 2;
 }
 
 #marketSection #marketCardColumns .marketColumn.deactivedColumn .cardsAndItemContainer {
     transform: scale(1);
+    top:0px;
     position: relative;
     z-index: 2;
 }
@@ -440,7 +448,7 @@ p {
 }
 
 .cardContainer[type="plant"][lighting="1"] .lightingIcon[lighting-icon="0"] {
-    left: 51px;
+    left: 48px;
 }
 
 #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="1"] .lightingIcon[lighting-icon="0"] {
@@ -449,11 +457,11 @@ p {
 }
 
 .cardContainer[type="plant"][lighting="2"] .lightingIcon[lighting-icon="0"] {
-    left: 46px;
+    left: 41.5px;
 }
 
 .cardContainer[type="plant"][lighting="2"] .lightingIcon[lighting-icon="1"] {
-    left: 59px;
+    left: 53.5px;
 }
 
 #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="2"] .lightingIcon[lighting-icon="0"] {
@@ -467,15 +475,15 @@ p {
 }
 
 .cardContainer[type="plant"][lighting="3"] .lightingIcon[lighting-icon="0"] {
-    left: 39px;
+    left: 35px;
 }
 
 .cardContainer[type="plant"][lighting="3"] .lightingIcon[lighting-icon="1"] {
-    left: 52px;
+    left: 47px;
 }
 
 .cardContainer[type="plant"][lighting="3"] .lightingIcon[lighting-icon="2"] {
-    left: 65px;
+    left: 59px;
 }
 
 #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="3"] .lightingIcon[lighting-icon="0"] {
@@ -835,12 +843,6 @@ p {
         height: 103vw;
     }
 
-    #gameLayer #gameSectionsParent .gameSection .gameSectionBg {
-        max-width: 105%;
-        width: 100%;
-        height: 102vw!important;
-    }
-
     #gameLayer #gameSectionsParent .gameSection .gameSectionContent {
         padding-top: .8vw;
     }
@@ -867,8 +869,16 @@ p {
     }
 
     #gameLayer #gameSectionsParent .gameSection .gameSectionBorder {
-        padding: .4vw;
         border-radius: 2vw;
+    }
+
+    #gameLayer #gameSectionsParent .gameSection .gameSectionBorder.outerBorder {
+        border: .1vw solid #41a742;
+        padding: .2vw;
+    }
+
+    #gameLayer #gameSectionsParent .gameSection .gameSectionBorder.innerBorder {
+        border: .5vw solid #41a742;
     }
 
     #marketSection #marketTitle, #tableauSection #playerTableauTitle {
