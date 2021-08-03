@@ -242,7 +242,7 @@ $(document).on('mouseleave','#container.wideScreenView #marketSection.gameSectio
     $('.activeColumnView').removeClass('activeColumnView');
     setTimeout(function(){
         $('.deactivedColumn').removeClass('deactivedColumn');
-    }, 100);
+    }, 200);
 });
 
 $(document).on(touchEvent,'#container.mobileView #marketSection.gameSection:not(.expandAnimation):not(.initSetup) #marketCardColumns .marketColumn .cardsAndItemContainer',function(){
