@@ -11,66 +11,40 @@ var initialRoomCards = [];
 var initialItemTokens = [];
 var initialPlantPots = [];
 
-function initFuncs(){
-    setupCarousel();
-    setupDrawPiles();
-    initiateMap();
+let changeOfView = false;
+let currentIframeView = '';
+let newIframeView = '';
+
+$(window).resize(function() {
+    checkScreenWidth();
+});
+
+function checkScreenWidth(){
+    changeOfView = false;
+	var windowSize = $(window).width();
+
+	if(windowSize <= 539) {
+		if(currentIframeView != 'mobileView') {
+			changeOfView = true;
+			newIframeView = 'mobileView';
+		}
+	} else if(windowSize > 539) {
+		if(currentIframeView != 'wideScreenView') {
+			changeOfView = true;
+			newIframeView = 'wideScreenView';
+		}
+	}
+
+	if(changeOfView) {
+        $('body > #container').removeClass('mobileView wideScreenView').addClass(newIframeView);
+        currentIframeView = newIframeView;
+	}
 }
 
-function setupCarousel(){
-    let carouselRaw = [
-        {   
-            'id': 'g',
-            'config': [5, 3, 3],
-            'order': [0, 1, 2],
-            'pos': 0
-        },{
-            'id': 'p',
-            'config': [4, 4, 4, 4, 4],
-            'order': [0, 1, 2, 3, 4],
-            'pos': 0
-        }
-    ];
-
-    for (let i = 0; i < carouselRaw.length; i++) {
-        shuffle(carouselRaw[i]['order']);
-    }
-
-    let masterIndex = 0;
-    let carouselData = [];
-
-    while (carouselData.length < 17) {
-        let thisIndex = carouselRaw[masterIndex]['pos'];
-        let thisRange = carouselRaw[masterIndex]['config'][carouselRaw[masterIndex]['order'][thisIndex]];
-        let uniqueCombo = false;
-        while (!uniqueCombo) {
-            let randNum = Math.floor(Math.random() * thisRange);
-            let thisCombo = `${carouselRaw[masterIndex]['id']}-${carouselRaw[masterIndex]['order'][thisIndex]}-${randNum}`;
-            if(carouselData.indexOf(thisCombo) == -1) {		
-                carouselData.push(thisCombo);
-                uniqueCombo = true;
-            }
-        }
-        carouselRaw[masterIndex]['pos'] == carouselRaw[masterIndex]['config'].length - 1 ? carouselRaw[masterIndex]['pos'] = 0 : carouselRaw[masterIndex]['pos']++;
-
-        masterIndex == 0 ? masterIndex = 1 : masterIndex = 0;
-
-    }
-
-    let carouselHTML = '';
-
-    for (let i = 0; i < carouselData.length; i++) {
-        carouselHTML += `
-            <div class="slideshow-slide">
-                <img src="img/demo-carousel/${carouselData[i]}.jpg">
-            </div>
-        `;
-    }
-
-    $('.slideshow-block > .slideshow-animation').html(carouselHTML);
-    setTimeout(function(){
-        initSlideshow('.slideshow-block','smoothscroll');
-    }, 100);
+function initFuncs(){
+    checkScreenWidth();
+    setupDrawPiles();
+    initiateMap();
 }
 
 function setupDrawPiles(){
@@ -364,7 +338,7 @@ $(document).on(touchEvent, '#startGame', function(){
     setTimeout(function(){
         $('#gameLayer').fadeIn();
         setTimeout(function(){
-            initMarketInterval = setInterval(initMarketFunc, 150);    
+            initMarketInterval = setInterval(initMarketFunc, 250);    
         }, 400);
     }, 400);
 	
@@ -386,7 +360,7 @@ function initMarketFunc(){
         currentColumn = 3;
         currentMarketItem = 0;
         setTimeout(function(){
-            initMarketFlipCardsInterval = setInterval(flipInitMarketCards, 150);    
+            initMarketFlipCardsInterval = setInterval(flipInitMarketCards, 250);    
         }, 1000);
     }
 }
@@ -441,12 +415,12 @@ function initPlayersHome() {
     setTimeout(function(){
         $('#playerInfoContainer #cardToPlace .flip-plant.startingPos').removeClass('startingPos')
         $('#mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room.startingPos').removeClass('startingPos')
-    }, 500);
+    }, 1000);
 
     setTimeout(function(){
         $('#playerInfoContainer #cardToPlace .flip-plant .flip-card-inner').css('transform', 'rotateY(180deg) translate3d(0, 0, 1px)'); 
         $('#mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room .flip-card-inner').css('transform', 'rotateY(180deg) translate3d(0, 0, 1px)'); 
-    }, 3000);
+    }, 3500);
 
     setTimeout(function(){
         $('#homeContentContainer #playerInfoContainer #cardToPlace .flip-plant .flip-card-inner .flip-card-back .cardContainer').prependTo('#homeContentContainer #playerInfoContainer #cardToPlace');
@@ -454,7 +428,7 @@ function initPlayersHome() {
         $('#homeContentContainer #mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room .flip-card-inner .flip-card-back .cardContainer').prependTo('#homeContentContainer #mapContainer #mapHiddenOverlay #row-2-column-4');
         $('#homeContentContainer #mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room').remove();
         $('.initSetup').removeClass('initSetup'); 
-    }, 3500);
+    }, 4000);
 }
 
 // $(document).on(touchEvent, '#backToStart', function(){
@@ -468,7 +442,7 @@ $(document).on(touchEvent, '#gameLayer #gameSectionsParent .minimized:not(.initS
     $(this).addClass('expanded expandAnimation').removeClass('minimized');
     setTimeout(function(){
         $('.expanded.expandAnimation').removeClass('expandAnimation');
-    }, 500)
+    }, 800)
 });
 
 function countInArray(array, what) {
@@ -554,3 +528,67 @@ function shuffle(array) {
   
 	return array;
 }
+
+
+// Carousel HTML:
+// <p class="has-text-centered"><strong><em>Sample of extra cards available with the final game:</em></strong></p>
+// <div class="slideshow-block">
+//     <div class="slideshow-animation"></div>
+// </div>
+
+
+// function setupCarousel(){
+//     let carouselRaw = [
+//         {   
+//             'id': 'g',
+//             'config': [5, 3, 3],
+//             'order': [0, 1, 2],
+//             'pos': 0
+//         },{
+//             'id': 'p',
+//             'config': [4, 4, 4, 4, 4],
+//             'order': [0, 1, 2, 3, 4],
+//             'pos': 0
+//         }
+//     ];
+
+//     for (let i = 0; i < carouselRaw.length; i++) {
+//         shuffle(carouselRaw[i]['order']);
+//     }
+
+//     let masterIndex = 0;
+//     let carouselData = [];
+
+//     while (carouselData.length < 17) {
+//         let thisIndex = carouselRaw[masterIndex]['pos'];
+//         let thisRange = carouselRaw[masterIndex]['config'][carouselRaw[masterIndex]['order'][thisIndex]];
+//         let uniqueCombo = false;
+//         while (!uniqueCombo) {
+//             let randNum = Math.floor(Math.random() * thisRange);
+//             let thisCombo = `${carouselRaw[masterIndex]['id']}-${carouselRaw[masterIndex]['order'][thisIndex]}-${randNum}`;
+//             if(carouselData.indexOf(thisCombo) == -1) {		
+//                 carouselData.push(thisCombo);
+//                 uniqueCombo = true;
+//             }
+//         }
+//         carouselRaw[masterIndex]['pos'] == carouselRaw[masterIndex]['config'].length - 1 ? carouselRaw[masterIndex]['pos'] = 0 : carouselRaw[masterIndex]['pos']++;
+
+//         masterIndex == 0 ? masterIndex = 1 : masterIndex = 0;
+
+//     }
+
+//     let carouselHTML = '';
+
+//     for (let i = 0; i < carouselData.length; i++) {
+//         carouselHTML += `
+//             <div class="slideshow-slide">
+//                 <img src="img/demo-carousel/${carouselData[i]}.jpg">
+//             </div>
+//         `;
+//     }
+
+//     $('.slideshow-block > .slideshow-animation').html(carouselHTML);
+//     setTimeout(function(){
+//         initSlideshow('.slideshow-block','smoothscroll');
+//     }, 100);
+// }
