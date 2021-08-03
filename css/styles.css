@@ -780,7 +780,7 @@ p {
 @media screen and (max-width: 539px) {
 
     #container #setupLayer {
-        height: 209vw;
+        height: 211vw;
     }
 
     .layer {
@@ -818,7 +818,7 @@ p {
     }
 
     #demoDisclaimer .message-body {
-        padding: 5vw 7vw 5vw 6vw;
+        padding: 5vw 7vw 2vw 6vw;
         border-radius: 1vw;
         border-width: 0vw 0vw 0vw 1vw;
     }
