@@ -1,5 +1,4 @@
 html {	
-	overflow-y: auto!important;
 	min-width: auto!important;
 }
 
@@ -773,10 +772,6 @@ p {
 }
 
 @media screen and (max-width: 539px) {
-
-    html {
-        overflow-y: hidden!important;
-    }
     
     #container #setupLayer {
         height: 211vw;
