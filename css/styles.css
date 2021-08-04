@@ -898,8 +898,8 @@ p {
 
     #marketSection #marketTitleContainer.titleContainer,
     #tableauSection #playerTableauTitleContainer.titleContainer {
-        height: 6.3vw;;
-        border-bottom: .1vw solid #003823;
+        height: 6.2vw;
+        border-bottom: .2vw solid #003823;
     }
 
     #marketSection #marketTitleContainer.titleContainer {
