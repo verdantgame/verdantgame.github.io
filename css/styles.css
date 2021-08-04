@@ -1,5 +1,4 @@
 html {	
-    /* overflow-y: hidden!important; */
 	min-width: auto!important;
 }
 
@@ -870,6 +869,10 @@ p {
         height: 41.2vw;
     }
 
+    #gameLayer #gameSectionsParent #tableauSection.minimized {
+        height: 95vw;
+    }
+
     #gameLayer #gameSectionsParent .gameSection.minimized .inactive {
         display: block;
         height: 100%;
@@ -1226,7 +1229,7 @@ p {
     }
 
     #gameLayer #gameSectionsParent #tableauSection.minimized {
-        top: 74vw;
+        top: 76.5vw;
     }
 
     #homeContentContainer {
