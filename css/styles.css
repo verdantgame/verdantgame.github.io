@@ -1,5 +1,5 @@
 html {	
-    overflow-y: hidden!important;
+    /* overflow-y: hidden!important; */
 	min-width: auto!important;
 }
 
@@ -166,7 +166,7 @@ p {
 
 #gameLayer #gameSectionsParent .gameSection .gameSectionContent {
     position: relative;
-    padding-top: 5px;
+    padding-top: 9px;
 }
 
 #gameSectionsParent .gameSection.expanded .inactive {
@@ -238,19 +238,34 @@ p {
     z-index: -1;
 }
 
-#marketSection #marketTitle,
-#tableauSection #playerTableauTitle {
-    margin-top: 0px;
-    margin-bottom: 0px;
+.titleContainer {
     opacity: 1;
-    height: 45px;
+    height: 33px;
+    border-bottom: 1px solid #003823;
     transition: all .7s ease-in-out;
-    font-size: 28px;
+    overflow: hidden;
 }
 
-#marketSection.minimized #marketTitle {
+#marketSection.gameSection.minimized #marketTitleContainer.titleContainer,
+#tableauSection.gameSection.minimized #playerTableauTitleContainer.titleContainer {
     height: 0px;
-    opacity:0;
+    opacity: 0;
+    margin-bottom: 0px;
+}
+
+.titleContainer > p.title {
+    font-size: 25px;
+    border-bottom: 2px solid #003823;
+}
+
+#marketSection #marketTitleContainer.titleContainer {
+    width: 90px;
+    margin: 0px auto 17px;
+}
+
+#tableauSection #playerTableauTitleContainer.titleContainer {
+    width: 160px;
+    margin: 0px auto 13px;
 }
 
 #marketSection #marketCardColumns { 
@@ -306,7 +321,7 @@ p {
 
 #marketSection #marketCardColumns .marketColumn.activeColumn .cardsAndItemContainer {
     transform: scale(1.3);
-    top: -35px;
+    top: -43px;
     position: relative;
     z-index: 2;
 }
@@ -657,7 +672,7 @@ p {
 
 .cardContainer,
 .flip-card {
-    border-radius: 9px;
+    border-radius: 6px;
     overflow: hidden;
 }
 
@@ -666,7 +681,7 @@ p {
     position: relative;
     width: 100%;
     overflow: visible !important;
-    transition: transform 0.7s;
+    transition: transform 0.9s;
     transform-style: preserve-3d;
     -webkit-transform-style: preserve-3d;
     -moz-transform-style: preserve-3d;
@@ -753,7 +768,7 @@ p {
 #homeContentContainer #playerInfoContainer #cardToPlace .flip-plant {
     top: 0px;
     right: 0px;
-    transition: right 2s ease-in-out, top 2s ease-in-out;
+    transition: right 1.8s ease-in-out, top 1.8s ease-in-out;
     overflow: hidden;
 }
 
@@ -765,7 +780,7 @@ p {
 #homeContentContainer #mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room {
     top: 0px;
     left: 0px;
-    transition: left 2s ease-in-out, top 2s ease-in-out;
+    transition: left 1.8s ease-in-out, top 1.8s ease-in-out;
 }
 
 #homeContentContainer #mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room.startingPos {
@@ -844,7 +859,7 @@ p {
     }
 
     #gameLayer #gameSectionsParent .gameSection .gameSectionContent {
-        padding-top: .8vw;
+        padding-top: 1.8vw;
     }
 
     #gameLayer #gameSectionsParent .gameSection .gameSectionBorder.innerBorder {
@@ -881,9 +896,25 @@ p {
         border: .5vw solid #41a742;
     }
 
-    #marketSection #marketTitle, #tableauSection #playerTableauTitle {
-        height: 8.3vw;
-        font-size: 5.2vw;
+    #marketSection #marketTitleContainer.titleContainer,
+    #tableauSection #playerTableauTitleContainer.titleContainer {
+        height: 6.3vw;;
+        border-bottom: .1vw solid #003823;
+    }
+
+    #marketSection #marketTitleContainer.titleContainer {
+        width: 17vw;
+        margin: 0vw auto 3.2vw;
+    }
+
+    #tableauSection #playerTableauTitleContainer.titleContainer {
+        width: 31vw;
+        margin: 0vw auto 2.6vw;
+    }
+
+    #marketSection #marketTitle,
+    #tableauSection #playerTableauTitle {
+        font-size: 4.8vw;
     }
 
     #marketSection #marketCardColumns .plantPotContainer.startingPos {
@@ -1187,7 +1218,7 @@ p {
 
     .cardContainer,
     .flip-card {
-        border-radius: 1.7vw;
+        border-radius: 1.2vw;
     }
 
     #gameLayer #gameSectionsParent #tableauSection.expanded {
