@@ -377,7 +377,7 @@ function initMarketFunc(){
         currentColumn = 3;
         currentMarketItem = 0;
         setTimeout(function(){
-            initMarketFlipCardsInterval = setInterval(flipInitMarketCards, 350);    
+            initMarketFlipCardsInterval = setInterval(flipInitMarketCards, 300);    
         }, 1000);
     }
 }
@@ -437,7 +437,7 @@ function initPlayersHome() {
     setTimeout(function(){
         $('#playerInfoContainer #cardToPlace .flip-plant .flip-card-inner').css('transform', 'rotateY(180deg) translate3d(0, 0, 1px)'); 
         $('#mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room .flip-card-inner').css('transform', 'rotateY(180deg) translate3d(0, 0, 1px)'); 
-    }, 3500);
+    }, 3300);
 
     setTimeout(function(){
         $('#homeContentContainer #playerInfoContainer #cardToPlace .flip-plant .flip-card-inner .flip-card-back .cardContainer').prependTo('#homeContentContainer #playerInfoContainer #cardToPlace');
@@ -445,7 +445,7 @@ function initPlayersHome() {
         $('#homeContentContainer #mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room .flip-card-inner .flip-card-back .cardContainer').prependTo('#homeContentContainer #mapContainer #mapHiddenOverlay #row-2-column-4');
         $('#homeContentContainer #mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room').remove();
         $('.initSetup').removeClass('initSetup'); 
-    }, 4050);
+    }, 3850);
 }
 
 $(document).on(touchEvent, '#gameLayer #gameSectionsParent .minimized:not(.initSetup)', function(){
