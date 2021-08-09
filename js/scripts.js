@@ -466,11 +466,11 @@ var mapMoveAmount = {
                 },
                 '9': {
                     'vertical': '75.5',
-                    'horizontal': '48'
+                    'horizontal': '96'
                 },
                 '7': {
                     'vertical': '58.5',
-                    'horizontal': '37.5'
+                    'horizontal': '75'
                 },
                 '5': {
                     'vertical': '42',
@@ -487,11 +487,11 @@ var mapMoveAmount = {
                 },
                 '9': {
                     'vertical': '15',
-                    'horizontal': '9.5'
+                    'horizontal': '19'
                 },
                 '7': {
                     'vertical': '11.75',
-                    'horizontal': '7.5'
+                    'horizontal': '15'
                 },
                 '5': {
                     'vertical': '16.8',
