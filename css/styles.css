@@ -1805,14 +1805,14 @@ p {
 
     #gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapZoomControls {
         top: 1.5vw;
-        right: 44vw;
-        width: 23vw;
-        height: 10vw;
+        right: 47vw;
+        width: 20vw;
+        height: 9vw;
     }
 
     #gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapZoomControls .zoomIcon {
         top: 0vw;
-        width: 10vw;
+        width: 8.5vw;
     }
 
     #gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapZoomControls .zoomOutIcon {
@@ -1820,13 +1820,13 @@ p {
     }
 
     #gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapZoomControls .zoomInIcon {
-        left: 13vw;
+        left: 11vw;
     }
 
     #gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapNavControls {
         bottom: 1vw;
-        width: 25vw;
-        height: 25vw;
+        width: 23vw;
+        height: 23vw;
         right: 0vw;
     }
 
@@ -1836,27 +1836,27 @@ p {
     }
 
     #gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapNavControls .arrowImg {
-        width: 9vw;
+        width: 8vw;
     }
 
     #gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapNavControls #upArrow.arrowImg {
-        top: 1.5vw;
-        right: 7.9vw;
+        top: 1.9vw;
+        right: 7.1vw;
     }
 
     #gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapNavControls #rightArrow.arrowImg {
-        top: 8.9vw;
+        top: 8.7vw;
         right: 0.6vw;
     }
 
     #gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapNavControls #downArrow.arrowImg {
-        top: 16.5vw;
-        right: 8.3vw;
+        top: 16vw;
+        right: 7.7vw;
     }
 
     #gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapNavControls #leftArrow.arrowImg {
         top: 8.3vw;
-        right: 15.6vw;
+        right: 14.6vw;
     }
 
     #gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapContainer #mapHiddenOverlay {
