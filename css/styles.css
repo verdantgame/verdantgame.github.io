@@ -1220,12 +1220,12 @@ p {
     }
 
     #loaderLayer .loader-parent .loader-container .loader-wrapper .loading-message {
-        font-size: 3vw;
+        font-size: 6vw;
     }
 
     #loaderLayer .loader-parent .loader-container .loader-wrapper .loader.is-loading {
-        height: 22vw;
-        width: 22vw;
+        height: 42vw;
+        width: 42vw;
     }
 
     #gameLayer #gameSectionsParent .gameSection .gameSectionBg {
