@@ -163,5 +163,5 @@ const preload = src => new Promise(function(resolve, reject) {
   ];
   
   preloadAll(sources)
-    .then(images => initFuncs())
+    .then(images => preloadImgsCallback())
     .catch(err => console.error('Failed', err));
