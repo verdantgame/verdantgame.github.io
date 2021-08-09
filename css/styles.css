@@ -1209,10 +1209,6 @@ p {
 
 @media screen and (max-width: 539px) {
 
-    html.hydrated {	
-        overflow-y: scroll!important;
-    }
-
     #gameLayer #gameSectionsParent .gameSection .gameSectionBg {
         opacity: 0.6;
         position: absolute;
