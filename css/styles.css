@@ -1450,15 +1450,15 @@ p {
     }
 
     .cardContainer[type="plant"] .plantVerdancy {
-        top: .5vw;
-        right: 1.1vw;
-        width: 3.9vw;
+        top: .4vw;
+        right: .4vw;
+        width: 4.2vw;
     }
 
     .cardContainer[type="plant"] .plantVPs {
-        top: 3.9vw;
-        right: .6vw;
-        width: 3.45vw;
+        top: 4vw;
+        right: 0vw;
+        width: 3.7vw;
     }
 
     .cardContainer[type="plant"] .lightingIcon {
