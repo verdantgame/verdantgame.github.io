@@ -64,6 +64,12 @@ const preload = src => new Promise(function(resolve, reject) {
     'img/lighting/full.png',
     'img/lighting/half.png',
     'img/lighting/none.png',
+    'img/map/arrow.png',
+    'img/map/woodCircle.png',
+    'img/map/zoomIn.png',
+    'img/map/zoomIn-inactive.png',
+    'img/map/zoomOut.png',
+    'img/map/zoomOut-inactive.png',
     'img/plants/back.jpg',
     'img/plants/flowering-0.jpg',
     'img/plants/flowering-1.jpg',
@@ -150,6 +156,9 @@ const preload = src => new Promise(function(resolve, reject) {
     'img/thumbs/3.png',
     'img/thumbs/4.png',
     'img/bg.jpg',
+    'img/bg2.jpg',
+    'img/card-storage.png',
+    'img/item-storage.png',
     'img/title-under-construction.jpg'
   ];
   
