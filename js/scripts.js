@@ -12,8 +12,8 @@ var initialItemTokens = [];
 var initialPlantPots = [];
 
 let changeOfView = false;
-let currentIframeView = '';
-let newIframeView = '';
+let currentView = '';
+let newView = '';
 
 $(window).resize(function() {
     checkScreenWidth();
@@ -24,20 +24,20 @@ function checkScreenWidth(){
 	var windowSize = $(window).width();
 
 	if(windowSize <= 539) {
-		if(currentIframeView != 'mobileView') {
+		if(currentView != 'mobileView') {
 			changeOfView = true;
-			newIframeView = 'mobileView';
+			newView = 'mobileView';
 		}
 	} else if(windowSize > 539) {
-		if(currentIframeView != 'wideScreenView') {
+		if(currentView != 'wideScreenView') {
 			changeOfView = true;
-			newIframeView = 'wideScreenView';
+			newView = 'wideScreenView';
 		}
 	}
 
 	if(changeOfView) {
-        $('body > #container').removeClass('mobileView wideScreenView').addClass(newIframeView);
-        currentIframeView = newIframeView;
+        $('body > #container').removeClass('mobileView wideScreenView').addClass(newView);
+        currentView = newView;
 	}
 }
 
@@ -100,10 +100,10 @@ function setupDrawPiles(){
     
     allItemTokens = shuffle(initItemTokens);
 
-    console.log(`allPlantCards: `, allPlantCards);
-    console.log(`allRoomCards: `, allRoomCards);
-    console.log(`allItemTokens: `, allItemTokens);
-    console.log(`allPlantPots: `, allPlantPots);
+    // console.log(`allPlantCards: `, allPlantCards);
+    // console.log(`allRoomCards: `, allRoomCards);
+    // console.log(`allItemTokens: `, allItemTokens);
+    // console.log(`allPlantPots: `, allPlantPots);
 
     setupInitialCardsAndItems();
 
@@ -148,88 +148,6 @@ function setupInitialCardsAndItems() {
 
 	$('#marketCardColumns').append(initialMarketHTML);
 
-}
-
-let mapData = [];
-let mapLoopLimit = 0;
-var mapRowsColumnsIndexes = {
-	rows: {},
-	columns: {}
-};
-
-function initiateMap() {
-
-	let numRows = 5;
-	let numColumns = 9;
-
-	// mapData = []
-	let i;
-	let j;
-	let k;
-	let l;
-
-	// loop through all rows
-	for (i = 0, j = 0; i < numRows; i++) {
-
-		mapRowsColumnsIndexes.rows['row' + j] = i;
-
-		// j = 0 ROW START
-		// i < 5 ROW DURATION (11 rows)
-		// end result = rows = [16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26];
-		mapData[i] = [];
-		// loop through all the children of the currently targetted row - which represents the columns
-		for (k = 0, l = 0; k < numColumns; k++) {
-
-			mapRowsColumnsIndexes.columns['column' + l] = k;
-
-			// l = 14 COLUMNS START
-			// k < 12 COLUMNS DURATION (12 columns)
-			// end result = columns = [14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25];
-			mapData[i][k] = {
-				// every map hex is blank to start with
-				row: j,
-				column: l,
-				placedCard: false,
-                placedItem: false
-			}
-			l++;
-		}
-		j++;
-	}
-
-	// now that the starting template for the map has been creatd (as well as the starting tile information), the map is generated
-	generateMap();
-}
-
-function generateMap() {
-	// the map HTML script
-	var mapHTML = `<div id="mapHiddenOverlay">`;
-	for (let i = 0; i < mapData.length; i++) {
-		for (let j = 0; j < mapData[i].length; j++) {
-			mapHTML += `<div id="row-${mapData[i][j].row}-column-${mapData[i][j].column}" class="mapTileContainer row-${mapData[i][j].row} column-${mapData[i][j].column}"></div>`;
-		}
-	}
-    mapHTML += `
-        </div>
-            <div class="zoomOptions">
-                <!--img zoomType="zoomIn" class="zoomIn zoomOption inactiveZoom" src="img/zoomIn-inactive.png" /-->
-                <!--img zoomType="zoomOut" class="zoomOut zoomOption activeZoom" src="img/zoomOut.png" /-->
-            </div>
-            <div class="mapNavigation">
-                <!--img class="navBackground" src="img/woodCircle.png" /-->
-                <!--img direction="up" class="upArrow navArrow" src="img/arrow.png" /-->
-                <!--img direction="right" class="rightArrow navArrow" src="img/arrow.png" /-->
-                <!--img direction="down" class="downArrow navArrow" src="img/arrow.png" /-->
-                <!--img direction="left" class="leftArrow navArrow" src="img/arrow.png" /-->
-            </div>
-
-            <div id="placedTileOptions">
-                <!--button id="cancelTilePlacement" class="button is-danger">Cancel</button-->
-                <!--button id="confirmTilePlacement" class="button is-success">Confirm</button-->
-            </div>
-    `;
-	// the map is generated and all the exisiting information has been replaced
-	$('#homeContentContainer #mapContainer').html(mapHTML);
 }
 
 $(document).on('mouseenter','#container.wideScreenView #marketSection.gameSection:not(.expandAnimation):not(.initSetup) #marketCardColumns .marketColumn .cardsAndItemContainer',function(){
@@ -345,6 +263,10 @@ $(document).on(touchEvent, '#frontPageGameInstructionsButton', function(){
 let initMarketInterval;
 let initMarketFlipCardsInterval;
 
+// $(document).on(touchEvent, '#startGame', function(){
+//     quickMarketSetup();
+// });
+
 $(document).on(touchEvent, '#startGame', function(){
 	$('body').addClass('gameView');
 	$('.layer').fadeOut();
@@ -360,6 +282,52 @@ $(document).on(touchEvent, '#startGame', function(){
 
 let currentColumn = 3;
 let currentMarketItem = 0;
+
+function quickMarketSetup() {
+    $('body').addClass('gameView');
+	$('#setupLayer.layer').hide();
+    $('#gameLayer.layer').show();
+    $('#gameLayer #gameSectionsParent .minimized ion-icon[name="expand"]').show();
+    $('.startingPos').addClass('notransition');
+    $('.startingPos').removeClass('startingPos');
+    $('.notransition')[0].offsetHeight;
+    $('.notransition').removeClass('notransition');
+    $('.flip-card-inner').addClass('notransition');
+    $('.flip-card-inner').css('transform', 'rotateY(180deg) translate3d(0, 0, 1px)');
+    $('.flip-card-inner')[0].offsetHeight;
+    $('.flip-card-inner').removeClass('notransition');
+    isolateFlipCardContents();
+    $('#marketSection').addClass('notransition');
+    $('#tableauSection').addClass('notransition');
+    $('#marketSection').addClass('minimized').removeClass('expanded');
+    $('#tableauSection').addClass('expanded').removeClass('minimized');
+    $('#marketSection')[0].offsetHeight;
+    $('#tableauSection')[0].offsetHeight;
+    $('#marketSection').removeClass('notransition');
+    $('#tableauSection').removeClass('notransition');
+    chooseStartingPlayerCards();
+    $('#playerInfoContainer #cardToPlace .flip-plant.startingPos').addClass('notransition');
+    $('#mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room.startingPos').addClass('notransition');
+    $('#playerInfoContainer #cardToPlace .flip-plant.startingPos').removeClass('startingPos')
+    $('#mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room.startingPos').removeClass('startingPos')
+    $('#playerInfoContainer #cardToPlace .flip-plant')[0].offsetHeight;
+    $('#mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room')[0].offsetHeight;
+    $('#playerInfoContainer #cardToPlace .flip-plant').removeClass('notransition');
+    $('#mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room').removeClass('notransition');
+    $('#playerInfoContainer #cardToPlace .flip-plant .flip-card-inner').addClass('notransition');
+    $('#mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room .flip-card-inner').addClass('notransition');
+    $('#playerInfoContainer #cardToPlace .flip-plant .flip-card-inner').css('transform', 'rotateY(180deg) translate3d(0, 0, 1px)'); 
+    $('#mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room .flip-card-inner').css('transform', 'rotateY(180deg) translate3d(0, 0, 1px)'); 
+    $('#playerInfoContainer #cardToPlace .flip-plant .flip-card-inner')[0].offsetHeight;
+    $('#mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room .flip-card-inner')[0].offsetHeight;
+    $('#playerInfoContainer #cardToPlace .flip-plant .flip-card-inner').removeClass('notransition');
+    $('#mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room .flip-card-inner').removeClass('notransition');
+    $('#homeContentContainer #playerInfoContainer #cardToPlace .flip-plant .flip-card-inner .flip-card-back .cardContainer').appendTo('#homeContentContainer #playerInfoContainer #cardToPlace');
+    $('#homeContentContainer #playerInfoContainer #cardToPlace .flip-plant').remove();
+    $('#homeContentContainer #mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room .flip-card-inner .flip-card-back .cardContainer').appendTo('#homeContentContainer #mapContainer #mapHiddenOverlay #row-2-column-4');
+    $('#homeContentContainer #mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room').remove();
+    $('.initSetup').removeClass('initSetup'); 
+}
 
 function initMarketFunc(){
     let marketItemClasses = ['.plantPotContainer', '.cardsAndItemContainer .flip-plant', '.cardsAndItemContainer .itemToken', '.cardsAndItemContainer .flip-room'];
@@ -392,19 +360,7 @@ function flipInitMarketCards() {
     } else if(currentColumn == -1 && (currentMarketItem + 1) == marketFlipCardClasses.length) {
         clearInterval(initMarketFlipCardsInterval);
         setTimeout(function(){
-
-            $('.cardsAndItemContainer .flip-plant .flip-card-inner .flip-card-back .cardContainer').each(function(){
-                let columnNum = $(this).closest('.marketColumn').attr('column');
-                $(this).prependTo(`.marketColumn[column="${columnNum}"] .cardsAndItemContainer`);
-            });
-
-            $('.cardsAndItemContainer .flip-room .flip-card-inner .flip-card-back .cardContainer').each(function(){
-                let columnNum = $(this).closest('.marketColumn').attr('column');
-                $(this).appendTo(`.marketColumn[column="${columnNum}"] .cardsAndItemContainer`);
-            });
-            
-            $('.flip-card').remove();
-
+            isolateFlipCardContents();
             setTimeout(function(){
                 initPlayersHome();
             }, 300);
@@ -413,21 +369,32 @@ function flipInitMarketCards() {
     }
 }
 
+function isolateFlipCardContents() {
+    $('.cardsAndItemContainer .flip-plant .flip-card-inner .flip-card-back .cardContainer').each(function(){
+        let columnNum = $(this).closest('.marketColumn').attr('column');
+        $(this).prependTo(`.marketColumn[column="${columnNum}"] .cardsAndItemContainer`);
+    });
+
+    $('.cardsAndItemContainer .flip-room .flip-card-inner .flip-card-back .cardContainer').each(function(){
+        let columnNum = $(this).closest('.marketColumn').attr('column');
+        $(this).appendTo(`.marketColumn[column="${columnNum}"] .cardsAndItemContainer`);
+    });
+    
+    $('.flip-card').remove();
+}
+
 function initPlayersHome() {
     $('#marketSection').addClass('minimized').removeClass('expanded');
-    $('#tableauSection').addClass('expanded').removeClass('minimized');
+    $('#tableauSection').addClass('expanded expandAnimation').removeClass('minimized');
+
+    setTimeout(function(){
+        $('#tableauSection').removeClass('expandAnimation');
+    }, 700);
 
     // target the next tile information in the allTiles array
     // splicing the first item removes it from the array and transfers the information into the "thisTile" variable
 
-    let startingPlant = allPlantCards.splice(0, 1);
-    let startingRoom = allRoomCards.splice(0, 1);
-
-    let startingPlantHTML = generateCard(startingPlant[0], 'plant', 'init');
-    let startingRoomHTML = generateCard(startingRoom[0], 'room', 'init');
-
-    $('#playerInfoContainer #cardToPlace').append(startingPlantHTML);
-    $('#mapContainer #mapHiddenOverlay #row-2-column-4').append(startingRoomHTML);
+    chooseStartingPlayerCards();
 
     setTimeout(function(){
         $('#playerInfoContainer #cardToPlace .flip-plant.startingPos').removeClass('startingPos')
@@ -440,21 +407,384 @@ function initPlayersHome() {
     }, 3300);
 
     setTimeout(function(){
-        $('#homeContentContainer #playerInfoContainer #cardToPlace .flip-plant .flip-card-inner .flip-card-back .cardContainer').prependTo('#homeContentContainer #playerInfoContainer #cardToPlace');
+        $('#homeContentContainer #playerInfoContainer #cardToPlace .flip-plant .flip-card-inner .flip-card-back .cardContainer').appendTo('#homeContentContainer #playerInfoContainer #cardToPlace');
         $('#homeContentContainer #playerInfoContainer #cardToPlace .flip-plant').remove();
-        $('#homeContentContainer #mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room .flip-card-inner .flip-card-back .cardContainer').prependTo('#homeContentContainer #mapContainer #mapHiddenOverlay #row-2-column-4');
+        $('#homeContentContainer #mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room .flip-card-inner .flip-card-back .cardContainer').appendTo('#homeContentContainer #mapContainer #mapHiddenOverlay #row-2-column-4');
         $('#homeContentContainer #mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room').remove();
         $('.initSetup').removeClass('initSetup'); 
     }, 3850);
 }
 
+function chooseStartingPlayerCards() {
+    let startingPlant = allPlantCards.splice(0, 1);
+    let startingRoom = allRoomCards.splice(0, 1);
+
+    let startingPlantHTML = generateCard(startingPlant[0], 'plant', 'init');
+    let startingRoomHTML = generateCard(startingRoom[0], 'room', 'init');
+
+    $('#playerInfoContainer #cardToPlace').append(startingPlantHTML);
+    $('#mapContainer #mapHiddenOverlay #row-2-column-4').append(startingRoomHTML);
+}
+
 $(document).on(touchEvent, '#gameLayer #gameSectionsParent .minimized:not(.initSetup)', function(){
+
+    let thisID = $(this).attr('id');
+
     $('#gameLayer #gameSectionsParent .expanded').addClass('minimized').removeClass('expanded');
     $(this).addClass('expanded expandAnimation').removeClass('minimized');
     setTimeout(function(){
         $('.expanded.expandAnimation').removeClass('expandAnimation');
-    }, 800)
+    }, 700)
+
+    thisID != 'tableauSection' ? lockMap = true : lockMap = false;
+
 });
+
+let allDirections = ['up', 'down', 'left', 'right'];
+
+let mapData = [];
+let mapLoopLimit = 0;
+var mapRowsColumnsIndexes = {
+	rows: {},
+	columns: {}
+};
+
+
+var mapMoveAmount = {
+	'cardPos': {
+		'top': 0,
+		'left': 0
+	},
+	'view':{
+		'wideScreenView': {
+            'zoomIncs': {
+                '11': {
+                    'vertical': '61.5',
+                    'horizontal': '59'
+                },
+                '9': {
+                    'vertical': '75.5',
+                    'horizontal': '48'
+                },
+                '7': {
+                    'vertical': '58.5',
+                    'horizontal': '37.5'
+                },
+                '5': {
+                    'vertical': '42',
+                    'horizontal': '37.5'
+                },
+            },
+			'unit': 'px'
+		},
+		'mobileView': {
+            'zoomIncs': {
+                '11': {
+                    'vertical': '18.5',
+                    'horizontal': '11.5'
+                },
+                '9': {
+                    'vertical': '15',
+                    'horizontal': '9.5'
+                },
+                '7': {
+                    'vertical': '11.75',
+                    'horizontal': '7.5'
+                },
+                '5': {
+                    'vertical': '16.8',
+                    'horizontal': '10.7'
+                },		
+			},
+			'unit': 'vw'
+		}
+	}
+}
+
+var mapStats = {
+    'centerRow': 2,
+	'centerColumn': 4,
+	'viewableTileLimits': {
+        up: 0,
+        down: 0,
+        left: 0,
+        right: 0
+	},
+	'zoomStats': {
+		'11': {
+			xCardsVisible: 6, // horizontal
+			yCardsVisible: 6  // vertical
+		},
+        '9': {
+			xCardsVisible: 8, // horizontal
+			yCardsVisible: 6  // vertical
+		},
+		'7': {
+			xCardsVisible: 8, // horizontal
+			yCardsVisible: 8  // vertical
+		},
+		'5': {
+			xCardsVisible: 10, // horizontal
+			yCardsVisible: 8  // vertical
+		}
+	},
+	'directionStatus': {
+		up: 'unlocked',
+		down: 'unlocked',
+		left: 'unlocked',
+		right: 'unlocked'
+	}
+}
+
+var zoomLevel = 9;
+var lockFunction = false;
+var lockMap = false;
+
+// how big the generated map is
+// up-down = 0-4 limits
+// left-right = 0-8 limits
+var mapLimits = {
+	up: 0,
+	down: 4,
+	left: 0,
+	right: 8
+}
+
+var mapRowRange = mapLimits.down - mapLimits.up + 1; // 5 rows
+var mapColumnRange = mapLimits.right - mapLimits.left + 1; // 9 columns
+
+function initiateMap() {
+
+	// loop through all rows
+	for (i = 0; i < mapRowRange; i++) {
+		mapData[i] = [];
+		for (j = 0; j < mapColumnRange; j++) {
+			mapData[i][j] = {
+				row: i,
+				column: j,
+				placedCard: false,
+                placedItem: false
+			}
+		}
+	}
+
+	// now that the starting template for the map has been creatd (as well as the starting tile information), the map is generated
+	generateMap();
+}
+
+function generateMap() {
+	// the map HTML script
+	var mapHTML = `<div id="mapHiddenOverlay">`;
+	for (let i = 0; i < mapData.length; i++) {
+		for (let j = 0; j < mapData[i].length; j++) {
+			mapHTML += `<div id="row-${mapData[i][j].row}-column-${mapData[i][j].column}" class="mapTileContainer row-${mapData[i][j].row} column-${mapData[i][j].column}"></div>`;
+		}
+	}
+    mapHTML += `
+        </div>
+    `;
+	// the map is generated and all the exisiting information has been replaced
+	$('#homeContentContainer #mapContainer').html(mapHTML);
+    calculateViewableCardLimits();
+}
+
+function calculateViewableCardLimits() {
+    let verticalLimit = Math.floor(mapStats.zoomStats[zoomLevel].yCardsVisible / 2) // left + right
+    mapStats.viewableTileLimits.up = mapMoveAmount.cardPos.top + verticalLimit;
+    mapStats.viewableTileLimits.down = mapMoveAmount.cardPos.top - verticalLimit;
+    let horizontalLimit = Math.floor(mapStats.zoomStats[zoomLevel].xCardsVisible / 2) // left + right
+    mapStats.viewableTileLimits.left = mapMoveAmount.cardPos.left + horizontalLimit;
+    mapStats.viewableTileLimits.right = mapMoveAmount.cardPos.left - horizontalLimit;
+}
+
+
+$(document).keydown(function(e){
+
+	if(!lockMap) {
+		lockMap = true;
+		setTimeout(function(){
+			lockMap = false;
+		}, 220);
+
+        if (e.which == 37 || e.which == 65) { 
+			if(mapStats.directionStatus.left == 'unlocked') {
+				processMapMovement('left');
+				return false;
+			}
+		 } else if (e.which == 38 || e.which == 87) { 
+			if(mapStats.directionStatus.up == 'unlocked') {
+				processMapMovement('up');
+				return false;
+			}
+		 } else if (e.which == 39 || e.which == 68) { 
+			if(mapStats.directionStatus.right == 'unlocked') {
+				processMapMovement('right');
+				return false;
+			}
+		 } else if (e.which == 40 || e.which == 83) { 
+			if(mapStats.directionStatus.down == 'unlocked') {
+				processMapMovement('down');
+				return false;
+			}
+		 } else if (e.which == 9) { 
+			e.preventDefault();
+		 }
+	}
+    
+});
+
+$(document).on(touchEvent,'#mapNavControls .arrowImg',function(){
+	let thisDirection = $(this).data('direction');
+	processMapMovement(thisDirection);
+});
+
+
+function processMapMovement(thisDirection){
+
+	if(thisDirection == 'up' || thisDirection == 'down') {	
+		if(thisDirection == 'up') {
+			mapMoveAmount.cardPos.top++;
+		} else if(thisDirection == 'down') {	
+			mapMoveAmount.cardPos.top--;
+		}
+		// checkMapLimits('vertical', thisDirection, mapMoveAmount.cardPos.top);
+        checkMapLimits();
+		updateMapPosition('vertical');
+	}
+
+	if(thisDirection == 'left' || thisDirection == 'right') {	
+		if(thisDirection == 'left') {
+			mapMoveAmount.cardPos.left++;
+		} else if(thisDirection == 'right') {	
+			mapMoveAmount.cardPos.left--;
+		}
+		// checkMapLimits('horizontal', thisDirection, mapMoveAmount.cardPos.left);
+        checkMapLimits();
+		updateMapPosition('horizontal');
+	}
+
+	$(`#mapNavControls #${thisDirection}Arrow`).addClass('activeArrow');
+	setTimeout(function(){
+		$('.activeArrow').removeClass('activeArrow');
+	}, 100);
+
+}
+
+// mapStats = {
+// 	'viewableTileLimits': {
+// 		up: 0,
+// 		down: 0,
+// 		left: 0,
+// 		right: 0
+//  }
+//}
+
+function checkMapLimits(){
+    for (let i = 0; i < allDirections.length; i++) {
+        if(allDirections[i] == 'up' || allDirections[i] == 'down') {
+            if(mapMoveAmount.cardPos.top == mapStats.viewableTileLimits[allDirections[i]]) {
+                mapStats.directionStatus[allDirections[i]] = 'mapLimit-locked';
+                $(`#mapNavControls #${allDirections[i]}Arrow`).hide();
+            } else {
+                mapStats.directionStatus[allDirections[i]] = 'unlocked';
+                $(`#mapNavControls #${[allDirections[i]]}Arrow`).show();
+            }
+        } else if(allDirections[i] == 'left' || allDirections[i] == 'right') {
+            if(mapMoveAmount.cardPos.left == mapStats.viewableTileLimits[allDirections[i]]) {
+                $(`#mapNavControls #${allDirections[i]}Arrow`).hide();
+                mapStats.directionStatus[allDirections[i]] = 'mapLimit-locked';
+            } else {
+                mapStats.directionStatus[allDirections[i]] = 'unlocked';
+                $(`#mapNavControls #${[allDirections[i]]}Arrow`).show();
+            }
+        }
+        
+    }
+}
+
+
+$(document).on(touchEvent,'#mapZoomControls .zoomIcon.activeZoom',function(){
+
+	if(!lockFunction) {
+
+		lockFunction = true;
+
+		setTimeout(function(){
+			lockFunction = false;
+		}, 220);
+
+		let zoomInLimit = 11;
+		let zoomOutLimit = 5;
+
+		let zoomOption = $(this).data('zoom-mode');
+
+		zoomOption == 'zoomIn' ? zoomLevel = zoomLevel + 2 : zoomLevel = zoomLevel - 2;
+
+		if(zoomLevel == zoomInLimit) {
+			$('#mapZoomControls .zoomInIcon').removeClass('activeZoom').addClass('inactiveZoom');
+			$('#mapZoomControls .zoomInIcon').attr('src', 'img/map/zoomIn-inactive.png')
+		} else if(zoomLevel == zoomOutLimit) {
+			$('#mapZoomControls .zoomOutIcon').attr('src', 'img/map/zoomOut-inactive.png')
+			$('#mapZoomControls .zoomOutIcon').removeClass('activeZoom').addClass('inactiveZoom');
+		} else {
+			if(zoomLevel < zoomInLimit) {
+				if($('#mapZoomControls .zoomInIcon').hasClass('inactiveZoom')) {
+					$('#mapZoomControls .zoomInIcon').removeClass('inactiveZoom').addClass('activeZoom');
+					$('#mapZoomControls .zoomInIcon').attr('src', 'img/map/zoomIn.png')
+				}
+			}
+			if(zoomLevel > zoomOutLimit) {
+				if($('#mapZoomControls .zoomOutIcon').hasClass('inactiveZoom')) {
+					$('#mapZoomControls .zoomOutIcon').removeClass('inactiveZoom').addClass('activeZoom');
+					$('#mapZoomControls .zoomOutIcon').attr('src', 'img/map/zoomOut.png')
+				}
+			}
+
+		}
+
+		checkMapLimits();
+		setZoom(zoomLevel, document.getElementById("mapHiddenOverlay"));
+
+	}
+});
+
+function setZoom(newZoom, el) {
+
+	let transformOriginPercentages = '';
+
+	if(currentView == 'wideScreenView') {
+		transformOriginPercentages = '50% 50%';
+	} else if(currentView == 'mobileView') {
+		transformOriginPercentages = '50% 50%';
+	}
+
+	let zoomScale = Number(newZoom)/10;
+
+	var p = ["webkit", "moz", "ms", "o"],
+	s = "scale(" + zoomScale + ")"
+	
+	for (var i = 0; i < p.length; i++) {
+		el.style[p[i] + "Transform"] = s;
+		el.style[p[i] + "TransformOrigin"] = transformOriginPercentages;
+	}
+
+	el.style["transform"] = s;
+	el.style["transformOrigin"] = transformOriginPercentages;
+
+	calculateViewableCardLimits();
+}
+
+function updateMapPosition(moveDirection) {
+	if(moveDirection == 'horizontal') {
+		let newLeftPosNum = (mapMoveAmount.cardPos.left * mapMoveAmount.view[currentView].zoomIncs[zoomLevel].horizontal);
+		let newLeftPos = newLeftPosNum + mapMoveAmount.view[currentView].unit;
+		$('#mapContainer #mapHiddenOverlay').css('left', newLeftPos);
+	} else if(moveDirection == 'vertical') {
+		let newTopPosNum = (mapMoveAmount.cardPos.top * mapMoveAmount.view[currentView].zoomIncs[zoomLevel].vertical);
+		let newTopPos = newTopPosNum + mapMoveAmount.view[currentView].unit;
+		$('#mapContainer #mapHiddenOverlay').css('top', newTopPos);
+	}
+}
 
 function countInArray(array, what) {
     var count = 0;
