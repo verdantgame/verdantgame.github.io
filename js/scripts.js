@@ -41,7 +41,9 @@ function checkScreenWidth(){
 	}
 }
 
-function initFuncs(){
+function preloadImgsCallback(){
+    $('#loaderLayer').fadeOut();
+    $('#setupLayer').fadeIn();  
     checkScreenWidth();
     setupDrawPiles();
     initiateMap();
