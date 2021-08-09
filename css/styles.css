@@ -1910,4 +1910,10 @@ p {
         opacity: 0;
     }
 
+    #gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #mapNavControls {
+        bottom: 2vw;
+        right: 1.5vw;
+        opacity: 0;
+    }
+
 }
