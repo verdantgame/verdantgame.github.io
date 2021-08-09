@@ -83,7 +83,7 @@ p {
 
 #loaderLayer {
     display: block;
-    top: 180px;
+    top: 240px;
 }
 
 
@@ -126,12 +126,12 @@ p {
 #loaderLayer .loader-parent .loader-container .loader-wrapper .loading-message {
     font-weight: bold;
     color: #3eaf56;
-    font-size:17px;
+    font-size: 22px;
 }
 
 #loaderLayer .loader-parent .loader-container .loader-wrapper .loader.is-loading {
-    height: 120px;
-    width: 120px;
+    height: 180px;
+    width: 180px;
     opacity: 1;
     z-index: 1;
     -webkit-animation: spinAround 1s infinite linear;
@@ -1216,16 +1216,16 @@ p {
 @media screen and (max-width: 539px) {
 
     #loaderLayer {
-        top: 30vw;
+        top: 50vw;
     }
 
     #loaderLayer .loader-parent .loader-container .loader-wrapper .loading-message {
-        font-size: 6vw;
+        font-size: 4.5vw;
     }
 
     #loaderLayer .loader-parent .loader-container .loader-wrapper .loader.is-loading {
-        height: 42vw;
-        width: 42vw;
+        height: 38vw;
+        width: 38vw;
     }
 
     #gameLayer #gameSectionsParent .gameSection .gameSectionBg {
