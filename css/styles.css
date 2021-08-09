@@ -1,4 +1,5 @@
 html {	
+    overflow-y: hidden!important;
 	min-width: auto!important;
 }
 
@@ -106,6 +107,34 @@ p {
     display: block;
 }
 
+#gameLayer #topInfoBar {
+    display: none;
+    width: 400px;
+    border: 1px solid #BBB;
+    margin: 10px auto 5px;
+    padding: 5px 0px;
+    border-radius: 9px;
+}
+
+#gameLayer #topInfoBar .infoBarColumn {
+    width: 174px;
+    margin: 2px 0px;
+}
+
+#gameLayer #topInfoBar .infoBarColumn.leftColumn {
+    float:left;
+    text-align: right;
+}
+
+#gameLayer #topInfoBar .infoBarColumn.rightColumn {
+    float:right;
+    text-align:left;
+}
+
+#gameLayer #topInfoBar .infoBarColumn .infoSpan {
+    font-weight: bold;
+}
+
 #gameLayer #gameSectionsParent {
     position: relative;
     margin: 0 auto;
@@ -141,14 +170,14 @@ p {
 }
 
 #gameLayer #gameSectionsParent .gameSection .bgOverlay {
-    opacity: .4;
+    opacity: .2;
     width: 104%;
     height: 104%;
     top: -2%;
     left: -2%;
     z-index: -8;
     position: absolute;
-    background-color: #ffffff;
+    background-color: #bcffc4;
 }
 
 #gameLayer #gameSectionsParent .gameSection .gameSectionBg {
@@ -158,7 +187,6 @@ p {
     left: -2%;
     width: 104%;
     max-width: 104%;
-    height: 104%;
     z-index: -9;
     border-radius: 10px;
 }
@@ -166,6 +194,11 @@ p {
 #gameLayer #gameSectionsParent .gameSection .gameSectionContent {
     position: relative;
     padding-top: 9px;
+    transition: all .7s ease-in-out;
+}
+
+#gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent {
+    padding-top: 0px;
 }
 
 #gameSectionsParent .gameSection.expanded .inactive {
@@ -204,9 +237,9 @@ p {
 }
 
 #gameLayer #gameSectionsParent #tableauSection.minimized .inactive ion-icon[name="expand"] {
-    font-size: 135px;
-    top: 185px;
-    left: 190px;
+    font-size: 65px;
+    top: 85px;
+    left: 224px;
 }
 
 #gameLayer #gameSectionsParent .gameSection.minimized:not(.initSetup):hover .inactive ion-icon[name="expand"] {
@@ -232,9 +265,11 @@ p {
 }
 
 #gameLayer #gameSectionsParent #tableauSection.minimized {
-    transform: scale(.4);
-    top: 392px;
+    transform: scale(1);
+    top: 548px;
     z-index: -1;
+    height: 243px;
+    width: 100%;
 }
 
 .titleContainer {
@@ -263,7 +298,7 @@ p {
 }
 
 #tableauSection #playerTableauTitleContainer.titleContainer {
-    width: 160px;
+    width: 80px;
     margin: 0px auto 13px;
 }
 
@@ -344,8 +379,11 @@ p {
 .backOfCardContainer {
     position: relative;
     height: 164px;
-    background-color: #f7efda;
     overflow: hidden;
+}
+
+.cardContainer {
+    background-color: #f7efda;
 }
 
 #marketSection #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer,
@@ -713,40 +751,115 @@ p {
 }
 
 #homeContentContainer {
-    border: 1px solid green;
-    width: 98%;
-    height: 460px;
+    width: 99%;
+    height: 463px;
     margin: 0 auto;
+    position: relative;
+    transition: all .7s ease-in-out;
 }
 
 #homeContentContainer #playerInfoContainer {
-    border: 1px solid red;
-    width: 130px;
+    width: 135px;
     height: 460px;
+    overflow: hidden;
     float: left;
-    margin-right: 12px;
+    transition: all .7s ease-in-out;
+}
+
+#gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #playerInfoContainer {
+    width: 160px;
+    height: 233px;
+}
+
+#gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #playerInfoContainer .playerInfoTitle {
+    font-style: italic;
+    font-weight: bold;
+    overflow: hidden;
+    height: 20px;
+    margin: 0px 0px 6px 0px;
+    transition: all .7s ease-in-out;
+}
+
+#gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #playerInfoContainer #cardToPlace .playerInfoTitle {
+    height: 24px;
+}
+
+#gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #playerInfoContainer .playerInfoTitle {
+    height: 0px!important;
+    margin: 0px 0px 0px 0px;
+}
+
+#gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #playerInfoContainer #swapItemsBtn {
+    position: absolute;
+    top: 307px;
+    left: 27px;
+    height: 42px;
+    overflow: hidden;
+    font-size: 14px;
+    line-height: 15px;
+    padding: 0px 1px;
+    transition: all .7s ease-in-out;
+}
+
+#gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #playerInfoContainer #swapItemsBtn {
+    height: 0px;
+    margin: 0px 0px 0px 0px;
+}
+
+#gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #playerInfoContainer #swapItemsBtn .swapItemsArrow {
+    font-size: 26px;
+    font-weight: bold;
+    margin: 2px 1px 2px;
+}
+
+#gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #playerInfoContainer #swapItemsBtn #swapItemsArrowOne {
+    transform: rotate(270deg);
+}
+
+#gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #playerInfoContainer #swapItemsBtn #swapItemsArrowTwo {
+    transform: rotate(90deg);
 }
 
 #homeContentContainer #mapContainer {
-    border: 1px solid blue;
-    width: 330px;
-    height: 460px;
-    float: left;
-    margin-right: 0px;
+    background-color: #f7f7f752;
+    background-image: url(../img/bg2.jpg);
+    background-size: cover;
+    background-position-y: center;
+    background-position-x: center;
+    border: 2px solid #41a742;
+    width: 360px;
+    height: 464px;
+    position: absolute;
+    right: 0px;
+    top: 0px;
     overflow: hidden;
+    border-radius: 7px;
+    transition: all .7s ease-in-out;
 }
 
-#homeContentContainer #mapContainer #mapHiddenOverlay {
+#gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapContainer #mapHiddenOverlay {
     position: relative;
-    top: -166px;
-    left: -319px;
+    transform-origin: 50% 50%;
+    margin-left: -306px;
+    margin-top: -188px;
+    top: 0px;
+    left: 0px;
     width: 980px;
     height: 810px;
-    transform: scale(.85);
+    transform: scale(.9);
+}
+
+#gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #mapContainer #mapHiddenOverlay,
+#gameLayer #gameSectionsParent #tableauSection.expanded .gameSectionContent #homeContentContainer #mapContainer #mapHiddenOverlay {
+    transition: all .7s ease-in-out;
+}
+
+#gameLayer #gameSectionsParent #tableauSection.expanded:not(.expandAnimation) .gameSectionContent #homeContentContainer #mapContainer #mapHiddenOverlay {
+    transition: all .2s ease-in-out;
 }
 
 #homeContentContainer #mapContainer #mapHiddenOverlay .mapTileContainer {
-    height: 164px;
+    height: 166px;
     width: 105px;
     margin: 1px;
     float: left;
@@ -759,9 +872,47 @@ p {
     height: 164px;
 }
 
-#homeContentContainer #playerInfoContainer #cardToPlace {
+#gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #playerInfoContainer #cardToPlace {
     width: 105px;
-    margin: 10px auto;
+    height: 191px;
+    transform: scale(1);
+    position: absolute;
+    top: -5px;
+    left: 16px;
+    transition: all .7s ease-in-out;
+}
+
+#gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #playerInfoContainer #cardToPlace #chosenCardBackground {
+    position: absolute;
+    max-width: 105%;
+    width: 104%;
+    left: -2px;
+    top: 27px;
+    transition: all .7s ease-in-out;
+}
+
+#gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #playerInfoContainer #cardToPlace #chosenCardBackground {
+    top: 3px;
+    width: 96%;
+    left: 1px;
+}
+
+#gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #playerInfoContainer #cardToPlace {
+    top: 6px;
+    left: 28px;
+    transform: scale(.97);
+    height: 166px;
+}
+
+#homeContentContainer #playerInfoContainer #cardToPlace > .flip-plant,
+#homeContentContainer #playerInfoContainer #cardToPlace > .cardContainer {
+    transform: scale(1);
+}
+
+#homeContentContainer #playerInfoContainer #cardToPlace #cardToPlaceTitle {
+    font-style: italic;
+    margin: 0px 0px 7px 0px;
+    font-weight: bold;
 }
 
 #homeContentContainer #playerInfoContainer #cardToPlace .flip-plant {
@@ -774,6 +925,43 @@ p {
 #homeContentContainer #playerInfoContainer #cardToPlace .flip-plant.startingPos {
     right: -150px;
     top: -270px;
+}
+
+#gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #playerInfoContainer .itemContainer {
+    width: 101px;
+    position: absolute;
+    left: 18px;
+    transform: scale(1);
+    transition: all .7s ease-in-out;
+}
+
+#gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #playerInfoContainer #chosenItemContainer {
+    top: 203px;
+}
+
+#gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #playerInfoContainer #storedItemContainer {
+    top: 352px;
+}
+
+#gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #playerInfoContainer .itemContainer {
+    top: 166px!important;
+    transform: scale(.7);
+}
+
+#gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #playerInfoContainer #chosenItemContainer {
+    left: 2px;
+}
+
+#gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #playerInfoContainer #storedItemContainer {
+    left: 56px;
+}
+
+
+#gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #playerInfoContainer .itemContainer .itemBackground {
+    width: 66%;
+    display: block;
+    margin: 0px auto 0px;
+    transition: all .7s ease-in-out;
 }
 
 #homeContentContainer #mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room {
@@ -793,7 +981,193 @@ p {
     display:none;
 }
 
+
+#gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent {
+    padding-top: 0px;
+}
+
+#gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer {
+    width: 100%;
+    height: 236px;
+    margin: 0 auto;
+}
+
+#gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #mapContainer {
+    width: 335px;
+    height: 221px;
+    top: 5px;
+    right: 6px;
+}
+
+#gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #mapContainer #mapHiddenOverlay {
+    transform-origin: 50% 50%;
+    top: 0px;
+    left: 0px;
+    margin-left: -321px;
+    margin-top: -303px;
+    width: 980px;
+    height: 810px;
+    transform: scale(.43);
+}
+
+#gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #mapContainer #mapHiddenOverlay .mapTileContainer {
+    height: 166px;
+    width: 105px;
+    margin: 1px;
+    float: left;
+    position: relative;
+}
+
+
+#gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapZoomControls {
+    position: absolute;
+    top: 7px;
+    right: 262px;
+    width: 91px;
+    height: 42px;
+    opacity: 1;
+    transition: all .7s ease-in-out;
+}
+
+#gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #mapZoomControls {
+    right: 243px;
+    opacity: 0;
+}
+
+#gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapZoomControls .zoomIcon {
+    position: absolute;
+    top: 0px;
+    width: 39px;
+}
+
+#gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapZoomControls .zoomIcon.inactiveZoom {
+    opacity: .4;
+}
+
+#gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapZoomControls .zoomIcon.activeZoom {
+    cursor:hand;
+    cursor:pointer;
+}
+
+#gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapZoomControls .zoomOutIcon {
+    left: 0px;
+}
+
+#gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapZoomControls .zoomInIcon {
+    left: 50px;
+}
+
+#gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapNavControls {
+    position: absolute;
+    bottom: 100px;
+    right: 0px;
+    width: 100px;
+    opacity: 1;
+    transition: all .7s ease-in-out;
+}
+
+#gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #mapNavControls {
+    bottom: 110px;
+    right: 10px;
+    opacity: 0;
+}
+
+#gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapNavControls #mapNavBackground {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+
+#gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapNavControls .arrowImg {
+    position: absolute;
+    top: 9px;
+    right: 31px;
+    width: 34px;
+    cursor:hand;
+    cursor:pointer;
+}
+
+#gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapNavControls #upArrow.arrowImg {
+    transform: rotate(270deg);
+    top: 9px;
+    right: 32px;
+}
+
+#gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapNavControls #rightArrow.arrowImg {
+    transform: rotate(0deg);
+    top: 39px;
+    right: 3px;
+}
+
+#gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapNavControls #downArrow.arrowImg {
+    transform: rotate(90deg);
+    top: 67px;
+    right: 35px;
+}
+
+#gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapNavControls #leftArrow.arrowImg {
+    transform: rotate(180deg);
+    top: 36px;
+    right: 62px;
+}
+
+#gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapNavControls #upArrow.arrowImg.activeArrow {    
+	-webkit-transform: rotate(270deg) translateX(2px);
+	transform: rotate(270deg) translateX(2px);
+}
+
+#gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapNavControls #rightArrow.arrowImg.activeArrow {    
+	-webkit-transform: rotate(0deg) translateX(2px);
+	transform: rotate(0deg) translateX(2px);
+}
+
+#gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapNavControls #downArrow.arrowImg.activeArrow {    
+	-webkit-transform: rotate(90deg) translateX(2px);
+	transform: rotate(90deg) translateX(2px);
+}
+
+#gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapNavControls #leftArrow.arrowImg.activeArrow {    
+	-webkit-transform: rotate(180deg) translateX(2px);
+	transform: rotate(180deg) translateX(2px);
+}
+
+.clear {
+    clear:both;
+}
+
 @media screen and (max-width: 539px) {
+
+    html.hydrated {	
+        overflow-y: scroll!important;
+    }
+
+    #gameLayer #gameSectionsParent .gameSection .gameSectionBg {
+        opacity: 0.6;
+        position: absolute;
+        top: -2%;
+        left: -2%;
+        width: 107%;
+        max-width: 107%;
+        z-index: -9;
+        border-radius: 3vw;
+    }
+
+    p {
+        line-height: 4.3vw;
+    }
+
+    #gameLayer #topInfoBar {
+        width: 74vw;
+        border: .1vw solid #BBB;
+        margin: 0vw auto 2.5vw;
+        padding: 1vw 0vw;
+        border-radius: 1.2vw;
+    }
+
+    #gameLayer #topInfoBar .infoBarColumn {
+        width: 33vw;
+        margin: .3vw 0vw;
+    }
     
     #container #setupLayer {
         height: 211vw;
@@ -870,7 +1244,7 @@ p {
     }
 
     #gameLayer #gameSectionsParent #tableauSection.minimized {
-        height: 95vw;
+        height: 47vw;
     }
 
     #gameLayer #gameSectionsParent .gameSection.minimized .inactive {
@@ -911,7 +1285,7 @@ p {
     }
 
     #tableauSection #playerTableauTitleContainer.titleContainer {
-        width: 31vw;
+        width: 15vw;
         margin: 0vw auto 2.6vw;
     }
 
@@ -1229,22 +1603,24 @@ p {
     }
 
     #gameLayer #gameSectionsParent #tableauSection.minimized {
-        top: 76.5vw;
+        top: 104.5vw;
     }
 
     #homeContentContainer {
-        border: .1vw solid green;
         height: 89vw;
     }
 
     #homeContentContainer #playerInfoContainer {
-        width: 24vw;
+        width: 26vw;
         height: 88vw;
-        margin-right: 2.2vw;
+        margin-right: 0vw;
     }
 
-    #homeContentContainer #playerInfoContainer #cardToPlace {
+    #gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #playerInfoContainer #cardToPlace {
         width: 20.9vw;
+        height: 39vw;
+        top: -2.7vw;
+        left: 2vw;
         margin: 2vw auto;
     }
 
@@ -1254,21 +1630,24 @@ p {
     }
 
     #homeContentContainer #mapContainer {
-        border: .1vw solid blue;
-        width: 63vw;
+        width: 68.1vw;
         height: 88vw;
         margin-right: 0vw;
+        border: .4vw solid #41a742;
+        right: 0vw;
+        top: 0vw;
+        border-radius: 2vw;
     }
 
     #homeContentContainer #mapContainer #mapHiddenOverlay {
-        top: -39vw;
-        left: -64.5vw;
+        top: -37vw;
+        left: -62.5vw;
         width: 195vw;
         height: 151vw;
     }
 
     #homeContentContainer #mapContainer #mapHiddenOverlay .mapTileContainer {
-        height: 32.9vw;
+        height: 33.3vw;
         width: 20.9vw;
         margin: .1vw;
     }
@@ -1276,6 +1655,259 @@ p {
     #homeContentContainer #mapContainer #mapHiddenOverlay .mapTileContainer .cardContainer,
     #homeContentContainer #mapContainer #mapHiddenOverlay .mapTileContainer .backOfCardContainer {
         height: 32.9vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #playerInfoContainer #cardToPlace .playerInfoTitle {
+        height: 4.6vw;
+        margin: 0vw 0vw 1vw 0vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #playerInfoContainer #cardToPlace #chosenCardBackground {
+        left: -0.4vw;
+        top: 5vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #playerInfoContainer .playerInfoTitle {
+        font-size: 2.95vw;
+        height: 4vw;
+        margin: 0vw 0vw 1.1vw 0vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #playerInfoContainer .itemContainer {
+        width: 18.9vw;
+        left: 2.7vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #playerInfoContainer #chosenItemContainer {
+        top: 40vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #playerInfoContainer #swapItemsBtn {
+        top: 60vw;
+        left: 3.2vw;
+        height: 8vw;
+        font-size: 2.5vw;
+        line-height: 3.1vw;
+        padding: 0vw 1vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #playerInfoContainer #swapItemsBtn .swapItemsArrow {
+        font-size: 5vw;
+        margin: 0vw .3vw .1vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #playerInfoContainer #storedItemContainer {
+        top: 69vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapZoomControls {
+        top: 1.5vw;
+        right: 49vw;
+        width: 17vw;
+        height: 8vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapZoomControls .zoomOutIcon {
+        left: 0vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapZoomControls .zoomIcon {
+        top: 0vw;
+        width: 7vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapZoomControls {
+        top: 1.5vw;
+        right: 44vw;
+        width: 22vw;
+        height: 10vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapZoomControls .zoomIcon {
+        top: 0vw;
+        width: 8vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapZoomControls .zoomOutIcon {
+        left: 0vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapZoomControls .zoomInIcon {
+        left: 11vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapNavControls {
+        bottom: 2vw;
+        width: 22vw;
+        height: 22vw;
+        right: 1vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapNavControls #mapNavBackground {
+        top: 0vw;
+        right: 0vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapNavControls .arrowImg {
+        width: 7.5vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapNavControls #upArrow.arrowImg {
+        top: 1.5vw;
+        right: 6.8vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapNavControls #rightArrow.arrowImg {
+        top: 7.9vw;
+        right: 0.6vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapNavControls #downArrow.arrowImg {
+        top: 14.5vw;
+        right: 7.3vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapNavControls #leftArrow.arrowImg {
+        top: 7.6vw;
+        right: 13.6vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapContainer #mapHiddenOverlay {
+        margin-left: -62vw;
+        margin-top: -40vw;
+        top: 0vw;
+        left: 0vw;
+        width: 192vw;
+        height: 169vw;
+        transform: scale(.9);
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer {
+        width: 100%;
+        height: 45vw;
+        margin: 0 auto;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #playerInfoContainer {
+        width: 27.5vw;
+        height: 44vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #playerInfoContainer #cardToPlace {
+        top: 0vw;
+        left: 3vw;
+        height: 34.2vw;
+        margin: 1vw auto 0vw;
+        transform: scale(1);
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #playerInfoContainer .playerInfoTitle {
+        height: 0vw!important;
+        margin: 0vw 0vw 0vw 0vw!important;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #mapContainer {
+        width: 52vw;
+        height: 42vw;
+        top: 1vw;
+        right: 1vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection.minimized {
+        top: 104.5vw;
+        height: 53vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer {
+        height: 51vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #playerInfoContainer {
+        width: 26.5vw;
+        height: 50.5vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #playerInfoContainer #cardToPlace {
+        top: 2vw;
+        left: 3vw;
+        transform: scale(1.1);
+        height: 33.2vw;
+        width: 20.9vw;
+        margin: 1vw auto 0vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #playerInfoContainer #cardToPlace #chosenCardBackground {
+        top: -.3vw;
+        width: 103%;
+        max-width: 103%;
+        left: -0.3vw;
+    }
+
+    #homeContentContainer #playerInfoContainer #cardToPlace > .flip-plant,
+    #homeContentContainer #playerInfoContainer #cardToPlace > .cardContainer {
+        transform: scale(.97);
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #playerInfoContainer .itemContainer {
+        transform: scale(.9);
+        top: 38.7vw!important;
+        width: 11.2vw;
+        height: 11.7vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #playerInfoContainer #chosenItemContainer {
+        left: 1vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #playerInfoContainer #storedItemContainer {
+        left: 14vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #playerInfoContainer .itemContainer .itemBackground {
+        width: 100%;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #playerInfoContainer .playerInfoTitle {
+        height: 0vw!important;
+        margin: 0vw 0vw 0vw 0vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #playerInfoContainer .itemContainer .itemBackground {
+        margin: 0vw auto 0vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #playerInfoContainer #swapItemsBtn {
+        height: 0vw;
+        margin: 0vw 0vw 0vw 0vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #mapContainer {
+        width: 67vw;
+        height: 49.2vw;
+        top: .5vw;
+        right: 1vw;
+        margin-right: 0vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #mapContainer #mapHiddenOverlay {
+        margin-left: -61.5vw;
+        margin-top: -325px;
+        top: 0vw;
+        left: 0vw;
+        width: 192vw;
+        height: 169vw;
+        transform: scale(.43);
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #mapContainer #mapHiddenOverlay .mapTileContainer {
+        height: 33.3vw;
+        width: 20.9vw;
+        margin: .1vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #mapZoomControls {
+        right: 45vw;
+        opacity: 0;
     }
 
 }
