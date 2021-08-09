@@ -1079,7 +1079,7 @@ p {
     margin-top: -303px;
     width: 980px;
     height: 810px;
-    transform: scale(.43);
+    transform: scale(.9);
 }
 
 #gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #mapContainer #mapHiddenOverlay .mapTileContainer {
@@ -1968,7 +1968,7 @@ p {
         left: 0vw;
         width: 192vw;
         height: 169vw;
-        transform: scale(.43);
+        transform: scale(.9);
     }
 
     #gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #mapContainer #mapHiddenOverlay .mapTileContainer {
