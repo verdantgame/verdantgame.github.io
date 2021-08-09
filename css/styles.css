@@ -1943,11 +1943,11 @@ p {
     }
 
     #gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #playerInfoContainer #chosenItemContainer {
-        left: 1vw;
+        left: 1.6vw;
     }
 
     #gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #playerInfoContainer #storedItemContainer {
-        left: 14vw;
+        left: 14.5vw;
     }
 
     #gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #playerInfoContainer .itemContainer .itemBackground {
