@@ -510,8 +510,8 @@ p {
 
 .cardContainer[type="plant"] .lightingIcon {
     position: absolute;
-    top: 2.5px;
-    width: 11.5px;
+    top: 4px;
+    width: 13.5px;
     transition: all .7s ease-in-out;
 }
 
@@ -553,7 +553,7 @@ p {
     position: absolute;
     top: 3px;
     right: 6px;
-    width: 18px;
+    width: 19px;
     transition: all .7s ease-in-out;
 }
 
@@ -567,7 +567,7 @@ p {
     position: absolute;
     top: 21px;
     right: 3px;
-    width: 15px;
+    width: 16px;
     transition: all .7s ease-in-out;
 }
 
@@ -578,7 +578,7 @@ p {
 }
 
 .cardContainer[type="plant"][lighting="1"] .lightingIcon[lighting-icon="0"] {
-    left: 48px;
+    left: 46px;
 }
 
 #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="1"] .lightingIcon[lighting-icon="0"] {
@@ -587,11 +587,11 @@ p {
 }
 
 .cardContainer[type="plant"][lighting="2"] .lightingIcon[lighting-icon="0"] {
-    left: 41.5px;
+    left: 38.5px;
 }
 
 .cardContainer[type="plant"][lighting="2"] .lightingIcon[lighting-icon="1"] {
-    left: 53.5px;
+    left: 52.5px;
 }
 
 #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="2"] .lightingIcon[lighting-icon="0"] {
@@ -605,15 +605,15 @@ p {
 }
 
 .cardContainer[type="plant"][lighting="3"] .lightingIcon[lighting-icon="0"] {
-    left: 35px;
+    left: 31px;
 }
 
 .cardContainer[type="plant"][lighting="3"] .lightingIcon[lighting-icon="1"] {
-    left: 47px;
+    left: 46px;
 }
 
 .cardContainer[type="plant"][lighting="3"] .lightingIcon[lighting-icon="2"] {
-    left: 59px;
+    left: 60px;
 }
 
 #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="3"] .lightingIcon[lighting-icon="0"] {
@@ -1451,23 +1451,23 @@ p {
 
     .cardContainer[type="plant"] .plantVerdancy {
         top: .4vw;
-        right: .4vw;
+        right: .7vw;
         width: 4.2vw;
     }
 
     .cardContainer[type="plant"] .plantVPs {
         top: 4vw;
         right: 0vw;
-        width: 3.7vw;
+        width: 3.9vw;
     }
 
     .cardContainer[type="plant"] .lightingIcon {
-        top: .2vw;
-        width: 2.6vw;
+        top: .7vw;
+        width: 2.8vw;
     }
 
     .cardContainer[type="plant"][lighting="1"] .lightingIcon[lighting-icon="0"] {
-        left: 9.25vw;
+        left: 9.2vw;
     }
 
     .cardContainer[type="plant"][lighting="2"] .lightingIcon[lighting-icon="0"] {
@@ -1475,7 +1475,7 @@ p {
     }
 
     .cardContainer[type="plant"][lighting="2"] .lightingIcon[lighting-icon="1"] {
-        left: 10.7vw;
+        left: 10.5vw;
     }
 
     .cardContainer[type="plant"][lighting="3"] .lightingIcon[lighting-icon="0"] {
