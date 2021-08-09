@@ -1,5 +1,5 @@
 html {	
-    overflow-y: hidden!important;
+    overflow-y: auto!important;
 	min-width: auto!important;
 }
 
@@ -1258,21 +1258,21 @@ p {
     }
 
     #setupLayer .subtitle {
-        width: 92vw;
+        width: 68vw;
         margin: 0vw auto 0vw;
-        font-size: 3.8vw;
-        line-height: 5vw;
+        font-size: 3.5vw;
+        line-height: 4.5vw;
     }
     
     #homepageButtonContainer {
         margin: 4vw auto 6vw;
-        width: 75vw;
+        width: 71vw;
     }
 
     #homepageButtonContainer .button {
         margin: 0vw 2vw;
-        width: 33vw;
-        font-size: 4vw;
+        width: 31vw;
+        font-size: 3.5vw;
     }
 
     #demoDisclaimer {
@@ -1280,14 +1280,14 @@ p {
     }
 
     #demoDisclaimer .message-body {
-        padding: 5vw 7vw 2vw 6vw;
+        padding: 4vw 7vw 2vw 6vw;
         border-radius: 1vw;
         border-width: 0vw 0vw 0vw 1vw;
     }
 
     #demoDisclaimer .message-body p {
-        font-size: 3.9vw;
-        line-height: 5.3vw;
+        font-size: 3.5vw;
+        line-height: 5vw;
         margin-bottom: 3vw;
     }
 
