@@ -178,9 +178,12 @@ $(document).on(touchEvent,'#container.mobileView #marketSection.gameSection:not(
     }, 100);
 });
 
+let lightingContainerPositions = ['top', 'right', 'bottom', 'left'];
+let lightingSymbolNumbers = ['one', 'two', 'three'];
+
 function generateCard(thisCard, cardType, mode) {
 	var thisCardHTML = `
-        <div class="flip-card flip-back flip-${cardType}${mode == 'init' ? ` startingPos` : ``}">
+        <div class="flip-card flip-back flip-${cardType}${mode == 'init' ? ` startingPos` : ` expanded`}">
             <div class="flip-card-inner">
                 <div class="flip-card-front">
                     <div class="backOfCardContainer">
@@ -188,24 +191,24 @@ function generateCard(thisCard, cardType, mode) {
                     </div>
                 </div>
                 <div class="flip-card-back">
-                    <div class="cardContainer" type="${cardType}"${cardType == 'plant' ? ` lighting="${thisCard.lighting.length}"` : ``}>
-                        <img class="${cardType}" src="img/${cardType}s/${thisCard.img}.jpg" alt="" />
+                    <div data-animation="widthHeight" class="cardContainer expanded" type="${cardType}"${cardType == 'plant' ? ` lighting="${thisCard.lighting.length}"` : ``}>
+                        <img data-animation="widthHeight" class="${cardType} expanded" src="img/${cardType}s/${thisCard.img}.jpg" alt="" />
                         ${cardType == 'plant' ? `
-                            <img class="plantBanner" src="img/plants/icons/banners/${thisCard.plantType}.png" alt="" />
-                            <img class="plantSymbol" src="img/plants/icons/symbols/${thisCard.plantType}.png" alt="" />
-                            <img class="plantVerdancy" src="img/plants/icons/verdancy/${thisCard.verdancyRequired}.png" alt="" />
-                            <img class="plantVPs" src="img/plants/icons/vp/${thisCard.vps}.png" alt="" />
+                            <img class="plantBanner expanded" src="img/plants/icons/banners/${thisCard.plantType}.png" alt="" />
+                            <img class="plantSymbol expanded" src="img/plants/icons/symbols/${thisCard.plantType}.png" alt="" />
+                            <img class="plantVerdancy expanded" src="img/plants/icons/verdancy/${thisCard.verdancyRequired}.png" alt="" />
+                            <img class="plantVPs expanded" src="img/plants/icons/vp/${thisCard.vps}.png" alt="" />
                         ` : ``}
     `;
 
     for (let i = 0; i < thisCard.lighting.length; i++) {
         thisCardHTML += `
-            ${cardType == 'room' ? `<div class="lightingIconContainer" lighting-container="${i}">` : ``}
-                <img class="lightingIcon" src="img/lighting/${thisCard.lighting[i]}.png" lighting-icon="${i}" alt="" />
+            ${cardType == 'room' ? `<div class="lightingIconContainer lightingIconContainer-${lightingContainerPositions[i]} expanded" >` : ``}
+                <img class="lightingIcon${cardType == 'plant' ? ` lightingIcon-${lightingSymbolNumbers[i]}` : ``} expanded" src="img/lighting/${thisCard.lighting[i]}.png" alt="" />
             ${cardType == 'room' ? `</div>` : ``}
         `;
     }
-
+    
     thisCardHTML += `
                     </div>
                 </div>
@@ -222,38 +225,6 @@ function generateItem(thisItem, mode) {
     let thisItemHTML = `<img class="itemToken${mode == 'init' ? ` startingPos` : ``}" src="img/${itemDetails[0]}/${itemDetails[1]}.png" />`
 	// return the HTML so that whenever the function is called, will now be a placeholder for the above HTML
 	return thisItemHTML;
-}
-
-function initSlideshow(container, animation){
-    /*
-    * @param {String} container Class or ID of the animation container
-    * @param {String} animation Name of the animation, e.g. smoothscroll
-    */
-    var sliderWidth = 0;	
-    var slidesNumber = $(container+'>div>div').length;
-    var sliderHeight = $(container + '>div>div:first-of-type').outerHeight(false);
-    var slideWidth = $(container + '>div>div:first-of-type').outerWidth(false);
-    var totalAnimationWidth = slideWidth * slidesNumber;
-    let containerWidth = $(container).width();
-    // detect number of visible slides
-    var slidesVisible = containerWidth / slideWidth;	
-    var maxSlidesVisible = Math.ceil(slidesVisible);
-
-    // count slides to determine animation speed
-    var speed = slidesNumber*2;
-    // append the tail	
-    $(container+'>div>div').slice(0,maxSlidesVisible).clone().appendTo($(container+'>div'));	
-
-    // Detect the slider width with appended tail
-    $(container+'>div>div').each(function(){
-        sliderWidth += $(this).outerWidth(false);
-    });
-
-    // set slider dimensions
-    $(container+'>div').css({'width':sliderWidth,'height':sliderHeight});
-
-    //   Insert styles to html
-    $("<style type='text/css'>@keyframes "+animation+" { 0% { margin-left: 0px; } 100% { margin-left: -"+totalAnimationWidth+"px; } } "+container+">div>div:first-child { -webkit-animation: "+animation+" "+speed+"s linear infinite; -moz-animation: "+animation+" "+speed+"s linear infinite; -ms-animation: "+animation+" "+speed+"s linear infinite; -o-animation: "+animation+" "+speed+"s linear infinite; animation: "+animation+" "+speed+"s linear infinite; }</style>").appendTo("head");	
 }
 
 var rulesURL = 'files/rules.pdf';
@@ -281,9 +252,6 @@ $(document).on(touchEvent, '#startGame', function(){
 	
     $('#gameLayer #gameSectionsParent .minimized ion-icon[name="expand"]').show();
 });
-
-let currentColumn = 3;
-let currentMarketItem = 0;
 
 function quickMarketSetup() {
     $('body').addClass('gameView');
@@ -331,9 +299,24 @@ function quickMarketSetup() {
     $('.initSetup').removeClass('initSetup'); 
 }
 
+let currentColumn = 3;
+let currentMarketItem = 0;
+
 function initMarketFunc(){
     let marketItemClasses = ['.plantPotContainer', '.cardsAndItemContainer .flip-plant', '.cardsAndItemContainer .itemToken', '.cardsAndItemContainer .flip-room'];
-    $(`.marketColumn[column="${currentColumn}"] ${marketItemClasses[currentMarketItem]}`).removeClass('startingPos');
+    let currentItem = $(`.marketColumn[column="${currentColumn}"] ${marketItemClasses[currentMarketItem]}`);
+
+    if(marketItemClasses[currentMarketItem] == '.plantPotContainer') {
+        animateStartingPot(currentItem);
+    } else if(marketItemClasses[currentMarketItem] == '.cardsAndItemContainer .flip-plant') {
+        animateStartingPlantCard(currentItem);
+    } else if(marketItemClasses[currentMarketItem] == '.cardsAndItemContainer .itemToken') {
+        animateStartingItemToken(currentItem);
+    } else if(marketItemClasses[currentMarketItem] == '.cardsAndItemContainer .flip-room') {
+        animateStartingRoomCard(currentItem);
+    }
+
+    // animateElement(currentItem, 'startingPos');
     currentColumn--;
     if(currentColumn == -1 && (currentMarketItem + 1) < marketItemClasses.length) {
         currentColumn = 3;
@@ -386,21 +369,22 @@ function isolateFlipCardContents() {
 }
 
 function initPlayersHome() {
-    $('#marketSection').addClass('minimized').removeClass('expanded');
-    $('#tableauSection').addClass('expanded expandAnimation').removeClass('minimized');
+    swapActiveMainSection();
 
     setTimeout(function(){
-        $('#tableauSection').removeClass('expandAnimation');
-    }, 700);
+        resetAnimationClasses();
+    }, 750);
 
     // target the next tile information in the allTiles array
     // splicing the first item removes it from the array and transfers the information into the "thisTile" variable
 
-    chooseStartingPlayerCards();
+    setTimeout(function(){
+        chooseStartingPlayerCards();
+    }, 800);
 
     setTimeout(function(){
-        $('#playerInfoContainer #cardToPlace .flip-plant.startingPos').removeClass('startingPos')
-        $('#mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room.startingPos').removeClass('startingPos')
+        positionAnimation($('#playerInfoContainer #cardToPlace .flip-plant'), 'tableauStartingPos');
+        positionAnimation($('#mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room'), 'tableauStartingPos');
     }, 1000);
 
     setTimeout(function(){
@@ -576,7 +560,7 @@ function initiateMap() {
 
 function generateMap() {
 	// the map HTML script
-	var mapHTML = `<div id="mapHiddenOverlay">`;
+	var mapHTML = `<div id="mapHiddenOverlay"  class="collapsed">`;
 	for (let i = 0; i < mapData.length; i++) {
 		for (let j = 0; j < mapData[i].length; j++) {
 			mapHTML += `<div id="row-${mapData[i][j].row}-column-${mapData[i][j].column}" class="mapTileContainer row-${mapData[i][j].row} column-${mapData[i][j].column}"></div>`;
@@ -873,65 +857,9 @@ function shuffle(array) {
 }
 
 
-// Carousel HTML:
-// <p class="has-text-centered"><strong><em>Sample of extra cards available with the final game:</em></strong></p>
-// <div class="slideshow-block">
-//     <div class="slideshow-animation"></div>
-// </div>
-
-
-// function setupCarousel(){
-//     let carouselRaw = [
-//         {   
-//             'id': 'g',
-//             'config': [5, 3, 3],
-//             'order': [0, 1, 2],
-//             'pos': 0
-//         },{
-//             'id': 'p',
-//             'config': [4, 4, 4, 4, 4],
-//             'order': [0, 1, 2, 3, 4],
-//             'pos': 0
-//         }
-//     ];
-
-//     for (let i = 0; i < carouselRaw.length; i++) {
-//         shuffle(carouselRaw[i]['order']);
-//     }
-
-//     let masterIndex = 0;
-//     let carouselData = [];
-
-//     while (carouselData.length < 17) {
-//         let thisIndex = carouselRaw[masterIndex]['pos'];
-//         let thisRange = carouselRaw[masterIndex]['config'][carouselRaw[masterIndex]['order'][thisIndex]];
-//         let uniqueCombo = false;
-//         while (!uniqueCombo) {
-//             let randNum = Math.floor(Math.random() * thisRange);
-//             let thisCombo = `${carouselRaw[masterIndex]['id']}-${carouselRaw[masterIndex]['order'][thisIndex]}-${randNum}`;
-//             if(carouselData.indexOf(thisCombo) == -1) {		
-//                 carouselData.push(thisCombo);
-//                 uniqueCombo = true;
-//             }
-//         }
-//         carouselRaw[masterIndex]['pos'] == carouselRaw[masterIndex]['config'].length - 1 ? carouselRaw[masterIndex]['pos'] = 0 : carouselRaw[masterIndex]['pos']++;
-
-//         masterIndex == 0 ? masterIndex = 1 : masterIndex = 0;
-
-//     }
-
-//     let carouselHTML = '';
-
-//     for (let i = 0; i < carouselData.length; i++) {
-//         carouselHTML += `
-//             <div class="slideshow-slide">
-//                 <img src="img/demo-carousel/${carouselData[i]}.jpg">
-//             </div>
-//         `;
-//     }
-
-//     $('.slideshow-block > .slideshow-animation').html(carouselHTML);
-//     setTimeout(function(){
-//         initSlideshow('.slideshow-block','smoothscroll');
-//     }, 100);
-// }
+$(document).on(touchEvent,'.gameSection.collapsed',function(){
+    swapActiveMainSection();
+    setTimeout(function(){
+        resetAnimationClasses();
+    }, 750);
+});
