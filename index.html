@@ -97,7 +97,7 @@
 
 				<div id="marketSection" class="gameSection expanded initSetup">
 
-					<div class="inactive">
+					<div class="inactive collapsed">
 						<ion-icon name="expand"></ion-icon>
 					</div>
 
@@ -105,8 +105,8 @@
 						<div class="gameSectionBorder innerBorder">
 							<div class="bgOverlay"></div>
 							<img class="gameSectionBg" src="img/bg.jpg" alt="">
-							<div class="gameSectionContent">
-								<div id="marketTitleContainer" class="titleContainer">
+							<div class="gameSectionContent expanded">
+								<div id="marketTitleContainer" class="titleContainer expanded">
 									<p id="marketTitle" class="title is-3 has-text-centered">Market</p>
 								</div>
 								<div id="marketCardColumns"></div>
@@ -115,43 +115,43 @@
 					</div>
 				</div>
 
-				<div id="tableauSection" class="gameSection minimized showExpand initSetup">
-					<div class="inactive">
+				<div id="tableauSection" class="gameSection collapsed initSetup">
+					<div class="inactive expanded">
 						<ion-icon name="expand"></ion-icon>
 					</div>
 					<div class="gameSectionBorder outerBorder">
 						<div class="gameSectionBorder innerBorder">
 							<div class="bgOverlay"></div>
 							<img class="gameSectionBg" src="img/bg.jpg" alt="">
-							<div class="gameSectionContent">
-								<div id="playerTableauTitleContainer" class="titleContainer">
+							<div class="gameSectionContent collapsed">
+								<div id="playerTableauTitleContainer" class="titleContainer collapsed">
 									<p id="playerTableauTitle" class="title is-3 has-text-centered">Home</p>
 								</div>
-								<div id="homeContentContainer">
+								<div id="homeContentContainer" class="expanded">
 
-									<div id="playerInfoContainer">
-										<div id="cardToPlace">
-											<p class="playerInfoTitle has-text-centered">Starting Card:</p>
-											<img id="chosenCardBackground" src="img/card-storage.png">
+									<div id="playerInfoContainer" class="collapsed">
+										<div id="cardToPlace" class="collapsed">
+											<p class="playerInfoTitle collapsed has-text-centered">Starting Card:</p>
+											<img id="chosenCardBackground" class="collapsed" src="img/card-storage.png">
 										</div>
-										<div id="chosenItemContainer" class="itemContainer">
-											<p class="playerInfoTitle has-text-centered">Chosen Item:</p>
+										<div id="chosenItemContainer" class="itemContainer collapsed">
+											<p class="playerInfoTitle collapsed has-text-centered">Chosen Item:</p>
 											<img id="chosenItemBackground" class="itemBackground" src="img/item-storage.png">
 										</div>
-										<button id="swapItemsBtn" class="button is-primary" title="Swap Items">
+										<button id="swapItemsBtn" class="button is-primary collapsed" title="Swap Items">
 											<span id="swapItemsArrowOne" class="swapItemsArrow">&curarr;</span> Swap<br />Items <span id="swapItemsArrowTwo" class="swapItemsArrow">&curarr;
 										</button>
-										<div id="storedItemContainer" class="itemContainer">
-											<p class="playerInfoTitle has-text-centered">Stored Item:</p>
+										<div id="storedItemContainer" class="itemContainer collapsed">
+											<p class="playerInfoTitle collapsed has-text-centered">Stored Item:</p>
 											<img id="storedItemBackground" class="itemBackground" src="img/item-storage.png">
 										</div>
 									</div>
-									<div id="mapContainer"></div>
-									<div id="mapZoomControls">
+									<div id="mapContainer" class="collapsed"></div>
+									<div id="mapZoomControls" class="collapsed">
 										<img data-zoom-mode="zoomOut" class="zoomIcon zoomOutIcon activeZoom" src="img/map/zoomOut.png" />
 										<img data-zoom-mode="zoomIn" class="zoomIcon zoomInIcon activeZoom" src="img/map/zoomIn.png" />
 									</div>
-									<div id="mapNavControls">
+									<div id="mapNavControls" class="collapsed">
 										<img id="mapNavBackground" src="img/map/woodCircle.png" />
 										<img data-direction="up" id="upArrow" class="arrowImg" src="img/map/arrow.png" />
 										<img data-direction="right" id="rightArrow" class="arrowImg" src="img/map/arrow.png" />
@@ -176,6 +176,7 @@
 	<script type="text/javascript" src="js/image-preloader.js"></script>
 	<script type="text/javascript" src="js/data.js"></script>
 	<script type="text/javascript" src="js/scripts.js"></script>
+	<script type="text/javascript" src="js/animations.js"></script>
 
 </body>
 
