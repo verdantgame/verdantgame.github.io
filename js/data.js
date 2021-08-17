@@ -341,3 +341,88 @@ var itemsAndNurtureItems = {
     'items': ['bird', 'cat', 'chair', 'dog', 'fish', 'lamp', 'shelf', 'sofa', 'table'], // 9 items in each 5 room colors = 45 total
     'itemsNurture': ['fertilizer', 'trowel', 'watering-can'] // 15 each = 45 total
 };
+
+
+let animations = {
+    market: {
+        'allAnimations':[
+            '#marketSection .itemToken',         
+            '#marketSection .inactive',
+            '#marketSection .cardsAndItemContainer .cardContainer[type="plant"]',
+            '#marketSection .cardsAndItemContainer .cardContainer[type="plant"] .plant',
+            '#marketSection .cardsAndItemContainer .cardContainer[type="room"]'
+        ],
+        'position':[
+            '#marketSection',
+            '#marketSection #gameSectionOverlayParent',
+            '#marketSection .gameSectionContent',
+            '#marketSection .cardsAndItemContainer .cardContainer[type="plant"] .plant',
+            '#marketSection .cardsAndItemContainer .cardContainer[type="plant"] .plantBanner',
+            '#marketSection .cardsAndItemContainer .cardContainer[type="plant"] .plantSymbol',
+            '#marketSection .cardsAndItemContainer .cardContainer[type="plant"] .plantVerdancy',
+            '#marketSection .cardsAndItemContainer .cardContainer[type="plant"] .plantVPs',
+            '#marketSection .cardsAndItemContainer .cardContainer[type="plant"] .lightingIcon',            
+            '#marketSection .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer',
+            '#marketSection .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer .lightingIcon'
+        ]
+    },
+    tableau: {
+        'allAnimations':[
+            '#tableauSection .inactive',
+            '#tableauSection #playerInfoContainer',
+            '#tableauSection #playerInfoContainer .playerInfoTitle',
+            '#tableauSection #cardToPlace',
+            '#tableauSection #chosenCardBackground',
+            '#tableauSection .itemContainer',
+            '#tableauSection .playerInfoTitle',
+            '#tableauSection #swapItemsBtn',
+            '#tableauSection #mapContainer',
+            '#tableauSection #mapContainer #mapHiddenOverlay',
+            '#tableauSection #mapZoomControls',
+            '#tableauSection #mapNavControls'
+        ],
+        'position':[
+            '#tableauSection',
+            '#tableauSection .gameSectionContent',
+            '#tableauSection #gameSectionOverlayParent',
+            '#tableauSection #cardToPlace',
+            '#tableauSection #chosenCardBackground',
+            '#tableauSection .itemContainer',
+            '#tableauSection .itemContainer .itemBackground',
+            '#tableauSection #mapContainer',
+            '#tableauSection #mapZoomControls',
+            '#tableauSection #mapNavControls'
+        ]
+    }
+};
+
+
+let animationClasses = {
+    'marketStartingPos': {
+        'start': 'startingPos',
+        'finish': 'expanded',
+        'transition': 'long' // 1s
+    },
+    'tableauStartingPos': {
+        'start': 'startingPos',
+        'finish': 'expanded',
+        'transition': 'veryLong' // 1.8s
+    },
+    'expanded': {
+        'start': 'collapsed',
+        'finish': 'expanded',
+        'transition': 'medium' // .7s
+    },
+    'collapsed': {
+        'start': 'expanded',
+        'finish': 'collapsed',
+        'transition': 'medium' // .7s
+    },
+}
+
+let animationLength = {
+    'quick': 200,
+    'short': 500,
+    'medium': 700,
+    'long': 1000
+}
