@@ -3,6 +3,10 @@ html {
 	min-width: auto!important;
 }
 
+.minimized {
+	user-select: none;
+}
+
 body {
     width: 100%;
     max-width: 539px;
@@ -14,59 +18,30 @@ p {
     line-height: 23px;
 }
 
-.layer {
-    display: none;
-    position: absolute;
-    top: 89px;
+#gameLayer .title {
+    font-family: 'DM Serif Display', serif;
+    color: #003722!important;
+    font-weight: 300;
+}
+
+.slideshow-block {
+    overflow: hidden;
     width: 100%;
+    height: 227px;
+    margin: 15px auto 10px;
 }
 
-.clear {
-    clear:both;
-}  
-
-.animatingElem.quickTransition {
-    transition: transform 200ms ease-in-out, height 200ms ease-in-out, width 200ms ease-in-out, opacity 200ms ease-in-out, background-color 200ms ease-in-out;
+.slideshow-animation {
+    width: auto;
+    height: 100px;
+    font-size: 0px;
 }
 
-.animatingElem.shortTransition {
-    transition: transform 500ms ease-in-out, height 500ms ease-in-out, width 500ms ease-in-out, opacity 500ms ease-in-out, background-color 500ms ease-in-out;
-}
-
-.animatingElem.mediumTransition {
-    transition: transform 700ms ease-in-out, height 700ms ease-in-out, width 700ms ease-in-out, opacity 700ms ease-in-out, background-color 700ms ease-in-out;
-}
-
-.animatingElem.longTransition {
-    transition: transform 1000ms ease-in-out, height 1000ms ease-in-out, width 1000ms ease-in-out, opacity 1000ms ease-in-out, background-color 1000ms ease-in-out;
-}
-
-.animatingElem.veryLongTransition {
-    transition: transform 1800ms ease-in-out, height 1800ms ease-in-out, width 1800ms ease-in-out, opacity 1800ms ease-in-out, background-color 1800ms ease-in-out;
-}
-
-/* .quickTransition {
-    transition: all 200ms ease-in-out;
-}
-
-.shortTransition {
-    transition: all 500ms ease-in-out;
-}
-
-.mediumTransition {
-    transition: all 700ms ease-in-out;
-}
-
-.longTransition {
-    transition: all 1000ms ease-in-out;
-}
-
-.veryLongTransition {
-    transition: all 1800ms ease-in-out;
-} */
-
-.collapsed {
-	user-select: none;
+.slideshow-animation div {
+    display: inline-block;
+    width: auto;
+    float: none;
+    padding: 0 20px;
 }
 
 #container {
@@ -74,40 +49,43 @@ p {
     position: relative;
 }
 
-#container #mainVerdantTitle {
+#mainVerdantTitle {
     display: block;
     text-align: center;
     margin: 10px 0px 8px;
 }
 
-#container #mainVerdantTitle img {
+#mainVerdantTitle img {
     width: 240px;
     margin-bottom: 0px;
     margin-left: 13px;
 }
 
-/* 
-    __                      __ _              
-   / /   ____   ____ _ ____/ /(_)____   ____ _
-  / /   / __ \ / __ `// __  // // __ \ / __ `/
- / /___/ /_/ // /_/ // /_/ // // / / // /_/ / 
-/_____/\____/ \__,_/ \__,_//_//_/ /_/ \__, /  
-    __                               /____/   
-   / /   ____ _ __  __ ___   _____            
-  / /   / __ `// / / // _ \ / ___/            
- / /___/ /_/ // /_/ //  __// /                
-/_____/\__,_/ \__, / \___//_/ 
-             /____/                           
+#setupLayer .subtitle {
+    font-style: italic;
+    text-align: center;
+    width: 440px;
+    margin: 11px auto 15px;
+    font-size: 16px;
+    line-height: 22px;
+}
 
-*Desktop*
-*Static Styles*
-            
-*/
+#homepageButtonContainer {
+    margin: 20px auto 27px;
+    width: 320px;
+}
+
+#homepageButtonContainer .button {
+    display: block;
+    margin: 0px 10px;
+    width: 140px;
+}
 
 #loaderLayer {
     display: block;
-    padding-top: 280px;
+    top: 240px;
 }
+
 
 #loaderLayer .loader-parent {
     padding: 0px;
@@ -185,91 +163,27 @@ p {
     }
 }
 
-/*                                                                       
- ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______
-/_____//_____//_____//_____//_____//_____//_____//_____//_____//_____//_____//_____//_____//_____//_____/
- _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _    
-(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)   
-                   _____        __                   __                                                  
-      __/|_       / ___/ ___   / /_ __  __ ____     / /   ____ _ __  __ ___   _____           
-     |    /       \__ \ / _ \ / __// / / // __ \   / /   / __ `// / / // _ \ / ___/        
-    /_ __|       ___/ //  __// /_ / /_/ // /_/ /  / /___/ /_/ // /_/ //  __// /            
-     |/         /____/ \___/ \__/ \__,_// .___/  /_____/\__,_/ \__, / \___//_/
-                                       /_/                    /____/                                     
- _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _       
-(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)      
- ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______       
-/_____//_____//_____//_____//_____//_____//_____//_____//_____//_____//_____//_____//_____//_____/       
-
-*Desktop*
-*Static Styles*
-*/
-
-#setupLayer .subtitle {
-    font-style: italic;
-    text-align: center;
-    width: 440px;
-    margin: 11px auto 15px;
-    font-size: 16px;
-    line-height: 22px;
+.layer {
+    display: none;
+    position: absolute;
+    top: 89px;
+    width: 100%;
 }
 
-#setupLayer #homepageButtonContainer {
-    margin: 20px auto 27px;
-    width: 320px;
-}
-
-#setupLayer #homepageButtonContainer .button {
-    display: block;
-    margin: 0px 10px;
-    width: 140px;
-}
-
-#setupLayer #demoDisclaimer {
+#demoDisclaimer {
     width: 93%;
     margin: 0px auto 0px;
 }
 
-#setupLayer #demoDisclaimer .message-body p {
+#demoDisclaimer .message-body p {
     margin-bottom: 13px;
 }
-     
-/*                                                                                                  
- ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______
-/_____//_____//_____//_____//_____//_____//_____//_____//_____//_____//_____//_____//_____//_____//_____/
- _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _    
-(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)   
-                     ______                           __                                                 
-        __/|_       / ____/____ _ ____ ___   ___     / /   ____ _ __  __ ___   _____       __/|_         
-       |    /      / / __ / __ `// __ `__ \ / _ \   / /   / __ `// / / // _ \ / ___/      |    /         
-      /_ __|      / /_/ // /_/ // / / / / //  __/  / /___/ /_/ // /_/ //  __// /         /_ __|          
-       |/         \____/ \__,_//_/ /_/ /_/ \___/  /_____/\__,_/ \__, / \___//_/           |/        
-                                                               /____/                                    
- _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _       
-(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)      
- ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______       
-/_____//_____//_____//_____//_____//_____//_____//_____//_____//_____//_____//_____//_____//_____/       
 
-*Desktop*
-*Static Styles*
-*/
-
-
-/* 
-  ______                 ____        ____     
- /_  __/____   ____     /  _/____   / __/____ 
-  / /  / __ \ / __ \    / / / __ \ / /_ / __ \
- / /  / /_/ // /_/ /  _/ / / / / // __// /_/ /
-/_/   \____// .___/  /___//_/ /_//_/   \____/ 
-    ____   /_/                                
-   / __ ) ____ _ _____                        
-  / __  |/ __ `// ___/                        
- / /_/ // /_/ // /                            
-/_____/ \__,_//_/ 
-
-*Desktop*
-*Static Styles*
-*/
+#backToStart {
+    width: 120px;
+    margin: 0 auto;
+    display: block;
+}
 
 #gameLayer #topInfoBar {
     display: none;
@@ -299,313 +213,204 @@ p {
     font-weight: bold;
 }
 
-/*    
-    __  ___        _                            
-   /  |/  /____ _ (_)____                       
-  / /|_/ // __ `// // __ \                      
- / /  / // /_/ // // / / /                      
-/_/  /_/ \__,_//_//_/ /_/                       
-   _____              __   _                    
-  / ___/ ___   _____ / /_ (_)____   ____   _____
-  \__ \ / _ \ / ___// __// // __ \ / __ \ / ___/
- ___/ //  __// /__ / /_ / // /_/ // / / /(__  ) 
-/____/ \___/ \___/ \__//_/ \____//_/ /_//____/
-
-*Desktop*
-*Static Styles*         
-*/
-
 #gameLayer #gameSectionsParent {
     position: relative;
     margin: 0 auto;
     width: 95%;
 }
+
 #gameLayer #gameSectionsParent .gameSection {
-    position: absolute;
+    position:absolute;
     width: 100%;
-    overflow: hidden;
+    height: 530px;
+    transition: all .7s ease-in-out;
 }
 
-#gameLayer .gameSection.initSetup {
+#gameLayer #gameSectionsParent .gameSection.initSetup {
     overflow:hidden;
 }
 
-#gameLayer .gameSectionBorder {
-    width: 100%;
-}
-
-#gameLayer .gameSectionBorder.outerBorder {
-    border-top-color: rgb(65, 167, 66);
-    border-top-style: solid;
-    border-top-width: 1px;
-    border-right-color: rgb(65, 167, 66);
-    border-right-style: solid;
-    border-right-width: 1px;
-    border-left-color: rgb(65, 167, 66);
-    border-left-style: solid;
-    border-left-width: 1px;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
-    padding: 1px;
-    position: relative;
-    z-index: 0;
-}
-
-#gameLayer .gameSectionBorder.innerBorder {
-    border-top-color: rgb(65, 167, 66);
-    border-top-style: solid;
-    border-top-width: 2px;
-    border-right-color: rgb(65, 167, 66);
-    border-right-style: solid;
-    border-right-width: 2px;
-    border-left-color: rgb(65, 167, 66);
-    border-left-style: solid;
-    border-left-width: 2px;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
-    position: relative;
-}
-
-#gameLayer #gameSectionOverlayParent {
+#gameLayer #gameSectionsParent .gameSection .gameSectionBorder {
     height: 100%;
     width: 100%;
-    position: absolute;
-    /* z-index: 1; */
-    background-color: transparent;
-    padding-top: 0px;
+    border-radius: 10px;
 }
 
-#gameLayer #gameSectionOverlayParent .gameSectionOverlayBorder.outerBorder {
-    border-bottom-color: rgb(65, 167, 66);
-    border-bottom-style: solid;
-    border-bottom-width: 1px;
-    border-bottom-right-radius: 3px;
-    border-bottom-left-radius: 3px;
-    border-right-color: rgb(65, 167, 66);
-    border-right-style: solid;
-    border-right-width: 1px;
-    border-left-color: rgb(65, 167, 66);
-    border-left-style: solid;
-    border-left-width: 1px;
+#gameLayer #gameSectionsParent .gameSection .gameSectionBorder.outerBorder {
+    border: 1px solid #41a742;
     padding: 1px;
-    width: 100%;
-    height: 18px;
+}
+
+#gameLayer #gameSectionsParent .gameSection .gameSectionBorder.innerBorder {
+    border: 2px solid #41a742;
+    position: relative;
     overflow: hidden;
 }
 
-#gameLayer #gameSectionOverlayParent .gameSectionOverlayBorder.innerBorder {
-    border-bottom-color: rgb(65, 167, 66);
-    border-bottom-style: solid;
-    border-bottom-width: 2px;
-    border-bottom-right-radius: 3px;
-    border-bottom-left-radius: 3px;
-    border-right-color: rgb(65, 167, 66);
-    border-right-style: solid;
-    border-right-width: 2px;
-    border-left-color: rgb(65, 167, 66);
-    border-left-style: solid;
-    border-left-width: 2px;
-    position: relative;
-    width: 100%;
-    height: 15px;
-}
-
-#gameLayer #gameSectionOverlayParent .gameSectionWhiteOverlay {
-    width: 100%;
-    height: 100%;
-    background-color: #FFF;
-}
-
-#gameLayer .bgOverlay,
-#gameLayer .gameSectionBg {
+#gameLayer #gameSectionsParent .gameSection .bgOverlay {
+    opacity: .2;
     width: 104%;
-    max-width: 104%;
-    position: absolute;
+    height: 104%;
     top: -2%;
     left: -2%;
-}
-
-#gameLayer .bgOverlay {
-    opacity: .2;
-    height: 104%;
     z-index: -8;
+    position: absolute;
     background-color: #bcffc4;
 }
 
-#gameLayer .gameSectionBg {
-    opacity: .6;
+#gameLayer #gameSectionsParent .gameSection .gameSectionBg {
+    opacity: 0.6;
+    position: absolute;
+    top: -2%;
+    left: -2%;
+    width: 104%;
+    max-width: 104%;
     z-index: -9;
     border-radius: 10px;
 }
 
-#gameLayer .gameSectionContent {
+#gameLayer #gameSectionsParent .gameSection .gameSectionContent {
     position: relative;
+    padding-top: 9px;
+    transition: all .7s ease-in-out;
 }
 
-#gameSectionsParent .gameSection .inactive.expanded {
+#gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent {
+    padding-top: 0px;
+}
+
+#gameSectionsParent .gameSection.expanded .inactive {
     display:none;
 }
 
-#gameSectionsParent .gameSection .inactive.collapsed {
-    display: block;
+#gameSectionsParent .gameSection.minimized .inactive {
     background-color: #0f0f0ffa;
     width: 100%;
     height: 100%;
-    border-radius: 0px;
+    border-radius: 3%;
     position: absolute;
     z-index: 99;
     opacity: 0;
+    transition: all .7s ease-in-out;
 }
 
-#gameSectionsParent .gameSection:not(.initSetup):hover .inactive.collapsed {
+#gameSectionsParent .gameSection.minimized:not(.initSetup):hover .inactive {
     cursor: hand;
     cursor: pointer;
     opacity: 0.5;
 }
 
-#gameSectionsParent .gameSection .inactive.collapsed ion-icon[name="expand"] {
+#gameLayer #gameSectionsParent .gameSection.minimized .inactive ion-icon[name="expand"] {
     font-weight: bold;
     position: absolute;
     color: #FFF;
     opacity: 0;
+    transition: all .2s ease-in-out;
 }
 
-#marketSection .inactive.collapsed ion-icon[name="expand"] {
+#gameLayer #gameSectionsParent #marketSection.minimized .inactive ion-icon[name="expand"] {
     font-size: 65px;
     top: 71px;
     left: 224px;
 }
 
-#gameSectionsParent .gameSection:not(.initSetup):hover .inactive.collapsed ion-icon[name="expand"] {
+#gameLayer #gameSectionsParent #tableauSection.minimized .inactive ion-icon[name="expand"] {
+    font-size: 65px;
+    top: 85px;
+    left: 224px;
+}
+
+#gameLayer #gameSectionsParent .gameSection.minimized:not(.initSetup):hover .inactive ion-icon[name="expand"] {
     opacity: 1;
 }
 
-#gameLayer .titleContainer {
-    height: 35px;
-    position: absolute;
-    top: 11px;
-    left: 207px;
-    border-bottom: 1px solid #003823;
-}
-
-#gameLayer .titleContainer .title {
-    font-family: 'DM Serif Display', serif;
-    color: #003722;
-    font-weight: 300;
-    font-size: 27px;
-    border-bottom: 2px solid #003823;
-}
-
-/*                                                                                        
- ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______
-/_____//_____//_____//_____//_____//_____//_____//_____//_____//_____//_____//_____/
- _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _    
-(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)   
-                       __  ___              __          __                          
-          __/|_       /  |/  /____ _ _____ / /__ ___   / /_       __/|_             
-         |    /      / /|_/ // __ `// ___// //_// _ \ / __/      |    /             
-        /_ __|      / /  / // /_/ // /   / ,<  /  __// /_       /_ __|              
-         |/        /_/  /_/ \__,_//_/   /_/|_| \___/ \__/        |/                 
- _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _       
-(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)      
- ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______       
-/_____//_____//_____//_____//_____//_____//_____//_____//_____//_____//_____/       
-
-*Desktop*
-*Static Styles*
-*/
-
-#marketSection {
-    height: 540px;
-    position:absolute;
+#gameLayer #gameSectionsParent #marketSection {
     top: 10px;
-    width:100%;
-}   
+}
 
-#marketSection.collapsed,
-#marketSection.expandAnimation {
+#gameLayer #gameSectionsParent #marketSection.minimized {
+    height: 216px;
+}
+
+#gameLayer #gameSectionsParent #marketSection.minimized,
+#gameLayer #gameSectionsParent #marketSection.expandAnimation {
     overflow: hidden;
 }
 
-#marketSection .gameSectionContent {
-    top: 0px;
+#gameLayer #gameSectionsParent #tableauSection.expanded {
+    transform: scale(1);
+    top: 233px;
 }
 
-#marketSection .gameSectionContent.collapsed {
-    top: -107px;
+#gameLayer #gameSectionsParent #tableauSection.minimized {
+    transform: scale(1);
+    top: 548px;
+    z-index: -1;
+    height: 243px;
+    width: 100%;
 }
 
-#marketSection .gameSectionBorder {
-    height: 520px;
+.titleContainer {
+    opacity: 1;
+    height: 33px;
+    border-bottom: 1px solid #003823;
+    transition: all .7s ease-in-out;
+    overflow: hidden;
 }
 
-#marketSection #gameSectionOverlayParent.collapsed {
-    top: 197px;
+#marketSection.gameSection.minimized #marketTitleContainer.titleContainer,
+#tableauSection.gameSection.minimized #playerTableauTitleContainer.titleContainer {
+    height: 0px;
+    opacity: 0;
+    margin-bottom: 0px;
 }
 
-#marketSection #gameSectionOverlayParent.expanded {
-    top: 516px;
+.titleContainer > p.title {
+    font-size: 25px;
+    border-bottom: 2px solid #003823;
+}
+
+#marketSection #marketTitleContainer.titleContainer {
+    width: 90px;
+    margin: 0px auto 17px;
+}
+
+#tableauSection #playerTableauTitleContainer.titleContainer {
+    width: 80px;
+    margin: 0px auto 13px;
 }
 
 #marketSection #marketCardColumns { 
-    position: absolute;
-    top: 65px;
-    left: 24px;
+    padding: 0px 20px;
 }
 
-#marketSection .marketColumn {
+#marketSection #marketCardColumns .marketColumn {
     width: 105px;
     float: left;
     margin: 0px 0px 0px 12px;
 }
 
-/* 
-    ____          __ 
-   / __ \ ____   / /_
-  / /_/ // __ \ / __/
- / ____// /_/ // /_  
-/_/     \____/ \__/
-
-*Desktop*
-*Static Styles*            
-*/
-
-#marketSection .marketColumn .plantPotContainer {
+#marketSection #marketCardColumns .plantPotContainer {
     width: 55px;
     height: 49px;
     margin: 0px auto 0px;
     display: block;
-    left: 0px;
     position: relative;
-    opacity: 1;
-}
-
-#marketSection .marketColumn .plantPotContainer.expanded {
     left: 0px;
+    opacity: 1;
+    transition: left 1s ease-in-out, width .7s ease-in-out, height .7s ease-in-out, opacity .7s ease-in-out;
 }
 
-#marketSection .marketColumn .plantPotContainer.startingPos {
+#marketSection #marketCardColumns .plantPotContainer.startingPos {
     left: -500px;
 }
 
+#marketSection.minimized #marketCardColumns .plantPotContainer {
+    height: 0px;
+    opacity: 0;
+}
 
-/* 
-   ______                  __               
-  / ____/____ _ _____ ____/ /_____       __ 
- / /    / __ `// ___// __  // ___/    __/ /_
-/ /___ / /_/ // /   / /_/ /(__  )    /_  __/
-\____/ \__,_//_/    \__,_//____/      /_/   
-    ____ __                                 
-   /  _// /_ ___   ____ ___   _____         
-   / / / __// _ \ / __ `__ \ / ___/         
- _/ / / /_ /  __// / / / / /(__  )          
-/___/ \__/ \___//_/ /_/ /_//____/ 
-
-*Desktop*
-*Static Styles*                                                                                                                   
-*/
-
-#marketSection .marketColumn .cardsAndItemContainer {
+#marketSection #marketCardColumns .marketColumn .cardsAndItemContainer {
     transform: scale(1);
     position:unset;
     z-index: 0;
@@ -616,14 +421,24 @@ p {
     opacity: 1;
 }
 
-#marketSection .marketColumn.activeColumn .cardsAndItemContainer {
+/* #marketSection #marketCardColumns .marketColumn .cardsAndItemContainer > * {
+    box-shadow: 0px 0px 0px #FFF;
+    transition: all .2s ease-in-out;
+    opacity: 1;
+}
+
+#marketSection #marketCardColumns .marketColumn.activeColumn .cardsAndItemContainer > *  {
+    box-shadow: 0px 5px 5px rgb(122, 122, 122);
+} */
+
+#marketSection #marketCardColumns .marketColumn.activeColumn .cardsAndItemContainer {
     transform: scale(1.3);
     top: -43px;
     position: relative;
     z-index: 2;
 }
 
-#marketSection .marketColumn.deactivedColumn .cardsAndItemContainer {
+#marketSection #marketCardColumns .marketColumn.deactivedColumn .cardsAndItemContainer {
     transform: scale(1);
     top:0px;
     position: relative;
@@ -634,99 +449,340 @@ p {
     opacity: .5;
 }
 
-#marketSection .marketColumn:first-child {
+#marketSection #marketCardColumns .marketColumn:first-child {
     margin: 0px 0px 0px 0px;
 }
-
-/* 
-    ____ __                     
-   /  _// /_ ___   ____ ___     
-   / / / __// _ \ / __ `__ \    
- _/ / / /_ /  __// / / / / /    
-/___/ \__/ \___//_/ /_/ /_/     
-  ______        __              
- /_  __/____   / /__ ___   ____ 
-  / /  / __ \ / //_// _ \ / __ \
- / /  / /_/ // ,<  /  __// / / /
-/_/   \____//_/|_| \___//_/ /_/ 
-
-*Desktop*
-*Static Styles*                       
-*/
-
-#marketSection .marketColumn .itemToken {
-    margin: 9.5px auto 7.5px;
-    position: relative;
-    left: 0px;
-    width: 46px;
-    display: block;
-}
-
-#marketSection .marketColumn .itemToken.expanded {
-    left: 0px;
-}
-
-#marketSection .marketColumn .itemToken.startingPos {
-    left: -500px;
-}
-
-/* 
-    __  ___              __          __ 
-   /  |/  /____ _ _____ / /__ ___   / /_
-  / /|_/ // __ `// ___// //_// _ \ / __/
- / /  / // /_/ // /   / ,<  /  __// /_  
-/_/  /_/ \__,_//_/   /_/|_| \___/ \__/  
-   ______                  __           
-  / ____/____ _ _____ ____/ /_____      
- / /    / __ `// ___// __  // ___/      
-/ /___ / /_/ // /   / /_/ /(__  )       
-\____/ \__,_//_/    \__,_//____/ 
-
-*Desktop*
-*Static Styles*                            
-*/
-
-#marketSection .marketColumn .cardsAndItemContainer .cardContainer,
-#marketSection .marketColumn .cardsAndItemContainer .backOfCardContainer {
-    left: 0px;
-}
-
-#marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"].expanded,
-#marketSection .marketColumn .cardsAndItemContainer .flip-plant.expanded,
-#marketSection .marketColumn .cardsAndItemContainer .flip-plant .backOfCardContainer.expanded,
-#marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="room"].expanded,
-#marketSection .marketColumn .cardsAndItemContainer .flip-room.expanded,
-#marketSection .marketColumn .cardsAndItemContainer .flip-room .backOfCardContainer.expanded {
-    height: 164px;
-}
- 
-/*       
-   ______                  __      
-  / ____/____ _ _____ ____/ /      
- / /    / __ `// ___// __  /       
-/ /___ / /_/ // /   / /_/ /        
-\____/ \__,_//_/    \__,_/         
-   _____  __          __           
-  / ___/ / /_ __  __ / /___   _____
-  \__ \ / __// / / // // _ \ / ___/
- ___/ // /_ / /_/ // //  __/(__  ) 
-/____/ \__/ \__, //_/ \___//____/  
-           /____/                  
-
-*Desktop*
-*Static Styles*                    
-*/
 
 .cardContainer,
 .backOfCardContainer {
     position: relative;
     height: 164px;
     overflow: hidden;
-    transition: height 700ms ease-in-out;
 }
 
 .cardContainer {
     background-color: #f7efda;
+}
+
+#marketSection #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer,
+#marketSection #marketCardColumns .marketColumn .cardsAndItemContainer .backOfCardContainer {
+    left: 0px;
+    transition: left 1s ease-in-out;
+}
+
+#marketSection #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"],
+#marketSection #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="room"] {
+    transition: height .7s ease-in-out;
+}
+
+#marketSection #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"],
+#marketSection #marketCardColumns .marketColumn .cardsAndItemContainer .flip-plant,
+#marketSection #marketCardColumns .marketColumn .cardsAndItemContainer .flip-plant .backOfCardContainer,
+#marketSection #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="room"],
+#marketSection #marketCardColumns .marketColumn .cardsAndItemContainer .flip-room,
+#marketSection #marketCardColumns .marketColumn .cardsAndItemContainer .flip-room .backOfCardContainer {
+    height: 164px;
+}
+
+#marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] {
+    height: 60px;
+}
+
+#marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="room"] {
+    height: 70px;
+}
+
+.cardContainer[type="plant"] .plant {
+    opacity: 1;
+    transition: all .7s ease-in-out;
+}
+
+#marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] .plant {
+    opacity: .15;
+}
+
+.cardContainer[type="room"] .room,
+.flip-room .roomBack {
+    top: 0px;
+    left: 0px;
+    position: absolute;
+}
+
+.cardContainer[type="plant"] .lightingIcon {
+    position: absolute;
+    top: 4px;
+    width: 13.5px;
+    transition: all .7s ease-in-out;
+}
+
+#marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] .lightingIcon {
+    width: 18px;
+}
+
+.cardContainer[type="plant"] .plantBanner {
+    position: absolute;
+    top: 0px;
+    left: 5px;
+    width: 19px;
+    height: 36px;
+    z-index: 0;
+    transition: all .7s ease-in-out;
+}
+
+#marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] .plantBanner {
+    left: 3px;
+    width: 28px;
+    height: 57.5px;
+}
+
+.cardContainer[type="plant"] .plantSymbol {
+    position: absolute;
+    top: 6.5px;
+    left: 7.5px;
+    width: 14.5px;
+    transition: all .7s ease-in-out;
+}
+
+#marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] .plantSymbol {
+    top: 14px;
+    width: 22px;
+    left: 6px;
+}
+
+.cardContainer[type="plant"] .plantVerdancy {
+    position: absolute;
+    top: 3px;
+    right: 6px;
+    width: 19px;
+    transition: all .7s ease-in-out;
+}
+
+#marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] .plantVerdancy {
+    top: 3.5px;
+    right: 1px;
+    width: 25px;
+}
+
+.cardContainer[type="plant"] .plantVPs {
+    position: absolute;
+    top: 21px;
+    right: 3px;
+    width: 16px;
+    transition: all .7s ease-in-out;
+}
+
+#marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] .plantVPs {
+    top: 32px;
+    width: 25px;
+    right: 2px;
+}
+
+.cardContainer[type="plant"][lighting="1"] .lightingIcon[lighting-icon="0"] {
+    left: 46px;
+}
+
+#marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="1"] .lightingIcon[lighting-icon="0"] {
+    left: 46px;
+    top: 19px;
+}
+
+.cardContainer[type="plant"][lighting="2"] .lightingIcon[lighting-icon="0"] {
+    left: 38.5px;
+}
+
+.cardContainer[type="plant"][lighting="2"] .lightingIcon[lighting-icon="1"] {
+    left: 52.5px;
+}
+
+#marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="2"] .lightingIcon[lighting-icon="0"] {
+    left: 46px;
+    top: 10px;
+}
+
+#marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="2"] .lightingIcon[lighting-icon="1"] {
+    left: 46px;
+    top: 29px;
+}
+
+.cardContainer[type="plant"][lighting="3"] .lightingIcon[lighting-icon="0"] {
+    left: 31px;
+}
+
+.cardContainer[type="plant"][lighting="3"] .lightingIcon[lighting-icon="1"] {
+    left: 46px;
+}
+
+.cardContainer[type="plant"][lighting="3"] .lightingIcon[lighting-icon="2"] {
+    left: 60px;
+}
+
+#marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="3"] .lightingIcon[lighting-icon="0"] {
+    left: 46px;
+    top: 2.5px;
+}
+
+#marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="3"] .lightingIcon[lighting-icon="1"] {
+    left: 46px;
+    top: 21.5px;
+}
+
+#marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="3"] .lightingIcon[lighting-icon="2"] {
+    left: 46px;
+    top: 39.5px;
+}
+
+#marketSection #marketCardColumns .marketColumn .itemToken {
+    width: 46px;
+    margin: 9.5px auto 7.5px;
+    position:relative;
+    left: 0px;
+    display: block;
+    transition: left 1s ease-in-out, width .7s ease-in-out, margin .7s ease-in-out;
+}
+
+#marketSection.minimized #marketCardColumns .marketColumn .itemToken {
+    width: 39px;
+}
+
+#marketSection #marketCardColumns .marketColumn .itemToken.startingPos {
+    left: -500px;
+}
+
+.cardContainer[type="room"] .lightingIconContainer {
+    position: absolute;
+    width: 23.5px;
+    height: 23.5px;
+    background-color: transparent;
+    transition: all .7s ease-in-out;
+}
+
+#marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer {
+    background-color: #f7efda;
+}
+
+.cardContainer[type="room"] .lightingIconContainer .lightingIcon {
+    width: 15.7px;
+    margin: 3.3px;
+    transition: all .7s ease-in-out;
+}
+
+#marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer .lightingIcon {
+    width: 17px;
+}
+
+.cardContainer[type="room"] .lightingIconContainer[lighting-container="0"] {
+    top: -2px;
+    left: 41px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+#marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer[lighting-container="0"] {
+    top: 0px;
+    left: 41px;
+}
+
+.cardContainer[type="room"] .lightingIconContainer[lighting-container="0"] .lightingIcon {
+    margin-top: 4.3px;
+    margin-right: 3.3px;
+    margin-bottom: 3.3px;
+    margin-left: 3px;
+}
+
+#marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer[lighting-container="0"] .lightingIcon {
+    margin-top: 3px;
+}
+
+#marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer[lighting-container="2"] .lightingIcon {
+    margin-top: 4.3px;
+}
+
+.cardContainer[type="room"] .lightingIconContainer[lighting-container="1"] {
+    top: 71.2px;
+    left: 85px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+#marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer[lighting-container="1"] {
+    top: 26px;
+    left: 82px;
+}
+
+.cardContainer[type="room"] .lightingIconContainer[lighting-container="1"] .lightingIcon {
+    margin-top: 3.3px;
+    margin-right: 3.3px;
+    margin-bottom: 3.3px;
+    margin-left: 3.3px;
+}
+
+.cardContainer[type="room"] .lightingIconContainer[lighting-container="2"] {
+    bottom: -2px;
+    left: 40.5px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+#marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer[lighting-container="2"] {
+    bottom: -2px;
+    left: 40.5px;
+}
+
+.cardContainer[type="room"] .lightingIconContainer[lighting-container="2"] .lightingIcon {
+    margin-top: 2.3px;
+    margin-right: 3.3px;
+    margin-bottom: 3.3px;
+    margin-left: 4px;
+}
+
+.cardContainer[type="room"] .lightingIconContainer[lighting-container="3"] {
+    top: 71.2px;
+    left: -3px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.cardContainer[type="room"] .lightingIconContainer[lighting-container="3"] .lightingIcon {
+    margin-top: 3.3px;
+    margin-right: 3.3px;
+    margin-bottom: 3.3px;
+    margin-left: 3.3px;
+}
+
+#marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer[lighting-container="3"] {
+    top: 25.2px;
+    left: 0px;
+}
+
+/* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
+
+.flip-card.flip-back.flip-plant {
+    position:relative;
+    left: 0px;
+    transition: left 1s ease-in-out;
+}
+
+.flip-card.flip-back.flip-plant.startingPos {
+    left: -500px;
+}
+
+.flip-card.flip-back.flip-room {
+    position:relative;
+    left: 0px;
+    transition: left 1s ease-in-out;
+}
+
+.flip-card.flip-back.flip-room.startingPos {
+    left: -500px;
+}
+
+.flip-card {
+    display:block;
+    background-color: transparent;
+    height: 164px;
+    perspective: 1000px; /* Remove this if you don't want the 3D effect */
+    margin: 0 auto;
+    overflow: hidden;
 }
 
 .cardContainer,
@@ -735,17 +791,7 @@ p {
     overflow: hidden;
 }
 
-.flip-card {
-    display:block;
-    background-color: transparent;
-    height: 164px;
-    perspective: 1000px;
-    margin: 0 auto;
-    overflow: hidden;
-    position: relative;
-}
-
-
+/* This container is needed to position the front and back side */
 .flip-card-inner {
     position: relative;
     width: 100%;
@@ -757,15 +803,18 @@ p {
     box-shadow: 0px 0px 10px #AAA;
 }
 
+/* Position the front and back side */
 .flip-card-front, .flip-card-back {
     z-index: 0;
     position: absolute;
     width: 100%;
+    /* height: 100%; */
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
     -moz-backface-visibility: hidden;
 }
 
+/* Style the back side */
 .flip-card-back {
     transform: rotateY(180deg) translate3d(0, 0, 1px);
     -webkit-transform: rotateY(180deg) translate3d(0, 0, 1px);
@@ -779,792 +828,94 @@ p {
     transition: none !important;
 }
 
-/* 
-   ______                  __      
-  / ____/____ _ _____ ____/ /      
- / /    / __ `// ___// __  /       
-/ /___ / /_/ // /   / /_/ /        
-\____/ \__,_//_/    \__,_/         
-   _____  __          __           
-  / ___/ / /_ __  __ / /___   _____
-  \__ \ / __// / / // // _ \ / ___/
- ___/ // /_ / /_/ // //  __/(__  ) 
-/____/ \__/ \__, //_/ \___//____/
-           /____/                  
-
-*Desktop*
-*Static Styles*
-*/
-
-/* 
-    ____   __               __ 
-   / __ \ / /____ _ ____   / /_
-  / /_/ // // __ `// __ \ / __/
- / ____// // /_/ // / / // /_  
-/_/    /_/ \__,_//_/ /_/ \__/ 
-
-*Desktop*
-*Static Styles*
-*/
-
-
-.cardContainer[type="plant"].collapsed {
-    height: 60px;
-}
-
-.flip-card.flip-back.flip-plant.expanded {
-    left: 0px;
-}
-
-.flip-card.flip-back.flip-plant.startingPos {
-    left: -500px;
-}
-
-.cardContainer[type="plant"] .plant {
-    opacity: 1;
-}
-
-.cardContainer[type="plant"] .plant.expanded {
-    opacity: 1;
-}
-
-.cardContainer[type="plant"] .plant.collapsed {
-    opacity: .15;
-}
-
-.cardContainer[type="plant"] .plantBanner {
-    position: absolute;
-    top: 0px;
-    left: 5px;
-    width: 19px;
-    height: 36px;
-    z-index: 0;
-    transform: scale(1);
-}
-
-.cardContainer[type="plant"] .plantBanner.expanded {
-    top: 0px;
-    left: 5px;
-    transform: scale(1);
-}
-
-.cardContainer[type="plant"] .plantBanner.collapsed {
-    left: -15px;
-    top: 0px;
-    transform: scale(2);
-}
-
-.cardContainer[type="plant"] .plantSymbol {
-    position: absolute;
-    top: 6.5px;
-    left: 7.5px;
-    width: 14.5px;
-    transform: scale(1);
-}
-
-.cardContainer[type="plant"] .plantSymbol.expanded {
-    top: 6.5px;
-    left: 7.5px;
-    transform: scale(1);
-}
-
-.cardContainer[type="plant"] .plantSymbol.collapsed {
-    top: 6.5px;
-    left: -21.5px;
-    transform: scale(1.2);
-}
-
-.cardContainer[type="plant"] .plantVerdancy {
-    position: absolute;
-    top: 3px;
-    right: 6px;
-    width: 19px;
-    transform: scale(1);
-}
-
-.cardContainer[type="plant"] .plantVerdancy.expanded {
-    top: 3px;
-    right: 6px;
-    transform: scale(1);
-}
-
-.cardContainer[type="plant"] .plantVerdancy.collapsed {
-    top: 3px;
-    right: 11px;
-    transform: scale(1.5);
-}
-
-.cardContainer[type="plant"] .plantVPs {
-    position: absolute;
-    top: 21px;
-    right: 3px;
-    width: 16px;
-    transform: scale(1);
-}
-
-.cardContainer[type="plant"] .plantVPs.expanded {
-    top: 21px;
-    right: 3px;
-    transform: scale(1);
-}
-
-.cardContainer[type="plant"] .plantVPs.collapsed {
-    top: 32px;
-    right: 13px;
-    transform: scale(1.6);
-}
-
-.cardContainer[type="plant"] .lightingIcon {
-    position: absolute;
-    width: 13.5px;
-    top: 4px;
-    transform: scale(1);
-}
-
-/* 1x Lighting */
-.cardContainer[type="plant"][lighting="1"] .lightingIcon-one.expanded {
-    transform: scale(1);
-    left: 46px;
-    top: 4px;
-}
-
-/* 1x Lighting */
-.cardContainer[type="plant"][lighting="1"] .lightingIcon-one.collapsed {
-    transform: scale(1.4);
-    left: 39px;
-    top: 20px;
-}
-
-/* 2x Lighting */
-.cardContainer[type="plant"][lighting="2"] .lightingIcon-one.expanded {
-    transform: scale(1);
-    left: 38.5px;
-    top: 4px;
-}
-
-.cardContainer[type="plant"][lighting="2"] .lightingIcon-two.expanded {
-    transform: scale(1);
-    left: 52.5px;
-    top: 4px;
-}
-
-/* 2x Lighting */
-.cardContainer[type="plant"][lighting="2"] .lightingIcon-one.collapsed {
-    transform: scale(1.4);
-    left: 39px;
-    top: 10px;
-}
-
-.cardContainer[type="plant"][lighting="2"] .lightingIcon-two.collapsed {
-    transform: scale(1.4);
-    left: 39px;
-    top: 31px;
-}
-
-/* 3x Lighting */
-.cardContainer[type="plant"][lighting="3"] .lightingIcon-one.expanded {
-    transform: scale(1);
-    left: 31px;
-    top: 4px;
-}
-
-.cardContainer[type="plant"][lighting="3"] .lightingIcon-two.expanded {
-    transform: scale(1);
-    left: 46px;
-    top: 4px;
-}
-
-.cardContainer[type="plant"][lighting="3"] .lightingIcon-three.expanded {
-    transform: scale(1);
-    left: 60px;
-    top: 4px;
-}
-
-/* 3x Lighting */
-.cardContainer[type="plant"][lighting="3"] .lightingIcon-one.collapsed {
-    transform: scale(1.4);
-    left: 39px;
-    top: 2px;
-}
-
-.cardContainer[type="plant"][lighting="3"] .lightingIcon-two.collapsed {
-    transform: scale(1.4);
-    left: 39px;
-    top: 21px;
-}
-
-.cardContainer[type="plant"][lighting="3"] .lightingIcon-three.collapsed {
-    transform: scale(1.4);
-    left: 39px;
-    top: 40px;
-}
-
-/* 
-    ____                         
-   / __ \ ____   ____   ____ ___ 
-  / /_/ // __ \ / __ \ / __ `__ \
- / _, _// /_/ // /_/ // / / / / /
-/_/ |_| \____/ \____//_/ /_/ /_/ 
-   ______                  __    
-  / ____/____ _ _____ ____/ /    
- / /    / __ `// ___// __  /     
-/ /___ / /_/ // /   / /_/ /      
-\____/ \__,_//_/    \__,_/
-
-*Desktop*
-*Static Styles*                          
-*/
-
-
-.flip-card.flip-back.flip-room.expanded {
-    left: 0px;
-}
-
-.flip-card.flip-back.flip-room.startingPos {
-    left: -500px;
-}
-
-.cardContainer[type="room"].collapsed {
-    height: 70px;
-}
-
-.cardContainer[type="room"] .room,
-.flip-room .roomBack {
-    top: 0px;
-    left: 0px;
-    position: absolute;
-}
-
-
-/* 
-    __     _         __     __   _                      
-   / /    (_)____ _ / /_   / /_ (_)____   ____ _        
-  / /    / // __ `// __ \ / __// // __ \ / __ `/        
- / /___ / // /_/ // / / // /_ / // / / // /_/ /         
-/_____//_/ \__, //_/ /_/ \__//_//_/ /_/ \__, /          
-   ______ /____/        __          _  /____/           
-  / ____/____   ____   / /_ ____ _ (_)____   ___   _____
- / /    / __ \ / __ \ / __// __ `// // __ \ / _ \ / ___/
-/ /___ / /_/ // / / // /_ / /_/ // // / / //  __// /    
-\____/ \____//_/ /_/ \__/ \__,_//_//_/ /_/ \___//_/
-
-*Desktop*
-*Static Styles*                                                                                                    
-*/
-
-.cardContainer[type="room"] .lightingIconContainer {
-    position: absolute;
-    width: 23.5px;
-    height: 23.5px;
-    background-color: #f7efda00;
-}
-
-/* Animations */
-.cardContainer[type="room"] .lightingIconContainer.expanded {
-    background-color: #f7efda00;
-}
-
-/* Animations */
-.cardContainer[type="room"] .lightingIconContainer.collapsed {
-    background-color: #f7efda;
-    border-bottom-right-radius: 0px;
-    border-bottom-left-radius: 0px;
-}
-
-/* Top  */
-.cardContainer[type="room"] .lightingIconContainer-top {
-    top: -2px;
-    left: 41px;
-    border-bottom-right-radius: 0px;
-    border-bottom-left-radius: 0px;
-}
-
-/* Top  */
-.cardContainer[type="room"] .lightingIconContainer-top.expanded {
-    top: -2px;
-    left: 41px;
-    border-bottom-right-radius: 0px;
-    border-bottom-left-radius: 0px;
-}
-
-/* Top Lighting Container */
-.cardContainer[type="room"] .lightingIconContainer-top.collapsed {
-    top: 0px;
-    left: 41px;
-    border-bottom-right-radius: 20px;
-    border-bottom-left-radius: 20px;
-}
-
-/* Right */
-.cardContainer[type="room"] .lightingIconContainer-right {
-    top: 71.2px;
-    left: 85px;
-    border-bottom-right-radius: 0px;
-    border-bottom-left-radius: 0px;
-}
-
-/* Right */
-.cardContainer[type="room"] .lightingIconContainer-right.expanded {
-    top: 71.2px;
-    left: 85px;
-    border-bottom-right-radius: 0px;
-    border-bottom-left-radius: 0px;
-}
-
-/* Right Lighting Container */
-.cardContainer[type="room"] .lightingIconContainer-right.collapsed {
-    top: 26px;
-    left: 82px;
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
-}
-
-/* Bottom */
-.cardContainer[type="room"] .lightingIconContainer-bottom {
-    bottom: -2px;
-    left: 40.5px;
-    border-bottom-right-radius: 0px;
-    border-bottom-left-radius: 0px;
-}
-
-/* Bottom */
-.cardContainer[type="room"] .lightingIconContainer-bottom.expanded {
-    bottom: -2px;
-    left: 40.5px;
-    border-bottom-right-radius: 0px;
-    border-bottom-left-radius: 0px;
-}
-
-/* Bottom Lighting Container */
-.cardContainer[type="room"] .lightingIconContainer-bottom.collapsed {
-    bottom: -2px;
-    left: 40.5px;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-}
-
-/* Left */
-.cardContainer[type="room"] .lightingIconContainer-left {
-    top: 71.2px;
-    left: -3px;
-    border-bottom-right-radius: 0px;
-    border-bottom-left-radius: 0px;
-}
-
-/* Left */
-.cardContainer[type="room"] .lightingIconContainer-left.expanded {
-    top: 71.2px;
-    left: -3px;
-    border-bottom-right-radius: 0px;
-    border-bottom-left-radius: 0px;
-}
-
-/* Left Lighting Container */
-.cardContainer[type="room"] .lightingIconContainer-left.collapsed {
-    top: 25.2px;
-    left: 0px;
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
-}
-
-
-
-
-/* 
-    __     _         __     __   _              
-   / /    (_)____ _ / /_   / /_ (_)____   ____ _
-  / /    / // __ `// __ \ / __// // __ \ / __ `/
- / /___ / // /_/ // / / // /_ / // / / // /_/ / 
-/_____//_/ \__, //_/ /_/ \__//_//_/ /_/ \__, /  
-          /____/                       /____/   
-   _____                    __            __    
-  / ___/ __  __ ____ ___   / /_   ____   / /    
-  \__ \ / / / // __ `__ \ / __ \ / __ \ / /     
- ___/ // /_/ // / / / / // /_/ // /_/ // /      
-/____/ \__, //_/ /_/ /_//_.___/ \____//_/
-      /____/                         
-      
-*Desktop*
-*Static Styles*
-*/
-
-.cardContainer[type="room"] .lightingIconContainer .lightingIcon {
-    width: 15.7px;
-    transform: scale(1);
-}
-
-/* Top  */
-.cardContainer[type="room"] .lightingIconContainer-top .lightingIcon {
-    margin-top: 4.3px;
-    margin-right: 3.3px;
-    margin-bottom: 3.3px;
-    margin-left: 3px;
-}
-
-/* Right */
-.cardContainer[type="room"] .lightingIconContainer-right .lightingIcon {
-    margin-top: 3.3px;
-    margin-right: 3.3px;
-    margin-bottom: 3.3px;
-    margin-left: 3.3px;
-}
-
-/* Bottom */
-.cardContainer[type="room"] .lightingIconContainer-bottom .lightingIcon {
-    margin-top: 2.3px;
-    margin-right: 3.3px;
-    margin-bottom: 3.3px;
-    margin-left: 4px;
-}
-
-/* Left */
-.cardContainer[type="room"] .lightingIconContainer-left .lightingIcon {
-    margin-top: 3.3px;
-    margin-right: 3.3px;
-    margin-bottom: 3.3px;
-    margin-left: 3.3px;
-}
-
-#marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer .lightingIcon.expanded {
-    transform: scale(1);
-}
-
-#marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer .lightingIcon.collapsed {
-    transform: scale(1.1);
-}
-
-
-
-/*                                                                           
- ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______
-/_____//_____//_____//_____//_____//_____//_____//_____//_____//_____//_____//_____/
- _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _    
-(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)   
-                   ______        __     __                                          
-      __/|_       /_  __/____ _ / /_   / /___   ____ _ __  __       __/|_           
-     |    /        / /  / __ `// __ \ / // _ \ / __ `// / / /      |    /           
-    /_ __|        / /  / /_/ // /_/ // //  __// /_/ // /_/ /      /_ __|            
-     |/          /_/   \__,_//_.___//_/ \___/ \__,_/ \__,_/        |/  
- _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _       
-(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)      
- ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______       
-/_____//_____//_____//_____//_____//_____//_____//_____//_____//_____//_____/       
-
-*Desktop*
-*Static Styles*
-*/#tableauSection {
-    top: 233px;
-    height: 550px;
-}
-
-#tableauSection.collapsed {
-    top: 551px;
-}
-
-#tableauSection.expanded {
-    top: 233px;
-}
-
-/* #tableauSection .inactive.collapsed {
-    height: 242px;
-} */
-
-#tableauSection .gameSectionContent {
-    top: 0px;
-}
-
-#tableauSection .gameSectionContent.collapsed {
-    top: -55px;
-}
-
-#tableauSection .gameSectionBorder {
-    height: 530px;
-}
-
-#tableauSection #gameSectionOverlayParent.collapsed {
-    top: 225px;
-}
-
-#tableauSection #gameSectionOverlayParent.expanded {
-    top: 520px;
-}
-
-#tableauSection .inactive.collapsed ion-icon[name="expand"] {
-    font-size: 65px;
-    top: 85px;
-    left: 224px;
-}
-
-#tableauSection #homeContentContainer {
+#homeContentContainer {
     width: 99%;
     height: 463px;
     margin: 0 auto;
     position: relative;
-    top: 60px;
+    transition: all .7s ease-in-out;
 }
 
-#tableauSection #playerInfoContainer {
-    overflow: hidden;
+#homeContentContainer #playerInfoContainer {
     width: 135px;
     height: 460px;
+    overflow: hidden;
     float: left;
+    transition: all .7s ease-in-out;
 }
 
-#tableauSection #playerInfoContainer .playerInfoTitle {
+#gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #playerInfoContainer {
+    width: 160px;
+    height: 233px;
+}
+
+#gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #playerInfoContainer .playerInfoTitle {
     font-style: italic;
     font-weight: bold;
-    top: 0px;
-    position: absolute;
-    width: 100%;
-}
-
-#tableauSection #playerInfoContainer .playerInfoTitle.expanded {
-    top: 0px;
-}
-
-#tableauSection #playerInfoContainer .playerInfoTitle.collapsed {
-    top: -23px;
-}
-
-/* 
-   ______                  __   ______     
-  / ____/____ _ _____ ____/ /  /_  __/____ 
- / /    / __ `// ___// __  /    / /  / __ \
-/ /___ / /_/ // /   / /_/ /    / /  / /_/ /
-\____/ \__,_//_/    \__,_/    /_/   \____/ 
-    ____   __                              
-   / __ \ / /____ _ _____ ___              
-  / /_/ // // __ `// ___// _ \             
- / ____// // /_/ // /__ /  __/             
-/_/    /_/ \__,_/ \___/ \___/
-
-*Desktop*
-*Static Styles*                                       
-*/
-
-#tableauSection #playerInfoContainer #cardToPlace {
-    position: absolute;
-    width: 105px;
-    height: 191px;
-    top: 0px;
-    left: 16px;
-}
-
-#tableauSection #playerInfoContainer #cardToPlace.expanded {
-    top: -4px;
-    left: 11px;
-}
-
-#tableauSection #playerInfoContainer #cardToPlace.collapsed {
-    top: -26px;
-    left: 14px;
-}
-
-#tableauSection #playerInfoContainer #cardToPlace > .flip-plant,
-#tableauSection #playerInfoContainer #cardToPlace > .cardContainer {
-    transform: scale(.96);
-    transform-origin: left top;
-    top: 30px;
-    left: 3px;
     overflow: hidden;
+    height: 20px;
+    margin: 0px 0px 6px 0px;
+    transition: all .7s ease-in-out;
 }
 
-#tableauSection #playerInfoContainer #cardToPlace .flip-plant.expanded {
-    top: 29px;
-    left: 3px;
+#gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #playerInfoContainer #cardToPlace .playerInfoTitle {
+    height: 24px;
 }
 
-#tableauSection #playerInfoContainer #cardToPlace .flip-plant.startingPos {
-    left: 150px;
-    top: -270px;
+#gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #playerInfoContainer .playerInfoTitle {
+    height: 0px!important;
+    margin: 0px 0px 0px 0px;
 }
 
-#tableauSection #playerInfoContainer #cardToPlace #chosenCardBackground {
+#gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #playerInfoContainer #swapItemsBtn {
     position: absolute;
-    width: 100%;
-    max-width: 100%;
-    top: 27px;
-    left: 1px;
-}
-
-/* #tableauSection #playerInfoContainer #cardToPlace #chosenCardBackground.expanded {
-    top: 27px;
-    left: -2px;
-}
-
-#tableauSection #playerInfoContainer #cardToPlace #chosenCardBackground.collapsed {
-    top: 2px;
-    left: 1px;
-} */
-
-
-
-
-/* 
-    ____ __                                                   
-   /  _// /_ ___   ____ ___                                   
-   / / / __// _ \ / __ `__ \                                  
- _/ / / /_ /  __// / / / / /                                  
-/___/ \__/ \___//_/ /_/ /_/                                   
-   ______               __          _                         
-  / ____/____   ____   / /_ ____ _ (_)____   ___   _____ _____
- / /    / __ \ / __ \ / __// __ `// // __ \ / _ \ / ___// ___/
-/ /___ / /_/ // / / // /_ / /_/ // // / / //  __// /   (__  ) 
-\____/ \____//_/ /_/ \__/ \__,_//_//_/ /_/ \___//_/   /____/ 
-
-*Desktop*
-*Static Styles*
-*/
-
-#tableauSection #playerInfoContainer .itemContainer {
-    width: 101px;
-    height: 100px;
-    position: absolute;
-    left: 18px;
-    transform: scale(1);
-    overflow: hidden;
-}
-
-#tableauSection #playerInfoContainer #chosenItemContainer.itemContainer.expanded {
-    top: 203px;
-    left: 18px;
-    transform: scale(1);
-}
-
-#tableauSection #playerInfoContainer #chosenItemContainer.itemContainer.collapsed {
-    top: 171px;
-    left: 5px;
-    transform: scale(.69);
-    transform-origin: left top;
-}
-
-#tableauSection #playerInfoContainer #storedItemContainer.itemContainer.expanded {
-    top: 361px;
-    left: 18px;
-    transform: scale(1);
-}
-
-#tableauSection #playerInfoContainer #storedItemContainer.itemContainer.collapsed {
-    top: 171px;
-    left: 61px;
-    transform: scale(.69);
-    transform-origin: left top;
-}
-
-#tableauSection #playerInfoContainer .itemContainer .itemBackground {
-    width: 70%;
-    display: block;
-    position: absolute;
-    top: 24px;
-    left: 15px;
-}
-
-#tableauSection #playerInfoContainer .itemContainer .itemBackground.expanded {
-    top: 24px;
-}
-
-#tableauSection #playerInfoContainer .itemContainer .itemBackground.collapsed {
-    top: 0px;
-}
-
-
-
-
-/* 
-   _____                           ____ __                        
-  / ___/_      __ ____ _ ____     /  _// /_ ___   ____ ___   _____
-  \__ \| | /| / // __ `// __ \    / / / __// _ \ / __ `__ \ / ___/
- ___/ /| |/ |/ // /_/ // /_/ /  _/ / / /_ /  __// / / / / /(__  ) 
-/____/ |__/|__/ \__,_// .___/  /___/ \__/ \___//_/ /_/ /_//____/  
-                     /_/                                          
-    ____          __   __                                         
-   / __ ) __  __ / /_ / /_ ____   ____                            
-  / __  |/ / / // __// __// __ \ / __ \                           
- / /_/ // /_/ // /_ / /_ / /_/ // / / /                           
-/_____/ \__,_/ \__/ \__/ \____//_/ /_/
-
-*Desktop*
-*Static Styles*                                                                 
-*/
-
-#tableauSection #playerInfoContainer #swapItemsBtn {
-    position: absolute;
-    top: 311px;
-    left: 22px;
+    top: 307px;
+    left: 27px;
     height: 42px;
     overflow: hidden;
     font-size: 14px;
     line-height: 15px;
     padding: 0px 1px;
+    transition: all .7s ease-in-out;
 }
 
-#tableauSection #playerInfoContainer #swapItemsBtn.collapsed {
+#gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #playerInfoContainer #swapItemsBtn {
     height: 0px;
     margin: 0px 0px 0px 0px;
 }
 
-#tableauSection #playerInfoContainer #swapItemsBtn .swapItemsArrow {
+#gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #playerInfoContainer #swapItemsBtn .swapItemsArrow {
     font-size: 26px;
     font-weight: bold;
     margin: 2px 1px 2px;
 }
 
-#tableauSection #playerInfoContainer #swapItemsBtn #swapItemsArrowOne {
+#gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #playerInfoContainer #swapItemsBtn #swapItemsArrowOne {
     transform: rotate(270deg);
 }
 
-#tableauSection #playerInfoContainer #swapItemsBtn #swapItemsArrowTwo {
+#gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #playerInfoContainer #swapItemsBtn #swapItemsArrowTwo {
     transform: rotate(90deg);
 }
 
-
-/* 
-    __  ___                                             
-   /  |/  /____ _ ____                                  
-  / /|_/ // __ `// __ \                                 
- / /  / // /_/ // /_/ /                                 
-/_/  /_/ \__,_// .___/                                  
-   ______     /_/       __          _                   
-  / ____/____   ____   / /_ ____ _ (_)____   ___   _____
- / /    / __ \ / __ \ / __// __ `// // __ \ / _ \ / ___/
-/ /___ / /_/ // / / // /_ / /_/ // // / / //  __// /    
-\____/ \____//_/ /_/ \__/ \__,_//_//_/ /_/ \___//_/
-    
-*Desktop*
-*Static Styles*                                          
-*/
-
- #tableauSection #mapContainer {
+#homeContentContainer #mapContainer {
     background-color: #f7f7f752;
     background-image: url(../img/bg2.jpg);
     background-size: cover;
     background-position-y: center;
     background-position-x: center;
     border: 2px solid #41a742;
-    width: 356px;
-    height: 455px;
+    width: 360px;
+    height: 464px;
     position: absolute;
-    top: 6px;
-    right: 6px;
+    right: 0px;
+    top: 0px;
     overflow: hidden;
     border-radius: 7px;
+    transition: all .7s ease-in-out;
 }
 
-#tableauSection #mapContainer.expanded {
-    width: 360px;
-    height: 463px;
-    top: 0px;
-    right: 4px;
-}
-
-#tableauSection #mapContainer.collapsed {
-    width: 359px;
-    height: 224px;
-    top: 0px;
-    right: 3px;
-}
-
-#tableauSection #mapContainer #mapHiddenOverlay {
+#gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapContainer #mapHiddenOverlay {
     position: relative;
     transform-origin: 50% 50%;
     margin-left: -306px;
@@ -1574,20 +925,18 @@ p {
     width: 980px;
     height: 810px;
     transform: scale(.9);
-    transition: top .2s ease-in-out, left .2s ease-in-out, transform .2s ease-in-out, margin .7s ease-in-out;
 }
 
-#tableauSection #mapContainer #mapHiddenOverlay.expanded {
-    margin-left: -306px;
-    margin-top: -188px;
+#gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #mapContainer #mapHiddenOverlay,
+#gameLayer #gameSectionsParent #tableauSection.expanded .gameSectionContent #homeContentContainer #mapContainer #mapHiddenOverlay {
+    transition: all .7s ease-in-out;
 }
 
-#tableauSection #mapContainer #mapHiddenOverlay.collapsed {
-    margin-left: -321px;
-    margin-top: -311px;
+#gameLayer #gameSectionsParent #tableauSection.expanded:not(.expandAnimation) .gameSectionContent #homeContentContainer #mapContainer #mapHiddenOverlay {
+    transition: all .2s ease-in-out;
 }
 
-#tableauSection #mapContainer #mapHiddenOverlay .mapTileContainer {
+#homeContentContainer #mapContainer #mapHiddenOverlay .mapTileContainer {
     height: 166px;
     width: 105px;
     margin: 1px;
@@ -1595,131 +944,219 @@ p {
     position: relative;
 }
 
-#tableauSection #mapContainer #mapHiddenOverlay .mapTileContainer .cardContainer,
-#tableauSection #mapContainer #mapHiddenOverlay .mapTileContainer .backOfCardContainer {
+#homeContentContainer #mapContainer #mapHiddenOverlay .mapTileContainer .cardContainer,
+#homeContentContainer #mapContainer #mapHiddenOverlay .mapTileContainer .backOfCardContainer {
     position: relative;
     height: 164px;
 }
 
-#tableauSection #mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room.expanded {
-    top: 0px;
-    left: 0px;
+#gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #playerInfoContainer #cardToPlace {
+    width: 105px;
+    height: 191px;
+    transform: scale(1);
+    position: absolute;
+    top: -5px;
+    left: 16px;
+    transition: all .7s ease-in-out;
 }
 
-#tableauSection #mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room.startingPos {
+#gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #playerInfoContainer #cardToPlace #chosenCardBackground {
+    position: absolute;
+    max-width: 105%;
+    width: 104%;
+    left: -2px;
+    top: 27px;
+    transition: all .7s ease-in-out;
+}
+
+#gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #playerInfoContainer #cardToPlace #chosenCardBackground {
+    top: 3px;
+    width: 96%;
+    left: 1px;
+}
+
+#gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #playerInfoContainer #cardToPlace {
+    top: 6px;
+    left: 28px;
+    transform: scale(.97);
+    height: 166px;
+}
+
+#homeContentContainer #playerInfoContainer #cardToPlace > .flip-plant,
+#homeContentContainer #playerInfoContainer #cardToPlace > .cardContainer {
+    transform: scale(1);
+}
+
+#homeContentContainer #playerInfoContainer #cardToPlace #cardToPlaceTitle {
+    font-style: italic;
+    margin: 0px 0px 7px 0px;
+    font-weight: bold;
+}
+
+#homeContentContainer #playerInfoContainer #cardToPlace .flip-plant {
+    top: 0px;
+    right: 0px;
+    transition: right 1.8s ease-in-out, top 1.8s ease-in-out;
+    overflow: hidden;
+}
+
+#homeContentContainer #playerInfoContainer #cardToPlace .flip-plant.startingPos {
+    right: -150px;
+    top: -270px;
+}
+
+#gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #playerInfoContainer .itemContainer {
+    width: 101px;
+    position: absolute;
+    left: 18px;
+    transform: scale(1);
+    transition: all .7s ease-in-out;
+}
+
+#gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #playerInfoContainer #chosenItemContainer {
+    top: 203px;
+}
+
+#gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #playerInfoContainer #storedItemContainer {
+    top: 352px;
+}
+
+#gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #playerInfoContainer .itemContainer {
+    top: 166px!important;
+    transform: scale(.7);
+}
+
+#gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #playerInfoContainer #chosenItemContainer {
+    left: 2px;
+}
+
+#gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #playerInfoContainer #storedItemContainer {
+    left: 56px;
+}
+
+
+#gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #playerInfoContainer .itemContainer .itemBackground {
+    width: 66%;
+    display: block;
+    margin: 0px auto 0px;
+    transition: all .7s ease-in-out;
+}
+
+#homeContentContainer #mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room {
+    top: 0px;
+    left: 0px;
+    transition: left 1.8s ease-in-out, top 1.8s ease-in-out;
+}
+
+#homeContentContainer #mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room.startingPos {
     top: -510px;
     left: -110px;
 }
 
-  
-/* 
- _____                         
-/__  /  ____   ____   ____ ___ 
-  / /  / __ \ / __ \ / __ `__ \
- / /__/ /_/ // /_/ // / / / / /
-/____/\____/ \____//_/ /_/ /_/
+#homeContentContainer #mapContainer .zoomOptions,
+#homeContentContainer #mapContainer .mapNavigation,
+#homeContentContainer #mapContainer #placedTileOptions {
+    display:none;
+}
 
-*Desktop*
-*Static Styles*                 
-*/
 
-#tableauSection #mapZoomControls {
+#gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent {
+    padding-top: 0px;
+}
+
+#gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer {
+    width: 100%;
+    height: 236px;
+    margin: 0 auto;
+}
+
+#gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #mapContainer {
+    width: 335px;
+    height: 221px;
+    top: 5px;
+    right: 6px;
+}
+
+#gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #mapContainer #mapHiddenOverlay {
+    transform-origin: 50% 50%;
+    top: 0px;
+    left: 0px;
+    margin-left: -321px;
+    margin-top: -303px;
+    width: 980px;
+    height: 810px;
+    transform: scale(.9);
+}
+
+#gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #mapContainer #mapHiddenOverlay .mapTileContainer {
+    height: 166px;
+    width: 105px;
+    margin: 1px;
+    float: left;
+    position: relative;
+}
+
+
+#gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapZoomControls {
     position: absolute;
-    top: 12px;
+    top: 7px;
     right: 262px;
     width: 91px;
     height: 42px;
     opacity: 1;
+    transition: all .7s ease-in-out;
 }
 
-#tableauSection #mapZoomControls.expanded {
-    right: 262px;
-    opacity: 1;
-}
-
-#tableauSection #mapZoomControls.collapsed {
+#gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #mapZoomControls {
     right: 243px;
     opacity: 0;
 }
 
-#tableauSection #mapZoomControls .zoomIcon {
+#gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapZoomControls .zoomIcon {
     position: absolute;
     top: 0px;
     width: 39px;
 }
 
-#tableauSection #mapZoomControls .zoomIcon.inactiveZoom {
+#gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapZoomControls .zoomIcon.inactiveZoom {
     opacity: .4;
 }
 
-#tableauSection #mapZoomControls .zoomIcon.activeZoom {
+#gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapZoomControls .zoomIcon.activeZoom {
     cursor:hand;
     cursor:pointer;
 }
 
-/* Zoom Out Icon */
-
-#tableauSection #mapZoomControls .zoomOutIcon {
+#gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapZoomControls .zoomOutIcon {
     left: 0px;
 }
 
-/* Zoom In Icon */
-
-#tableauSection #mapZoomControls .zoomInIcon {
+#gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapZoomControls .zoomInIcon {
     left: 50px;
 }
 
-/* 
-    _   __               _                __   _             
-   / | / /____ _ _   __ (_)____ _ ____ _ / /_ (_)____   ____ 
-  /  |/ // __ `/| | / // // __ `// __ `// __// // __ \ / __ \
- / /|  // /_/ / | |/ // // /_/ // /_/ // /_ / // /_/ // / / /
-/_/ |_/ \__,_/  |___//_/ \__, / \__,_/ \__//_/ \____//_/ /_/ 
-                        /____/                                 
-                        
-*Desktop*
-*Static Styles*
-*/
-
-#tableauSection #mapNavControls {
+#gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapNavControls {
     position: absolute;
     bottom: 100px;
     right: 0px;
     width: 100px;
-    height: 100px;
     opacity: 1;
+    transition: all .7s ease-in-out;
 }
 
-#tableauSection #mapNavControls.expanded {
-    bottom: 3px;
-    right: 7px;
-    opacity: 1;
-}
-
-#tableauSection #mapNavControls.collapsed {
-    bottom: 246px;
+#gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #mapNavControls {
+    bottom: 110px;
     right: 10px;
     opacity: 0;
 }
 
-#tableauSection #mapNavControls #mapNavBackground {
+#gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapNavControls #mapNavBackground {
     position: absolute;
     top: 0px;
     right: 0px;
 }
 
-/*
-    ___                                     
-   /   |   _____ _____ ____  _      __ _____
-  / /| |  / ___// ___// __ \| | /| / // ___/
- / ___ | / /   / /   / /_/ /| |/ |/ /(__  ) 
-/_/  |_|/_/   /_/    \____/ |__/|__//____/ 
-
-*Desktop*
-*Static Styles*                                                          
-*/
-
-#tableauSection #mapNavControls .arrowImg {
+#gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapNavControls .arrowImg {
     position: absolute;
     top: 9px;
     right: 31px;
@@ -1728,111 +1165,55 @@ p {
     cursor:pointer;
 }
 
-/* Up */
-#tableauSection #mapNavControls #upArrow.arrowImg {
+#gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapNavControls #upArrow.arrowImg {
     transform: rotate(270deg);
     top: 9px;
     right: 32px;
 }
 
-/* Up Arrow */
-#tableauSection #mapNavControls #upArrow.arrowImg.activeArrow {    
-	-webkit-transform: rotate(270deg) translateX(2px);
-	transform: rotate(270deg) translateX(2px);
-}
-
-/* Right */
-#tableauSection #mapNavControls #rightArrow.arrowImg {
+#gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapNavControls #rightArrow.arrowImg {
     transform: rotate(0deg);
     top: 39px;
     right: 3px;
 }
 
-/* Down */
-#tableauSection #mapNavControls #downArrow.arrowImg {
+#gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapNavControls #downArrow.arrowImg {
     transform: rotate(90deg);
     top: 67px;
     right: 35px;
 }
 
-/* Left */
-#tableauSection #mapNavControls #leftArrow.arrowImg {
+#gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapNavControls #leftArrow.arrowImg {
     transform: rotate(180deg);
     top: 36px;
     right: 62px;
 }
 
-/* Right Arrow */
-#tableauSection #mapNavControls #rightArrow.arrowImg.activeArrow {    
+#gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapNavControls #upArrow.arrowImg.activeArrow {    
+	-webkit-transform: rotate(270deg) translateX(2px);
+	transform: rotate(270deg) translateX(2px);
+}
+
+#gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapNavControls #rightArrow.arrowImg.activeArrow {    
 	-webkit-transform: rotate(0deg) translateX(2px);
 	transform: rotate(0deg) translateX(2px);
 }
 
-/* Down Arrow */
-#tableauSection #mapNavControls #downArrow.arrowImg.activeArrow {    
+#gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapNavControls #downArrow.arrowImg.activeArrow {    
 	-webkit-transform: rotate(90deg) translateX(2px);
 	transform: rotate(90deg) translateX(2px);
 }
 
-/* Left Arrow */
-#tableauSection #mapNavControls #leftArrow.arrowImg.activeArrow {    
+#gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapNavControls #leftArrow.arrowImg.activeArrow {    
 	-webkit-transform: rotate(180deg) translateX(2px);
 	transform: rotate(180deg) translateX(2px);
-} 
+}
 
+.clear {
+    clear:both;
+}
 
 @media screen and (max-width: 539px) {
-
-    /*                                                                                         
-     ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______
-    /_____//_____//_____//_____//_____//_____//_____//_____//_____//_____//_____//_____//_____//_____//_____/
-     _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _    
-    (_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)   
-                       __  ___        __     _  __         _____  __          __                             
-          __/|_       /  |/  /____   / /_   (_)/ /___     / ___/ / /_ __  __ / /___   _____       __/|_      
-         |    /      / /|_/ // __ \ / __ \ / // // _ \    \__ \ / __// / / // // _ \ / ___/      |    /      
-        /_ __|      / /  / // /_/ // /_/ // // //  __/   ___/ // /_ / /_/ // //  __/(__  )      /_ __|       
-         |/        /_/  /_/ \____//_.___//_//_/ \___/   /____/ \__/ \__, //_/ \___//____/        |/          
-                                                                   /____/                                    
-     _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _       
-    (_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)      
-     ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______       
-    /_____//_____//_____//_____//_____//_____//_____//_____//_____//_____//_____//_____//_____//_____/       
-
-    *Mobile*
-    */
-
-    p {
-        line-height: 4.3vw;
-    }
-
-    #container #mainVerdantTitle {
-        margin: 3vw 0vw 0vw;
-    }
-
-    #container #mainVerdantTitle img {
-        width: 49vw;
-    }
-
-    .layer {
-        top: 20vw;
-    }
-
-    /* 
-        __                      __ _              
-       / /   ____   ____ _ ____/ /(_)____   ____ _
-      / /   / __ \ / __ `// __  // // __ \ / __ `/
-     / /___/ /_/ // /_/ // /_/ // // / / // /_/ / 
-    /_____/\____/ \__,_/ \__,_//_//_/ /_/ \__, /  
-        __                               /____/   
-       / /   ____ _ __  __ ___   _____            
-      / /   / __ `// / / // _ \ / ___/            
-     / /___/ /_/ // /_/ //  __// /                
-    /_____/\__,_/ \__, / \___//_/ 
-                 /____/                           
-                
-    *Mobile*
-    */
 
     #loaderLayer {
         top: 50vw;
@@ -1847,25 +1228,49 @@ p {
         width: 38vw;
     }
 
+    #gameLayer #gameSectionsParent .gameSection .gameSectionBg {
+        opacity: 0.6;
+        position: absolute;
+        top: -2%;
+        left: -2%;
+        width: 107%;
+        max-width: 107%;
+        z-index: -9;
+        border-radius: 3vw;
+    }
+
+    p {
+        line-height: 4.3vw;
+    }
+
+    #gameLayer #topInfoBar {
+        width: 74vw;
+        border: .1vw solid #BBB;
+        margin: 0vw auto 2.5vw;
+        padding: 1vw 0vw;
+        border-radius: 1.2vw;
+    }
+
+    #gameLayer #topInfoBar .infoBarColumn {
+        width: 33vw;
+        margin: .3vw 0vw;
+    }
+    
     #container #setupLayer {
         height: 211vw;
     }
 
-    /* 
-       _____        __                
-      / ___/ ___   / /_ __  __ ____   
-      \__ \ / _ \ / __// / / // __ \  
-     ___/ //  __// /_ / /_/ // /_/ /  
-    /____/ \___/ \__/ \__,_// .___/   
-        __                 /_/        
-       / /   ____ _ __  __ ___   _____
-      / /   / __ `// / / // _ \ / ___/
-     / /___/ /_/ // /_/ //  __// /    
-    /_____/\__,_/ \__, / \___//_/ 
-                 /____/               
-                 
-    *Mobile*
-    */
+    .layer {
+        top: 20.3vw;
+    }
+
+    #mainVerdantTitle {
+        margin: 3vw 0vw 0vw;
+    }
+
+    #mainVerdantTitle img {
+        width: 48vw;
+    }
 
     #setupLayer .subtitle {
         width: 68vw;
@@ -1873,7 +1278,7 @@ p {
         font-size: 3.5vw;
         line-height: 4.5vw;
     }
-
+    
     #homepageButtonContainer {
         margin: 4vw auto 6vw;
         width: 71vw;
@@ -1901,60 +1306,41 @@ p {
         margin-bottom: 3vw;
     }
 
-    /* 
-       ______                         
-      / ____/____ _ ____ ___   ___    
-     / / __ / __ `// __ `__ \ / _ \   
-    / /_/ // /_/ // / / / / //  __/   
-    \____/ \__,_//_/ /_/ /_/ \___/    
-        __                            
-       / /   ____ _ __  __ ___   _____
-      / /   / __ `// / / // _ \ / ___/
-     / /___/ /_/ // /_/ //  __// /    
-    /_____/\__,_/ \__, / \___//_/ 
-                 /____/               
-                 
-    *Mobile*
-    */
-
-    #gameLayer #topInfoBar {
-        width: 74vw;
-        border: .1vw solid #BBB;
-        margin: 0vw auto 2.5vw;
-        padding: 1vw 0vw;
-        border-radius: 1.2vw;
-    }
-
-    #gameLayer #topInfoBar .infoBarColumn {
-        width: 33vw;
-        margin: .3vw 0vw;
+    #gameLayer #gameSectionsParent #marketSection {
+        top: 0vw;
     }
 
     #gameLayer #gameSectionsParent {
         width: 97%;
     }
 
-    /* #gameLayer #gameSectionsParent .gameSection {
+    #gameLayer #gameSectionsParent .gameSection {
         height: 103vw;
-    } */
-
-    #gameLayer #gameSectionsParent .gameSection .gameSectionBg {
-        opacity: 0.6;
-        position: absolute;
-        top: -2%;
-        left: -2%;
-        width: 107%;
-        max-width: 107%;
-        z-index: -9;
-        border-radius: 3vw;
     }
 
-    /* #gameLayer #gameSectionsParent .gameSection .gameSectionContent {
+    #gameLayer #gameSectionsParent .gameSection .gameSectionContent {
         padding-top: 1.8vw;
-    } */
+    }
 
     #gameLayer #gameSectionsParent .gameSection .gameSectionBorder.innerBorder {
         border: .3vw solid #41a742;
+    }
+
+    #gameLayer #gameSectionsParent #marketSection.minimized {
+        height: 41.2vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection.minimized {
+        height: 47vw;
+    }
+
+    #gameLayer #gameSectionsParent .gameSection.minimized .inactive {
+        display: block;
+        height: 100%;
+        width: 100%;
+        opacity: 0.01;
+        position: absolute;
+        z-index: 999;
     }
 
     #gameLayer #gameSectionsParent .gameSection .inactive ion-icon[name="expand"] {
@@ -1962,7 +1348,7 @@ p {
     }
 
     #gameLayer #gameSectionsParent .gameSection .gameSectionBorder {
-        border-radius: 0.5vw;
+        border-radius: 2vw;
     }
 
     #gameLayer #gameSectionsParent .gameSection .gameSectionBorder.outerBorder {
@@ -1974,502 +1360,321 @@ p {
         border: .5vw solid #41a742;
     }
 
-    #gameLayer .titleContainer {
-        top: 1.2vw;
-        left: 40vw;
-        height: 6.4vw;
+    #marketSection #marketTitleContainer.titleContainer,
+    #tableauSection #playerTableauTitleContainer.titleContainer {
+        height: 6.2vw;
         border-bottom: .2vw solid #003823;
     }
 
-    #gameLayer #marketTitleContainer.titleContainer {
+    #marketSection #marketTitleContainer.titleContainer {
         width: 17vw;
+        margin: 0vw auto 3.2vw;
     }
 
-    #gameLayer #playerTableauTitleContainer.titleContainer {
+    #tableauSection #playerTableauTitleContainer.titleContainer {
         width: 15vw;
+        margin: 0vw auto 2.6vw;
     }
 
-    #gameLayer .titleContainer .title {
-        font-size: 5vw;
-    }
-    
-    
-    /* 
-        __  ___              __          __ 
-       /  |/  /____ _ _____ / /__ ___   / /_
-      / /|_/ // __ `// ___// //_// _ \ / __/
-     / /  / // /_/ // /   / ,<  /  __// /_  
-    /_/  /_/ \__,_//_/   /_/|_| \___/ \__/ 
-                                            
-    *Mobile*
-    */
-
-    #marketSection {
-        top: 0vw;
-        height: 102vw;
+    #marketSection #marketTitle,
+    #tableauSection #playerTableauTitle {
+        font-size: 4.8vw;
     }
 
-    /* #marketSection.expanded {
-        height: 102vw;
-    }
-
-    #marketSection.collapsed {
-        height: 41.2vw;
-    } */
-
-    #marketSection .gameSectionBorder {
-        height: 102vw;
-    }
-
-    #marketSection .gameSectionContent.expanded {
-        top: 0vw;
-    }
-
-    #marketSection .gameSectionContent.collapsed {
-        top: -18vw;
-    }
-
-    #marketSection #gameSectionOverlayParent.expanded {
-        top: 98vw;
-    }
-
-    #marketSection #gameSectionOverlayParent.collapsed {
-        top: 37.5vw;
-    }
-
-    
-
-    #playerInfoContainer #cardToPlace .flip-plant {
-        top: 0vw;
-        right: 0vw;
-    }
-    
-    #mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room {
-        top: 0vw;
-        left: 0vw;
-    }
-    
-    #marketSection #marketCardColumns {
-        padding: 0vw 0vw 0vw 0vw;
-        top: 10vw;
-        left: 1.5vw;
-    }
-
-    #marketSection .marketColumn {
-        width: 20.9vw;
-        margin: 0vw 0vw 0vw 2.6vw;
-    }
-
-    /* 
-        ____          __ 
-       / __ \ ____   / /_
-      / /_/ // __ \ / __/
-     / ____// /_/ // /_  
-    /_/     \____/ \__/
-    
-    *Mobile*
-    */
-
-
-    #marketSection .marketColumn .plantPotContainer {
-        width: 10.3vw;
-        height: 9.1vw;
-    }
-
-    #marketSection .marketColumn .plantPotContainer.startingPos {
+    #marketSection #marketCardColumns .plantPotContainer.startingPos {
         left: -98vw;
     }
 
-    /* 
-       ______                  __               
-      / ____/____ _ _____ ____/ /_____       __ 
-     / /    / __ `// ___// __  // ___/    __/ /_
-    / /___ / /_/ // /   / /_/ /(__  )    /_  __/
-    \____/ \__,_//_/    \__,_//____/      /_/   
-        ____ __                                 
-       /  _// /_ ___   ____ ___   _____         
-       / / / __// _ \ / __ `__ \ / ___/         
-     _/ / / /_ /  __// / / / / /(__  )          
-    /___/ \__/ \___//_/ /_/ /_//____/ 
-    
-    *Desktop*
-    *Static Styles*                                                                                                                   
-    */
-
-
-
-    #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"].expanded,
-    #marketSection .marketColumn .cardsAndItemContainer .flip-plant.expanded,
-    #marketSection .marketColumn .cardsAndItemContainer .flip-plant .backOfCardContainer.expanded,
-    #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="room"].expanded,
-    #marketSection .marketColumn .cardsAndItemContainer .flip-room.expanded,
-    #marketSection .marketColumn .cardsAndItemContainer .flip-room .backOfCardContainer.expanded {
-        height: 32.7vw;
+    #marketSection #marketCardColumns .marketColumn .itemToken.startingPos {
+        left: -98vw;
     }
-
-    /*
-        ____   __               __          
-       / __ \ / /____ _ ____   / /_         
-      / /_/ // // __ `// __ \ / __/         
-     / ____// // /_/ // / / // /_           
-    /_/    /_/ \__,_//_/ /_/ \__/           
-       ______                  __           
-      / ____/____ _ _____ ____/ /           
-     / /    / __ `// ___// __  /            
-    / /___ / /_/ // /   / /_/ /             
-    \____/ \__,_//_/    \__,_/ 
-                                                             
-    *Mobile*
-    */
 
     .flip-card.flip-back.flip-plant.startingPos {
         left: -98vw;
     }
-
-    .cardContainer[type="plant"].collapsed {
-        height: 11.3vw;
-    }
-
-    /* Plant Symbols */
-    .cardContainer[type="plant"] .plantBanner.expanded {
-        top: 0vw;
-        left: .4vw;
-        width: 4vw;
-        height: 8.7vw;
-    }
-
-    .cardContainer[type="plant"] .plantBanner.collapsed {
-        top: -0.8vw;
-        width: 4.1vw;
-        left: -3.5vw;
-        height: 8vw;
-    }
-
-    .cardContainer[type="plant"] .plantSymbol.expanded {
-        top: 1.9vw;
-        left: .5vw;
-        width: 3.5vw;
-    }
-
-    .cardContainer[type="plant"] .plantSymbol.collapsed {
-        top: 2.7vw;
-        width: 4.1vw;
-        left: -5.9vw;
-    }
-
-    .cardContainer[type="plant"] .plantVerdancy.expanded {
-        top: .4vw;
-        right: .2vw;
-        width: 4.5vw;
-    }
-
-    .cardContainer[type="plant"] .plantVerdancy.collapsed {
-        top: 0.4vw;
-        right: 2.2vw;
-        width: 3.7vw;
-    }
-
-    .cardContainer[type="plant"] .plantVPs.expanded {
-        top: 4.2vw;
-        right: 0vw;
-        width: 4.3vw;
-    }
-
-    .cardContainer[type="plant"] .plantVPs.collapsed {
-        top: 5.5vw;
-        width: 3.3vw;
-        right: 2.4vw;
-    }
-
-    /* 
-        __     _         __     __   _               
-       / /    (_)____ _ / /_   / /_ (_)____   ____ _ 
-      / /    / // __ `// __ \ / __// // __ \ / __ `/ 
-     / /___ / // /_/ // / / // /_ / // / / // /_/ /  
-    /_____//_/ \__, //_/ /_/ \__//_//_/ /_/ \__, /   
-              /____/                       /____/    
-       _____                    __            __     
-      / ___/ __  __ ____ ___   / /_   ____   / /_____
-      \__ \ / / / // __ `__ \ / __ \ / __ \ / // ___/
-     ___/ // /_/ // / / / / // /_/ // /_/ // /(__  ) 
-    /____/ \__, //_/ /_/ /_//_.___/ \____//_//____/  
-          /____/                                         
-
-    *Mobile*
-    *Animation Specifications*
-    */
-
-    .cardContainer[type="plant"] .lightingIcon {
-        top: .45vw;
-        width: 3vw;
-    }
-
-    .cardContainer[type="plant"] .lightingIcon.expanded {
-        width: 3vw;
-    }
-
-    .cardContainer[type="plant"] .lightingIcon.collapsed {
-        width: 2.7vw;
-    }
-
-    /* 1x Lighting */
-    .cardContainer[type="plant"][lighting="1"] .lightingIcon-one.expanded {
-        top: .45vw;
-        left: 8.9vw;
-    }
-
-    /* 1x Lighting */
-    .cardContainer[type="plant"][lighting="1"] .lightingIcon-one.collapsed {
-        top: 3.6vw;
-        left: 8vw;
-    }
-
-    /* 2x Lighting */
-    .cardContainer[type="plant"][lighting="2"] .lightingIcon-one.expanded {
-        top: .45vw;
-        left: 7.4vw;
-    }
-
-    .cardContainer[type="plant"][lighting="2"] .lightingIcon-one.collapsed {
-        top: 1.7vw;
-        left: 8vw;
-    }
-
-    .cardContainer[type="plant"][lighting="2"] .lightingIcon-two.expanded {
-        top: .45vw;
-        left: 10.5vw;
-    }
-
-    .cardContainer[type="plant"][lighting="2"] .lightingIcon-two.collapsed {
-        top: 5.8vw;
-        left: 8vw;
-    }
-
-    /* 3x Lighting */
-    .cardContainer[type="plant"][lighting="3"] .lightingIcon-one.expanded {
-        top: .45vw;
-        left: 6.5vw;
-    }
-
-    /* 3x Lighting */
-    .cardContainer[type="plant"][lighting="3"] .lightingIcon-one.collapsed {
-        top: .3vw;
-        left: 8vw;
-    }
-
-    .cardContainer[type="plant"][lighting="3"] .lightingIcon-two.expanded {
-        top: .45vw;
-        left: 9.3vw;
-    }
-
-    .cardContainer[type="plant"][lighting="3"] .lightingIcon-two.collapsed {
-        top: 3.9vw;
-        left: 8vw;
-    }
-
-    .cardContainer[type="plant"][lighting="3"] .lightingIcon-three.expanded {
-        top: .45vw;
-        left: 11.9vw;
-    }
-
-    .cardContainer[type="plant"][lighting="3"] .lightingIcon-three.collapsed {
-        top: 7.5vw;
-        left: 8vw;
-    }
-
-
-
-    /* 
-        __  ___              __          __ 
-       /  |/  /____ _ _____ / /__ ___   / /_
-      / /|_/ // __ `// ___// //_// _ \ / __/
-     / /  / // /_/ // /   / ,<  /  __// /_  
-    /_/  /_/ \__,_//_/   /_/|_| \___/ \__/  
-        ____ __                             
-       /  _// /_ ___   ____ ___             
-       / / / __// _ \ / __ `__ \            
-     _/ / / /_ /  __// / / / / /            
-    /___/ \__/ \___//_/ /_/ /_/ 
-                                            
-    *Mobile*
-    */
-
-    #marketSection .marketColumn .itemToken {
-        width: 9vw;
-        margin: 1.5vw auto 1.5vw;
-    }
-
-    #marketSection .marketColumn .itemToken.startingPos {
-        left: -98vw;
-    }
-
-    #marketSection .marketColumn .itemToken.collapsed {
-        width: 8.2vw;
-    }
     
-    /* 
-        ____                         
-       / __ \ ____   ____   ____ ___ 
-      / /_/ // __ \ / __ \ / __ `__ \
-     / _, _// /_/ // /_/ // / / / / /
-    /_/ |_| \____/ \____//_/ /_/ /_/ 
-       ______                  __    
-      / ____/____ _ _____ ____/ /    
-     / /    / __ `// ___// __  /     
-    / /___ / /_/ // /   / /_/ /      
-    \____/ \__,_//_/    \__,_/ 
-                                    
-    *Mobile*
-    */
-
     .flip-card.flip-back.flip-room.startingPos {
         left: -98vw;
     }
 
-    .cardContainer[type="room"],
-    .flip-room,
-    .flip-room .backOfCardContainer {
+    #homeContentContainer #playerInfoContainer #cardToPlace .flip-plant {
+        top: 0vw;
+        right: 0vw;
+    }
+    
+    #homeContentContainer #playerInfoContainer #cardToPlace .flip-plant.startingPos {
+        right: -29.5vw;
+        top: -53vw;
+    }
+    
+    #homeContentContainer #mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room {
+        top: 0vw;
+        left: 0vw;
+    }
+    
+    #homeContentContainer #mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room.startingPos {
+        top: -93vw;
+        left: -21vw;
+    }
+
+    #marketSection #marketCardColumns {
+        padding: 0vw 0vw 0vw 1vw;
+    }
+
+    #marketSection #marketCardColumns .marketColumn {
+        width: 20.9vw;
+        margin: 0vw 0vw 0vw 2.5vw;
+    }
+
+    #marketSection #marketCardColumns .plantPotContainer {
+        width: 10.3vw;
+        height: 9.1vw;
+    }
+
+    #marketSection #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"],
+    #marketSection #marketCardColumns .marketColumn .cardsAndItemContainer .flip-plant,
+    #marketSection #marketCardColumns .marketColumn .cardsAndItemContainer .flip-plant .backOfCardContainer {
+        height: 32.7vw;
+    }
+
+    .cardContainer[type="plant"] .plantBanner {
+        left: .9vw;
+        width: 4vw;
+        height: 7.3vw;
+    }
+
+    .cardContainer[type="plant"] .plantSymbol {
+        top: 1.3vw;
+        left: 1.4vw;
+        width: 3.1vw;
+    }
+
+    .cardContainer[type="plant"] .plantVerdancy {
+        top: .4vw;
+        right: .7vw;
+        width: 4.2vw;
+    }
+
+    .cardContainer[type="plant"] .plantVPs {
+        top: 4vw;
+        right: 0vw;
+        width: 3.9vw;
+    }
+
+    .cardContainer[type="plant"] .lightingIcon {
+        top: .7vw;
+        width: 2.8vw;
+    }
+
+    .cardContainer[type="plant"][lighting="1"] .lightingIcon[lighting-icon="0"] {
+        left: 9.2vw;
+    }
+
+    .cardContainer[type="plant"][lighting="2"] .lightingIcon[lighting-icon="0"] {
+        left: 7.8vw;
+    }
+
+    .cardContainer[type="plant"][lighting="2"] .lightingIcon[lighting-icon="1"] {
+        left: 10.5vw;
+    }
+
+    .cardContainer[type="plant"][lighting="3"] .lightingIcon[lighting-icon="0"] {
+        left: 6.5vw;
+    }
+
+    .cardContainer[type="plant"][lighting="3"] .lightingIcon[lighting-icon="1"] {
+        left: 9.3vw;
+    }
+
+    .cardContainer[type="plant"][lighting="3"] .lightingIcon[lighting-icon="2"] {
+        left: 11.9vw;
+    }
+
+    #marketSection #marketCardColumns .marketColumn .itemToken {
+        width: 8.6vw;
+        margin: 1.5vw auto 1.5vw;
+    }
+
+    #marketSection #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="room"],
+    #marketSection #marketCardColumns .marketColumn .cardsAndItemContainer .flip-room,
+    #marketSection #marketCardColumns .marketColumn .cardsAndItemContainer .flip-room .backOfCardContainer {
         height: 32.9vw;
+    }
+
+    .cardContainer[type="room"] .lightingIconContainer[lighting-container="0"] {
+        width: 4.55vw;
+        height: 4vw;
+        top: 0vw;
+        left: 8.18vw;
+        border-bottom-right-radius: 3.1vw;
+        border-bottom-left-radius: 3.1vw;
+    }
+
+    .cardContainer[type="room"] .lightingIconContainer[lighting-container="1"] {
+        width: 4vw;
+        height: 4.65vw;
+        top: 14vw;
+        left: 16.9vw;
+        border-top-left-radius: 3.1vw;
+        border-bottom-left-radius: 3.1vw;
+    }
+
+    .cardContainer[type="room"] .lightingIconContainer[lighting-container="2"] {
+        width: 4.55vw;
+        height: 4vw;
+        bottom: 0.1vw;
+        left: 8.18vw;
+        border-top-left-radius: 3.1vw;
+        border-top-right-radius: 3.1vw;
+    }
+
+    .cardContainer[type="room"] .lightingIconContainer[lighting-container="3"] {
+        width: 4vw;
+        height: 4.65vw;
+        top: 14vw;
+        left: 0vw;
+        border-top-right-radius: 3.1vw;
+        border-bottom-right-radius: 3.1vw;
     }
 
     .cardContainer[type="room"] .lightingIconContainer .lightingIcon {
         width: 3.4vw;
     }
 
-    /* Top Lighting Container */
-    .cardContainer[type="room"] .lightingIconContainer-top {
-        width: 4.55vw;
-        height: 4vw;
-        top: 0vw;
-        left: 8.1vw;
-        border-bottom-right-radius: 7vw;
-        border-bottom-left-radius: 7vw;
-    }
-
-    /* Top */
-    .cardContainer[type="room"] .lightingIconContainer-top.expanded {
-        top: 0vw;
-        left: 8.1vw;
-    }
-
-    /* Top */
-    .cardContainer[type="room"] .lightingIconContainer-top.collapsed {
-        top: 0.4vw;
-        left: 8.04vw;
-    }
-
-    /* Top Lighting Symbol */
-    .cardContainer[type="room"] .lightingIconContainer-top .lightingIcon {
-        margin-top: 0vw;
+    .cardContainer[type="room"] .lightingIconContainer[lighting-container="0"] .lightingIcon {
+        margin-top: .1vw;
         margin-right: 0vw;
         margin-bottom: 0vw;
-        margin-left: .62vw;
+        margin-left: .7vw;
     }
 
-    /* Right Lighting Container */
-    .cardContainer[type="room"] .lightingIconContainer-right {
-        width: 4vw;
-        height: 4.65vw;
-        top: 14vw;
-        left: 16.9vw;
-        border-top-left-radius: 7vw;
-        border-bottom-left-radius: 7vw;
-    }
-    
-    /* Right */
-    .cardContainer[type="room"] .lightingIconContainer-right.expanded {
-        top: 14vw;
-        left: 16.9vw;
-    }
-
-    /* Right */
-    .cardContainer[type="room"] .lightingIconContainer-right.collapsed {
-        top: 4.9vw;
-        left: 16.7vw;
-    }
-
-    /* Right Lighting Symbol */
-    .cardContainer[type="room"] .lightingIconContainer-right .lightingIcon {
-        margin-top: .5vw;
+    .cardContainer[type="room"] .lightingIconContainer[lighting-container="1"] .lightingIcon {
+        margin-top: .67vw;
         margin-right: 0vw;
         margin-bottom: 0vw;
         margin-left: .45vw;
     }
 
-    /* Bottom Lighting Container */
-    .cardContainer[type="room"] .lightingIconContainer-bottom {
-        width: 4.55vw;
-        height: 4vw;
-        bottom: 0.1vw;
-        left: 8.18vw;
-        border-top-left-radius: 7vw;
-        border-top-right-radius: 7vw;
+    .cardContainer[type="room"] .lightingIconContainer[lighting-container="2"] .lightingIcon {
+        margin-top: .3vw;
+        margin-right: 0vw;
+        margin-bottom: 0vw;
+        margin-left: .65vw;
     }
 
-    /* Bottom */
-    .cardContainer[type="room"] .lightingIconContainer-bottom.expanded {
-        bottom: 0.1vw;
+    .cardContainer[type="room"] .lightingIconContainer[lighting-container="3"] .lightingIcon {
+        margin-top: .67vw;
+        margin-right: 0vw;
+        margin-bottom: 0vw;
+        margin-left: .3vw;
+    }
+
+    #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer[lighting-container="0"] {
+        top: 0.6vw;
         left: 8.18vw;
     }
 
-    /* Bottom */
-    .cardContainer[type="room"] .lightingIconContainer-bottom.collapsed {
+    #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer[lighting-container="1"] {
+        top: 4.9vw;
+        left: 16.7vw;
+    }
+
+    #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer[lighting-container="2"] {
         bottom: -0vw;
         left: 8.18vw;
     }
 
-    /* Bottom Lighting Symbol */
-    .cardContainer[type="room"] .lightingIconContainer-bottom .lightingIcon {
-        margin-top: .3vw;
-        margin-right: 0vw;
-        margin-bottom: 0vw;
-        margin-left: .5vw;
-    }
-
-    /* Left Lighting Container */
-    .cardContainer[type="room"] .lightingIconContainer-left {
-        width: 4vw;
-        height: 4.65vw;
-        top: 14vw;
-        left: 0vw;
-        border-top-right-radius: 7vw;
-        border-bottom-right-radius: 7vw;
-    }
-
-    /* Left */
-    .cardContainer[type="room"] .lightingIconContainer-left.expanded {
-        top: 14vw;
-        left: 0vw;
-    }
-
-    /* Left */
-    .cardContainer[type="room"] .lightingIconContainer-left.collapsed {
+    #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer[lighting-container="3"] {
         top: 4.9vw;
         left: 0.3vw;
     }
 
-    /* Left Lighting Symbol */
-    .cardContainer[type="room"] .lightingIconContainer-left .lightingIcon {
-        margin-top: .5vw;
-        margin-right: 0vw;
-        margin-bottom: 0vw;
-        margin-left: 0vw;
+    #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer .lightingIcon {
+        width: 3.4vw;
     }
 
-    /* 
-        ______ __ _              
-       / ____// /(_)____         
-      / /_   / // // __ \        
-     / __/  / // // /_/ /        
-    /_/    /_//_// .___/         
-       ______   /_/            __
-      / ____/____ _ _____ ____/ /
-     / /    / __ `// ___// __  / 
-    / /___ / /_/ // /   / /_/ /  
-    \____/ \__,_//_/    \__,_/ 
-                                 
-    *Mobile*
-    */
+    #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer[lighting-container="0"] .lightingIcon {
+        margin-top: .1vw;
+    }
+
+    #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer[lighting-container="2"] .lightingIcon {
+        margin-top: .6vw;
+    }
+
+    #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer[lighting-container="3"] .lightingIcon {
+        margin-left: .2vw;
+    }
+
+    #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] .plantBanner {
+        left: .7vw;
+        width: 5.2vw;
+        height: 10.6vw;
+    }
+
+    #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] .plantSymbol {
+        top: 2.7vw;
+        width: 4.1vw;
+        left: 1.1vw;
+    }
+
+    #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] .plantVerdancy {
+        top: .65vw;
+        right: .2vw;
+        width: 4.7vw;
+    }
+    
+    #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] .plantVPs {
+        top: 6vw;
+        width: 4.7vw;
+        right: .4vw;
+    }
+
+    #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] .lightingIcon {
+        width: 3.5vw;
+        left: 9vw;
+    }
+
+    #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="1"] .lightingIcon[lighting-icon="0"] {
+        top: 3.6vw;
+        left: 9vw;
+    }
+
+    #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="2"] .lightingIcon[lighting-icon="0"] {
+        top: 1.9vw;
+        left: 9vw;
+    }
+
+    #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="2"] .lightingIcon[lighting-icon="1"] {
+        top: 5.5vw;
+        left: 9vw;
+    }
+
+    #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="3"] .lightingIcon[lighting-icon="0"] {
+        top: .8vw;
+        left: 9vw;
+    }
+
+    #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="3"] .lightingIcon[lighting-icon="1"] {
+        top: 4.2vw;
+        left: 9vw;
+    }
+
+    #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="3"] .lightingIcon[lighting-icon="2"] {
+        top: 7.5vw;
+        left: 9vw;
+    }
+
+    #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] {
+        height: 11.3vw;
+    }
+
+    #marketSection.minimized #marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer[type="room"] {
+        height: 13vw;
+    }
+
+    #marketSection.minimized #marketCardColumns .marketColumn .itemToken {
+        width: 8.2vw;
+    }
 
     .flip-card {
         height: 32.7vw;
@@ -2480,244 +1685,183 @@ p {
         border-radius: 1.2vw;
     }
 
+    #gameLayer #gameSectionsParent #tableauSection.expanded {
+        top: 43vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection.minimized {
+        top: 104.5vw;
+    }
+
+    #homeContentContainer {
+        height: 89vw;
+    }
+
+    #homeContentContainer #playerInfoContainer {
+        width: 26vw;
+        height: 88vw;
+        margin-right: 0vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #playerInfoContainer #cardToPlace {
+        width: 20.9vw;
+        height: 39vw;
+        top: -2.7vw;
+        left: 2vw;
+        margin: 2vw auto;
+    }
+
     .cardContainer,
     .backOfCardContainer {
         height: 32.7vw;
     }
 
-    /*                                                                                     
-     ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______
-    /_____//_____//_____//_____//_____//_____//_____//_____//_____//_____//_____//_____/
-     _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _    
-    (_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)   
-                       ______        __     __                                          
-            __/|_     /_  __/____ _ / /_   / /___   ____ _ __  __       __/|_           
-           |    /      / /  / __ `// __ \ / // _ \ / __ `// / / /      |    /           
-          /_ __|      / /  / /_/ // /_/ // //  __// /_/ // /_/ /      /_ __|            
-           |/        /_/   \__,_//_.___//_/ \___/ \__,_/ \__,_/        |/               
-                                    
-     _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _  _       
-    (_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)(_)      
-     ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______       
-    /_____//_____//_____//_____//_____//_____//_____//_____//_____//_____//_____/       
-    
-    *Mobile*
-    */
-
-    #tableauSection {
-        height: 102vw;
-    }
-
-    #tableauSection.collapsed {
-        top: 102.5vw;
-    }
-    
-    #tableauSection.expanded {
-        top: 43vw;
-    }
-
-    #tableauSection .gameSectionContent {
-        top: 0vw;
-        height: 99vw;
-    }
-
-    #tableauSection .gameSectionContent.expanded {
-        top: 0vw;
-    }
-
-    #tableauSection .gameSectionContent.collapsed {
-        top: -10vw;
-    }
-
-    #tableauSection .gameSectionBorder {
-        height: 102vw;
-    }
-
-    #tableauSection #gameSectionOverlayParent.expanded {
-        top: 97vw;
-    }
-
-    #tableauSection #gameSectionOverlayParent.collapsed {
-        top: 48vw;
-    }
-
-    #tableauSection #homeContentContainer {
-        height: 89vw;
-        top: 10.5vw;
-    }
-
-    #tableauSection #playerInfoContainer {
-        width: 26.5vw;
+    #homeContentContainer #mapContainer {
+        width: 68.1vw;
         height: 88vw;
         margin-right: 0vw;
-    }
-
-    #tableauSection #playerInfoContainer #cardToPlace {
-        top: -1.7vw;
-        left: 2vw;
-        width: 20.9vw;
-        height: 39vw;
-        transform: scale(1);
-    }
-
-    #tableauSection #playerInfoContainer #cardToPlace.expanded {
-        top: -1.7vw;
-        left: 2vw;
-        transform: scale(1);
-    }
-
-    #tableauSection #playerInfoContainer #cardToPlace.collapsed {
-        top: -5vw;
-        left: 1.5vw;
-        transform: scale(1.1);
-    }
-
-    #tableauSection #playerInfoContainer .playerInfoTitle {
-        font-size: 3.08vw;
-        height: 4vw;
-    }
-
-    #tableauSection #playerInfoContainer .playerInfoTitle.expanded {
-        top:0vw;
-    }
-
-    #tableauSection #playerInfoContainer .playerInfoTitle.collapsed {
-        top: -8vw;
-    }
-
-    #tableauSection #playerInfoContainer #cardToPlace #chosenCardBackground {
-        left: -0.4vw;
-        top: 5vw;
-    }
-
-    #tableauSection #playerInfoContainer #cardToPlace #chosenCardBackground.collapsed {
-        top: 4.6vw;
-        width: 102%;
-        max-width: 102%;
-        left: 0vw;
-    }
-
-    #tableauSection #playerInfoContainer #cardToPlace > .flip-plant,
-    #tableauSection #playerInfoContainer #cardToPlace > .cardContainer {
-        transform: scale(.96);
-        transform-origin: left top;
-        top: 5.5vw;
-        left: 0.4vw;
-        overflow: hidden;
-    }
-
-    #tableauSection #playerInfoContainer .itemContainer {
-        width: 18.9vw;
-        height: 17.8vw;
-        transform: scale(1);
-    }
-
-    #tableauSection #playerInfoContainer .itemContainer.expanded {
-        width: 18.9vw;
-        height: 17.8vw;
-        transform: scale(1);
-    }
-
-    #tableauSection #playerInfoContainer .itemContainer.collapsed {
-        width: 20.2vw;
-        height: 15.7vw;
-        top: 37.5vw!important;
-        transform: scale(.75);
-    }
-
-    #tableauSection #playerInfoContainer .itemContainer .itemBackground.expanded {
-        top: 4.7vw;
-    }
-
-    #tableauSection #playerInfoContainer .itemContainer .itemBackground.collapsed {
-        top: 0vw;
-    }
-
-    #tableauSection #playerInfoContainer #chosenItemContainer.itemContainer {
-        top: 37.5vw;
-        left: 2.9vw;
-    }
-
-    #tableauSection #playerInfoContainer #chosenItemContainer.itemContainer.expanded {
-        top: 37.5vw;
-        left: 2.9vw;
-    }
-    
-    #tableauSection #playerInfoContainer #chosenItemContainer.itemContainer.collapsed {
-        left: -0.4vw;
-    }
-    
-    #tableauSection #playerInfoContainer #storedItemContainer.itemContainer {
-        top: 69vw;
-    }
-    
-    #tableauSection #playerInfoContainer #storedItemContainer.itemContainer.expanded {
-        top: 66.5vw;
-        left: 2.9vw;
-        transform: scale(1);
-    }
-
-    #tableauSection #playerInfoContainer #storedItemContainer.itemContainer.collapsed {
-        left: 11.5vw;
-    }
-
-    #tableauSection #playerInfoContainer #swapItemsBtn {
-        top: 58vw;
-        left: 2.8vw;
-        height: 7.5vw;
-        font-size: 2.5vw;
-        line-height: 3.1vw;
-        padding: 0vw .3vw;
-    }
-
-    #tableauSection #playerInfoContainer #swapItemsBtn.collapsed {
-        height: 0vw;
-    }
-
-    #tableauSection #playerInfoContainer #swapItemsBtn .swapItemsArrow {
-        font-size: 7vw;
-        margin: 0vw .2vw .1vw;
-    }
-
-    /* 
-        __  ___            
-       /  |/  /____ _ ____ 
-      / /|_/ // __ `// __ \
-     / /  / // /_/ // /_/ /
-    /_/  /_/ \__,_// .___/ 
-                  /_/      
-                  
-    *Mobile*
-    */
-
-    #tableauSection #mapContainer {
-        width: 68.1vw;
-        height: 86vw;
-        margin-right: 0vw;
         border: .4vw solid #41a742;
+        right: 0vw;
+        top: 0vw;
         border-radius: 2vw;
     }
 
-    #tableauSection #mapContainer.expanded {
-        width: 68.1vw;
-        height: 86vw;
-    }
-
-    #tableauSection #mapContainer.collapsed {
-        width: 66vw;
-        height: 48.5vw;
-    }
-
-    #tableauSection #mapContainer #mapHiddenOverlay {
+    #homeContentContainer #mapContainer #mapHiddenOverlay {
         top: -37vw;
         left: -62.5vw;
         width: 195vw;
         height: 151vw;
     }
 
-    #tableauSection #mapContainer #mapHiddenOverlay {
-        margin-left: -61vw;
-        margin-top: -43vw;
+    #homeContentContainer #mapContainer #mapHiddenOverlay .mapTileContainer {
+        height: 33.3vw;
+        width: 20.9vw;
+        margin: .1vw;
+    }
+
+    #homeContentContainer #mapContainer #mapHiddenOverlay .mapTileContainer .cardContainer,
+    #homeContentContainer #mapContainer #mapHiddenOverlay .mapTileContainer .backOfCardContainer {
+        height: 32.9vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #playerInfoContainer #cardToPlace .playerInfoTitle {
+        height: 4.6vw;
+        margin: 0vw 0vw 1vw 0vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #playerInfoContainer #cardToPlace #chosenCardBackground {
+        left: -0.4vw;
+        top: 5vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #playerInfoContainer .playerInfoTitle {
+        font-size: 3.08vw;
+        height: 4vw;
+        margin: 0vw 0vw 1.1vw 0vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #playerInfoContainer .itemContainer {
+        width: 18.9vw;
+        left: 2.7vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #playerInfoContainer #chosenItemContainer {
+        top: 40vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #playerInfoContainer #swapItemsBtn {
+        top: 60vw;
+        left: 3.2vw;
+        height: 8vw;
+        font-size: 2.5vw;
+        line-height: 3.1vw;
+        padding: 0vw 1vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #playerInfoContainer #swapItemsBtn .swapItemsArrow {
+        font-size: 5vw;
+        margin: 0vw .3vw .1vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #playerInfoContainer #storedItemContainer {
+        top: 69vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapZoomControls {
+        top: 1.5vw;
+        right: 49vw;
+        width: 17vw;
+        height: 8vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapZoomControls .zoomOutIcon {
+        left: 0vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapZoomControls .zoomIcon {
+        top: 0vw;
+        width: 7vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapZoomControls {
+        top: 1.5vw;
+        right: 47vw;
+        width: 20vw;
+        height: 9vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapZoomControls .zoomIcon {
+        top: 0vw;
+        width: 8.5vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapZoomControls .zoomOutIcon {
+        left: 0vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapZoomControls .zoomInIcon {
+        left: 11vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapNavControls {
+        bottom: 1vw;
+        width: 23vw;
+        height: 23vw;
+        right: 0vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapNavControls #mapNavBackground {
+        top: 0vw;
+        right: 0vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapNavControls .arrowImg {
+        width: 8vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapNavControls #upArrow.arrowImg {
+        top: 1.9vw;
+        right: 7.1vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapNavControls #rightArrow.arrowImg {
+        top: 8.7vw;
+        right: 0.6vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapNavControls #downArrow.arrowImg {
+        top: 16vw;
+        right: 7.7vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapNavControls #leftArrow.arrowImg {
+        top: 8.3vw;
+        right: 14.6vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection .gameSectionContent #homeContentContainer #mapContainer #mapHiddenOverlay {
+        margin-left: -62vw;
+        margin-top: -40vw;
         top: 0vw;
         left: 0vw;
         width: 192vw;
@@ -2725,12 +1869,114 @@ p {
         transform: scale(.9);
     }
 
-    #tableauSection #mapContainer #mapHiddenOverlay.expanded {
-        margin-left: -61vw;
-        margin-top: -43vw;
+    #gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer {
+        width: 100%;
+        height: 45vw;
+        margin: 0 auto;
     }
 
-    #tableauSection #mapContainer #mapHiddenOverlay.collapsed {
+    #gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #playerInfoContainer {
+        width: 27.5vw;
+        height: 44vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #playerInfoContainer #cardToPlace {
+        top: 0vw;
+        left: 3vw;
+        height: 34.2vw;
+        margin: 1vw auto 0vw;
+        transform: scale(1);
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #playerInfoContainer .playerInfoTitle {
+        height: 0vw!important;
+        margin: 0vw 0vw 0vw 0vw!important;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #mapContainer {
+        width: 52vw;
+        height: 42vw;
+        top: 1vw;
+        right: 1vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection.minimized {
+        top: 104.5vw;
+        height: 53vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer {
+        height: 51vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #playerInfoContainer {
+        width: 26.5vw;
+        height: 50.5vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #playerInfoContainer #cardToPlace {
+        top: 2vw;
+        left: 3vw;
+        transform: scale(1.1);
+        height: 33.2vw;
+        width: 20.9vw;
+        margin: 1vw auto 0vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #playerInfoContainer #cardToPlace #chosenCardBackground {
+        top: -.3vw;
+        width: 103%;
+        max-width: 103%;
+        left: -0.3vw;
+    }
+
+    #homeContentContainer #playerInfoContainer #cardToPlace > .flip-plant,
+    #homeContentContainer #playerInfoContainer #cardToPlace > .cardContainer {
+        transform: scale(.97);
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #playerInfoContainer .itemContainer {
+        transform: scale(.9);
+        top: 38.7vw!important;
+        width: 11.2vw;
+        height: 11.7vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #playerInfoContainer #chosenItemContainer {
+        left: 1.6vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #playerInfoContainer #storedItemContainer {
+        left: 14.5vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #playerInfoContainer .itemContainer .itemBackground {
+        width: 100%;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #playerInfoContainer .playerInfoTitle {
+        height: 0vw!important;
+        margin: 0vw 0vw 0vw 0vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #playerInfoContainer .itemContainer .itemBackground {
+        margin: 0vw auto 0vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #playerInfoContainer #swapItemsBtn {
+        height: 0vw;
+        margin: 0vw 0vw 0vw 0vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #mapContainer {
+        width: 67vw;
+        height: 49.2vw;
+        top: .5vw;
+        right: 1vw;
+        margin-right: 0vw;
+    }
+
+    #gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #mapContainer #mapHiddenOverlay {
         margin-left: -61.5vw;
         margin-top: -59vw;
         top: 0vw;
@@ -2740,142 +1986,21 @@ p {
         transform: scale(.9);
     }
 
-    #tableauSection #mapContainer #mapHiddenOverlay .mapTileContainer {
+    #gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #mapContainer #mapHiddenOverlay .mapTileContainer {
         height: 33.3vw;
         width: 20.9vw;
         margin: .1vw;
     }
 
-    #tableauSection #mapContainer #mapHiddenOverlay .mapTileContainer.collapsed {
-        height: 33.3vw;
-        width: 20.9vw;
-        margin: .1vw;
+    #gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #mapZoomControls {
+        right: 45vw;
+        opacity: 0;
     }
 
-    #homeContentContainer #mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room.startingPos {
-        top: -93vw;
-        left: -21vw;
-    }
-
-    #tableauSection #mapContainer #mapHiddenOverlay .mapTileContainer .cardContainer,
-    #tableauSection #mapContainer #mapHiddenOverlay .mapTileContainer .backOfCardContainer {
-        height: 32.9vw;
-    }
-
-    /* 
-     _____                         
-    /__  /  ____   ____   ____ ___ 
-      / /  / __ \ / __ \ / __ `__ \
-     / /__/ /_/ // /_/ // / / / / /
-    /____/\____/ \____//_/ /_/ /_/ 
-    
-    *Mobile*
-    */
-
-    #tableauSection #mapZoomControls {
-        top: 1.5vw;
-        right: 47vw;
-        width: 20vw;
-        height: 9vw;
-    }
-
-    #tableauSection #mapZoomControls.expanded {
-        right: 46vw;
-    }
-
-    #tableauSection #mapZoomControls.collapsed {
-        right: 46vw;
-    }
-
-    #tableauSection #mapZoomControls .zoomIcon {
-        width: 9vw;
-    }
-
-    #tableauSection #mapZoomControls .zoomIcon.zoomOutIcon {
-        top: 0vw;
-        left: 0vw;
-    }
-
-    #tableauSection #mapZoomControls .zoomIcon.zoomInIcon {
-        top: 0vw;
-        left: 11vw;
-    }
-
-    /* 
-        _   __               _                __   _             
-       / | / /____ _ _   __ (_)____ _ ____ _ / /_ (_)____   ____ 
-      /  |/ // __ `/| | / // // __ `// __ `// __// // __ \ / __ \
-     / /|  // /_/ / | |/ // // /_/ // /_/ // /_ / // /_/ // / / /
-    /_/ |_/ \__,_/  |___//_/ \__, / \__,_/ \__//_/ \____//_/ /_/ 
-                            /____/                               
-                            
-    *Mobile*
-    */
-
-    #tableauSection #mapNavControls {
-        bottom: 1vw;
-        width: 23vw;
-        height: 23vw;
-        right: 0vw;
-    }
-
-    #tableauSection #homeContentContainer #mapNavControls.expanded {
-        bottom: 4vw;
-        right: 1.5vw;
-    }
-
-    #tableauSection #homeContentContainer #mapNavControls.collapsed {
+    #gameLayer #gameSectionsParent #tableauSection.minimized .gameSectionContent #homeContentContainer #mapNavControls {
         bottom: 2vw;
         right: 1.5vw;
+        opacity: 0;
     }
-
-    #tableauSection #mapNavControls #mapNavBackground {
-        top: 0vw;
-        right: 0vw;
-    }
-
-    /* 
-        ___                                     
-       /   |   _____ _____ ____  _      __ _____
-      / /| |  / ___// ___// __ \| | /| / // ___/
-     / ___ | / /   / /   / /_/ /| |/ |/ /(__  ) 
-    /_/  |_|/_/   /_/    \____/ |__/|__//____/  
-    
-    *Mobile*                        
-    */
-
-    #tableauSection #mapNavControls .arrowImg {
-        width: 8vw;
-    }
-
-    /* Up Arrow */
-    #tableauSection #mapNavControls #upArrow.arrowImg {
-        top: 1.9vw;
-        right: 7.1vw;
-    }
-
-    /* Right Arrow */
-    #tableauSection #mapNavControls #rightArrow.arrowImg {
-        top: 8.7vw;
-        right: 0.6vw;
-    }
-
-    /* Down Arrow */
-    #tableauSection #mapNavControls #downArrow.arrowImg {
-        top: 16vw;
-        right: 7.7vw;
-    }
-
-    /* Left Arrow */
-    #tableauSection #mapNavControls #leftArrow.arrowImg {
-        top: 8.3vw;
-        right: 14.6vw;
-    }
-
-    #playerInfoContainer #cardToPlace > .flip-plant,
-    #playerInfoContainer #cardToPlace > .cardContainer {
-        transform: scale(.97);
-    }
-
 
 }
