@@ -442,11 +442,12 @@ p {
     position: relative;
 }
 
+#container.mobileView #gameSectionsParent .gameSection .inactive,
 #gameSectionsParent .gameSection .inactive.expanded {
     display:none;
 }
-
-#gameSectionsParent .gameSection .inactive.collapsed {
+ 
+#container.wideScreenView #gameSectionsParent .gameSection .inactive.collapsed {
     display: block;
     background-color: #0f0f0ffa;
     width: 100%;
@@ -2544,17 +2545,19 @@ p {
 
     #tableauSection #playerInfoContainer #cardToPlace {
         top: -0.4vw;
-        left: 2vw;
+        left: 1.8vw;
         width: 21.9vw;
         height: 41vw;
     }
 
     #tableauSection #playerInfoContainer #cardToPlace.expanded {
         top: -0.4vw;
+        left: 1.8vw;
     }
 
     #tableauSection #playerInfoContainer #cardToPlace.collapsed {
         top: -5.8vw;
+        left: 1.8vw;
     }
 
     #tableauSection #playerInfoContainer .playerInfoTitle {
@@ -2642,7 +2645,7 @@ p {
     
     #tableauSection #playerInfoContainer #chosenItemContainer.itemContainer.collapsed {
         top: 30.6vw;
-        left: -1vw;
+        left: -1.9vw;
     }
     
     #tableauSection #playerInfoContainer #storedItemContainer.itemContainer {
@@ -2657,7 +2660,7 @@ p {
 
     #tableauSection #playerInfoContainer #storedItemContainer.itemContainer.collapsed {
         top: 30.6vw;
-        left: 10.4vw;
+        left: 9.4vw;
     }
 
     #tableauSection #playerInfoContainer #swapItemsBtn {
