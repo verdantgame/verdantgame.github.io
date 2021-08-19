@@ -1674,28 +1674,82 @@ p {
 *Static Styles*                                          
 */
 
- #tableauSection #mapContainer {
+
+#tableauSection #homeContentContainer #mapContainerOuterOverlay {
+    width: 360px;
+    height: 463px;
+    overflow: hidden;
+    position: absolute;
+    top: 0px;
+    right: 3px;
+    border-bottom-color: rgb(65, 167, 66);
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+#tableauSection #homeContentContainer #mapContainerOuterOverlay.expanded {
+    top: 0px;
+}
+
+#tableauSection #homeContentContainer #mapContainerOuterOverlay.collapsed {
+    top: -234px;
+}
+
+#tableauSection #homeContentContainer #mapContainerInnerOverlay {
+    width: 360px;
+    height: 463px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    border: 2px solid #41a742;
+    overflow: hidden;
+    border-right-color: rgb(65, 167, 66);
+    border-right-style: solid;
+    border-right-width: 2px;
+    border-left-color: rgb(65, 167, 66);
+    border-left-style: solid;
+    border-left-width: 2px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+#tableauSection #homeContentContainer #mapContainerInnerOverlay.expanded {
+    top: 0px;
+}
+
+#tableauSection #homeContentContainer #mapContainerInnerOverlay.collapsed {
+    top: 238px;
+}
+
+#tableauSection #mapContainerOverlay {
+    position: relative;
+}
+
+#tableauSection #mapContainer {
     background-color: #f7f7f752;
     background-image: url(../img/bg2.jpg);
     background-size: cover;
     background-position-y: center;
     background-position-x: center;
-    border: 2px solid #41a742;
     width: 360px;
     height: 463px;
     position: absolute;
-    top: 0px;
-    right: 3px;
     overflow: hidden;
     border-radius: 7px;
+    top: -122px;
+    right: -2px;
 }
 
 #tableauSection #mapContainer.expanded {
-    height: 463px;
+    top: 0px;
+    right: -2px;
 }
 
 #tableauSection #mapContainer.collapsed {
-    height: 232px;
+    top: -122px;
+    right: -2px;
 }
 
 #tableauSection #mapContainer #mapHiddenOverlay {
