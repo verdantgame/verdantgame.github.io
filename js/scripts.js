@@ -15,6 +15,14 @@ let changeOfView = false;
 let currentView = '';
 let newView = '';
 
+function preloadImgsCallback(){
+    $('#loaderLayer').fadeOut();
+    $('#setupLayer').fadeIn();  
+    checkScreenWidth();
+    setupDrawPiles();
+    initiateMap();  
+}
+
 $(window).resize(function() {
     checkScreenWidth();
 });
@@ -39,14 +47,6 @@ function checkScreenWidth(){
         $('body > #container').removeClass('mobileView wideScreenView').addClass(newView);
         currentView = newView;
 	}
-}
-
-function preloadImgsCallback(){
-    $('#loaderLayer').fadeOut();
-    $('#setupLayer').fadeIn();  
-    checkScreenWidth();
-    setupDrawPiles();
-    initiateMap();
 }
 
 function setupDrawPiles(){
@@ -136,13 +136,13 @@ function setupInitialCardsAndItems() {
 		// the below code generates the HTML to store information for each tile and token combination and then inserts it into the DOM
 		initialMarketHTML += `
             <div class="marketColumn" column="${k}">
-                <div class="plantPotContainer startingPos">
+                <div class="plantPotContainer expanded startingPos startingPosAnimate">
                     <img class="plantPot" src="img/pots/${initialPlantPots[k]}.png" alt="" />
                 </div>
                 <div class="cardsAndItemContainer">
-                    ${generateCard(initialPlantCards[k], 'plant', 'init')}
+                    ${generateCard(initialPlantCards[k], 'plant', 'init', 'market')}
                     ${generateItem(initialItemTokens[k], 'init')}
-                    ${generateCard(initialRoomCards[k], 'room', 'init')}
+                    ${generateCard(initialRoomCards[k], 'room', 'init', 'market')}
                 </div>
             </div>
         `;
@@ -152,12 +152,12 @@ function setupInitialCardsAndItems() {
 
 }
 
-$(document).on('mouseenter','#container.wideScreenView #marketSection.gameSection:not(.expandAnimation):not(.initSetup) #marketCardColumns .marketColumn .cardsAndItemContainer',function(){
+$(document).on('mouseenter','#container.wideScreenView #marketSection.gameSection:not(.animatingElem):not(.initSetup) #marketCardColumns .marketColumn .cardsAndItemContainer',function(){
 	$(this).closest('.marketColumn').addClass('activeColumn');
     $(this).closest('#marketCardColumns').addClass('activeColumnView');
 });
 
-$(document).on('mouseleave','#container.wideScreenView #marketSection.gameSection:not(.expandAnimation):not(.initSetup) #marketCardColumns .marketColumn .cardsAndItemContainer',function(){
+$(document).on('mouseleave','#container.wideScreenView #marketSection.gameSection:not(.animatingElem):not(.initSetup) #marketCardColumns .marketColumn .cardsAndItemContainer',function(){
 	$('.activeColumn').addClass('deactivedColumn').removeClass('activeColumn');
     $('.activeColumnView').removeClass('activeColumnView');
     setTimeout(function(){
@@ -165,12 +165,12 @@ $(document).on('mouseleave','#container.wideScreenView #marketSection.gameSectio
     }, 200);
 });
 
-$(document).on(touchEvent,'#container.mobileView #marketSection.gameSection:not(.expandAnimation):not(.initSetup) #marketCardColumns .marketColumn .cardsAndItemContainer',function(){
+$(document).on(touchEvent,'#container.mobileView #marketSection.gameSection:not(.animatingElem):not(.initSetup) #marketCardColumns .marketColumn .cardsAndItemContainer',function(){
 	$(this).closest('.marketColumn').addClass('activeColumn');
     $(this).closest('#marketCardColumns').addClass('activeColumnView');
 });
 
-$(document).on(touchEvent,'#container.mobileView #marketSection.gameSection:not(.expandAnimation):not(.initSetup) #marketCardColumns .marketColumn .cardsAndItemContainer',function(){
+$(document).on(touchEvent,'#container.mobileView #marketSection.gameSection:not(.animatingElem):not(.initSetup) #marketCardColumns .marketColumn .cardsAndItemContainer',function(){
 	$('.activeColumn').addClass('deactivedColumn').removeClass('activeColumn');
     $('.activeColumnView').removeClass('activeColumnView');
     setTimeout(function(){
@@ -178,9 +178,12 @@ $(document).on(touchEvent,'#container.mobileView #marketSection.gameSection:not(
     }, 100);
 });
 
-function generateCard(thisCard, cardType, mode) {
+let lightingContainerPositions = ['top', 'right', 'bottom', 'left'];
+let lightingSymbolNumbers = ['one', 'two', 'three'];
+
+function generateCard(thisCard, cardType, mode, thisSection) {
 	var thisCardHTML = `
-        <div class="flip-card flip-back flip-${cardType}${mode == 'init' ? ` startingPos` : ``}">
+        <div data-animation-group="${thisSection}" class="flip-card flip-back flip-${cardType} expanded${mode == 'init' ? ` startingPos startingPosAnimate` : ``}">
             <div class="flip-card-inner">
                 <div class="flip-card-front">
                     <div class="backOfCardContainer">
@@ -188,29 +191,40 @@ function generateCard(thisCard, cardType, mode) {
                     </div>
                 </div>
                 <div class="flip-card-back">
-                    <div class="cardContainer" type="${cardType}"${cardType == 'plant' ? ` lighting="${thisCard.lighting.length}"` : ``}>
-                        <img class="${cardType}" src="img/${cardType}s/${thisCard.img}.jpg" alt="" />
-                        ${cardType == 'plant' ? `
-                            <img class="plantBanner" src="img/plants/icons/banners/${thisCard.plantType}.png" alt="" />
-                            <img class="plantSymbol" src="img/plants/icons/symbols/${thisCard.plantType}.png" alt="" />
-                            <img class="plantVerdancy" src="img/plants/icons/verdancy/${thisCard.verdancyRequired}.png" alt="" />
-                            <img class="plantVPs" src="img/plants/icons/vp/${thisCard.vps}.png" alt="" />
-                        ` : ``}
+                    <div data-animation-group="${thisSection}" class="cardContainer expanded" type="${cardType}"${cardType == 'plant' ? ` lighting="${thisCard.lighting.length}"` : ``}>
+                        <div data-animation-group="${thisSection}" class="cardContainerOverlay expanded">
+                            <img data-animation-group="${thisSection}" class="${cardType} expanded animatingElem mediumTransition" src="img/${cardType}s/${thisCard.img}.jpg" alt="" style="transform-origin: left top;" />
+                            ${cardType == 'plant' ? `
+                            <div data-animation-group="${thisSection}" class="plantBannerContainer plantImgContainer expanded">
+                                <img data-animation-group="${thisSection}" class="plantBanner plantImg expanded animatingElem mediumTransition" src="img/plants/icons/banners/${thisCard.plantType}.png" alt="" style="transform-origin: left top;" />
+                            </div>
+                            <div data-animation-group="${thisSection}" class="plantSymbolContainer plantImgContainer expanded">
+                                <img data-animation-group="${thisSection}" class="plantSymbol plantImg expanded animatingElem mediumTransition" src="img/plants/icons/symbols/${thisCard.plantType}.png" alt="" style="transform-origin: left top;" />
+                            </div>
+                            <div data-animation-group="${thisSection}" class="plantVerdancyContainer plantImgContainer expanded">
+                                <img data-animation-group="${thisSection}" class="plantVerdancy plantImg expanded animatingElem mediumTransition" src="img/plants/icons/verdancy/${thisCard.verdancyRequired}.png" style="transform-origin: left top;" alt="" />
+                            </div>
+                            <div data-animation-group="${thisSection}" class="plantVPsContainer plantImgContainer expanded">
+                                <img data-animation-group="${thisSection}" class="plantVPs plantImg expanded animatingElem mediumTransition" src="img/plants/icons/vp/${thisCard.vps}.png" alt="" style="transform-origin: left top;" />
+                            </div>
+                            ` : ``}
+                            
     `;
 
     for (let i = 0; i < thisCard.lighting.length; i++) {
         thisCardHTML += `
-            ${cardType == 'room' ? `<div class="lightingIconContainer" lighting-container="${i}">` : ``}
-                <img class="lightingIcon" src="img/lighting/${thisCard.lighting[i]}.png" lighting-icon="${i}" alt="" />
-            ${cardType == 'room' ? `</div>` : ``}
+            <div data-animation-group="${thisSection}" class="lightingIconContainer lightingIconContainer-${cardType == 'room' ? `${lightingContainerPositions[i]}` : `${lightingSymbolNumbers[i]}`} expanded" >
+                <img data-animation-group="${thisSection}" class="lightingIcon${cardType == 'plant' ? ` lightingIcon-${lightingSymbolNumbers[i]}` : ``} expanded animatingElem mediumTransition" src="img/lighting/${thisCard.lighting[i]}.png" alt="" style="transform-origin: left top;" />
+            </div>
         `;
     }
-
+    
     thisCardHTML += `
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     `;
 
 	// return the HTML so that whenever the function is called, will now be a placeholder for the above HTML
@@ -219,41 +233,9 @@ function generateCard(thisCard, cardType, mode) {
 
 function generateItem(thisItem, mode) {
     let itemDetails = thisItem.split('_');
-    let thisItemHTML = `<img class="itemToken${mode == 'init' ? ` startingPos` : ``}" src="img/${itemDetails[0]}/${itemDetails[1]}.png" />`
+    let thisItemHTML = `<img data-animation-group="market" class="itemToken expanded${mode == 'init' ? ` startingPos startingPosAnimate` : ``}" src="img/${itemDetails[0]}/${itemDetails[1]}.png" />`
 	// return the HTML so that whenever the function is called, will now be a placeholder for the above HTML
 	return thisItemHTML;
-}
-
-function initSlideshow(container, animation){
-    /*
-    * @param {String} container Class or ID of the animation container
-    * @param {String} animation Name of the animation, e.g. smoothscroll
-    */
-    var sliderWidth = 0;	
-    var slidesNumber = $(container+'>div>div').length;
-    var sliderHeight = $(container + '>div>div:first-of-type').outerHeight(false);
-    var slideWidth = $(container + '>div>div:first-of-type').outerWidth(false);
-    var totalAnimationWidth = slideWidth * slidesNumber;
-    let containerWidth = $(container).width();
-    // detect number of visible slides
-    var slidesVisible = containerWidth / slideWidth;	
-    var maxSlidesVisible = Math.ceil(slidesVisible);
-
-    // count slides to determine animation speed
-    var speed = slidesNumber*2;
-    // append the tail	
-    $(container+'>div>div').slice(0,maxSlidesVisible).clone().appendTo($(container+'>div'));	
-
-    // Detect the slider width with appended tail
-    $(container+'>div>div').each(function(){
-        sliderWidth += $(this).outerWidth(false);
-    });
-
-    // set slider dimensions
-    $(container+'>div').css({'width':sliderWidth,'height':sliderHeight});
-
-    //   Insert styles to html
-    $("<style type='text/css'>@keyframes "+animation+" { 0% { margin-left: 0px; } 100% { margin-left: -"+totalAnimationWidth+"px; } } "+container+">div>div:first-child { -webkit-animation: "+animation+" "+speed+"s linear infinite; -moz-animation: "+animation+" "+speed+"s linear infinite; -ms-animation: "+animation+" "+speed+"s linear infinite; -o-animation: "+animation+" "+speed+"s linear infinite; animation: "+animation+" "+speed+"s linear infinite; }</style>").appendTo("head");	
 }
 
 var rulesURL = 'files/rules.pdf';
@@ -281,9 +263,6 @@ $(document).on(touchEvent, '#startGame', function(){
 	
     $('#gameLayer #gameSectionsParent .minimized ion-icon[name="expand"]').show();
 });
-
-let currentColumn = 3;
-let currentMarketItem = 0;
 
 function quickMarketSetup() {
     $('body').addClass('gameView');
@@ -331,6 +310,9 @@ function quickMarketSetup() {
     $('.initSetup').removeClass('initSetup'); 
 }
 
+let currentColumn = 3;
+let currentMarketItem = 0;
+
 function initMarketFunc(){
     let marketItemClasses = ['.plantPotContainer', '.cardsAndItemContainer .flip-plant', '.cardsAndItemContainer .itemToken', '.cardsAndItemContainer .flip-room'];
     $(`.marketColumn[column="${currentColumn}"] ${marketItemClasses[currentMarketItem]}`).removeClass('startingPos');
@@ -366,7 +348,6 @@ function flipInitMarketCards() {
             setTimeout(function(){
                 initPlayersHome();
             }, 300);
-
         }, 550);
     }
 }
@@ -386,21 +367,16 @@ function isolateFlipCardContents() {
 }
 
 function initPlayersHome() {
-    $('#marketSection').addClass('minimized').removeClass('expanded');
-    $('#tableauSection').addClass('expanded expandAnimation').removeClass('minimized');
+    $('.startingPosAnimate').removeClass('startingPosAnimate');
+    swapActiveMainSection();
 
     setTimeout(function(){
-        $('#tableauSection').removeClass('expandAnimation');
-    }, 700);
-
-    // target the next tile information in the allTiles array
-    // splicing the first item removes it from the array and transfers the information into the "thisTile" variable
-
-    chooseStartingPlayerCards();
+        chooseStartingPlayerCards();
+    }, 800);
 
     setTimeout(function(){
-        $('#playerInfoContainer #cardToPlace .flip-plant.startingPos').removeClass('startingPos')
-        $('#mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room.startingPos').removeClass('startingPos')
+        animateElem($('#playerInfoContainer #cardToPlace .flip-plant'), 'tableauStartingPos');
+        animateElem($('#mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room'), 'tableauStartingPos');
     }, 1000);
 
     setTimeout(function(){
@@ -413,7 +389,7 @@ function initPlayersHome() {
         $('#homeContentContainer #playerInfoContainer #cardToPlace .flip-plant').remove();
         $('#homeContentContainer #mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room .flip-card-inner .flip-card-back .cardContainer').appendTo('#homeContentContainer #mapContainer #mapHiddenOverlay #row-2-column-4');
         $('#homeContentContainer #mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room').remove();
-        $('.initSetup').removeClass('initSetup'); 
+        $('.initSetup').removeClass('initSetup');
     }, 3850);
 }
 
@@ -421,8 +397,8 @@ function chooseStartingPlayerCards() {
     let startingPlant = allPlantCards.splice(0, 1);
     let startingRoom = allRoomCards.splice(0, 1);
 
-    let startingPlantHTML = generateCard(startingPlant[0], 'plant', 'init');
-    let startingRoomHTML = generateCard(startingRoom[0], 'room', 'init');
+    let startingPlantHTML = generateCard(startingPlant[0], 'plant', 'init', 'tableau');
+    let startingRoomHTML = generateCard(startingRoom[0], 'room', 'init', 'tableau');
 
     $('#playerInfoContainer #cardToPlace').append(startingPlantHTML);
     $('#mapContainer #mapHiddenOverlay #row-2-column-4').append(startingRoomHTML);
@@ -450,7 +426,6 @@ var mapRowsColumnsIndexes = {
 	rows: {},
 	columns: {}
 };
-
 
 var mapMoveAmount = {
 	'cardPos': {
@@ -586,7 +561,7 @@ function generateMap() {
         </div>
     `;
 	// the map is generated and all the exisiting information has been replaced
-	$('#homeContentContainer #mapContainer').html(mapHTML);
+	$('#homeContentContainer #mapContainer').append(mapHTML);
     calculateViewableCardLimits();
 }
 
@@ -873,65 +848,9 @@ function shuffle(array) {
 }
 
 
-// Carousel HTML:
-// <p class="has-text-centered"><strong><em>Sample of extra cards available with the final game:</em></strong></p>
-// <div class="slideshow-block">
-//     <div class="slideshow-animation"></div>
-// </div>
-
-
-// function setupCarousel(){
-//     let carouselRaw = [
-//         {   
-//             'id': 'g',
-//             'config': [5, 3, 3],
-//             'order': [0, 1, 2],
-//             'pos': 0
-//         },{
-//             'id': 'p',
-//             'config': [4, 4, 4, 4, 4],
-//             'order': [0, 1, 2, 3, 4],
-//             'pos': 0
-//         }
-//     ];
-
-//     for (let i = 0; i < carouselRaw.length; i++) {
-//         shuffle(carouselRaw[i]['order']);
-//     }
-
-//     let masterIndex = 0;
-//     let carouselData = [];
-
-//     while (carouselData.length < 17) {
-//         let thisIndex = carouselRaw[masterIndex]['pos'];
-//         let thisRange = carouselRaw[masterIndex]['config'][carouselRaw[masterIndex]['order'][thisIndex]];
-//         let uniqueCombo = false;
-//         while (!uniqueCombo) {
-//             let randNum = Math.floor(Math.random() * thisRange);
-//             let thisCombo = `${carouselRaw[masterIndex]['id']}-${carouselRaw[masterIndex]['order'][thisIndex]}-${randNum}`;
-//             if(carouselData.indexOf(thisCombo) == -1) {		
-//                 carouselData.push(thisCombo);
-//                 uniqueCombo = true;
-//             }
-//         }
-//         carouselRaw[masterIndex]['pos'] == carouselRaw[masterIndex]['config'].length - 1 ? carouselRaw[masterIndex]['pos'] = 0 : carouselRaw[masterIndex]['pos']++;
-
-//         masterIndex == 0 ? masterIndex = 1 : masterIndex = 0;
-
-//     }
-
-//     let carouselHTML = '';
-
-//     for (let i = 0; i < carouselData.length; i++) {
-//         carouselHTML += `
-//             <div class="slideshow-slide">
-//                 <img src="img/demo-carousel/${carouselData[i]}.jpg">
-//             </div>
-//         `;
-//     }
-
-//     $('.slideshow-block > .slideshow-animation').html(carouselHTML);
-//     setTimeout(function(){
-//         initSlideshow('.slideshow-block','smoothscroll');
-//     }, 100);
-// }
+$(document).on(touchEvent,'.gameSection.collapsed',function(){
+    swapActiveMainSection();
+    // setTimeout(function(){
+    //     resetAnimationClasses();
+    // }, 750);
+});
