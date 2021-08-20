@@ -366,16 +366,15 @@ p {
     position: relative;
 }
 
-#gameLayer #gameSectionOverlayParent {
+#gameLayer .gameSectionOverlayParent {
     height: 100%;
     width: 100%;
     position: absolute;
-    /* z-index: 1; */
     background-color: transparent;
     padding-top: 0px;
 }
 
-#gameLayer #gameSectionOverlayParent .gameSectionOverlayBorder.outerBorder {
+#gameLayer .gameSectionOverlayParent .gameSectionOverlayBorder.outerBorder {
     border-bottom-color: rgb(65, 167, 66);
     border-bottom-style: solid;
     border-bottom-width: 1px;
@@ -393,7 +392,7 @@ p {
     overflow: hidden;
 }
 
-#gameLayer #gameSectionOverlayParent .gameSectionOverlayBorder.innerBorder {
+#gameLayer .gameSectionOverlayParent .gameSectionOverlayBorder.innerBorder {
     border-bottom-color: rgb(65, 167, 66);
     border-bottom-style: solid;
     border-bottom-width: 2px;
@@ -410,7 +409,7 @@ p {
     height: 15px;
 }
 
-#gameLayer #gameSectionOverlayParent .gameSectionWhiteOverlay {
+#gameLayer .gameSectionOverlayParent .gameSectionWhiteOverlay {
     width: 100%;
     height: 100%;
     background-color: #FFF;
@@ -440,6 +439,7 @@ p {
 
 #gameLayer .gameSectionContent {
     position: relative;
+    height: 100%;
 }
 
 #container.mobileView #gameSectionsParent .gameSection .inactive,
@@ -540,12 +540,16 @@ p {
     height: 520px;
 }
 
-#marketSection #gameSectionOverlayParent.collapsed {
-    top: 197px;
+#marketSection .gameSectionOverlayParent {
+    top: 506px;
 }
 
-#marketSection #gameSectionOverlayParent.expanded {
+#marketSection .gameSectionOverlayParent.expanded {
     top: 506px;
+}
+
+#marketSection .gameSectionOverlayParent.collapsed {
+    top: 197px;
 }
 
 #marketSection #marketCardColumns { 
@@ -798,7 +802,6 @@ p {
     background-color: transparent;
     height: 164px;
     perspective: 1000px;
-    /* margin: 0 auto; */
     overflow: hidden;
     position: relative;
 }
@@ -812,7 +815,7 @@ p {
     transform-style: preserve-3d;
     -webkit-transform-style: preserve-3d;
     -moz-transform-style: preserve-3d;
-    box-shadow: 0px 0px 10px #AAA;
+    /* box-shadow: 0px 0px 10px #AAA; */
 }
 
 .flip-card-front, .flip-card-back {
@@ -1437,12 +1440,18 @@ p {
     height: 530px;
 }
 
-#tableauSection #gameSectionOverlayParent.collapsed {
-    top: 235px;
+#tableauSection .gameSectionOverlayParent {
+    height: 550px;
+    width: 512.047px;
+    top: 520px;
 }
 
-#tableauSection #gameSectionOverlayParent.expanded {
+#tableauSection .gameSectionOverlayParent.expanded {
     top: 520px;
+}
+
+#tableauSection .gameSectionOverlayParent.collapsed {
+    top: 235px;
 }
 
 #tableauSection .inactive.collapsed ion-icon[name="expand"] {
@@ -2116,7 +2125,7 @@ p {
         width: 98%;
     }
 
-    #gameLayer #gameSectionOverlayParent .gameSectionOverlayBorder.outerBorder {
+    #gameLayer .gameSectionOverlayParent .gameSectionOverlayBorder.outerBorder {
         border-bottom-width: .187vw;
         border-bottom-right-radius: .55vw;
         border-bottom-left-radius: .55vw;
@@ -2127,7 +2136,7 @@ p {
         height: 3.34vw;
     }
 
-    #gameLayer #gameSectionOverlayParent .gameSectionOverlayBorder.innerBorder {
+    #gameLayer .gameSectionOverlayParent .gameSectionOverlayBorder.innerBorder {
         border-bottom-width: .374vw;
         border-bottom-right-radius: .55vw;
         border-bottom-left-radius: .55vw;
@@ -2219,11 +2228,11 @@ p {
         top: -18vw;
     }
 
-    #marketSection #gameSectionOverlayParent.expanded {
+    #marketSection .gameSectionOverlayParent.expanded {
         top: 96.5vw;
     }
 
-    #marketSection #gameSectionOverlayParent.collapsed {
+    #marketSection .gameSectionOverlayParent.collapsed {
         top: 37.5vw;
     }
     
@@ -2524,11 +2533,15 @@ p {
         height: 102vw;
     }
 
-    #tableauSection #gameSectionOverlayParent.expanded {
+    #tableauSection .gameSectionOverlayParent {
         top: 97vw;
     }
 
-    #tableauSection #gameSectionOverlayParent.collapsed {
+    #tableauSection .gameSectionOverlayParent.expanded {
+        top: 97vw;
+    }
+
+    #tableauSection .gameSectionOverlayParent.collapsed {
         top: 48vw;
     }
 
