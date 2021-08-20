@@ -37,7 +37,7 @@ let sectionStates = {
 
 function swapActiveMainSection(){
 
-    $('#gameSectionOverlayParent').removeClass('animatingElem quickTransition shortTransition mediumTransition longTransition');
+    $('.gameSectionOverlayParent').removeClass('animatingElem quickTransition shortTransition mediumTransition longTransition');
     $('#tableauSection').removeClass('animatingElem quickTransition shortTransition mediumTransition longTransition');
     $('#playerInfoContainer #mapContainer').removeClass('animatingElem quickTransition shortTransition mediumTransition longTransition');
 
@@ -67,6 +67,7 @@ function animateElem(elem, mode) {
     let endLeftPos = $(elem).position().left;
 
     if(startTopPos != endTopPos || startLeftPos != endLeftPos) {
+
         var invertedTop = startTopPos - endTopPos; // 18px
         var invertedLeft = startLeftPos - endLeftPos; // 29.5px
         
@@ -82,7 +83,6 @@ function animateElem(elem, mode) {
                 elem[0].classList.remove(`${animationClasses[mode].transition}Transition`);
                 elem[0].classList.remove('animatingElem');
             });
-
         }); 
 
     } else {
