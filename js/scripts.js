@@ -63,7 +63,8 @@ $(document).on(touchEvent,'#placeFirstPlantCardBtn',function(){
 })
 
 
-$(document).on('mouseenter','.mapTileContainer.potentialPlacement.activePotentialPlacement:not(.temporaryPlacement)',function(){
+
+$(document).on('mouseenter','#mapContainer.expanded .mapTileContainer.potentialPlacement.activePotentialPlacement:not(.temporaryPlacement)',function(){
     console.log('mouseenter ping');
 	// the .potentialPlacement class has been previously add to every card container on the map to show the player where they can place the newly chosen tile on the map
 
@@ -77,26 +78,26 @@ $(document).on('mouseenter','.mapTileContainer.potentialPlacement.activePotentia
 	$('.cardContainer.activeCard').clone().appendTo(thisTile);
 
 	// copying all of the tile contents also copies over the yellow border into the map - which we don't need as the user can easily tell what card has just ben generated, so we can immediately delete this element from the newly generated tile html in the map
-	// $('.mapTileContainer.potentialPlacement .tileContainer .selectedTileOutline').remove();
+	// $('#mapContainer.expanded .mapTileContainer.potentialPlacement .tileContainer .selectedTileOutline').remove();
 });
 
-$(document).on('mouseleave','.mapTileContainer.potentialPlacement.activePotentialPlacement.cardPlacementPreview:not(.temporaryPlacement)',function(){    
+$(document).on('mouseleave','#mapContainer.expanded .mapTileContainer.potentialPlacement.activePotentialPlacement.cardPlacementPreview:not(.temporaryPlacement)',function(){    
 	// once the user leaves a map card that is a potential placement, the tile that is currently being previewed is deleted
     $(this).removeClass('cardPlacementPreview');
-	$('.mapTileContainer.potentialPlacement:not(.temporaryPlacement) .cardContainer').remove();
+	$('#mapContainer.expanded .mapTileContainer.potentialPlacement:not(.temporaryPlacement) .cardContainer').remove();
 });
 
-$(document).on(touchEvent,'.mapTileContainer.potentialPlacement.activePotentialPlacement:not(.temporaryPlacement)',function(){    
+$(document).on(touchEvent,'#mapContainer.expanded .mapTileContainer.potentialPlacement.activePotentialPlacement:not(.temporaryPlacement)',function(){    
     
-	if($('.mapTileContainer.potentialPlacement:not(.temporaryPlacement) .cardContainer').length) {
-		$('.mapTileContainer.potentialPlacement:not(.temporaryPlacement) .cardContainer').remove();
+	if($('#mapContainer.expanded .mapTileContainer.potentialPlacement:not(.temporaryPlacement) .cardContainer').length) {
+		$('#mapContainer.expanded .mapTileContainer.potentialPlacement:not(.temporaryPlacement) .cardContainer').remove();
 	}
 
     $('.cardPlacementPreview').removeClass('cardPlacementPreview');
 
 	var targID = $(this).attr('id');      
 
-    $('.mapTileContainer.potentialPlacement.temporaryPlacement').addClass('activePotentialPlacement').removeClass('temporaryPlacement');
+    $('#mapContainer.expanded .mapTileContainer.potentialPlacement.temporaryPlacement').addClass('activePotentialPlacement').removeClass('temporaryPlacement');
 	$(this).removeClass('activePotentialPlacement').addClass('temporaryPlacement');
 
 	temporarilyLockMap(1000);
