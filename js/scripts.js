@@ -370,7 +370,7 @@ $(document).on(touchEvent, '#startGame', function(){
         }, 400);
     }, 400);
 	
-    $('#gameLayer #gameSectionsParent .minimized ion-icon[name="expand"]').show();
+    $('#gameLayer #gameSectionsParent .collapsed ion-icon[name="expand"]').show();
 });
 
 
@@ -478,17 +478,18 @@ function chooseStartingPlayerCards() {
     $('#mapContainer #mapHiddenOverlay #row-2-column-4').attr('cardtype', 'room');
 }
 
-$(document).on(touchEvent, '#gameLayer #gameSectionsParent .minimized:not(.initSetup)', function(){
+$(document).on(touchEvent, '#gameLayer #gameSectionsParent .collapsed:not(.initSetup)', function(){
 
     let thisID = $(this).attr('id');
 
-    $('#gameLayer #gameSectionsParent .expanded').addClass('minimized').removeClass('expanded');
-    $(this).addClass('expanded expandAnimation').removeClass('minimized');
+    $('#gameLayer #gameSectionsParent .expanded').addClass('collapsed').removeClass('expanded');
+    $(this).addClass('expanded expandAnimation').removeClass('collapsed');
+
+    if(thisID != 'tableauSection') lockMap = true;
     setTimeout(function(){
         $('.expanded.expandAnimation').removeClass('expandAnimation');
+        if(thisID == 'tableauSection') lockMap = false
     }, 700)
-
-    thisID != 'tableauSection' ? lockMap = true : lockMap = false;
 
 });
 
