@@ -60,9 +60,7 @@ $(document).on(touchEvent,'#minimizeScreenIcon',function(){
 $(document).on(touchEvent,'#placeFirstPlantCardBtn',function(){
     $('#tableauSection .gameSectionContent #homeContentContainer #playerInfoContainer #cardToPlace .cardContainer').addClass('activeCard');
     generatePossibleMapPlacements();
-})
-
-
+});
 
 $(document).on('mouseenter','#mapContainer.expanded .mapTileContainer.potentialPlacement.activePotentialPlacement:not(.temporaryPlacement)',function(){
     console.log('mouseenter ping');
