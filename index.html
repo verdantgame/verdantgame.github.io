@@ -42,6 +42,9 @@
 	<div id="full-bg"></div>
 	<div id="container">
 
+		<ion-icon id="maximizeScreenIcon" name="expand" role="img" class="hydrated md" aria-label="expand"></ion-icon>
+		<ion-icon id="minimizeScreenIcon" name="contract" role="img" class="hydrated md" aria-label="contract"></ion-icon>
+
 		<p id="mainVerdantTitle" class="title">
 			<img src="img/title-under-construction.jpg" alt="Verdant Title Image" />
 		</p>
@@ -83,6 +86,9 @@
 		<div id="gameLayer" class="layer">
 
 			<div id="topInfoBar">
+				<p id="secondaryVerdantTitle" class="title">
+					<img src="img/mobile-title.jpg" alt="Verdant Title Image">
+				</p>
 				<div class="leftColumn infoBarColumn">
 					<p id="turnsRemaining">Turns Remaining: <span class="infoSpan bold">13</span></p>
 				</div>
@@ -183,7 +189,7 @@
 							</div>
 						</div>
 					</div>
-					<div data-animation-group="tableau" class="gameSectionOverlayParent collapsed animatingElem mediumTransition" style="transform-origin: left top;">
+					<div data-animation-group="tableau" class="gameSectionOverlayParent collapsed">
 						<div class="gameSectionOverlayBorder outerBorder">
 							<div class="gameSectionOverlayBorder innerBorder">
 							</div>
@@ -191,6 +197,18 @@
 						<div class="gameSectionWhiteOverlay"></div>
 					</div>
 				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="placeFirstCardModal" class="modal notificationModal">
+
+		<div class="modal-background"></div>
+		<div class="modal-content">
+			<div class="notification">
+				<button class="delete closeModalTrigger" aria-label="close" title="Close button image"></button>
+				<p class="has-text-centered">Choose where the first plant will go.</p>
+				<button id="placeFirstPlantCardBtn" class="button is-danger closeModalTrigger button-is-centered" title="Close modal button">Close</button>
 			</div>
 		</div>
 	</div>
