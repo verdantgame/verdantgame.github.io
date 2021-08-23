@@ -44,13 +44,14 @@ $(document).on(touchEvent,'.closeModalTrigger',function(){
 $(document).on(touchEvent,'#maximizeScreenIcon',function(){
 	$(this).hide();
     $('#minimizeScreenIcon').show();
-    toggleFullScreen(document.body);
+    openFullscreen();
+
 });
 
 $(document).on(touchEvent,'#minimizeScreenIcon',function(){
 	$(this).hide();
     $('#maximizeScreenIcon').show();
-    toggleFullScreen(document.body);
+    closeFullscreen();
 });
 
 // $(document).on(touchEvent,'.modal.is-active .modal-background.closableModalBackground',function(){
@@ -1073,54 +1074,48 @@ function shuffle(array) {
 	return array;
 }
 
-
 // /* Get the documentElement (<html>) to display the page in fullscreen */
-// var elem = document.documentElement;
+var elemOne = document.documentElement;
+var elemTwo = document.body;
 
-// /* View in fullscreen */
-// function openFullscreen() {
-//   if (elem.requestFullscreen) {
-//     elem.requestFullscreen();
-//   } else if (elem.webkitRequestFullscreen) { /* Safari */
-//     elem.webkitRequestFullscreen();
-//   } else if (elem.msRequestFullscreen) { /* IE11 */
-//     elem.msRequestFullscreen();
-//   }
-// }
+/* View in fullscreen */
+function openFullscreen() {
+    if(elemOne.requestFullScreen) {
+        elemOne.requestFullScreen();
+    } else if(elemOne.mozRequestFullScreen) {
+        elemOne.mozRequestFullScreen();
+    } else if(elemOne.webkitRequestFullScreen) {
+        elemOne.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
+    } else if(elemOne.msRequestFullscreen) {
+        elemOne.msRequestFullscreen();
+    } else if(elemTwo.requestFullScreen) {
+        elemTwo.requestFullScreen();
+    } else if(elemTwo.mozRequestFullScreen) {
+        elemTwo.mozRequestFullScreen();
+    } else if(elemTwo.webkitRequestFullScreen) {
+        elemTwo.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
+    } else if(elemTwo.msRequestFullscreen) {
+        elemTwo.msRequestFullscreen();
+    }
+}
 
-// /* Close fullscreen */
-// function closeFullscreen() {
-//   if (document.exitFullscreen) {
-//     document.exitFullscreen();
-//   } else if (document.webkitExitFullscreen) { /* Safari */
-//     document.webkitExitFullscreen();
-//   } else if (document.msExitFullscreen) { /* IE11 */
-//     document.msExitFullscreen();
-//   }
-// }
-
-
-function toggleFullScreen(elem) {
-    // ## The below if statement seems to work better ## if ((document.fullScreenElement && document.fullScreenElement !== null) || (document.msfullscreenElement && document.msfullscreenElement !== null) || (!document.mozFullScreen && !document.webkitIsFullScreen)) {
-    if ((document.fullScreenElement !== undefined && document.fullScreenElement === null) || (document.msFullscreenElement !== undefined && document.msFullscreenElement === null) || (document.mozFullScreen !== undefined && !document.mozFullScreen) || (document.webkitIsFullScreen !== undefined && !document.webkitIsFullScreen)) {
-        if (elem.requestFullScreen) {
-            elem.requestFullScreen();
-        } else if (elem.mozRequestFullScreen) {
-            elem.mozRequestFullScreen();
-        } else if (elem.webkitRequestFullScreen) {
-            elem.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
-        } else if (elem.msRequestFullscreen) {
-            elem.msRequestFullscreen();
-        }
-    } else {
-        if (document.cancelFullScreen) {
-            document.cancelFullScreen();
-        } else if (document.mozCancelFullScreen) {
-            document.mozCancelFullScreen();
-        } else if (document.webkitCancelFullScreen) {
-            document.webkitCancelFullScreen();
-        } else if (document.msExitFullscreen) {
-            document.msExitFullscreen();
-        }
+/* Close fullscreen */
+function closeFullscreen() {
+    if(document.exitFullscreen) {
+        document.exitFullscreen();
+    } else if(document.mozExitFullscreen) {
+        document.mozExitFullscreen();
+    } else if(document.webkitExitFullscreen) { /* Safari */
+        document.webkitExitFullscreen();
+    } else if(document.msExitFullscreen) { /* IE11 */
+        document.msExitFullscreen();
+    } else if(document.cancelFullScreen) {
+        document.cancelFullScreen();
+    } else if(document.mozCancelFullScreen) {
+        document.mozCancelFullScreen();
+    } else if(document.webkitCancelFullScreen) {
+        document.webkitCancelFullScreen();
+    } else if(document.msExitFullscreen) {
+        document.msExitFullscreen();
     }
 }
