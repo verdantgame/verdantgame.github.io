@@ -18,6 +18,10 @@ body {
     max-width: 539px;
 }
 
+#maximizeScreenIcon {
+    display: none;
+}
+
 #container.desktopView #maximizeScreenIcon,
 #container.tabletView #maximizeScreenIcon,
 #container.desktopView #minimizeScreenIcon,
@@ -1143,197 +1147,197 @@ p {
 }
 
 /* 1x Lighting */
-.cardContainer[type="plant"][lighting="1"] .lightingIconContainer-one {
+.cardContainer[type="plant"][lighting-num="1"] .lightingIconContainer-one {
     top: 1%;
     left: 39%;
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="1"] .lightingIconContainer-one.expanded,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="1"] .lightingIconContainer-one.expanded {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting-num="1"] .lightingIconContainer-one.expanded,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting-num="1"] .lightingIconContainer-one.expanded {
     top: 1%;
     left: 39%;
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="1"] .lightingIconContainer-one.collapsed,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="1"] .lightingIconContainer-one.collapsed {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting-num="1"] .lightingIconContainer-one.collapsed,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting-num="1"] .lightingIconContainer-one.collapsed {
     top: 12%;
     left: 36%;
 }
 
-.cardContainer[type="plant"][lighting="1"] .lightingIconContainer-one > .lightingIcon-one {
+.cardContainer[type="plant"][lighting-num="1"] .lightingIconContainer-one > .lightingIcon-one {
     width: 68%;
     transform:scale(1);
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="1"] .lightingIconContainer-one > .lightingIcon-one.expanded,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="1"] .lightingIconContainer-one > .lightingIcon-one.expanded {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting-num="1"] .lightingIconContainer-one > .lightingIcon-one.expanded,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting-num="1"] .lightingIconContainer-one > .lightingIcon-one.expanded {
     transform:scale(1);
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="1"] .lightingIconContainer-one > .lightingIcon-one.collapsed,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="1"] .lightingIconContainer-one > .lightingIcon-one.collapsed {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting-num="1"] .lightingIconContainer-one > .lightingIcon-one.collapsed,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting-num="1"] .lightingIconContainer-one > .lightingIcon-one.collapsed {
     transform:scale(1.3);
 }
 
 /* 2x Lighting */
-.cardContainer[type="plant"][lighting="2"] .lightingIconContainer-one {
+.cardContainer[type="plant"][lighting-num="2"] .lightingIconContainer-one {
     top: 1%;
     left: 32%;
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="2"] .lightingIconContainer-one.expanded,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="2"] .lightingIconContainer-one.expanded {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting-num="2"] .lightingIconContainer-one.expanded,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting-num="2"] .lightingIconContainer-one.expanded {
     top: 1%;
     left: 32%;
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="2"] .lightingIconContainer-one.collapsed,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="2"] .lightingIconContainer-one.collapsed {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting-num="2"] .lightingIconContainer-one.collapsed,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting-num="2"] .lightingIconContainer-one.collapsed {
     top: 5%;
     left: 36%;
 }
 
-.cardContainer[type="plant"][lighting="2"] .lightingIconContainer-one > .lightingIcon-one {
+.cardContainer[type="plant"][lighting-num="2"] .lightingIconContainer-one > .lightingIcon-one {
     width: 68%;
     transform:scale(1);
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="2"] .lightingIconContainer-one > .lightingIcon-one.expanded,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="2"] .lightingIconContainer-one > .lightingIcon-one.expanded {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting-num="2"] .lightingIconContainer-one > .lightingIcon-one.expanded,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting-num="2"] .lightingIconContainer-one > .lightingIcon-one.expanded {
     transform:scale(1);
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="2"] .lightingIconContainer-one > .lightingIcon-one.collapsed,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="2"] .lightingIconContainer-one > .lightingIcon-one.collapsed {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting-num="2"] .lightingIconContainer-one > .lightingIcon-one.collapsed,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting-num="2"] .lightingIconContainer-one > .lightingIcon-one.collapsed {
     transform:scale(1.3);
 }
 
-.cardContainer[type="plant"][lighting="2"] .lightingIconContainer-two {
+.cardContainer[type="plant"][lighting-num="2"] .lightingIconContainer-two {
     top: 1%;
     left: 47%;
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="2"] .lightingIconContainer-two.expanded,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="2"] .lightingIconContainer-two.expanded {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting-num="2"] .lightingIconContainer-two.expanded,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting-num="2"] .lightingIconContainer-two.expanded {
     top: 1%;
     left: 47%;
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="2"] .lightingIconContainer-two.collapsed,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="2"] .lightingIconContainer-two.collapsed {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting-num="2"] .lightingIconContainer-two.collapsed,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting-num="2"] .lightingIconContainer-two.collapsed {
     top: 19%;
     left: 36%;
 }
 
-.cardContainer[type="plant"][lighting="2"] .lightingIconContainer-two > .lightingIcon-two {
+.cardContainer[type="plant"][lighting-num="2"] .lightingIconContainer-two > .lightingIcon-two {
     width: 68%;
     transform:scale(1);
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="2"] .lightingIconContainer-two > .lightingIcon-two.expanded,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="2"] .lightingIconContainer-two > .lightingIcon-two.expanded {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting-num="2"] .lightingIconContainer-two > .lightingIcon-two.expanded,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting-num="2"] .lightingIconContainer-two > .lightingIcon-two.expanded {
     transform:scale(1);
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="2"] .lightingIconContainer-two > .lightingIcon-two.collapsed,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="2"] .lightingIconContainer-two > .lightingIcon-two.collapsed {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting-num="2"] .lightingIconContainer-two > .lightingIcon-two.collapsed,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting-num="2"] .lightingIconContainer-two > .lightingIcon-two.collapsed {
     transform:scale(1.3);
 }
 
 /* 3x Lighting */
-.cardContainer[type="plant"][lighting="3"] .lightingIconContainer-one {
+.cardContainer[type="plant"][lighting-num="3"] .lightingIconContainer-one {
     top: 1%;
     left: 24%;
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="3"] .lightingIconContainer-one.expanded,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="3"] .lightingIconContainer-one.expanded {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting-num="3"] .lightingIconContainer-one.expanded,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting-num="3"] .lightingIconContainer-one.expanded {
     top: 1%;
     left: 24%;
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="3"] .lightingIconContainer-one.collapsed,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="3"] .lightingIconContainer-one.collapsed {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting-num="3"] .lightingIconContainer-one.collapsed,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting-num="3"] .lightingIconContainer-one.collapsed {
     top: 1%;
     left: 36%;
 }
 
-.cardContainer[type="plant"][lighting="3"] .lightingIconContainer-one > .lightingIcon-one {
+.cardContainer[type="plant"][lighting-num="3"] .lightingIconContainer-one > .lightingIcon-one {
     width: 68%;
     transform:scale(1);
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="3"] .lightingIconContainer-one > .lightingIcon-one.expanded,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="3"] .lightingIconContainer-one > .lightingIcon-one.expanded {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting-num="3"] .lightingIconContainer-one > .lightingIcon-one.expanded,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting-num="3"] .lightingIconContainer-one > .lightingIcon-one.expanded {
     transform:scale(1);
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="3"] .lightingIconContainer-one > .lightingIcon-one.collapsed,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="3"] .lightingIconContainer-one > .lightingIcon-one.collapsed {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting-num="3"] .lightingIconContainer-one > .lightingIcon-one.collapsed,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting-num="3"] .lightingIconContainer-one > .lightingIcon-one.collapsed {
     transform:scale(1.3);
 }
 
-.cardContainer[type="plant"][lighting="3"] .lightingIconContainer-two {
+.cardContainer[type="plant"][lighting-num="3"] .lightingIconContainer-two {
     top: 1%;
     left: 39%;
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="3"] .lightingIconContainer-two.expanded,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="3"] .lightingIconContainer-two.expanded {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting-num="3"] .lightingIconContainer-two.expanded,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting-num="3"] .lightingIconContainer-two.expanded {
     top: 1%;
     left: 39%;
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="3"] .lightingIconContainer-two.collapsed,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="3"] .lightingIconContainer-two.collapsed {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting-num="3"] .lightingIconContainer-two.collapsed,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting-num="3"] .lightingIconContainer-two.collapsed {
     top: 14%;
     left: 36%;
 }
 
-.cardContainer[type="plant"][lighting="3"] .lightingIconContainer-two > .lightingIcon-two {
+.cardContainer[type="plant"][lighting-num="3"] .lightingIconContainer-two > .lightingIcon-two {
     width: 68%;
     transform:scale(1);
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="3"] .lightingIconContainer-two > .lightingIcon-two.expanded,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="3"] .lightingIconContainer-two > .lightingIcon-two.expanded {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting-num="3"] .lightingIconContainer-two > .lightingIcon-two.expanded,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting-num="3"] .lightingIconContainer-two > .lightingIcon-two.expanded {
     transform:scale(1);
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="3"] .lightingIconContainer-two > .lightingIcon-two.collapsed,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="3"] .lightingIconContainer-two > .lightingIcon-two.collapsed {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting-num="3"] .lightingIconContainer-two > .lightingIcon-two.collapsed,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting-num="3"] .lightingIconContainer-two > .lightingIcon-two.collapsed {
     transform:scale(1.3);
 }
 
-.cardContainer[type="plant"][lighting="3"] .lightingIconContainer-three {
+.cardContainer[type="plant"][lighting-num="3"] .lightingIconContainer-three {
     top: 1%;
     left: 54%;
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="3"] .lightingIconContainer-three.expanded,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="3"] .lightingIconContainer-three.expanded {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting-num="3"] .lightingIconContainer-three.expanded,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting-num="3"] .lightingIconContainer-three.expanded {
     top: 1%;
     left: 54%;
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="3"] .lightingIconContainer-three.collapsed,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="3"] .lightingIconContainer-three.collapsed {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting-num="3"] .lightingIconContainer-three.collapsed,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting-num="3"] .lightingIconContainer-three.collapsed {
     top: 26%;
     left: 36%;
 }
 
-.cardContainer[type="plant"][lighting="3"] .lightingIconContainer-three > .lightingIcon-three {
+.cardContainer[type="plant"][lighting-num="3"] .lightingIconContainer-three > .lightingIcon-three {
     width: 68%;
     transform:scale(1);
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="3"] .lightingIconContainer-three > .lightingIcon-three.expanded,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="3"] .lightingIconContainer-three > .lightingIcon-three.expanded {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting-num="3"] .lightingIconContainer-three > .lightingIcon-three.expanded,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting-num="3"] .lightingIconContainer-three > .lightingIcon-three.expanded {
     transform:scale(1);
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="3"] .lightingIconContainer-three > .lightingIcon-three.collapsed,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting="3"] .lightingIconContainer-three > .lightingIcon-three.collapsed {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting-num="3"] .lightingIconContainer-three > .lightingIcon-three.collapsed,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][lighting-num="3"] .lightingIconContainer-three > .lightingIcon-three.collapsed {
     transform:scale(1.3);
 }
 
