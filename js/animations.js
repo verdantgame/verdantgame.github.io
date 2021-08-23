@@ -52,8 +52,6 @@ function swapActiveMainSection(){
 
 function animateElem(elem, mode) {
 
-    // let startScale = $(elem).css('transform');
-    // if(startScale == 'none') elem[0].style.transformOrigin = 'top left';
     elem[0].style.transformOrigin = 'top left';
     
     let startTopPos = $(elem).position().top;
@@ -68,8 +66,8 @@ function animateElem(elem, mode) {
 
     if(startTopPos != endTopPos || startLeftPos != endLeftPos) {
 
-        var invertedTop = startTopPos - endTopPos; // 18px
-        var invertedLeft = startLeftPos - endLeftPos; // 29.5px
+        var invertedTop = startTopPos - endTopPos;
+        var invertedLeft = startLeftPos - endLeftPos;
         
         elem[0].style.transform = `
             translate(${invertedLeft}px, ${invertedTop}px)
