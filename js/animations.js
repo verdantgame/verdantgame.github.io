@@ -46,8 +46,17 @@ function swapActiveMainSection(){
             animateElem($(this), thisState);
         });
     }
-    sectionStates.market == 'expanded' ? sectionStates.market = 'collapsed' : sectionStates.market = 'expanded';
-    sectionStates.tableau == 'expanded' ? sectionStates.tableau = 'collapsed' : sectionStates.tableau = 'expanded';
+    if(sectionStates.tableau == 'expanded') {
+        sectionStates.tableau = 'collapsed';
+        sectionStates.market = 'expanded';
+        lockMap = true;
+    } else if(sectionStates.market == 'expanded') {
+        sectionStates.market = 'collapsed';
+        sectionStates.tableau = 'expanded';
+        setTimeout(function(){
+            lockMap = false;
+        }, 710);
+    }
 }
 
 function animateElem(elem, mode) {
