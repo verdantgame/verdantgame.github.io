@@ -478,26 +478,6 @@ function chooseStartingPlayerCards() {
     $('#mapContainer #mapHiddenOverlay #row-2-column-4').attr('cardtype', 'room');
 }
 
-// $(document).on(touchEvent, '#gameLayer #gameSectionsParent .collapsed:not(.initSetup)', function(){
-
-//     let thisID = $(this).attr('id');
-
-//     $('#gameLayer #gameSectionsParent .expanded').addClass('collapsed').removeClass('expanded');
-//     $(this).addClass('expanded expandAnimation').removeClass('collapsed');
-
-//     if(thisID != 'tableauSection') {
-        
-
-
-//     setTimeout(function(){
-//         $('.expanded.expandAnimation').removeClass('expandAnimation');
-//         if(thisID == 'tableauSection') lockMap = false
-//     }, 700)
-
-    
-
-// });
-
 let lockMap = false;
 
 let allDirections = ['up', 'down', 'left', 'right'];
