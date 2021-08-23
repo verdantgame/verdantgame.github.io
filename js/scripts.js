@@ -63,53 +63,59 @@ $(document).on(touchEvent,'#placeFirstPlantCardBtn',function(){
 });
 
 $(document).on('mouseenter','#mapContainer.expanded .mapTileContainer.potentialPlacement.activePotentialPlacement:not(.temporaryPlacement)',function(){
-    console.log('mouseenter ping');
-	// the .potentialPlacement class has been previously add to every card container on the map to show the player where they can place the newly chosen tile on the map
+    if(!lockMap) {
+        // the .potentialPlacement class has been previously add to every card container on the map to show the player where they can place the newly chosen tile on the map
 
-    $(this).addClass('cardPlacementPreview');
+        $(this).addClass('cardPlacementPreview');
 
-	// target the currently hovered over tile
-	var thisTile = $(this);
+        // target the currently hovered over tile
+        var thisTile = $(this);
 
-	// the tile+token pairing that had previously been clicked has the .chosenTokenTileContainer class assigned to it
-	// targeting the .tileContainer child, a copy of all of the tile information is now created on the map card that the user is currently hovering over
-	$('.cardContainer.activeCard').clone().appendTo(thisTile);
+        // the tile+token pairing that had previously been clicked has the .chosenTokenTileContainer class assigned to it
+        // targeting the .tileContainer child, a copy of all of the tile information is now created on the map card that the user is currently hovering over
+        $('.cardContainer.activeCard').clone().appendTo(thisTile);
 
-	// copying all of the tile contents also copies over the yellow border into the map - which we don't need as the user can easily tell what card has just ben generated, so we can immediately delete this element from the newly generated tile html in the map
-	// $('#mapContainer.expanded .mapTileContainer.potentialPlacement .tileContainer .selectedTileOutline').remove();
+        // copying all of the tile contents also copies over the yellow border into the map - which we don't need as the user can easily tell what card has just ben generated, so we can immediately delete this element from the newly generated tile html in the map
+        // $('#mapContainer.expanded .mapTileContainer.potentialPlacement .tileContainer .selectedTileOutline').remove();
+    }
 });
 
 $(document).on('mouseleave','#mapContainer.expanded .mapTileContainer.potentialPlacement.activePotentialPlacement.cardPlacementPreview:not(.temporaryPlacement)',function(){    
-	// once the user leaves a map card that is a potential placement, the tile that is currently being previewed is deleted
-    $(this).removeClass('cardPlacementPreview');
-	$('#mapContainer.expanded .mapTileContainer.potentialPlacement:not(.temporaryPlacement) .cardContainer').remove();
+    if(!lockMap) {
+        // once the user leaves a map card that is a potential placement, the tile that is currently being previewed is deleted
+        $(this).removeClass('cardPlacementPreview');
+        $('#mapContainer.expanded .mapTileContainer.potentialPlacement:not(.temporaryPlacement) .cardContainer').remove();
+    }
 });
 
 $(document).on(touchEvent,'#mapContainer.expanded .mapTileContainer.potentialPlacement.activePotentialPlacement:not(.temporaryPlacement)',function(){    
-    
-	if($('#mapContainer.expanded .mapTileContainer.potentialPlacement:not(.temporaryPlacement) .cardContainer').length) {
-		$('#mapContainer.expanded .mapTileContainer.potentialPlacement:not(.temporaryPlacement) .cardContainer').remove();
-	}
+    if(!lockMap) {
+        lockMap = true;
+        if($('#mapContainer.expanded .mapTileContainer.potentialPlacement:not(.temporaryPlacement) .cardContainer').length) {
+            $('#mapContainer.expanded .mapTileContainer.potentialPlacement:not(.temporaryPlacement) .cardContainer').remove();
+        }
 
-    $('.cardPlacementPreview').removeClass('cardPlacementPreview');
+        $('.cardPlacementPreview').removeClass('cardPlacementPreview');
 
-	var targID = $(this).attr('id');      
+        var targID = $(this).attr('id');      
 
-    $('#mapContainer.expanded .mapTileContainer.potentialPlacement.temporaryPlacement').addClass('activePotentialPlacement').removeClass('temporaryPlacement');
-	$(this).removeClass('activePotentialPlacement').addClass('temporaryPlacement');
+        $('#mapContainer.expanded .mapTileContainer.potentialPlacement.temporaryPlacement').addClass('activePotentialPlacement').removeClass('temporaryPlacement');
+        $(this).removeClass('activePotentialPlacement').addClass('temporaryPlacement');
 
-	temporarilyLockMap(1000);
-    
-	$('.cardContainer.activeCard').parentToAnimate($('#' + targID), 1000);
+        temporarilyLockMap(1000);
+        
+        $('.cardContainer.activeCard').parentToAnimate($('#' + targID), 1000);
 
-    // setTimeout(function(){
-	// 	checkLightingMatches();
-	// }, 1010)
+        setTimeout(function(){
+        	lockMap = false;
+            // checkLightingMatches()
+        }, 1100)
 
-	// setTimeout(function(){
-	// 	$('#mapContainer #placedCardOptions').addClass('showOptions');
-	// 	$('.mobileCardPlacementOptions.inactiveCardOptions').addClass('activeCardOptions').removeClass('inactiveCardOptions');
-	// }, 300)
+        // setTimeout(function(){
+        // 	$('#mapContainer #placedCardOptions').addClass('showOptions');
+        // 	$('.mobileCardPlacementOptions.inactiveCardOptions').addClass('activeCardOptions').removeClass('inactiveCardOptions');
+        // }, 300)
+    }
 	
 })
 
@@ -283,8 +289,21 @@ function generateCard(thisCard, cardType, mode, thisSection) {
                     </div>
                 </div>
                 <div class="flip-card-back">
-                    <div data-animation-group="${thisSection}" class="cardContainer expanded" type="${cardType}"${cardType == 'plant' ? ` lighting="${thisCard.lighting.length}"` : ``}>
-                        <div data-animation-group="${thisSection}" class="cardContainerOverlay expanded">
+                    <div data-animation-group="${thisSection}" class="cardContainer expanded" type="${cardType}"${cardType == 'plant' ? ` lighting-num="${thisCard.lighting.length}"` : ``}`;
+                    if(cardType == 'plant') {
+                        thisCardHTML += ` lighting-types="`;
+                        for (let i = 0; i < thisCard.lighting.length; i++) {
+                            thisCardHTML += `${i != 0 ? ` ` : ``}${thisCard.lighting[i]}`;
+                        }
+                        thisCardHTML += `">`;
+                    } else if(cardType == 'room') {
+                        for (let i = 0; i < thisCard.lighting.length; i++) {
+                            thisCardHTML += ` lighting-${lightingContainerPositions[i]}="${thisCard.lighting[i]}"`;
+                        }
+                        thisCardHTML += `>`;
+                    }
+                    
+                    thisCardHTML += `<div data-animation-group="${thisSection}" class="cardContainerOverlay expanded">
                             <img data-animation-group="${thisSection}" class="${cardType} expanded animatingElem mediumTransition" src="img/${cardType}s/${thisCard.img}.jpg" alt="" style="transform-origin: left top;" />
                             ${cardType == 'plant' ? `
                             <div data-animation-group="${thisSection}" class="plantBannerContainer plantImgContainer expanded">
@@ -904,6 +923,9 @@ jQuery.fn.extend({
     parentToAnimate: function(newParent, duration) {
 
 		var $element = $(this);
+        var $oldParent = $element.parent()
+
+        
 
 		newParent = $(newParent); // Allow passing in either a JQuery object or selector
 		var oldOffset = $element.offset();
@@ -911,8 +933,6 @@ jQuery.fn.extend({
         var newOffset = $element.offset();
 
 		var temp = $element.clone().appendTo('body');
-
-        console.log($element[0].className);
 
 		if($element[0].className == 'cardContainer expanded activeCard') {
 
@@ -929,11 +949,16 @@ jQuery.fn.extend({
 			
 			if(newParent[0].offsetParent.id == 'mapHiddenOverlay') {
 
-				startWidth = $element[0].offsetWidth;
-				startHeight = $element[0].offsetHeight;
+                if($oldParent[0].className == 'mapTileContainer potentialPlacement activePotentialPlacement') {
+                    startWidth = $element[0].offsetWidth * zoomScale;
+                    startHeight = $element[0].offsetHeight * zoomScale;
+                } else {
+                    startWidth = $element[0].offsetWidth;
+				    startHeight = $element[0].offsetHeight;
+                }      
 				
-				endWidth = startWidth * zoomScale;
-				endHeight = startHeight * zoomScale;
+				endWidth = $element[0].offsetWidth * zoomScale;
+				endHeight = $element[0].offsetHeight * zoomScale;
 
 				startOpacity = 1;
 				endOpacity = 1;
