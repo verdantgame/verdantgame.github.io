@@ -5,6 +5,10 @@
    overflow: auto!important;
 }
 
+html, body {
+    background-color: #FFF;
+}
+
 html {	
     overflow-y: auto!important;
 	min-width: auto!important;
