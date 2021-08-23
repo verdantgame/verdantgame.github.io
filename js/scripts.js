@@ -1,5 +1,6 @@
 // If device is touch capable, use touch as the trigger, otherwise the user is using a desktop computer so use click
 var touchEvent = 'ontouchstart' in window ? 'touchstart' : 'click';
+touchEvent == 'touchstart' ? $('#container').addClass('touchDevice') : $('#container').addClass('nonTouchDevice');
 
 var allPlantCards = [];
 var allRoomCards = [];
@@ -17,36 +18,140 @@ let newView = '';
 
 function preloadImgsCallback(){
     $('#loaderLayer').fadeOut();
-    $('#setupLayer').fadeIn();  
+    $('#setupLayer').fadeIn();      
     checkScreenWidth();
     setupDrawPiles();
     initiateMap();  
 }
 
+$(document).ready(function(){
+    generateModalButtonNums();
+})
+
 $(window).resize(function() {
     checkScreenWidth();
 });
+
+$(document).on(touchEvent,'.gameSection.collapsed',function(){
+    swapActiveMainSection();
+}); 
+
+
+$(document).on(touchEvent,'.closeModalTrigger',function(){
+	$('.modal.is-active').removeClass('is-active');
+});
+
+$(document).on(touchEvent,'#maximizeScreenIcon',function(){
+	$(this).hide();
+    $('#minimizeScreenIcon').show();
+    openFullscreen();
+});
+
+$(document).on(touchEvent,'#minimizeScreenIcon',function(){
+	$(this).hide();
+    $('#maximizeScreenIcon').show();
+    closeFullscreen()
+});
+
+// $(document).on(touchEvent,'.modal.is-active .modal-background.closableModalBackground',function(){
+// 	$('.modal.is-active').removeClass('is-active');
+// });
+
+$(document).on(touchEvent,'#placeFirstPlantCardBtn',function(){
+    $('#tableauSection .gameSectionContent #homeContentContainer #playerInfoContainer #cardToPlace .cardContainer').addClass('activeCard');
+    generatePossibleMapPlacements();
+})
+
+
+$(document).on('mouseenter','.mapTileContainer.potentialPlacement.activePotentialPlacement:not(.temporaryPlacement)',function(){
+    console.log('mouseenter ping');
+	// the .potentialPlacement class has been previously add to every card container on the map to show the player where they can place the newly chosen tile on the map
+
+    $(this).addClass('cardPlacementPreview');
+
+	// target the currently hovered over tile
+	var thisTile = $(this);
+
+	// the tile+token pairing that had previously been clicked has the .chosenTokenTileContainer class assigned to it
+	// targeting the .tileContainer child, a copy of all of the tile information is now created on the map card that the user is currently hovering over
+	$('.cardContainer.activeCard').clone().appendTo(thisTile);
+
+	// copying all of the tile contents also copies over the yellow border into the map - which we don't need as the user can easily tell what card has just ben generated, so we can immediately delete this element from the newly generated tile html in the map
+	// $('.mapTileContainer.potentialPlacement .tileContainer .selectedTileOutline').remove();
+});
+
+$(document).on('mouseleave','.mapTileContainer.potentialPlacement.activePotentialPlacement.cardPlacementPreview:not(.temporaryPlacement)',function(){    
+	// once the user leaves a map card that is a potential placement, the tile that is currently being previewed is deleted
+    $(this).removeClass('cardPlacementPreview');
+	$('.mapTileContainer.potentialPlacement:not(.temporaryPlacement) .cardContainer').remove();
+});
+
+$(document).on(touchEvent,'.mapTileContainer.potentialPlacement.activePotentialPlacement:not(.temporaryPlacement)',function(){    
+    
+	if($('.mapTileContainer.potentialPlacement:not(.temporaryPlacement) .cardContainer').length) {
+		$('.mapTileContainer.potentialPlacement:not(.temporaryPlacement) .cardContainer').remove();
+	}
+
+    $('.cardPlacementPreview').removeClass('cardPlacementPreview');
+
+	var targID = $(this).attr('id');      
+
+    $('.mapTileContainer.potentialPlacement.temporaryPlacement').addClass('activePotentialPlacement').removeClass('temporaryPlacement');
+	$(this).removeClass('activePotentialPlacement').addClass('temporaryPlacement');
+
+	temporarilyLockMap(1000);
+    
+	$('.cardContainer.activeCard').parentToAnimate($('#' + targID), 1000);
+
+    // setTimeout(function(){
+	// 	checkLightingMatches();
+	// }, 1010)
+
+	// setTimeout(function(){
+	// 	$('#mapContainer #placedCardOptions').addClass('showOptions');
+	// 	$('.mobileCardPlacementOptions.inactiveCardOptions').addClass('activeCardOptions').removeClass('inactiveCardOptions');
+	// }, 300)
+	
+})
+
+function checkLightingMatches() {
+    // search 4 neighbours
+    // see if any have a placed card
+    // 
+}
+
+function generateModalButtonNums() {
+    $('.modal').each(function(){
+        let buttonNum = $(this).find('.button:not(.delete.closeModalTrigger)');
+        $(this).children('.modal-content').attr('btns', buttonNum.length);
+    });
+}
 
 function checkScreenWidth(){
     changeOfView = false;
 	var windowSize = $(window).width();
 
-	if(windowSize <= 539) {
+	if(windowSize > 1239) {
+		if(currentView != 'desktopView') {
+            $('body > #container').removeClass('mobileView tabletView').addClass('desktopView');
+			changeOfView = true;
+			newView = 'desktopView';
+		}
+	} else if(windowSize > 539) {
+		if(currentView != 'tabletView') {
+            $('body > #container').removeClass('mobileView desktopView').addClass('tabletView');
+			changeOfView = true;
+			newView = 'tabletView';
+		}
+	} else if(windowSize <= 539) {
 		if(currentView != 'mobileView') {
+            $('body > #container').removeClass('tabletView desktopView').addClass('mobileView');
 			changeOfView = true;
 			newView = 'mobileView';
 		}
-	} else if(windowSize > 539) {
-		if(currentView != 'wideScreenView') {
-			changeOfView = true;
-			newView = 'wideScreenView';
-		}
 	}
 
-	if(changeOfView) {
-        $('body > #container').removeClass('mobileView wideScreenView').addClass(newView);
-        currentView = newView;
-	}
+	if(changeOfView) currentView = newView;
 }
 
 function setupDrawPiles(){
@@ -71,9 +176,6 @@ function setupDrawPiles(){
     allRoomCards = shuffle(initRoomCards);
 
     // create and shuffle item tokens draw pile array
-
-    // var plantTypes = ['flowering', 'foliage', 'succulent', 'unusual', 'vining'];
-
     let initItemTokens = [];
     for (const [key, value] of Object.entries(itemsAndNurtureItems)) {
         for (let i = 0; i < value.length; i++) {
@@ -86,11 +188,8 @@ function setupDrawPiles(){
                     initItemTokens.push(`${key}_${itemsAndNurtureItems[key][i]}`);
                 }
             }
-            
         }
     }
-
-    // create and shuffle available plant pots
 
     let plantPots = ['concrete', 'wood', 'porcelain'];
     for (let i = 0; i < plantPots.length; i++) {
@@ -102,13 +201,7 @@ function setupDrawPiles(){
     
     allItemTokens = shuffle(initItemTokens);
 
-    // console.log(`allPlantCards: `, allPlantCards);
-    // console.log(`allRoomCards: `, allRoomCards);
-    // console.log(`allItemTokens: `, allItemTokens);
-    // console.log(`allPlantPots: `, allPlantPots);
-
     setupInitialCardsAndItems();
-
 }
 
 function setupInitialCardsAndItems() {
@@ -247,14 +340,12 @@ $(document).on(touchEvent, '#frontPageGameInstructionsButton', function(){
 let initMarketInterval;
 let initMarketFlipCardsInterval;
 
-// $(document).on(touchEvent, '#startGame', function(){
-//     quickMarketSetup();
-// });
-
 $(document).on(touchEvent, '#startGame', function(){
 	$('body').addClass('gameView');
 	$('.layer').fadeOut();
+    // if($('#container').hasClass('mobileView')) $('#mainVerdantTitle').fadeOut();
     setTimeout(function(){
+        // if($('#container').hasClass('mobileView')) $('#secondaryVerdantTitle').show();
         $('#gameLayer').fadeIn();
         setTimeout(function(){
             initMarketInterval = setInterval(initMarketFunc, 200);    
@@ -264,51 +355,6 @@ $(document).on(touchEvent, '#startGame', function(){
     $('#gameLayer #gameSectionsParent .minimized ion-icon[name="expand"]').show();
 });
 
-function quickMarketSetup() {
-    $('body').addClass('gameView');
-	$('#setupLayer.layer').hide();
-    $('#gameLayer.layer').show();
-    $('#gameLayer #gameSectionsParent .minimized ion-icon[name="expand"]').show();
-    $('.startingPos').addClass('notransition');
-    $('.startingPos').removeClass('startingPos');
-    $('.notransition')[0].offsetHeight;
-    $('.notransition').removeClass('notransition');
-    $('.flip-card-inner').addClass('notransition');
-    $('.flip-card-inner').css('transform', 'rotateY(180deg) translate3d(0, 0, 1px)');
-    $('.flip-card-inner')[0].offsetHeight;
-    $('.flip-card-inner').removeClass('notransition');
-    isolateFlipCardContents();
-    $('#marketSection').addClass('notransition');
-    $('#tableauSection').addClass('notransition');
-    $('#marketSection').addClass('minimized').removeClass('expanded');
-    $('#tableauSection').addClass('expanded').removeClass('minimized');
-    $('#marketSection')[0].offsetHeight;
-    $('#tableauSection')[0].offsetHeight;
-    $('#marketSection').removeClass('notransition');
-    $('#tableauSection').removeClass('notransition');
-    chooseStartingPlayerCards();
-    $('#playerInfoContainer #cardToPlace .flip-plant.startingPos').addClass('notransition');
-    $('#mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room.startingPos').addClass('notransition');
-    $('#playerInfoContainer #cardToPlace .flip-plant.startingPos').removeClass('startingPos')
-    $('#mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room.startingPos').removeClass('startingPos')
-    $('#playerInfoContainer #cardToPlace .flip-plant')[0].offsetHeight;
-    $('#mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room')[0].offsetHeight;
-    $('#playerInfoContainer #cardToPlace .flip-plant').removeClass('notransition');
-    $('#mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room').removeClass('notransition');
-    $('#playerInfoContainer #cardToPlace .flip-plant .flip-card-inner').addClass('notransition');
-    $('#mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room .flip-card-inner').addClass('notransition');
-    $('#playerInfoContainer #cardToPlace .flip-plant .flip-card-inner').css('transform', 'rotateY(180deg) translate3d(0, 0, 1px)'); 
-    $('#mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room .flip-card-inner').css('transform', 'rotateY(180deg) translate3d(0, 0, 1px)'); 
-    $('#playerInfoContainer #cardToPlace .flip-plant .flip-card-inner')[0].offsetHeight;
-    $('#mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room .flip-card-inner')[0].offsetHeight;
-    $('#playerInfoContainer #cardToPlace .flip-plant .flip-card-inner').removeClass('notransition');
-    $('#mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room .flip-card-inner').removeClass('notransition');
-    $('#homeContentContainer #playerInfoContainer #cardToPlace .flip-plant .flip-card-inner .flip-card-back .cardContainer').appendTo('#homeContentContainer #playerInfoContainer #cardToPlace');
-    $('#homeContentContainer #playerInfoContainer #cardToPlace .flip-plant').remove();
-    $('#homeContentContainer #mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room .flip-card-inner .flip-card-back .cardContainer').appendTo('#homeContentContainer #mapContainer #mapHiddenOverlay #row-2-column-4');
-    $('#homeContentContainer #mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room').remove();
-    $('.initSetup').removeClass('initSetup'); 
-}
 
 let currentColumn = 3;
 let currentMarketItem = 0;
@@ -367,22 +413,28 @@ function isolateFlipCardContents() {
 }
 
 function initPlayersHome() {
+
+    let initPlayersHomeTimeout = 0;
+
     $('.startingPosAnimate').removeClass('startingPosAnimate');
+
     swapActiveMainSection();
+
+    if(!$('#container').hasClass('desktopView')) initPlayersHomeTimeout = 800;
 
     setTimeout(function(){
         chooseStartingPlayerCards();
-    }, 800);
+    }, initPlayersHomeTimeout);
 
     setTimeout(function(){
         animateElem($('#playerInfoContainer #cardToPlace .flip-plant'), 'tableauStartingPos');
         animateElem($('#mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room'), 'tableauStartingPos');
-    }, 1000);
+    }, (initPlayersHomeTimeout + 200));
 
     setTimeout(function(){
         $('#playerInfoContainer #cardToPlace .flip-plant .flip-card-inner').css('transform', 'rotateY(180deg) translate3d(0, 0, 1px)'); 
         $('#mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room .flip-card-inner').css('transform', 'rotateY(180deg) translate3d(0, 0, 1px)'); 
-    }, 3300);
+    }, (initPlayersHomeTimeout + 2500)); 
 
     setTimeout(function(){
         $('#homeContentContainer #playerInfoContainer #cardToPlace .flip-plant .flip-card-inner .flip-card-back .cardContainer').appendTo('#homeContentContainer #playerInfoContainer #cardToPlace');
@@ -390,7 +442,8 @@ function initPlayersHome() {
         $('#homeContentContainer #mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room .flip-card-inner .flip-card-back .cardContainer').appendTo('#homeContentContainer #mapContainer #mapHiddenOverlay #row-2-column-4');
         $('#homeContentContainer #mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room').remove();
         $('.initSetup').removeClass('initSetup');
-    }, 3850);
+        $('#placeFirstCardModal').addClass('is-active');
+    }, (initPlayersHomeTimeout + 3050)); 
 }
 
 function chooseStartingPlayerCards() {
@@ -401,7 +454,10 @@ function chooseStartingPlayerCards() {
     let startingRoomHTML = generateCard(startingRoom[0], 'room', 'init', 'tableau');
 
     $('#playerInfoContainer #cardToPlace').append(startingPlantHTML);
+    $('#playerInfoContainer #cardToPlace').attr('cardtype', 'plant');
+    
     $('#mapContainer #mapHiddenOverlay #row-2-column-4').append(startingRoomHTML);
+    $('#mapContainer #mapHiddenOverlay #row-2-column-4').attr('cardtype', 'room');
 }
 
 $(document).on(touchEvent, '#gameLayer #gameSectionsParent .minimized:not(.initSetup)', function(){
@@ -418,6 +474,8 @@ $(document).on(touchEvent, '#gameLayer #gameSectionsParent .minimized:not(.initS
 
 });
 
+let lockMap = false;
+
 let allDirections = ['up', 'down', 'left', 'right'];
 
 let mapData = [];
@@ -433,7 +491,28 @@ var mapMoveAmount = {
 		'left': 0
 	},
 	'view':{
-		'wideScreenView': {
+		'desktopView': {
+            'zoomIncs': {
+                '11': {
+                    'vertical': '61.5',
+                    'horizontal': '59'
+                },
+                '9': {
+                    'vertical': '75.5',
+                    'horizontal': '96'
+                },
+                '7': {
+                    'vertical': '58.5',
+                    'horizontal': '75'
+                },
+                '5': {
+                    'vertical': '42',
+                    'horizontal': '37.5'
+                },
+            },
+			'unit': 'px'
+		},
+        'tabletView': {
             'zoomIncs': {
                 '11': {
                     'vertical': '61.5',
@@ -515,7 +594,6 @@ var mapStats = {
 
 var zoomLevel = 9;
 var lockFunction = false;
-var lockMap = false;
 
 // how big the generated map is
 // up-down = 0-4 limits
@@ -551,10 +629,10 @@ function initiateMap() {
 
 function generateMap() {
 	// the map HTML script
-	var mapHTML = `<div id="mapHiddenOverlay">`;
+	var mapHTML = `<div id="mapHiddenOverlay" style="transform: scale(0.9);">`;
 	for (let i = 0; i < mapData.length; i++) {
 		for (let j = 0; j < mapData[i].length; j++) {
-			mapHTML += `<div id="row-${mapData[i][j].row}-column-${mapData[i][j].column}" class="mapTileContainer row-${mapData[i][j].row} column-${mapData[i][j].column}"></div>`;
+			mapHTML += `<div data-map-row="${mapData[i][j].row}" data-map-column="${mapData[i][j].column}" id="row-${mapData[i][j].row}-column-${mapData[i][j].column}" class="mapTileContainer"></div>`;
 		}
 	}
     mapHTML += `
@@ -614,6 +692,13 @@ $(document).on(touchEvent,'#mapNavControls .arrowImg',function(){
 	let thisDirection = $(this).data('direction');
 	processMapMovement(thisDirection);
 });
+
+function temporarilyLockMap(timePeriod) {
+	lockMap = true;
+	setTimeout(function(){
+		lockMap = false;
+	}, timePeriod);
+}
 
 
 function processMapMovement(thisDirection){
@@ -763,6 +848,137 @@ function updateMapPosition(moveDirection) {
 	}
 }
 
+function generatePossibleMapPlacements(){
+    let cardTypeToPlace = $('#tableauSection .gameSectionContent #homeContentContainer #playerInfoContainer #cardToPlace').attr('cardtype');
+    showPotentialPlacements(cardTypeToPlace);
+}
+
+let validCardTypeNeighbours = {
+    'plant': 'room',
+    'room': 'plant'
+}
+
+let validNeighbourIDs = [];
+
+// data-map-row="${mapData[i][j].row}"
+// data-map-column="${mapData[i][j].column}"
+
+function showPotentialPlacements(currentCardType) {
+    validNeighbourIDs = [];
+    $('.mapTileContainer').each(function(){
+        let placedCardType = $(this).attr('cardtype');
+        if (typeof placedCardType !== 'undefined' && placedCardType !== false) {
+            if(placedCardType == validCardTypeNeighbours[currentCardType]) checkSurroundingValidPlacements($(this));
+        }
+    });
+
+    let uniquePlacementIDs = validNeighbourIDs.filter(onlyUnique);
+
+    for (let i = 0; i < uniquePlacementIDs.length; i++) {
+        $(`#${uniquePlacementIDs[i]}`).addClass('potentialPlacement activePotentialPlacement');
+    }
+}
+
+function checkSurroundingValidPlacements(thisCard){
+    let thisRow = parseInt(thisCard.data('map-row'));
+    let thisColumn = parseInt(thisCard.data('map-column'));
+
+    let testPlacements = [
+        `#row-${thisRow - 1}-column-${thisColumn}`,
+        `#row-${thisRow + 1}-column-${thisColumn}`,
+        `#row-${thisRow}-column-${thisColumn - 1}`,
+        `#row-${thisRow}-column-${thisColumn + 1}`
+    ]
+
+    for (let i = 0; i < testPlacements.length; i++) {
+        let thisAttr = $(`${testPlacements[i]}`).attr('placedCardType');
+        if (typeof thisAttr === 'undefined' || thisAttr === false) {
+            validNeighbourIDs.push($(`${testPlacements[i]}`).attr('id'));
+        };
+    }
+}
+
+
+jQuery.fn.extend({
+    // Modified and Updated by MLM
+    // Origin: Davy8 (http://stackoverflow.com/a/5212193/796832)
+    parentToAnimate: function(newParent, duration) {
+
+		var $element = $(this);
+
+		newParent = $(newParent); // Allow passing in either a JQuery object or selector
+		var oldOffset = $element.offset();
+        $(this).appendTo(newParent);
+        var newOffset = $element.offset();
+
+		var temp = $element.clone().appendTo('body');
+
+        console.log($element[0].className);
+
+		if($element[0].className == 'cardContainer expanded activeCard') {
+
+			let zoomScale = Number(zoomLevel)/10;
+
+			let startWidth = 0;
+			let startHeight = 0;
+			let endWidth = 0;
+			let endHeight = 0;
+
+			let startOpacity = 0;
+			let endOpacity = 0;
+
+			
+			if(newParent[0].offsetParent.id == 'mapHiddenOverlay') {
+
+				startWidth = $element[0].offsetWidth;
+				startHeight = $element[0].offsetHeight;
+				
+				endWidth = startWidth * zoomScale;
+				endHeight = startHeight * zoomScale;
+
+				startOpacity = 1;
+				endOpacity = 1;
+
+			} else if(newParent[0].offsetParent.id == 'playerInfoContainer') {
+
+				endWidth = $element[0].offsetWidth;
+				endHeight = $element[0].offsetHeight;
+				
+				startWidth = endWidth * zoomScale;
+				startHeight = endHeight * zoomScale;
+
+				startOpacity = 1;
+				endOpacity = 0.75;
+
+			}
+            
+			temp.css({
+                'width': startWidth,
+				'height': startHeight,
+				'position': 'absolute',
+                'top': oldOffset.top,
+				'left': oldOffset.left,
+				'opacity': startOpacity,
+				'zIndex': 1000
+			});
+			
+			$element.hide();
+
+			temp.animate({
+				'width': endWidth,
+				'height': endHeight,
+                'top': newOffset.top,
+				'left': newOffset.left,
+				'opacity': endOpacity
+			}, duration, function() {
+				$element.show();
+				temp.remove();
+			});
+		}
+
+    }
+});
+
 function countInArray(array, what) {
     var count = 0;
     for (var i = 0; i < array.length; i++) {
@@ -848,9 +1064,27 @@ function shuffle(array) {
 }
 
 
-$(document).on(touchEvent,'.gameSection.collapsed',function(){
-    swapActiveMainSection();
-    // setTimeout(function(){
-    //     resetAnimationClasses();
-    // }, 750);
-});
+/* Get the documentElement (<html>) to display the page in fullscreen */
+var elem = document.documentElement;
+
+/* View in fullscreen */
+function openFullscreen() {
+  if (elem.requestFullscreen) {
+    elem.requestFullscreen();
+  } else if (elem.webkitRequestFullscreen) { /* Safari */
+    elem.webkitRequestFullscreen();
+  } else if (elem.msRequestFullscreen) { /* IE11 */
+    elem.msRequestFullscreen();
+  }
+}
+
+/* Close fullscreen */
+function closeFullscreen() {
+  if (document.exitFullscreen) {
+    document.exitFullscreen();
+  } else if (document.webkitExitFullscreen) { /* Safari */
+    document.webkitExitFullscreen();
+  } else if (document.msExitFullscreen) { /* IE11 */
+    document.msExitFullscreen();
+  }
+}
