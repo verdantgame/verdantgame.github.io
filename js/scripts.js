@@ -2,6 +2,9 @@
 var touchEvent = 'ontouchstart' in window ? 'touchstart' : 'click';
 touchEvent == 'touchstart' ? $('#container').addClass('touchDevice') : $('#container').addClass('nonTouchDevice');
 
+// for (const [key, value] of Object.entries(myObject)) {
+// }
+
 var allPlantCards = [];
 var allRoomCards = [];
 var allItemTokens = [];
@@ -16,28 +19,178 @@ let changeOfView = false;
 let currentView = '';
 let newView = '';
 
-function preloadImgsCallback(){
-    $('#loaderLayer').fadeOut();
-    $('#setupLayer').fadeIn();      
-    checkScreenWidth();
-    setupDrawPiles();
-    initiateMap();  
+let startingPlacement = true;
+
+let oppositeType = {
+    'plant': 'room',
+    'room': 'plant'
 }
 
+let oppositePos = {
+    'top': 'bottom',
+    'right': 'left',
+    'bottom': 'top',
+    'left': 'right'
+}
+
+let mapVerdancyVisible = false;
+
 $(document).ready(function(){
+    checkScreenWidth();
     generateModalButtonNums();
+    $('#loaderLayer').fadeIn('fast');
+    setTimeout(function(){
+        $.getScript("js/image-preloader.js");
+    }, 210);
 })
+
+function preloadImgsCallback(){
+    $('#loaderLayer').fadeOut();
+    setTimeout(function(){
+        $('#setupLayer').fadeIn();
+        setupDrawPiles();
+        initiateMap();  
+    }, 400);
+}
+
+var rulesURL = 'files/rules.pdf';
+
+$(document).on(touchEvent, '#frontPageGameInstructionsButton', function(){
+	openInNewTab(rulesURL);
+});
+
+$(document).on(touchEvent, '#startGame', function(){
+	$('.layer').fadeOut();
+    setTimeout(function(){
+        $('body').addClass('gameView');
+        $('#gameLayer').fadeIn();
+        setTimeout(function(){
+            initMarketInterval = setInterval(initMarketFunc, 200);    
+        }, 400);
+    }, 400);
+	
+    $('#gameLayer #gameSectionsParent .collapsed ion-icon[name="expand"]').show();
+});
+
+function initMarketFunc(){
+    let marketItemClasses = ['.plantPotContainer', '.cardsAndItemContainer .flip-plant', '.cardsAndItemContainer .itemToken', '.cardsAndItemContainer .flip-room'];
+    $(`.marketColumn[column="${currentColumn}"] ${marketItemClasses[currentMarketItem]}`).removeClass('startingPos');
+    currentColumn--;
+    if(currentColumn == -1 && (currentMarketItem + 1) < marketItemClasses.length) {
+        currentColumn = 3;
+        currentMarketItem++;
+        clearInterval(initMarketInterval);
+        setTimeout(function(){
+            initMarketInterval = setInterval(initMarketFunc, 200);
+        }, 250)
+    } else if(currentColumn == -1 && (currentMarketItem + 1) == marketItemClasses.length) {
+        clearInterval(initMarketInterval);
+        currentColumn = 3;
+        currentMarketItem = 0;
+        setTimeout(function(){
+            initMarketFlipCardsInterval = setInterval(flipInitMarketCards, 300);    
+        }, 1000);
+    }
+}
+
+function flipInitMarketCards() {
+    let marketFlipCardClasses = ['.cardsAndItemContainer .flip-plant .flip-card-inner', '.cardsAndItemContainer .flip-room .flip-card-inner'];
+    $(`.marketColumn[column="${currentColumn}"] ${marketFlipCardClasses[currentMarketItem]}`).css('transform', 'rotateY(180deg) translate3d(0, 0, 1px)'); 
+    currentColumn--;
+    if(currentColumn == -1 && (currentMarketItem + 1) < marketFlipCardClasses.length) {
+        currentColumn = 3;
+        currentMarketItem++;
+    } else if(currentColumn == -1 && (currentMarketItem + 1) == marketFlipCardClasses.length) {
+        clearInterval(initMarketFlipCardsInterval);
+        setTimeout(function(){
+            isolateFlipCardContents();
+            setTimeout(function(){
+                initPlayersHome();
+            }, 300);
+        }, 550);
+    }
+}
+
+function isolateFlipCardContents() {
+    $('.cardsAndItemContainer .flip-plant .flip-card-inner .flip-card-back .cardContainer').each(function(){
+        let columnNum = $(this).closest('.marketColumn').attr('column');
+        $(this).prependTo(`.marketColumn[column="${columnNum}"] .cardsAndItemContainer`);
+    });
+
+    $('.cardsAndItemContainer .flip-room .flip-card-inner .flip-card-back .cardContainer').each(function(){
+        let columnNum = $(this).closest('.marketColumn').attr('column');
+        $(this).appendTo(`.marketColumn[column="${columnNum}"] .cardsAndItemContainer`);
+    });
+    
+    $('.flip-card').remove();
+}
+
+function initPlayersHome() {
+
+    let initPlayersHomeTimeout = 0;
+
+    $('.startingPosAnimate').removeClass('startingPosAnimate');
+
+    swapActiveMainSection();
+
+    if(!$('#container').hasClass('desktopView')) initPlayersHomeTimeout = 800;
+
+    setTimeout(function(){
+        chooseStartingPlayerCards();
+    }, initPlayersHomeTimeout);
+
+    setTimeout(function(){
+        animateElem($('#playerInfoContainer #cardToPlace .flip-plant'), 'tableauStartingPos');
+        animateElem($('#mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room'), 'tableauStartingPos');
+    }, (initPlayersHomeTimeout + 200));
+
+    setTimeout(function(){
+        $('#playerInfoContainer #cardToPlace .flip-plant .flip-card-inner').css('transform', 'rotateY(180deg) translate3d(0, 0, 1px)'); 
+        $('#mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room .flip-card-inner').css('transform', 'rotateY(180deg) translate3d(0, 0, 1px)'); 
+    }, (initPlayersHomeTimeout + 2500)); 
+
+    setTimeout(function(){
+        $('#homeContentContainer #playerInfoContainer #cardToPlace .flip-plant .flip-card-inner .flip-card-back .cardContainer').appendTo('#homeContentContainer #playerInfoContainer #cardToPlace');
+        $('#homeContentContainer #playerInfoContainer #cardToPlace .flip-plant').remove();
+        $('#homeContentContainer #mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room .flip-card-inner .flip-card-back .cardContainer').appendTo('#homeContentContainer #mapContainer #mapHiddenOverlay #row-2-column-4');
+        $('#homeContentContainer #mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room').remove();
+        $('.initSetup').removeClass('initSetup');
+        $('#tableauSection .gameSectionContent #homeContentContainer #playerInfoContainer #cardToPlace .cardContainer').addClass('activeCard');
+        $('#placeFirstCardModal').addClass('is-active');
+    }, (initPlayersHomeTimeout + 3050)); 
+}
+
+function chooseStartingPlayerCards() {
+    let startingPlant = allPlantCards.splice(0, 1);
+    let startingRoom = allRoomCards.splice(0, 1);
+
+    let startingPlantHTML = generateCard(startingPlant[0], 'plant', 'init', 'tableau');
+    let startingRoomHTML = generateCard(startingRoom[0], 'room', 'init', 'tableau');
+
+    $('#playerInfoContainer #cardToPlace').append(startingPlantHTML);
+    $('#playerInfoContainer #cardToPlace').attr('cardtype', 'plant');
+    
+    $('#mapContainer #mapHiddenOverlay #row-2-column-4').append(startingRoomHTML);
+    $('#mapContainer #mapHiddenOverlay #row-2-column-4').attr('cardtype', 'room');
+}
+
+$(document).on(touchEvent, '#placeFirstPlantCardBtn', function(){
+    generatePossibleMapPlacements();
+});
 
 $(window).resize(function() {
     checkScreenWidth();
 });
 
-$(document).on(touchEvent,'.gameSection.collapsed',function(){
+$(document).on(touchEvent,'.gameSection.collapsed:not(.initSetup)',function(){
     swapActiveMainSection();
 }); 
 
-
 $(document).on(touchEvent,'.closeModalTrigger',function(){
+	$('.modal.is-active').removeClass('is-active');
+});
+
+$(document).on(touchEvent,'.modal.is-active .modal-background.closableModalBackground',function(){
 	$('.modal.is-active').removeClass('is-active');
 });
 
@@ -45,7 +198,6 @@ $(document).on(touchEvent,'#maximizeScreenIcon',function(){
 	$(this).hide();
     $('#minimizeScreenIcon').show();
     openFullscreen();
-
 });
 
 $(document).on(touchEvent,'#minimizeScreenIcon',function(){
@@ -53,78 +205,6 @@ $(document).on(touchEvent,'#minimizeScreenIcon',function(){
     $('#maximizeScreenIcon').show();
     closeFullscreen();
 });
-
-// $(document).on(touchEvent,'.modal.is-active .modal-background.closableModalBackground',function(){
-// 	$('.modal.is-active').removeClass('is-active');
-// });
-
-$(document).on(touchEvent,'#placeFirstPlantCardBtn',function(){
-    $('#tableauSection .gameSectionContent #homeContentContainer #playerInfoContainer #cardToPlace .cardContainer').addClass('activeCard');
-    generatePossibleMapPlacements();
-});
-
-$(document).on('mouseenter','#mapContainer.expanded .mapTileContainer.potentialPlacement.activePotentialPlacement:not(.temporaryPlacement)',function(){
-    if(!lockMap) {
-        // the .potentialPlacement class has been previously add to every card container on the map to show the player where they can place the newly chosen tile on the map
-
-        $(this).addClass('cardPlacementPreview');
-
-        // target the currently hovered over tile
-        var thisTile = $(this);
-
-        // the tile+token pairing that had previously been clicked has the .chosenTokenTileContainer class assigned to it
-        // targeting the .tileContainer child, a copy of all of the tile information is now created on the map card that the user is currently hovering over
-        $('.cardContainer.activeCard').clone().appendTo(thisTile);
-
-        // copying all of the tile contents also copies over the yellow border into the map - which we don't need as the user can easily tell what card has just ben generated, so we can immediately delete this element from the newly generated tile html in the map
-        // $('#mapContainer.expanded .mapTileContainer.potentialPlacement .tileContainer .selectedTileOutline').remove();
-    }
-});
-
-$(document).on('mouseleave','#mapContainer.expanded .mapTileContainer.potentialPlacement.activePotentialPlacement.cardPlacementPreview:not(.temporaryPlacement)',function(){    
-    if(!lockMap) {
-        // once the user leaves a map card that is a potential placement, the tile that is currently being previewed is deleted
-        $(this).removeClass('cardPlacementPreview');
-        $('#mapContainer.expanded .mapTileContainer.potentialPlacement:not(.temporaryPlacement) .cardContainer').remove();
-    }
-});
-
-$(document).on(touchEvent,'#mapContainer.expanded .mapTileContainer.potentialPlacement.activePotentialPlacement:not(.temporaryPlacement)',function(){    
-    if(!lockMap) {
-        lockMap = true;
-        if($('#mapContainer.expanded .mapTileContainer.potentialPlacement:not(.temporaryPlacement) .cardContainer').length) {
-            $('#mapContainer.expanded .mapTileContainer.potentialPlacement:not(.temporaryPlacement) .cardContainer').remove();
-        }
-
-        $('.cardPlacementPreview').removeClass('cardPlacementPreview');
-
-        var targID = $(this).attr('id');      
-
-        $('#mapContainer.expanded .mapTileContainer.potentialPlacement.temporaryPlacement').addClass('activePotentialPlacement').removeClass('temporaryPlacement');
-        $(this).removeClass('activePotentialPlacement').addClass('temporaryPlacement');
-
-        temporarilyLockMap(1000);
-        
-        $('.cardContainer.activeCard').parentToAnimate($('#' + targID), 1000);
-
-        setTimeout(function(){
-        	lockMap = false;
-            // checkLightingMatches()
-        }, 1100)
-
-        // setTimeout(function(){
-        // 	$('#mapContainer #placedCardOptions').addClass('showOptions');
-        // 	$('.mobileCardPlacementOptions.inactiveCardOptions').addClass('activeCardOptions').removeClass('inactiveCardOptions');
-        // }, 300)
-    }
-	
-})
-
-function checkLightingMatches() {
-    // search 4 neighbours
-    // see if any have a placed card
-    // 
-}
 
 function generateModalButtonNums() {
     $('.modal').each(function(){
@@ -251,34 +331,6 @@ function setupInitialCardsAndItems() {
 
 }
 
-$(document).on('mouseenter','#container.wideScreenView #marketSection.gameSection:not(.animatingElem):not(.initSetup) #marketCardColumns .marketColumn .cardsAndItemContainer',function(){
-	$(this).closest('.marketColumn').addClass('activeColumn');
-    $(this).closest('#marketCardColumns').addClass('activeColumnView');
-});
-
-$(document).on('mouseleave','#container.wideScreenView #marketSection.gameSection:not(.animatingElem):not(.initSetup) #marketCardColumns .marketColumn .cardsAndItemContainer',function(){
-	$('.activeColumn').addClass('deactivedColumn').removeClass('activeColumn');
-    $('.activeColumnView').removeClass('activeColumnView');
-    setTimeout(function(){
-        $('.deactivedColumn').removeClass('deactivedColumn');
-    }, 200);
-});
-
-$(document).on(touchEvent,'#container.mobileView #marketSection.gameSection:not(.animatingElem):not(.initSetup) #marketCardColumns .marketColumn .cardsAndItemContainer',function(){
-	$(this).closest('.marketColumn').addClass('activeColumn');
-    $(this).closest('#marketCardColumns').addClass('activeColumnView');
-});
-
-$(document).on(touchEvent,'#container.mobileView #marketSection.gameSection:not(.animatingElem):not(.initSetup) #marketCardColumns .marketColumn .cardsAndItemContainer',function(){
-	$('.activeColumn').addClass('deactivedColumn').removeClass('activeColumn');
-    $('.activeColumnView').removeClass('activeColumnView');
-    setTimeout(function(){
-        $('.deactivedColumn').removeClass('deactivedColumn');
-    }, 100);
-});
-
-let lightingContainerPositions = ['top', 'right', 'bottom', 'left'];
-let lightingSymbolNumbers = ['one', 'two', 'three'];
 
 function generateCard(thisCard, cardType, mode, thisSection) {
 	var thisCardHTML = `
@@ -290,23 +342,56 @@ function generateCard(thisCard, cardType, mode, thisSection) {
                     </div>
                 </div>
                 <div class="flip-card-back">
-                    <div data-animation-group="${thisSection}" class="cardContainer expanded" type="${cardType}"${cardType == 'plant' ? ` lighting-num="${thisCard.lighting.length}"` : ``}`;
+                    <div data-animation-group="${thisSection}" class="cardContainer expanded" type="${cardType}"${cardType == 'plant' ? ` data-lighting-num="${thisCard.lighting.length}"` : ``}`;
                     if(cardType == 'plant') {
-                        thisCardHTML += ` lighting-types="`;
+                        thisCardHTML += ` data-lighting-types="`;
                         for (let i = 0; i < thisCard.lighting.length; i++) {
                             thisCardHTML += `${i != 0 ? ` ` : ``}${thisCard.lighting[i]}`;
                         }
                         thisCardHTML += `">`;
                     } else if(cardType == 'room') {
                         for (let i = 0; i < thisCard.lighting.length; i++) {
-                            thisCardHTML += ` lighting-${lightingContainerPositions[i]}="${thisCard.lighting[i]}"`;
+                            thisCardHTML += ` data-lighting-${lightingContainerPositions[i]}="${thisCard.lighting[i]}"`;
                         }
                         thisCardHTML += `>`;
                     }
+
+                    if(cardType == 'plant') {
+                        thisCardHTML += `
+                            <div class="verdancyIconsAndVPLayer" verdancy-icons="${thisCard.verdancyRequired}" verdancy-completed="0">
+                                <img class="verdancyLayerBadge verdancyLayerImg" src="img/plants/icons/badges/${thisCard.plantType}.png" alt="" />
+                                <img class="vpReminderIcon verdancyLayerImg" src="img/plants/icons/vp/${thisCard.vps}.png" />
+                            `;
+
+                            for (let i = 0; i < thisCard.lighting.length; i++) {
+                                thisCardHTML += `
+                                    <img data-lighting-type="${thisCard.lighting[i]}" class="verdancyLightingIcon verdancyLightingIcon-${lightingSymbolNumbers[i]}" src="img/lighting/${thisCard.lighting[i]}.png" />
+                                `;
+                            }
+
+                            thisCardHTML += `
+                                <div class="verdancyIconsParentContainer">
+                            `;
+                        for (let i = 0; i < thisCard.verdancyRequired; i++) {
+                            thisCardHTML += `
+                                <div class="verdancyIconContainer incompleteVerdancy" data-verdancy-icon-num="${i}">
+                                    <div class="verdancyIconPosContainer">
+                                        <img class="verdancyIcon incompleteVerdancyIcon" src="img/verdancy-inactive.png" />
+                                        <img class="verdancyIcon completeVerdancyIcon" src="img/verdancy-active.png" />
+                                    </div> 
+                                </div>
+                            `;
+                        }
+                        thisCardHTML += `
+                                </div>
+                            </div>
+                        `;
+                    }
                     
                     thisCardHTML += `<div data-animation-group="${thisSection}" class="cardContainerOverlay expanded">
-                            <img data-animation-group="${thisSection}" class="${cardType} expanded animatingElem mediumTransition" src="img/${cardType}s/${thisCard.img}.jpg" alt="" style="transform-origin: left top;" />
-                            ${cardType == 'plant' ? `
+                        <img data-animation-group="${thisSection}" class="${cardType} expanded animatingElem mediumTransition" src="img/${cardType}s/${thisCard.img}.jpg" alt="" style="transform-origin: left top;" />
+                        
+                        ${cardType == 'plant' ? `
                             <div data-animation-group="${thisSection}" class="plantBannerContainer plantImgContainer expanded">
                                 <img data-animation-group="${thisSection}" class="plantBanner plantImg expanded animatingElem mediumTransition" src="img/plants/icons/banners/${thisCard.plantType}.png" alt="" style="transform-origin: left top;" />
                             </div>
@@ -319,13 +404,13 @@ function generateCard(thisCard, cardType, mode, thisSection) {
                             <div data-animation-group="${thisSection}" class="plantVPsContainer plantImgContainer expanded">
                                 <img data-animation-group="${thisSection}" class="plantVPs plantImg expanded animatingElem mediumTransition" src="img/plants/icons/vp/${thisCard.vps}.png" alt="" style="transform-origin: left top;" />
                             </div>
-                            ` : ``}
+                        ` : ``}
                             
     `;
 
     for (let i = 0; i < thisCard.lighting.length; i++) {
         thisCardHTML += `
-            <div data-animation-group="${thisSection}" class="lightingIconContainer lightingIconContainer-${cardType == 'room' ? `${lightingContainerPositions[i]}` : `${lightingSymbolNumbers[i]}`} expanded" >
+            <div data-animation-group="${thisSection}" data-lighting-type="${thisCard.lighting[i]}" class="lightingIconContainer lightingIconContainer-${cardType == 'room' ? `${lightingContainerPositions[i]}` : `${lightingSymbolNumbers[i]}`} expanded">
                 <img data-animation-group="${thisSection}" class="lightingIcon${cardType == 'plant' ? ` lightingIcon-${lightingSymbolNumbers[i]}` : ``} expanded animatingElem mediumTransition" src="img/lighting/${thisCard.lighting[i]}.png" alt="" style="transform-origin: left top;" />
             </div>
         `;
@@ -350,134 +435,41 @@ function generateItem(thisItem, mode) {
 	return thisItemHTML;
 }
 
-var rulesURL = 'files/rules.pdf';
-
-$(document).on(touchEvent, '#frontPageGameInstructionsButton', function(){
-	openInNewTab(rulesURL);
+$(document).on('mouseenter','#container.desktopView #marketSection.gameSection:not(.initSetup) #marketCardColumns .marketColumn',function(){
+	$(this).addClass('activeColumn');
+    $(this).closest('#marketCardColumns').addClass('activeColumnView');
 });
+
+$(document).on('mouseleave','#container.desktopView #marketSection.gameSection:not(.initSetup) #marketCardColumns .marketColumn .cardsAndItemContainer',function(){
+	$('.activeColumn').addClass('deactivedColumn').removeClass('activeColumn');
+    $('.activeColumnView').removeClass('activeColumnView');
+    setTimeout(function(){
+        $('.deactivedColumn').removeClass('deactivedColumn');
+    }, 200);
+});
+
+$(document).on(touchEvent,'#container.mobileView #marketSection.gameSection:not(.animatingElem):not(.initSetup) #marketCardColumns .marketColumn',function(){
+	$(this).closest('.marketColumn').addClass('activeColumn');
+    $(this).closest('#marketCardColumns').addClass('activeColumnView');
+});
+
+$(document).on(touchEvent,'#container.mobileView #marketSection.gameSection:not(.animatingElem):not(.initSetup) #marketCardColumns .marketColumn',function(){
+	$('.activeColumn').addClass('deactivedColumn').removeClass('activeColumn');
+    $('.activeColumnView').removeClass('activeColumnView');
+    setTimeout(function(){
+        $('.deactivedColumn').removeClass('deactivedColumn');
+    }, 100);
+});
+
+let lightingContainerPositions = ['top', 'right', 'bottom', 'left'];
+let lightingSymbolNumbers = ['one', 'two', 'three'];
 
 let initMarketInterval;
 let initMarketFlipCardsInterval;
 
-$(document).on(touchEvent, '#startGame', function(){
-	$('body').addClass('gameView');
-	$('.layer').fadeOut();
-    // if($('#container').hasClass('mobileView')) $('#mainVerdantTitle').fadeOut();
-    setTimeout(function(){
-        // if($('#container').hasClass('mobileView')) $('#secondaryVerdantTitle').show();
-        $('#gameLayer').fadeIn();
-        setTimeout(function(){
-            initMarketInterval = setInterval(initMarketFunc, 200);    
-        }, 400);
-    }, 400);
-	
-    $('#gameLayer #gameSectionsParent .collapsed ion-icon[name="expand"]').show();
-});
-
-
 let currentColumn = 3;
 let currentMarketItem = 0;
 
-function initMarketFunc(){
-    let marketItemClasses = ['.plantPotContainer', '.cardsAndItemContainer .flip-plant', '.cardsAndItemContainer .itemToken', '.cardsAndItemContainer .flip-room'];
-    $(`.marketColumn[column="${currentColumn}"] ${marketItemClasses[currentMarketItem]}`).removeClass('startingPos');
-    currentColumn--;
-    if(currentColumn == -1 && (currentMarketItem + 1) < marketItemClasses.length) {
-        currentColumn = 3;
-        currentMarketItem++;
-        clearInterval(initMarketInterval);
-        setTimeout(function(){
-            initMarketInterval = setInterval(initMarketFunc, 200);
-        }, 250)
-    } else if(currentColumn == -1 && (currentMarketItem + 1) == marketItemClasses.length) {
-        clearInterval(initMarketInterval);
-        currentColumn = 3;
-        currentMarketItem = 0;
-        setTimeout(function(){
-            initMarketFlipCardsInterval = setInterval(flipInitMarketCards, 300);    
-        }, 1000);
-    }
-}
-
-function flipInitMarketCards() {
-    let marketFlipCardClasses = ['.cardsAndItemContainer .flip-plant .flip-card-inner', '.cardsAndItemContainer .flip-room .flip-card-inner'];
-    $(`.marketColumn[column="${currentColumn}"] ${marketFlipCardClasses[currentMarketItem]}`).css('transform', 'rotateY(180deg) translate3d(0, 0, 1px)'); 
-    currentColumn--;
-    if(currentColumn == -1 && (currentMarketItem + 1) < marketFlipCardClasses.length) {
-        currentColumn = 3;
-        currentMarketItem++;
-    } else if(currentColumn == -1 && (currentMarketItem + 1) == marketFlipCardClasses.length) {
-        clearInterval(initMarketFlipCardsInterval);
-        setTimeout(function(){
-            isolateFlipCardContents();
-            setTimeout(function(){
-                initPlayersHome();
-            }, 300);
-        }, 550);
-    }
-}
-
-function isolateFlipCardContents() {
-    $('.cardsAndItemContainer .flip-plant .flip-card-inner .flip-card-back .cardContainer').each(function(){
-        let columnNum = $(this).closest('.marketColumn').attr('column');
-        $(this).prependTo(`.marketColumn[column="${columnNum}"] .cardsAndItemContainer`);
-    });
-
-    $('.cardsAndItemContainer .flip-room .flip-card-inner .flip-card-back .cardContainer').each(function(){
-        let columnNum = $(this).closest('.marketColumn').attr('column');
-        $(this).appendTo(`.marketColumn[column="${columnNum}"] .cardsAndItemContainer`);
-    });
-    
-    $('.flip-card').remove();
-}
-
-function initPlayersHome() {
-
-    let initPlayersHomeTimeout = 0;
-
-    $('.startingPosAnimate').removeClass('startingPosAnimate');
-
-    swapActiveMainSection();
-
-    if(!$('#container').hasClass('desktopView')) initPlayersHomeTimeout = 800;
-
-    setTimeout(function(){
-        chooseStartingPlayerCards();
-    }, initPlayersHomeTimeout);
-
-    setTimeout(function(){
-        animateElem($('#playerInfoContainer #cardToPlace .flip-plant'), 'tableauStartingPos');
-        animateElem($('#mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room'), 'tableauStartingPos');
-    }, (initPlayersHomeTimeout + 200));
-
-    setTimeout(function(){
-        $('#playerInfoContainer #cardToPlace .flip-plant .flip-card-inner').css('transform', 'rotateY(180deg) translate3d(0, 0, 1px)'); 
-        $('#mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room .flip-card-inner').css('transform', 'rotateY(180deg) translate3d(0, 0, 1px)'); 
-    }, (initPlayersHomeTimeout + 2500)); 
-
-    setTimeout(function(){
-        $('#homeContentContainer #playerInfoContainer #cardToPlace .flip-plant .flip-card-inner .flip-card-back .cardContainer').appendTo('#homeContentContainer #playerInfoContainer #cardToPlace');
-        $('#homeContentContainer #playerInfoContainer #cardToPlace .flip-plant').remove();
-        $('#homeContentContainer #mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room .flip-card-inner .flip-card-back .cardContainer').appendTo('#homeContentContainer #mapContainer #mapHiddenOverlay #row-2-column-4');
-        $('#homeContentContainer #mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room').remove();
-        $('.initSetup').removeClass('initSetup');
-        $('#placeFirstCardModal').addClass('is-active');
-    }, (initPlayersHomeTimeout + 3050)); 
-}
-
-function chooseStartingPlayerCards() {
-    let startingPlant = allPlantCards.splice(0, 1);
-    let startingRoom = allRoomCards.splice(0, 1);
-
-    let startingPlantHTML = generateCard(startingPlant[0], 'plant', 'init', 'tableau');
-    let startingRoomHTML = generateCard(startingRoom[0], 'room', 'init', 'tableau');
-
-    $('#playerInfoContainer #cardToPlace').append(startingPlantHTML);
-    $('#playerInfoContainer #cardToPlace').attr('cardtype', 'plant');
-    
-    $('#mapContainer #mapHiddenOverlay #row-2-column-4').append(startingRoomHTML);
-    $('#mapContainer #mapHiddenOverlay #row-2-column-4').attr('cardtype', 'room');
-}
 
 let lockMap = false;
 
@@ -698,13 +690,265 @@ $(document).on(touchEvent,'#mapNavControls .arrowImg',function(){
 	processMapMovement(thisDirection);
 });
 
+
+$(document).on('mouseenter','#mapContainer.expanded:not(.mapLocked) .mapTileContainer.potentialPlacement.activePotentialPlacement:not(.temporaryPlacement)',function(){
+    if(!lockMap) {
+        $(this).addClass('cardPlacementPreview');
+        var thisTile = $(this);
+        $('.cardContainer.activeCard').clone().appendTo(thisTile);
+    }
+});
+
+$(document).on('mouseleave','#mapContainer.expanded:not(.mapLocked) .mapTileContainer.potentialPlacement.activePotentialPlacement.cardPlacementPreview:not(.temporaryPlacement)',function(){    
+    if(!lockMap) {
+        $(this).removeClass('cardPlacementPreview');
+        $('#mapContainer.expanded .mapTileContainer.potentialPlacement:not(.temporaryPlacement) .cardContainer').remove();
+    }
+});
+
+$(document).on(touchEvent,'#mapContainer.expanded:not(.mapLocked) .mapTileContainer.potentialPlacement.activePotentialPlacement:not(.temporaryPlacement)',function(){    
+    if(!lockMap) {
+        lockMap = true;
+        toggleMapVerdancy('hide');
+        if($('#mapContainer.expanded .mapTileContainer.potentialPlacement:not(.temporaryPlacement) .cardContainer').length) {
+            $('#mapContainer.expanded .mapTileContainer.potentialPlacement:not(.temporaryPlacement) .cardContainer').remove();
+        }
+        $('.cardPlacementPreview').removeClass('cardPlacementPreview');
+        var targID = $(this).attr('id');
+        $('#mapContainer.expanded .mapTileContainer.potentialPlacement.temporaryPlacement').addClass('activePotentialPlacement').removeClass('temporaryPlacement');
+        temporarilyLockMap(1000);
+
+        setTimeout(function(){
+            animateElem($('#mapContainer #placedCardOptions'), 'showCardOptions');
+        }, 450)
+
+
+        setTimeout(function(){
+            $(`#${targID}`).removeClass('activePotentialPlacement').addClass('temporaryPlacement');
+            if(startingPlacement) {
+                if($('#verdancyVisibilityContainer.disableVerdancyVisibility').length) {
+                    $('#verdancyVisibilityContainer.disableVerdancyVisibility').removeClass('disableVerdancyVisibility');
+                }
+            }
+        }, 950)
+
+        $('.cardContainer.activeCard').parentToAnimate($(`#${targID}`), 1000);
+    }
+});
+
+$(document).on(touchEvent,'#cancelCardPlacement.button',function(){
+    animateElem($('#mapContainer #placedCardOptions'), 'hideCardOptions');
+    cancelCardPlacement();
+    if(startingPlacement) {
+        $('#verdancyVisibilityContainer').addClass('disableVerdancyVisibility');
+    }
+});
+
+function cancelCardPlacement(){
+    $('.cardContainer.activeCard').parentToAnimate($('#playerInfoContainer #cardToPlace'), 1000);
+    resetMapPlacements('resetCardToPlace');
+}
+
+$(document).on(touchEvent,'#confirmCardPlacement.button',function(){
+    let placedMapID = $('.mapTileContainer.temporaryPlacement').attr('id');
+    checkLightingMatches(`#${placedMapID}`);
+    $('.mapTileContainer.potentialPlacement.activePotentialPlacement').removeClass('activePotentialPlacement');
+    setTimeout(function(){
+        $('.mapTileContainer.potentialPlacement').removeClass('potentialPlacement');
+    }, 300);
+    animateElem($('#mapContainer #placedCardOptions'), 'hideCardOptions');
+});
+
+
+let lightingMatches = [];
+let showLightingMatchesInterval;
+let lightingMatchCount = 0;
+
+function checkLightingMatches(mapID) {
+    lightingMatches = [];
+    lightingMatchCount = 0;
+    var $card = $(`${mapID} .cardContainer.activeCard`);
+    var cardType = $card.attr('type');
+    var thisRow = $card.closest('.mapTileContainer').data('map-row');
+    var thisColumn =  $card.closest('.mapTileContainer').data('map-column');
+
+    let allNeighbours = findMapNeighbours(parseInt(thisRow), parseInt(thisColumn), oppositeType[cardType], true);
+
+    if(cardType == 'plant') {
+
+        let plantLightingNum = parseInt($card.data('lighting-num'));
+        let plantLightingData = $card.data('lighting-types');
+
+        let allPlantLighting = [];
+
+        if(plantLightingNum > 1) {
+            let splitLightingData = plantLightingData.split(' ');
+            allPlantLighting.push(...splitLightingData);
+
+        } else if(plantLightingNum == 1){
+            allPlantLighting.push(plantLightingData);
+        }
+
+        for (const [key, value] of Object.entries(allNeighbours)) {
+            let touchingLightingIcon = $(`${key}.mapTileContainer .cardContainer`).data(`lighting-${oppositePos[value]}`);
+            if(allPlantLighting.indexOf(touchingLightingIcon) !== -1) {
+
+                lightingMatches.push(
+                    [
+                        `${key}.mapTileContainer .cardContainer .lightingIconContainer-${oppositePos[value]} .lightingIcon`, // room = [0] index
+                        `${mapID}.mapTileContainer .cardContainer .verdancyIconsAndVPLayer .verdancyLightingIcon[data-lighting-type="${touchingLightingIcon}"]` // plant = [1] index
+                    ]
+                );
+            }
+        };
+
+    } else if(cardType == 'room') {
+        // room code here
+    }
+
+    if(lightingMatches.length !== 0) {
+        toggleMapVerdancy('hide');
+        setTimeout(function(){
+            $card.find('.verdancyIconsAndVPLayer').addClass('showIndividualVerdancyLayer');
+        }, 10);
+        setTimeout(function(){
+            showLightingMatchesFunc();
+        }, 720);
+    } else {
+        if(startingPlacement) {
+            startFirstRound();
+        } else {
+            // NEED TO ALSO CHECK IF ITEM HAS BEEN PLACED!!!!
+            startNextRound();
+        }
+    }
+}
+
+function startFirstRound() {
+    startingPlacement = false;
+    resetMapPlacements('nextRound');
+    setTimeout(function(){
+        swapActiveMainSection();
+    }, 600);
+    setTimeout(function(){
+        $('#startFirstTurnModal').addClass('is-active');
+    }, 1400);
+}
+
+function resetMapPlacements(mode) {
+
+    // mode == nextRound (card was successfully placed)
+    // mode == resetCardToPlace (card was NOT placed)
+
+    toggleMapVerdancy('hide');
+    $('.verdancyIconsAndVPLayer.showIndividualVerdancyLayer').removeClass('showIndividualVerdancyLayer');
+
+    if(mode == 'nextRound') {
+        let placedCardType = $('.mapTileContainer .cardContainer.activeCard').attr('type');
+        let mapElID = $('.mapTileContainer .cardContainer.activeCard').closest('.mapTileContainer').attr('id');
+        $(`#${mapElID}`).attr('cardtype', placedCardType);
+        $('.mapTileContainer .cardContainer.activeCard').removeClass('activeCard');
+        $('.mapTileContainer.temporaryPlacement').removeClass('temporaryPlacement');
+    } else if(mode == 'resetCardToPlace'){
+        $('.mapTileContainer.temporaryPlacement').addClass('activePotentialPlacement').removeClass('temporaryPlacement');
+    }
+}
+
+// $(document).on(touchEvent,'#startFirstTurnBtn.button',function(){
+//     setTimeout(function(){
+//         // Active Market columns to be clickable for user to confirm a card + item combo
+//     }, 710);
+// });
+
+
+function showLightingMatchesFunc() {
+
+    console.log(`lightingMatches[lightingMatchCount][0] = "${lightingMatches[lightingMatchCount][0]}"`);
+    console.log(`lightingMatches[lightingMatchCount][1] = "${lightingMatches[lightingMatchCount][1]}"`);
+
+    let splitPlantCardID = lightingMatches[lightingMatchCount][1].split(' ');
+    let plantCardID = splitPlantCardID[0];
+
+    $(`${lightingMatches[lightingMatchCount][0]}`).attr('style', '');
+    $(`${lightingMatches[lightingMatchCount][1]}`).attr('style', '');
+
+    $(`${lightingMatches[lightingMatchCount][0]}`).addClass('matchedLighting');
+    $(`${lightingMatches[lightingMatchCount][1]}`).addClass('matchedLighting');
+
+    setTimeout(function(){
+        $(`${lightingMatches[lightingMatchCount][0]}.matchedLighting`).addClass('matchedLightingAnimation');
+        $(`${lightingMatches[lightingMatchCount][1]}.matchedLighting`).addClass('matchedLightingAnimation');
+    }, 410);
+
+    setTimeout(function(){
+        let currentVerdancy = $(`${plantCardID} .cardContainer .verdancyIconsAndVPLayer`).attr('verdancy-completed');
+        $(`${plantCardID} .cardContainer .verdancyIconsAndVPLayer .verdancyIconContainer[data-verdancy-icon-num="${currentVerdancy}"]`).addClass('completeVerdancy').removeClass('incompleteVerdancy');
+        currentVerdancy++;
+        $(`${plantCardID} .cardContainer .verdancyIconsAndVPLayer`).attr('verdancy-completed', currentVerdancy);
+    }, 1410);
+
+    setTimeout(function(){
+        $(`${lightingMatches[lightingMatchCount][0]}.matchedLighting.matchedLightingAnimation`).removeClass('matchedLightingAnimation');
+        $(`${lightingMatches[lightingMatchCount][1]}.matchedLighting.matchedLightingAnimation`).removeClass('matchedLightingAnimation');
+    }, 2220);
+
+    setTimeout(function(){
+        $(`${lightingMatches[lightingMatchCount][0]}.matchedLighting`).removeClass('matchedLighting');
+        $(`${lightingMatches[lightingMatchCount][1]}.matchedLighting`).removeClass('matchedLighting');
+
+        lightingMatchCount++;
+
+        if(lightingMatchCount < lightingMatches.length) {
+            setTimeout(function(){
+                showLightingMatchesFunc();
+            }, 300);
+        } else {
+            if(startingPlacement) {
+                startFirstRound();
+            } else {
+                // NEED TO ALSO CHECK IF ITEM HAS BEEN PLACED!!!!
+                startNextRound();
+            }
+        }
+
+    }, 3120);
+
+}
+
+$(document).on(touchEvent,'#mapContainer.expanded:not(.mapLocked) #verdancyVisibilityContainer:not(.disableVerdancyVisibility)',function(){    
+    toggleMapVerdancy('none');
+});
+
+function toggleMapVerdancy(mode) {
+
+    if(mode != 'none') {
+        if(mode == 'show') {
+            mapVerdancyVisible = true
+        } else if(mode == 'hide') {
+            mapVerdancyVisible = false
+        }
+    } else {
+        !mapVerdancyVisible ? mapVerdancyVisible = true : mapVerdancyVisible = false;
+    }
+
+    if(mapVerdancyVisible) {
+        $('#verdancyVisibilityContainer').addClass('hideVerdancy').removeClass('showVerdancy');
+        $('#mapHiddenOverlay').addClass('showVerdancyLayer');
+    } else if(!mapVerdancyVisible) {
+        $('#verdancyVisibilityContainer').addClass('showVerdancy').removeClass('hideVerdancy');
+        $('#mapHiddenOverlay').removeClass('showVerdancyLayer');
+    }
+}
+
+
 function temporarilyLockMap(timePeriod) {
 	lockMap = true;
+    $('#mapContainer').addClass('mapLocked');
 	setTimeout(function(){
+        $('#mapContainer').removeClass('mapLocked');
 		lockMap = false;
 	}, timePeriod);
 }
-
 
 function processMapMovement(thisDirection){
 
@@ -737,15 +981,6 @@ function processMapMovement(thisDirection){
 
 }
 
-// mapStats = {
-// 	'viewableTileLimits': {
-// 		up: 0,
-// 		down: 0,
-// 		left: 0,
-// 		right: 0
-//  }
-//}
-
 function checkMapLimits(){
     for (let i = 0; i < allDirections.length; i++) {
         if(allDirections[i] == 'up' || allDirections[i] == 'down') {
@@ -765,7 +1000,6 @@ function checkMapLimits(){
                 $(`#mapNavControls #${[allDirections[i]]}Arrow`).show();
             }
         }
-        
     }
 }
 
@@ -819,7 +1053,7 @@ function setZoom(newZoom, el) {
 
 	let transformOriginPercentages = '';
 
-	if(currentView == 'wideScreenView') {
+	if(currentView == 'desktopView') {
 		transformOriginPercentages = '50% 50%';
 	} else if(currentView == 'mobileView') {
 		transformOriginPercentages = '50% 50%';
@@ -858,137 +1092,94 @@ function generatePossibleMapPlacements(){
     showPotentialPlacements(cardTypeToPlace);
 }
 
-let validCardTypeNeighbours = {
-    'plant': 'room',
-    'room': 'plant'
-}
-
 let validNeighbourIDs = [];
-
-// data-map-row="${mapData[i][j].row}"
-// data-map-column="${mapData[i][j].column}"
 
 function showPotentialPlacements(currentCardType) {
     validNeighbourIDs = [];
     $('.mapTileContainer').each(function(){
         let placedCardType = $(this).attr('cardtype');
         if (typeof placedCardType !== 'undefined' && placedCardType !== false) {
-            if(placedCardType == validCardTypeNeighbours[currentCardType]) checkSurroundingValidPlacements($(this));
+            if(placedCardType == oppositeType[currentCardType]) {
+                let mapNeighbours = findMapNeighbours($(this).data('map-row'), $(this).data('map-column'), 'empty', false);
+                if(mapNeighbours.length != 0) validNeighbourIDs.push(...mapNeighbours);
+            }
         }
     });
 
     let uniquePlacementIDs = validNeighbourIDs.filter(onlyUnique);
 
     for (let i = 0; i < uniquePlacementIDs.length; i++) {
-        $(`#${uniquePlacementIDs[i]}`).addClass('potentialPlacement activePotentialPlacement');
+        $(`${uniquePlacementIDs[i]}`).addClass('animatingElem mediumTransitionAll');
     }
+
+    setTimeout(function(){
+        for (let i = 0; i < uniquePlacementIDs.length; i++) {
+            $(`${uniquePlacementIDs[i]}`).addClass('potentialPlacement');
+        }
+    }, 10);
+
+    setTimeout(function(){
+        for (let i = 0; i < uniquePlacementIDs.length; i++) {
+            $(`${uniquePlacementIDs[i]}`).addClass('activePotentialPlacement');
+        }
+    }, 20);
+
+    setTimeout(function(){
+        for (let i = 0; i < uniquePlacementIDs.length; i++) {
+            $(`${uniquePlacementIDs[i]}`).removeClass('animatingElem mediumTransitionAll');
+        }
+    }, 800);
 }
 
-function checkSurroundingValidPlacements(thisCard){
-    let thisRow = parseInt(thisCard.data('map-row'));
-    let thisColumn = parseInt(thisCard.data('map-column'));
 
-    let testPlacements = [
-        `#row-${thisRow - 1}-column-${thisColumn}`,
-        `#row-${thisRow + 1}-column-${thisColumn}`,
-        `#row-${thisRow}-column-${thisColumn - 1}`,
-        `#row-${thisRow}-column-${thisColumn + 1}`
-    ]
+function findMapNeighbours(thisRow, thisColumn, criteria, returnPositions){
 
-    for (let i = 0; i < testPlacements.length; i++) {
-        let thisAttr = $(`${testPlacements[i]}`).attr('placedCardType');
-        if (typeof thisAttr === 'undefined' || thisAttr === false) {
-            validNeighbourIDs.push($(`${testPlacements[i]}`).attr('id'));
-        };
+    let allMapNeighbours = [
+        `#row-${thisRow - 1}-column-${thisColumn}`, // top
+        `#row-${thisRow}-column-${thisColumn + 1}`, // right
+        `#row-${thisRow + 1}-column-${thisColumn}`, // bottom
+        `#row-${thisRow}-column-${thisColumn - 1}` // left
+    ];
+
+    if(!returnPositions) {
+        let validMapNeighbours = [];
+
+        for (let i = 0; i < allMapNeighbours.length; i++) {
+    
+            if($(`${allMapNeighbours[i]}`).length) {
+                let thisAttr = $(`${allMapNeighbours[i]}`).attr('cardtype');
+    
+                if (criteria == 'empty') {
+                    if (typeof thisAttr === 'undefined' || thisAttr === false) {
+                        validMapNeighbours.push(allMapNeighbours[i]);
+                    };
+                } else if(thisAttr == criteria){
+                    validMapNeighbours.push(allMapNeighbours[i]);
+                } 
+            }
+        }
+    
+        return validMapNeighbours;
+    } else if(returnPositions){
+        let validMapNeighbours = {};
+
+        for (let i = 0; i < allMapNeighbours.length; i++) {
+    
+            if($(`${allMapNeighbours[i]}`).length) {
+                let thisAttr = $(`${allMapNeighbours[i]}`).attr('cardtype');
+    
+                if (criteria == 'empty') {
+                    if (typeof thisAttr === 'undefined' || thisAttr === false) {
+                        validMapNeighbours[`${allMapNeighbours[i]}`] = lightingContainerPositions[i];
+                    };
+                } else if(thisAttr == criteria){
+                    validMapNeighbours[`${allMapNeighbours[i]}`] = lightingContainerPositions[i];
+                } 
+            }
+        }
+        return validMapNeighbours;
     }
 }
-
-
-jQuery.fn.extend({
-    // Modified and Updated by MLM
-    // Origin: Davy8 (http://stackoverflow.com/a/5212193/796832)
-    parentToAnimate: function(newParent, duration) {
-
-		var $element = $(this);
-        var $oldParent = $element.parent()
-
-        
-
-		newParent = $(newParent); // Allow passing in either a JQuery object or selector
-		var oldOffset = $element.offset();
-        $(this).appendTo(newParent);
-        var newOffset = $element.offset();
-
-		var temp = $element.clone().appendTo('body');
-
-		if($element[0].className == 'cardContainer expanded activeCard') {
-
-			let zoomScale = Number(zoomLevel)/10;
-
-			let startWidth = 0;
-			let startHeight = 0;
-			let endWidth = 0;
-			let endHeight = 0;
-
-			let startOpacity = 0;
-			let endOpacity = 0;
-
-			
-			if(newParent[0].offsetParent.id == 'mapHiddenOverlay') {
-
-                if($oldParent[0].className == 'mapTileContainer potentialPlacement activePotentialPlacement') {
-                    startWidth = $element[0].offsetWidth * zoomScale;
-                    startHeight = $element[0].offsetHeight * zoomScale;
-                } else {
-                    startWidth = $element[0].offsetWidth;
-				    startHeight = $element[0].offsetHeight;
-                }      
-				
-				endWidth = $element[0].offsetWidth * zoomScale;
-				endHeight = $element[0].offsetHeight * zoomScale;
-
-				startOpacity = 1;
-				endOpacity = 1;
-
-			} else if(newParent[0].offsetParent.id == 'playerInfoContainer') {
-
-				endWidth = $element[0].offsetWidth;
-				endHeight = $element[0].offsetHeight;
-				
-				startWidth = endWidth * zoomScale;
-				startHeight = endHeight * zoomScale;
-
-				startOpacity = 1;
-				endOpacity = 0.75;
-
-			}
-            
-			temp.css({
-                'width': startWidth,
-				'height': startHeight,
-				'position': 'absolute',
-                'top': oldOffset.top,
-				'left': oldOffset.left,
-				'opacity': startOpacity,
-				'zIndex': 1000
-			});
-			
-			$element.hide();
-
-			temp.animate({
-				'width': endWidth,
-				'height': endHeight,
-                'top': newOffset.top,
-				'left': newOffset.left,
-				'opacity': endOpacity
-			}, duration, function() {
-				$element.show();
-				temp.remove();
-			});
-		}
-
-    }
-});
 
 function countInArray(array, what) {
     var count = 0;
