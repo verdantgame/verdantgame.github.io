@@ -21,6 +21,16 @@ let animationClasses = {
         'finish': 'collapsed',
         'transition': 'medium' // .7s
     },
+    'showCardOptions': {
+        'start': 'collapsed',
+        'finish': 'expanded',
+        'transition': 'quick' // .2s
+    },
+    'hideCardOptions': {
+        'start': 'expanded',
+        'finish': 'collapsed',
+        'transition': 'quick' // .2s
+    }
 }
 
 let animationLength = {
@@ -104,3 +114,108 @@ function animateElem(elem, mode) {
     }
 
 }
+
+jQuery.fn.extend({
+    // Modified and Updated by MLM
+    // Origin: Davy8 (http://stackoverflow.com/a/5212193/796832)
+    parentToAnimate: function(newParent, duration) {
+
+        $(this).removeClass('animatingElem mediumTransition');
+
+		var $element = $(this);
+        var $oldParent = $element.parent()
+
+        console.log(`$element = `, $element);
+        console.log(`$oldParent = `, $oldParent);
+        
+		newParent = $(newParent); // Allow passing in either a JQuery object or selector
+		var oldOffset = $element.offset();
+        $(this).appendTo(newParent);
+        var newOffset = $element.offset();
+
+        console.log(`newParent = `, newParent);
+        console.log(`oldOffset = `, oldOffset);
+        console.log(`newOffset = `, newOffset);
+
+		var temp = $element.clone().appendTo('body');
+
+		if($element[0].className.indexOf("activeCard") >= 0) {
+            console.log(`$element[0].className.indexOf("activeCard") >= 0`);
+
+			let mapZoomScale = Number(zoomLevel)/10;
+            let cardToPlaceScale = 1;
+
+            if($('#container').hasClass('mobileView')) cardToPlaceScale = 1.17;
+
+			let startWidth = 0;
+			let startHeight = 0;
+			let endWidth = 0;
+			let endHeight = 0;
+
+			let startOpacity = 1;
+			let endOpacity = 1;
+
+            let zIndex = 1000;
+
+			
+			if(newParent[0].offsetParent.id == 'mapHiddenOverlay') {
+                console.log(`newParent[0].offsetParent.id == 'mapHiddenOverlay'`);
+
+                if($oldParent[0].className == 'mapTileContainer potentialPlacement activePotentialPlacement') {
+                    startWidth = $element[0].offsetWidth * mapZoomScale;
+                    startHeight = $element[0].offsetHeight * mapZoomScale;
+                } else {
+                    startWidth = $element[0].offsetWidth * cardToPlaceScale;
+				    startHeight = $element[0].offsetHeight * cardToPlaceScale;
+                }      
+
+                console.log(`mapZoomScale = "${mapZoomScale}"`);
+                console.log(`$element[0].offsetWidth = "${$element[0].offsetWidth}"`);
+                console.log(`$element[0].offsetHeight = "${$element[0].offsetHeight}"`);
+				
+				endWidth = $element[0].offsetWidth * mapZoomScale;
+				endHeight = $element[0].offsetHeight * mapZoomScale;
+
+                console.log(`endWidth = "${endWidth}"`);
+                console.log(`endHeight = "${endHeight}"`);
+
+                zIndex = 10;
+
+			} else if(newParent[0].offsetParent.id == 'playerInfoContainer' || newParent[0].offsetParent.id == 'homeContentContainer') {
+                console.log(`newParent[0].offsetParent.id == 'playerInfoContainer'`);
+				startWidth = $element[0].offsetWidth * mapZoomScale;
+                startHeight = $element[0].offsetHeight * mapZoomScale;
+				
+				endWidth = $element[0].offsetWidth * cardToPlaceScale;
+				endHeight = $element[0].offsetHeight * cardToPlaceScale;
+
+                zIndex = 10;
+			}
+            
+			temp.css({
+                'width': startWidth,
+				'height': startHeight,
+				'position': 'absolute',
+                'top': oldOffset.top,
+				'left': oldOffset.left,
+				'opacity': startOpacity,
+				'zIndex': zIndex
+			});
+			
+			$element.hide();
+
+			temp.animate({
+				'width': endWidth,
+				'height': endHeight,
+                'top': newOffset.top,
+				'left': newOffset.left,
+				'opacity': endOpacity,
+				'zIndex': zIndex
+			}, duration, function() {
+				$element.show();
+				temp.remove();
+			});
+		}
+
+    }
+});
