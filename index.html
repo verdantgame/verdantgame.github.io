@@ -21,10 +21,14 @@
 	<meta name="msapplication-TileColor" content="#da532c">
 	<meta name="theme-color" content="#ffffff">
 
+
 	<!-- Font for Titles -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Serif+Text&display=swap" rel="stylesheet">
+
+	<!-- Font for Matching Lighting Types -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 
 	<!-- Global site tag (gtag.js) - Google Analytics -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-F576KC8537"></script>
@@ -42,13 +46,6 @@
 	<div id="full-bg"></div>
 	<div id="container">
 
-		<ion-icon id="maximizeScreenIcon" name="expand" role="img" class="hydrated md" aria-label="expand"></ion-icon>
-		<ion-icon id="minimizeScreenIcon" name="contract" role="img" class="hydrated md" aria-label="contract"></ion-icon>
-
-		<p id="mainVerdantTitle" class="title">
-			<img src="img/title-under-construction.jpg" alt="Verdant Title Image" />
-		</p>
-
 		<div id="loaderLayer" class="layer">
 			<div class="loader-parent">
 				<div class="loader-container">
@@ -61,10 +58,15 @@
 		</div>
 
 		<div id="setupLayer" class="layer">
+
+			<p id="mainVerdantTitle" class="title">
+				<img src="img/mobile-title.png" title="Verdant Title" alt="Verdant Title" />
+			</p>
+
 			<p class="subtitle is-6">Verdant is a puzzly spatial card and token drafting game about houseplant collection and care, for 1-5 players, ages 10+.</p>
 
 			<div id="homepageButtonContainer" class="buttons">
-				<button id="frontPageGameInstructionsButton" class="button is-info" title="Instructions">Instructions</button>
+				<button id="frontPageGameInstructionsButton" class="button is-info" title="Instructions Button">Instructions</button>
 				<button id="startGame" class="button is-success startCommenceButton" title="Start Game">Start Game</button>
 			</div>
 
@@ -87,7 +89,7 @@
 
 			<div id="topInfoBar">
 				<p id="secondaryVerdantTitle" class="title">
-					<img src="img/mobile-title.jpg" alt="Verdant Title Image">
+					<img src="img/mobile-title.png" alt="Verdant Title">
 				</p>
 				<div class="leftColumn infoBarColumn">
 					<p id="turnsRemaining">Turns Remaining: <span class="infoSpan bold">13</span></p>
@@ -96,53 +98,38 @@
 					<p id="greenThumbsAmount">Green Thumbs: <span class="infoSpan bold">2</span></p>
 				</div>
 				<div class="clear"></div>
+
+				<ion-icon id="maximizeScreenIcon" name="expand" role="img" class="hydrated md gameLayerElement gameLayer-mobileElement" aria-label="expand"></ion-icon>
+				<ion-icon id="minimizeScreenIcon" name="contract" role="img" class="hydrated md gameLayerElement gameLayer-mobileElement" aria-label="contract"></ion-icon>
+
 			</div>
 
 			<div id="gameSectionsParent">
 
-				<div data-animation-group="market" id="marketSection" class="gameSection expanded initSetup animatingElem mediumTransition" style="transform-origin: left top;">
-
-					<div class="gameSectionBorder outerBorder">
-						<div class="gameSectionBorder innerBorder">
-
+				<div data-animation-group="market" id="marketContainerOuterOverlay" class="expanded gameSectionContainerOuterOverlay gameSectionContainerOverlay">
+					<div data-animation-group="market" id="marketContainerInnerOverlay" class="expanded gameSectionContainerInnerOverlay gameSectionContainerOverlay">
+						<div data-animation-group="market" id="marketSection" class="gameSection expanded initSetup animatingElem mediumTransition" style="transform-origin: left top;">
 							<div data-animation-group="market" class="inactive collapsed">
 								<ion-icon name="expand"></ion-icon>
 							</div>
-
 							<div class="bgOverlay"></div>
 							<img class="gameSectionBg" src="img/bg.jpg" alt="">
-
 							<div data-animation-group="market" class="gameSectionContent expanded">
 								<div id="marketTitleContainer" class="titleContainer">
 									<p id="marketTitle" class="title is-3 has-text-centered">Market</p>
 								</div>
-
 								<div id="marketCardColumns"></div>
-
-							</div>
-
-						</div>
-					</div>
-
-					<div data-animation-group="market" class="gameSectionOverlayParent expanded">
-						<div class="gameSectionOverlayBorder outerBorder">
-							<div class="gameSectionOverlayBorder innerBorder">
 							</div>
 						</div>
-						<div class="gameSectionWhiteOverlay"></div>
 					</div>
-
 				</div>
 
-				<div data-animation-group="tableau" id="tableauSection" class="gameSection collapsed animatingElem mediumTransition initSetup" style="transform-origin: left top;">
-
-					<div class="gameSectionBorder outerBorder">
-						<div class="gameSectionBorder innerBorder">
-
+				<div data-animation-group="tableau" id="tableauContainerOuterOverlay" class="collapsed gameSectionContainerOuterOverlay gameSectionContainerOverlay">
+					<div data-animation-group="tableau" id="tableauContainerInnerOverlay" class="collapsed gameSectionContainerInnerOverlay gameSectionContainerOverlay">
+						<div data-animation-group="tableau" id="tableauSection" class="gameSection initSetup">
 							<div data-animation-group="tableau" class="inactive expanded">
 								<ion-icon name="expand"></ion-icon>
 							</div>
-
 							<div class="bgOverlay"></div>
 							<img class="gameSectionBg" src="img/bg.jpg" alt="">
 							<div data-animation-group="tableau" class="gameSectionContent collapsed">
@@ -150,37 +137,92 @@
 									<p id="playerTableauTitle" class="title is-3 has-text-centered">Home</p>
 								</div>
 								<div id="homeContentContainer">
-
 									<div data-animation-group="tableau" id="playerInfoContainer" class="animatingElem mediumTransition collapsed" style="transform-origin: left top;">
+
+										<!-- <button data-animation-group="tableau" class="button is-primary showVerdancyBtn mobileElement collapsed" title="Swap Items">
+											<span class="icon">
+												<ion-icon name="eye-outline"></ion-icon>
+												<img src="img/verdancy-active.png" />
+											</span>
+										</button> -->
+
 										<div data-animation-group="tableau" id="cardToPlace" class="collapsed">
-											<p data-animation-group="tableau" class="playerInfoTitle collapsed has-text-centered">Starting Card:</p>
+											<p data-animation-group="tableau" class="playerInfoTitle desktopElement tabletElement collapsed has-text-centered">Starting Card:</p>
+											<p data-animation-group="tableau" class="playerInfoTitle mobileElement collapsed has-text-centered">Starting<br />Card</p>
 											<img data-animation-group="tableau" id="chosenCardBackground" class="collapsed" src="img/card-storage.png">
 										</div>
+
 										<div data-animation-group="tableau" id="chosenItemContainer" class="itemContainer collapsed">
-											<p data-animation-group="tableau" class="playerInfoTitle collapsed has-text-centered">Chosen Item:</p>
+											<p data-animation-group="tableau" class="playerInfoTitle desktopElement tabletElement collapsed has-text-centered">Chosen Item:</p>
+											<p data-animation-group="tableau" class="playerInfoTitle mobileElement collapsed has-text-centered">Chosen<br />Item</p>
 											<img data-animation-group="tableau" id="chosenItemBackground" class="itemBackground collapsed" src="img/item-storage.png">
 										</div>
-										<button data-animation-group="tableau" id="swapItemsBtn" class="button is-primary animatingElem mediumTransition collapsed" title="Swap Items" style="transform-origin: left top;">
-											<span id="swapItemsArrowOne" class="swapItemsArrow">&curarr;</span> Swap<br />Items <span id="swapItemsArrowTwo" class="swapItemsArrow">&curarr;
-										</button>
+
+										<button data-animation-group="tableau" class="button is-primary swapItemsBtn desktopElement tabletElement animatingElem mediumTransition collapsed" title="Swap Items" style="transform-origin: left top;" disabled>Swap<br />Items</button>
+
+										<button data-animation-group="tableau" class="button is-primary swapItemsBtn mobileElement animatingElem mediumTransition collapsed" title="Swap Items" style="transform-origin: left top;" disabled>&#8595;</button>
+
+										<ion-icon data-animation-group="tableau" name="archive" class="storageIcon mobileElement collapsed"></ion-icon>
+
 										<div data-animation-group="tableau" id="storedItemContainer" class="itemContainer collapsed">
-											<p data-animation-group="tableau" class="playerInfoTitle collapsed has-text-centered">Stored Item:</p>
+											<p data-animation-group="tableau" class="playerInfoTitle desktopElement tabletElement collapsed has-text-centered">Stored Item:</p>
+											<p data-animation-group="tableau" class="playerInfoTitle mobileElement collapsed has-text-centered">Stored<br />Item</p>
 											<img data-animation-group="tableau" id="storedItemBackground" class="itemBackground collapsed" src="img/item-storage.png">
 										</div>
+
 									</div>
+
 									<div data-animation-group="tableau" id="mapContainerOuterOverlay" class="collapsed">
 										<div data-animation-group="tableau" id="mapContainerInnerOverlay" class="collapsed">
 											<div data-animation-group="tableau" id="mapContainer" class="collapsed">
+
+												<div data-animation-group="tableau" id="verdancyVisibilityContainer" class="collapsed showVerdancy disableVerdancyVisibility">
+
+													<img class="verdancyVisibilityImg verdancyMainImgInactive" src="img/verdancy-inactive2.png" alt="">
+													<img class="verdancyVisibilityImg verdancyMainImg" src="img/verdancy-active.png" alt="">
+													<img class="verdancyVisibilityImg verdancyShadowImg" src="img/verdancy-shadow.png" alt="">
+
+													<div id="showVerdancyIconContainer" class="showHideVerdancyIconContainer">
+														<ion-icon name="eye-outline" class="verdancyIconMain showVerdancyIcon verdancyVisibilityIcon md hydrated" role="img" aria-label="eye outline"></ion-icon>
+														<ion-icon name="eye-outline" class="verdancyIconShadow showVerdancyIcon verdancyVisibilityIcon md hydrated" role="img" aria-label="eye outline"></ion-icon>
+													</div>
+
+													<div id="hideVerdancyIconContainer" class="showHideVerdancyIconContainer">
+														<ion-icon name="eye-off-outline" class="verdancyIconMain hideVerdancyIcon verdancyVisibilityIcon md hydrated" role="img" aria-label="eye off outline"></ion-icon>
+														<ion-icon name="eye-off-outline" class="verdancyIconShadow hideVerdancyIcon verdancyVisibilityIcon md hydrated" role="img" aria-label="eye off outline"></ion-icon>
+													</div>
+
+												</div>
+
 												<div data-animation-group="tableau" id="mapZoomControls" class="animatingElem mediumTransition collapsed" style="transform-origin: left top;">
 													<img data-zoom-mode="zoomOut" class="zoomIcon zoomOutIcon activeZoom" src="img/map/zoomOut.png" />
 													<img data-zoom-mode="zoomIn" class="zoomIcon zoomInIcon activeZoom" src="img/map/zoomIn.png" />
 												</div>
+
 												<div data-animation-group="tableau" id="mapNavControls" class="animatingElem mediumTransition collapsed" style="transform-origin: left top;">
 													<img id="mapNavBackground" src="img/map/woodCircle.png" />
 													<img data-direction="up" id="upArrow" class="arrowImg" src="img/map/arrow.png" />
 													<img data-direction="right" id="rightArrow" class="arrowImg" src="img/map/arrow.png" />
 													<img data-direction="down" id="downArrow" class="arrowImg" src="img/map/arrow.png" />
 													<img data-direction="left" id="leftArrow" class="arrowImg" src="img/map/arrow.png" />
+												</div>
+
+												<div id="placedCardOptions" class="collapsed">
+
+													<button id="cancelCardPlacement" class="button is-danger">
+														<span>Cancel</span>
+														<span class="icon">
+															<ion-icon name="close-circle" role="img" class="md hydrated" aria-label="close circle"></ion-icon>
+														</span>
+													</button>
+
+													<button id="confirmCardPlacement" class="button is-success">
+														<span>Confirm</span>
+														<span class="icon">
+															<ion-icon name="checkmark-circle" role="img" class="md hydrated" aria-label="checkmark circle"></ion-icon>
+														</span>
+													</button>
+
 												</div>
 											</div>
 										</div>
@@ -189,26 +231,29 @@
 							</div>
 						</div>
 					</div>
-					<div data-animation-group="tableau" class="gameSectionOverlayParent collapsed">
-						<div class="gameSectionOverlayBorder outerBorder">
-							<div class="gameSectionOverlayBorder innerBorder">
-							</div>
-						</div>
-						<div class="gameSectionWhiteOverlay"></div>
-					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 
 	<div id="placeFirstCardModal" class="modal notificationModal">
-
 		<div class="modal-background"></div>
 		<div class="modal-content">
 			<div class="notification">
 				<button class="delete closeModalTrigger" aria-label="close" title="Close button image"></button>
-				<p class="has-text-centered">Choose where the first plant will go.</p>
+				<p class="has-text-centered">Choose the position of your starting plant card.</p>
 				<button id="placeFirstPlantCardBtn" class="button is-danger closeModalTrigger button-is-centered" title="Close modal button">Close</button>
+			</div>
+		</div>
+	</div>
+
+	<div id="startFirstTurnModal" class="modal notificationModal">
+		<div class="modal-background"></div>
+		<div class="modal-content">
+			<div class="notification">
+				<button class="delete closeModalTrigger" aria-label="close" title="Close button image"></button>
+				<p class="has-text-centered">Now choose a card and item from the market to place in your home.</p>
+				<button id="startFirstTurnBtn" class="button is-danger closeModalTrigger button-is-centered" title="Close modal button">Close</button>
 			</div>
 		</div>
 	</div>
@@ -220,7 +265,6 @@
 	<script type="text/javascript" src="js/data.js"></script>
 	<script type="text/javascript" src="js/animations.js"></script>
 	<script type="text/javascript" src="js/scripts.js"></script>
-	<script type="text/javascript" src="js/image-preloader.js"></script>
 
 </body>
 
