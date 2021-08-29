@@ -51,27 +51,12 @@ body {
 }
 
 #container.desktopView #maximizeScreenIcon,
-#container.desktopView #minimizeScreenIcon {
+#container.desktopView #minimizeScreenIcon,
+#container.tabletView #maximizeScreenIcon,
+#container.tabletView #minimizeScreenIcon {
     display:none!important;
 }
 
-body #container.tabletView #maximizeScreenIcon {
-    display:none;
-}
-
-body.gameView #container.tabletView #maximizeScreenIcon {
-    display:block;
-}
-
-body.gameView #container.tabletView #maximizeScreenIcon,
-body.gameView #container.tabletView #minimizeScreenIcon {
-    position: absolute;
-    top: 8px;
-    right: 10px;
-    font-size: 40px;
-    cursor: hand;
-    cursor: pointer;
-}
 
 #container #minimizeScreenIcon {
     display:none;
