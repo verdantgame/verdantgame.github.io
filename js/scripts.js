@@ -178,11 +178,17 @@ $(document).on(touchEvent, '#placeFirstPlantCardBtn', function(){
     generatePossibleMapPlacements();
 });
 
+$(document).on(touchEvent, '#showScoringRemindersBtn', function(){
+    $('#scoringReminderModal').addClass('is-active');
+});
+
+
+
 $(window).resize(function() {
     checkScreenWidth();
 });
 
-$(document).on(touchEvent,'.gameSection.collapsed:not(.initSetup)',function(){
+$(document).on(touchEvent,'#swapSectionsIcon:not(.initSetup)',function(){
     swapActiveMainSection();
 }); 
 
@@ -854,13 +860,6 @@ function resetMapPlacements(mode) {
     }
 }
 
-// $(document).on(touchEvent,'#startFirstTurnBtn.button',function(){
-//     setTimeout(function(){
-//         // Active Market columns to be clickable for user to confirm a card + item combo
-//     }, 710);
-// });
-
-
 function showLightingMatchesFunc() {
 
     console.log(`lightingMatches[lightingMatchCount][0] = "${lightingMatches[lightingMatchCount][0]}"`);
@@ -885,12 +884,12 @@ function showLightingMatchesFunc() {
         $(`${plantCardID} .cardContainer .verdancyIconsAndVPLayer .verdancyIconContainer[data-verdancy-icon-num="${currentVerdancy}"]`).addClass('completeVerdancy').removeClass('incompleteVerdancy');
         currentVerdancy++;
         $(`${plantCardID} .cardContainer .verdancyIconsAndVPLayer`).attr('verdancy-completed', currentVerdancy);
-    }, 1410);
+    }, 1310);
 
     setTimeout(function(){
         $(`${lightingMatches[lightingMatchCount][0]}.matchedLighting.matchedLightingAnimation`).removeClass('matchedLightingAnimation');
         $(`${lightingMatches[lightingMatchCount][1]}.matchedLighting.matchedLightingAnimation`).removeClass('matchedLightingAnimation');
-    }, 2220);
+    }, 1720);
 
     setTimeout(function(){
         $(`${lightingMatches[lightingMatchCount][0]}.matchedLighting`).removeClass('matchedLighting');
@@ -911,11 +910,11 @@ function showLightingMatchesFunc() {
             }
         }
 
-    }, 3120);
+    }, 2420);
 
 }
 
-$(document).on(touchEvent,'#mapContainer.expanded:not(.mapLocked) #verdancyVisibilityContainer:not(.disableVerdancyVisibility)',function(){    
+$(document).on(touchEvent,'#mapContainer #verdancyVisibilityContainer:not(.disableVerdancyVisibility)',function(){    
     toggleMapVerdancy('none');
 });
 
