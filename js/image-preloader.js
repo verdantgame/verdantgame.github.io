@@ -101,6 +101,11 @@ const preload = src => new Promise(function(resolve, reject) {
     'img/plants/vining-3.jpg',
     'img/plants/vining-4.jpg',
     'img/plants/vining-5.jpg',
+    'img/plants/icons/badges/flowering.png',
+    'img/plants/icons/badges/foliage.png',
+    'img/plants/icons/badges/succulent.png',
+    'img/plants/icons/badges/unusual.png',
+    'img/plants/icons/badges/vining.png',
     'img/plants/icons/banners/flowering.png',
     'img/plants/icons/banners/foliage.png',
     'img/plants/icons/banners/succulent.png',
@@ -159,7 +164,12 @@ const preload = src => new Promise(function(resolve, reject) {
     'img/bg2.jpg',
     'img/card-storage.png',
     'img/item-storage.png',
-    'img/title-under-construction.jpg'
+    'img/scoring-aid.jpg',
+    'img/title.png',
+    'img/verdancy-active.png',
+    'img/verdancy-inactive.png',
+    'img/verdancy-inactive2.png',
+    'img/verdancy-shadow.png'
   ];
   
   preloadAll(sources)
