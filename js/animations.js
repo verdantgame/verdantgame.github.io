@@ -56,17 +56,23 @@ function swapActiveMainSection(){
             animateElem($(this), thisState);
         });
     }
+
     if(sectionStates.tableau == 'expanded') {
         sectionStates.tableau = 'collapsed';
         sectionStates.market = 'expanded';
-        lockMap = true;
+        
     } else if(sectionStates.market == 'expanded') {
         sectionStates.market = 'collapsed';
         sectionStates.tableau = 'expanded';
-        setTimeout(function(){
-            lockMap = false;
-        }, 710);
     }
+
+    temporarilyLockMap(700);
+
+    // lockMap = true;
+    // setTimeout(function(){
+    //     lockMap = false;
+    // }, 710);
+
 }
 
 function animateElem(elem, mode) {
@@ -109,6 +115,43 @@ function animateElem(elem, mode) {
             //     elem[0].classList.remove(`${animationClasses[mode].transition}Transition`);
             //     elem[0].classList.remove('animatingElem');
             // });
+        }); 
+
+    }
+
+}
+
+function animateMap(elem, mode) {
+
+    elem[0].style.transformOrigin = 'top left';
+    
+    let startTopPos = $(elem).position().top;
+    let startLeftPos = $(elem).position().left;
+
+    elem[0].classList.add('animatingElem');
+    elem[0].classList.add(animationClasses[mode].finish);
+    elem[0].classList.remove(animationClasses[mode].start);
+
+    let endTopPos = $(elem).position().top;
+    let endLeftPos = $(elem).position().left;
+
+    if(startTopPos != endTopPos || startLeftPos != endLeftPos) {
+
+        var invertedTop = startTopPos - endTopPos;
+        var invertedLeft = startLeftPos - endLeftPos;
+        
+        elem[0].style.transform = `
+            translate(${invertedLeft}px, ${invertedTop}px)
+        `;
+
+        requestAnimationFrame(function(){
+            elem[0].classList.add(`${animationClasses[mode].transition}Transition`);
+            elem[0].style.transform = '';
+            $(elem).parent().one("webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend", function() {
+                elem[0].style.transformOrigin = '';
+                elem[0].classList.remove(`${animationClasses[mode].transition}Transition`);
+                elem[0].classList.remove('animatingElem');
+            });
         }); 
 
     }
