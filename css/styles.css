@@ -32,7 +32,8 @@ html {
 body {
     width: 100%;
     margin: 0 auto;
-    box-sizing: unset;
+    /* box-sizing: content-box;
+    box-sizing: border-box; */
     /* line-height: 0; */
     /* width: 100%;
     height: 100%;
@@ -328,14 +329,14 @@ p {
 #setupLayer #homepageButtonContainer .button {
     display: block;
     margin: 0px 14px;
-    width: 105px;
-    height: 28px;
+    width: 142px;
+    height: 45px;
 }
 
 #container.tabletView #setupLayer #homepageButtonContainer .button,
 #container.mobileView #setupLayer #homepageButtonContainer .button {
-    width: 95px;
-    height: 26px;
+    width: 141px;
+    height: 46px;
 }
 
 #setupLayer #demoDisclaimer {
@@ -397,10 +398,10 @@ p {
 
 #container.tabletView #gameLayer #topInfoBar {
     width: 100%;
-    margin: 7px auto 3px;
+    margin: 6px auto 7px;
     padding: 5px 0px;
     border-radius: 9px;
-    height: 49px;
+    height: 55px;
     position: relative;
     z-index: 1;
 }
@@ -464,12 +465,14 @@ p {
     font-size: 18px;
     margin: 15px 0px 0px 79px;
     padding: 0px 38px;
+    height: 49px;
 }
 
 #container.tabletView #gameLayer #topInfoBar #showScoringRemindersBtn {
     font-size: 15px;
     margin: 5px 0px 0px 46px;
     padding: 0px 26px;
+    height: 39px;
 }
 
 #container.desktopView #swapSectionsIcon {
@@ -708,7 +711,7 @@ p {
 }
 
 #container.tabletView #gameLayer .titleContainer {
-    height: 31px;
+    height: 33px;
     left: 35px;
 }
 
@@ -1542,7 +1545,7 @@ p {
     position: absolute;
     left: 0vw;
     top: 0vw;
-    height: 96%;
+    height: 100%;
     width: 100%;
     z-index: 99;
     transition: opacity .5s ease-in-out;
@@ -1611,7 +1614,7 @@ p {
 
 .cardContainer[type="plant"] .verdancyIconsAndVPLayer .verdancyIconsParentContainer {
     width: 105%;
-    height: 64%;
+    height: 62%;
     position: absolute;
     top: 38%;
     left: 0%;
@@ -1738,10 +1741,10 @@ p {
 
 /* Top  */
 .cardContainer[type="room"] .lightingIconContainer-top {
-    width: 17%;
-    height: 13%;
+    width: 25%;
+    height: 15%;
     top: -1%;
-    left: 38%;
+    left: 38.7%;
     padding: 0% 3% 3% 3%;
     border-bottom-right-radius: 50%;
     border-bottom-left-radius: 50%;
@@ -1751,23 +1754,23 @@ p {
 #container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer-top.expanded,
 #container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer-top.expanded {
     top: -1%;
-    left: 38%;
+    left: 38.7%;
 }
 
 /* Top Lighting Container */
 #container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer-top.collapsed,
 #container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer-top.collapsed {
     top: 0%;
-    left: 39%;
+    left: 38%;
 }
 
 /* Right */
 .cardContainer[type="room"] .lightingIconContainer-right {
-    width: 16%;
-    height: 11.4%;
-    top: 44%;
-    left: 81%;
-    padding: 0% 0% 3% 3%;
+    width: 20.7%;
+    height: 13.4%;
+    top: 43.8%;
+    left: 80%;
+    padding: 1% 0% 3% 3%;
     border-top-left-radius: 50%;
     border-bottom-left-radius: 50%;
 }
@@ -1775,7 +1778,7 @@ p {
 /* Right */
 #container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer-right.expanded,
 #container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer-right.expanded {
-    top: 44%;
+    top: 43.8%;
 }
 
 /* Right Lighting Container */
@@ -1786,11 +1789,11 @@ p {
 
 /* Bottom */
 .cardContainer[type="room"] .lightingIconContainer-bottom {
-    width: 17%;
+    width: 25%;
     height: 13%;
     padding: 2% 3% 0% 3%;
-    bottom: -1%;
-    left: 39%;
+    bottom: 0%;
+    left: 38%;
     border-top-left-radius: 50%;
     border-top-right-radius: 50%;
 }
@@ -1798,22 +1801,22 @@ p {
 /* Bottom */
 #container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer-bottom.expanded,
 #container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer-bottom.expanded {
-    bottom: -1%;
+    bottom: 0%;
 }
 
 /* Bottom Lighting Container */
 #container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer-bottom.collapsed,
 #container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer-bottom.collapsed {
-    bottom: 59%;
+    bottom: 61%;
 }
 
 /* Left */
 .cardContainer[type="room"] .lightingIconContainer-left {
-    width: 16%;
-    height: 12%;
-    padding: 0.5% 2% 0% 0%;
+    width: 20.5%;
+    height: 14%;
+    padding: 1% 2.2% 0% 0%;
     top: 43%;
-    left: 1%;
+    left: .5%;
     border-bottom-right-radius: 50%;
     border-top-right-radius: 50%;
 }
@@ -2296,17 +2299,25 @@ p {
     position: absolute;
     width: 45px;
     height: 58px;
-    top: 273px;
-    left: 43px;
+    top: 288px;
+    left: 41px;
     overflow: hidden;
     opacity: 1;
 }
 
-#tableauSection #playerInfoContainer #swapItemsBtnContainer.expanded {
+#tableauSection.tabletView #playerInfoContainer #swapItemsBtnContainer,
+#tableauSection.mobileView #playerInfoContainer #swapItemsBtnContainer {
+    top: 275px;
+    left: 43px;
+}
+
+#tableauSection.tabletView #playerInfoContainer #swapItemsBtnContainer.expanded,
+#tableauSection.mobileView #playerInfoContainer #swapItemsBtnContainer.expanded {
     opacity: 1;
 }
 
-#tableauSection #playerInfoContainer #swapItemsBtnContainer.collapsed {
+#tableauSection.tabletView #playerInfoContainer #swapItemsBtnContainer.collapsed,
+#tableauSection.mobileView #playerInfoContainer #swapItemsBtnContainer.collapsed {
     opacity: 0;
 }
 
@@ -2550,7 +2561,7 @@ p {
 #tableauSection #mapContainer #placedCardOptions {
     width: 100%;
     height: 58px;
-    padding: 3px 0px 0px 38px;
+    padding: 3px 0px 0px 68px;
     position: absolute;
     z-index: 14;
     bottom: 0px;
@@ -2560,8 +2571,8 @@ p {
 }
 
 #container.tabletView #tableauSection #mapContainer #placedCardOptions {
-    height: 48px;
-    padding: 2px 0px 0px 9px;
+    height: 55px;
+    padding: 0px 0px 0px 9px;
     position: absolute;
 }
 
@@ -2576,18 +2587,18 @@ p {
 
 #tableauSection #mapContainer #placedCardOptions .button {
     float: left;
-    margin: 5px 17px;
+    margin: 5px 15px;
     font-size: 15px;
-    width: 116px;
-    padding: 0px 10px;
+    width: 120px;
+    padding: 0px 0px;
 }
 
 #container.tabletView #tableauSection #mapContainer #placedCardOptions .button {
-    margin: 5px 8px;
-    font-size: 13px;
-    width: 80px;
-    height: 20px;
-    padding: 6px 10px;
+    margin: 6px 6px 0px;
+    font-size: 15px;
+    width: 107px;
+    height: 38px;
+    padding: 0px 0px;
 }
 
 #tableauSection #mapContainer #placedCardOptions .button .icon ion-icon {
@@ -2614,7 +2625,7 @@ p {
     height: 56px;
     position: absolute;
     top: 5px;
-    right: 8px;
+    right: 11px;
     z-index: 1;
 }
 
@@ -2738,7 +2749,7 @@ p {
 #tableauSection #mapZoomControls {
     position: absolute;
     top: 5px;
-    left: 6px;
+    left: 11px;
     width: 107px;
     height: 48px;
     z-index: 15;
@@ -3161,8 +3172,8 @@ p {
 
     #container.mobileView #setupLayer #homepageButtonContainer .button {
         margin: 0vw 2vw;
-        width: 23vw;
-        height: 6vw;
+        width: 31vw;
+        height: 10vw;
         font-size: 3.5vw;
     }
 
@@ -3255,7 +3266,9 @@ p {
     #container.mobileView #gameLayer #topInfoBar #showScoringRemindersBtn {
         font-size: 2.7vw;
         margin: 1.4vw 0vw 0vw 5vw;
-        padding: 0vw 4vw;
+        padding: 0vw 0vw;
+        width: 17vw;
+        height: 7vw;
     }
 
     #container.mobileView #gameLayer #gameSectionsParent {
@@ -4094,7 +4107,7 @@ p {
 
 
     #tableauSection #mapContainer #placedCardOptions {
-        height: 9.8vw;
+        height: 12.8vw;
         padding: 1.2vw 0.2vw 1.4vw 3vw;
         z-index: 14;
         bottom: 0vw;
@@ -4111,10 +4124,10 @@ p {
 
     #tableauSection #mapContainer #placedCardOptions .button {
         margin: .5vw 2.5vw;
-        font-size: 3.1vw;
-        width: 18vw;
-        padding: 0.4vw 2vw;
-        height: 7vw;
+        font-size: 3.5vw;
+        width: 24vw;
+        padding: 0vw 0vw;
+        height: 9vw;
     }
 
     #tableauSection #mapContainer #placedCardOptions .button .icon ion-icon {
