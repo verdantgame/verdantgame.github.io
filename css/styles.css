@@ -3,13 +3,6 @@
 *:-webkit-full-screen,
 *:-moz-full-screen {
    overflow: auto!important;
-   -webkit-text-size-adjust: 100%
-}
-
-* {
-    -moz-text-size-adjust: 100%;
-    -webkit-text-size-adjust: 100%;
-    -ms-text-size-adjust: 100%;
 }
 
 :root {
@@ -20,35 +13,50 @@
     background-color: #ababab!important;
 }
 
-.desktopElement,
-.tabletElement {
-    display:block;
+#container.desktopView .desktopElement,
+#container.tabletView .tabletElement,
+#container.mobileView .mobileElement {
+    display:block!important;
 }
 
-.mobileElement {
+#container.desktopView .tabletElement,
+#container.desktopView .mobileElement,
+#container.tabletView .desktopElement,
+#container.tabletView .mobileElement,
+#container.mobileView .desktopElement,
+#container.mobileView .tabletElement {
     display: none;
 }
 
-html, body {
-    background-color: #FFF;
-}
-
-html {	
-    overflow-y: auto!important;
-	min-width: auto!important;
+html {
+    overflow-y: hidden!important;
+    min-width: auto!important;
+    /* width: 100%;
+    height: 100%;
+    overflow: hidden; */
 }
 
 body {
     width: 100%;
     margin: 0 auto;
-    line-height: 0;
+    box-sizing: content-box;
+    /* line-height: 0; */
+    /* width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+    padding-right: 17px;
+    box-sizing: content-box; */
 }
 
 #container.desktopView {
     max-width: 1250px;
 }
 
-#container.tabletView,
+#container.tabletView {
+    max-width: 539px;
+    height: 1040px;
+}
+
 #container.mobileView {
     max-width: 539px;
 }
@@ -63,7 +71,6 @@ body {
 #container.tabletView #minimizeScreenIcon {
     display:none!important;
 }
-
 
 #container #minimizeScreenIcon {
     display:none;
@@ -87,6 +94,29 @@ p {
 .modal.notificationModal .modal-content {
     top: 15%;
     width: 330px;
+}
+
+.modal .modal-content .delete.closeModalTrigger.smallCloseCross {
+    padding: 1px!important;
+}
+
+.modal .modal-content .delete.closeModalTrigger.mediumCloseCross {
+    padding: 5px!important;
+}
+
+.modal .modal-content .delete.closeModalTrigger.largeCloseCross {
+    padding: 9px!important;
+}
+
+#scoringReminderModal.modal.notificationModal .modal-content {
+    top: 2%;
+    width: 530px;
+}
+
+#scoringReminderModal.modal.notificationModal .modal-content #scoringAidImg {
+    width: 370px;
+    display: block;
+    margin: 0 auto;
 }
 
 .modal.notificationModal .modal-content[btns="1"] .button:not(.delete.closeModalTrigger) {
@@ -298,14 +328,21 @@ p {
 }
 
 #setupLayer #homepageButtonContainer {
-    margin: 20px auto 27px;
-    width: 320px;
+    width: 340px;
+    margin: 16px auto 20px;
 }
 
 #setupLayer #homepageButtonContainer .button {
     display: block;
-    margin: 0px 10px;
-    width: 140px;
+    margin: 0px 14px;
+    width: 105px;
+    height: 28px;
+}
+
+#container.tabletView #setupLayer #homepageButtonContainer .button,
+#container.mobileView #setupLayer #homepageButtonContainer .button {
+    width: 95px;
+    height: 26px;
 }
 
 #setupLayer #demoDisclaimer {
@@ -355,45 +392,141 @@ p {
 *Static Styles*
 */
 
+
 #gameLayer #topInfoBar {
     display: block;
-    width: 400px;
+    width: 752px;
     margin: 10px auto 5px;
     padding: 5px 0px;
     border-radius: 9px;
+    height: 73px;
 }
 
-#container.desktopView #gameLayer #topInfoBar #secondaryVerdantTitle,
+#container.tabletView #gameLayer #topInfoBar {
+    width: 100%;
+    margin: 7px auto 3px;
+    padding: 5px 0px;
+    border-radius: 9px;
+    height: 49px;
+    position: relative;
+    z-index: 1;
+}
+
+#container #gameLayer #topInfoBar #secondaryVerdantTitle {
+    margin-bottom: 0px;
+    float: left;
+    width: 236px;
+}
+
 #container.tabletView #gameLayer #topInfoBar #secondaryVerdantTitle {
-    display: block;
-    width: 240px;
-    margin: 0 auto 3px;
+    width: 150px;
+    margin-left: 15px;
 }
 
-#gameLayer #topInfoBar .infoBarColumn {
-    font-size: 20px;
-    margin: 2px 0px;
-}
-
-#container.desktopView #gameLayer #topInfoBar .infoBarColumn {
+#gameLayer #topInfoBar #infoBarStats {
+    width: 204px;
+    float: left;
+    margin: 12px 0px 0px 60px;
     font-size: 20px;
 }
 
-#gameLayer #topInfoBar .infoBarColumn.leftColumn {
-    width: 184px;
-    float:left;
-    text-align: right;
+#container.tabletView #gameLayer #topInfoBar #infoBarStats {
+    width: 166px;
+    margin: 1px 0px 0px 41px;
+    font-size: 16px;
+    line-height: 23px;
 }
 
-#gameLayer #topInfoBar .infoBarColumn.rightColumn {
-    width: 174px;
-    float:right;
-    text-align:left;
+#gameLayer #topInfoBar #infoBarStats .infoBarStatContainer {
+    margin-bottom: 4px;
 }
 
-#gameLayer #topInfoBar .infoBarColumn .infoSpan {
+#container.tabletView #gameLayer #topInfoBar #infoBarStats .infoBarStatContainer {
+    margin-bottom: 0px;
+}
+
+#gameLayer #topInfoBar #infoBarStats .infoBarStatContainer .infoBarStatTitle {
+    width: 169px;
+    float: left;
+    text-align: center;
+}
+
+#container.tabletView #gameLayer #topInfoBar #infoBarStats .infoBarStatContainer .infoBarStatTitle {
+    width: 133px;
+    margin-right: 0px;
+}
+
+#gameLayer #topInfoBar #infoBarStats .infoBarStatContainer .infoBarStatData {
+    width: 32px;
+    float: right;
+    text-align: center;
     font-weight: bold;
 }
+
+#container.tabletView #gameLayer #topInfoBar #infoBarStats .infoBarStatContainer .infoBarStatData {
+    width: 28px;
+}
+
+#gameLayer #topInfoBar #showScoringRemindersBtn {
+    font-size: 18px;
+    margin: 15px 0px 0px 79px;
+    padding: 0px 38px;
+}
+
+#container.tabletView #gameLayer #topInfoBar #showScoringRemindersBtn {
+    font-size: 15px;
+    margin: 5px 0px 0px 46px;
+    padding: 0px 26px;
+}
+
+#container.desktopView #swapSectionsIcon {
+    display: none;
+}
+
+#container.tabletView #swapSectionsIcon,
+#container.mobileView #swapSectionsIcon {
+    font-size: 43px;
+    width: 43px;
+    height: 43px;
+    position: absolute;
+    top: 209px;
+    left: 232px;
+    z-index: 11;
+    color: #003722;
+    background-color: #05c15f;
+    border-radius: 50%;
+    cursor: pointer;
+    cursor: hand;
+    box-shadow: 0px 0px 5px 2px #424242;
+}
+
+#container.tabletView #swapSectionsIcon.expanded,
+#container.mobileView #swapSectionsIcon.expanded {
+    top: 209px;
+}
+
+#container.tabletView #swapSectionsIcon.collapsed,
+#container.mobileView #swapSectionsIcon.collapsed {
+    top: 519px;
+}
+
+#container #swapSectionsIcon ion-icon[name="arrow-up-circle-outline"] {
+    transition: transform .7s ease-in-out;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    transform: rotate(180deg);
+}
+
+#container #swapSectionsIcon.expanded ion-icon[name="arrow-up-circle-outline"] {
+    transform: rotate(180deg);
+}
+
+#container #swapSectionsIcon.collapsed ion-icon[name="arrow-up-circle-outline"] {
+    transform: rotate(0deg);
+}
+
+
 
 /*    
     __  ___        _                            
@@ -447,8 +580,28 @@ p {
     border-bottom-left-radius: 10px;
 }
 
+#container .gameSectionContainerOuterOverlay.collapsed {
+    z-index: 0;
+}
+
+#container .gameSectionContainerOuterOverlay.expanded {
+    z-index: 1;
+}
+
+#tableauContainerInnerOverlay.gameSectionContainerInnerOverlay {
+    width: 657px;
+}
+
+#marketContainerInnerOverlay.gameSectionContainerInnerOverlay {
+    width: 505px;
+}
+
+#container.tabletView #marketContainerInnerOverlay.gameSectionContainerInnerOverlay {
+    width: 511px;
+}
+
 .gameSectionContainerInnerOverlay {
-    width: 100%;
+    width: 99.2%;
     height: 100%;
     position: absolute;
     overflow: hidden;
@@ -485,78 +638,14 @@ p {
 #container.desktopView #gameLayer .gameSectionContainerOuterOverlay {
     top: 10px;
 }
-/* 
-#container.desktopView #gameLayer .gameSectionOverlayParent {
-    display:none;
-}
-
-#container.tabletView #gameLayer .gameSectionOverlayParent,
-#container.mobileView #gameLayer .gameSectionOverlayParent {
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    background-color: transparent;
-    padding-top: 0px;
-}
-
-#container.tabletView #gameLayer .gameSectionOverlayParent .gameSectionOverlayBorder.outerBorder,
-#container.mobileView #gameLayer .gameSectionOverlayParent .gameSectionOverlayBorder.outerBorder {
-    border-bottom-color: rgb(65, 167, 66);
-    border-bottom-style: solid;
-    border-bottom-width: 1px;
-    border-right-color: rgb(65, 167, 66);
-    border-right-style: solid;
-    border-left-color: rgb(65, 167, 66);
-    border-left-style: solid;
-    width: 100%;
-    overflow: hidden;
-}
-
-#container.tabletView #gameLayer .gameSectionOverlayParent .gameSectionOverlayBorder.outerBorder {
-    border-bottom-width: 1px;
-    border-bottom-right-radius: 3px;
-    border-bottom-left-radius: 3px;
-    border-right-width: 1px;
-    border-left-width: 1px;
-    padding: 1px;
-    height: 18px;
-}
-
-#container.tabletView #gameLayer .gameSectionOverlayParent .gameSectionOverlayBorder.innerBorder,
-#container.mobileView #gameLayer .gameSectionOverlayParent .gameSectionOverlayBorder.innerBorder {
-    border-bottom-color: rgb(65, 167, 66);
-    border-bottom-style: solid;
-    border-right-color: rgb(65, 167, 66);
-    border-right-style: solid;
-    border-left-color: rgb(65, 167, 66);
-    border-left-style: solid;
-    position: relative;
-    width: 100%;
-}
-
-#container.tabletView #gameLayer .gameSectionOverlayParent .gameSectionOverlayBorder.innerBorder {
-    border-bottom-width: 2px;
-    border-bottom-right-radius: 3px;
-    border-bottom-left-radius: 3px;
-    border-right-width: 2px;
-    border-left-width: 2px;
-    height: 15px;
-}
-
-#container.tabletView #gameLayer .gameSectionOverlayParent .gameSectionWhiteOverlay,
-#container.mobileView #gameLayer .gameSectionOverlayParent .gameSectionWhiteOverlay {
-    width: 100%;
-    height: 100%;
-    background-color: #FFF;
-} */
 
 #gameLayer .bgOverlay,
 #gameLayer .gameSectionBg {
-    width: 106%;
-    max-width: 106%;
+    width: 108%;
+    max-width: 108%;
     position: absolute;
     top: -2%;
-    left: -2%;
+    left: -4%;
 }
 
 #gameLayer .bgOverlay {
@@ -618,11 +707,16 @@ p {
 }
 
 #gameLayer .titleContainer {
-    height: 35px;
+    height: 34px;
     position: absolute;
     top: 11px;
     left: 31px;
     border-bottom: 1px solid #003823;
+}
+
+#container.tabletView #gameLayer .titleContainer {
+    height: 31px;
+    left: 35px;
 }
 
 #gameLayer .titleContainer .title {
@@ -631,6 +725,10 @@ p {
     font-weight: 300;
     font-size: 27px;
     border-bottom: 2px solid #003823;
+}
+
+#container.tabletView #gameLayer .titleContainer .title {
+    font-size: 25px;
 }
 
 /*                                                                                        
@@ -680,12 +778,17 @@ p {
     border-top-left-radius: 10px;
 }
 
+#container.desktopView #marketContainerInnerOverlay.gameSectionContainerInnerOverlay {
+    width: 505px;
+}
+
 #container.tabletView #marketContainerOuterOverlay.expanded {
     top: 5px;
 }
 
 #container.tabletView #marketContainerOuterOverlay.collapsed {
-    top: -307px;
+    top: -311px;
+    /* z-index: 0; */
 }
 
 #container.tabletView #marketContainerInnerOverlay.expanded {
@@ -693,7 +796,7 @@ p {
 }
 
 #container.tabletView #marketContainerInnerOverlay.collapsed {
-    top: 315px;
+    top: 312px;
 }
 
 #marketSection .gameSectionContent {
@@ -710,33 +813,28 @@ p {
 
 #marketSection #marketCardColumns { 
     position: absolute;
-    top: 59px;
-    left: 24px;
-}
-
-#marketSection #marketCardColumns { 
-    position: absolute;
-    top: 59px;
-    left: 24px;
-}
-
-#container.desktopView #marketSection #marketCardColumns { 
     top: 75px;
+    left: 24px;
+}
+
+#container.tabletView #marketSection #marketCardColumns { 
+    top: 59px;
+    left: 20px;
 }
 
 #marketSection .marketColumn {
     width: 105px;
     float: left;
-    margin: 0px 0px 0px 12px;
+    margin: 0px 0px 0px 16px;
 }
 
-#container.desktopView #marketSection .marketColumn {
+/* #container.desktopView #marketSection .marketColumn {
     height: 450px;
 }
 
 #container.desktopView #marketSection .marketColumn:hover {
     height: 450px;
-}
+} */
 
 /* 
     ____          __ 
@@ -1444,7 +1542,6 @@ p {
     transform: scale(1.4);
 }
 
-
 .verdancyIconsAndVPLayer {
     opacity: 0;
     padding-top: 0.5vw;
@@ -1452,7 +1549,7 @@ p {
     position: absolute;
     left: 0vw;
     top: 0vw;
-    height: 100%;
+    height: 96%;
     width: 100%;
     z-index: 99;
     transition: opacity .5s ease-in-out;
@@ -1521,7 +1618,7 @@ p {
 
 .cardContainer[type="plant"] .verdancyIconsAndVPLayer .verdancyIconsParentContainer {
     width: 105%;
-    height: 61%;
+    height: 64%;
     position: absolute;
     top: 38%;
     left: 0%;
@@ -1541,7 +1638,7 @@ p {
 }
 
 .cardContainer[type="plant"] .verdancyIconsAndVPLayer .verdancyIconsParentContainer .verdancyIconContainer .verdancyIcon {
-    transition: opacity .6s ease-in-out;
+    transition: opacity .3s ease-in-out;
     opacity: 0;
     position:absolute;
     top:0vw;
@@ -1648,10 +1745,10 @@ p {
 
 /* Top  */
 .cardContainer[type="room"] .lightingIconContainer-top {
-    width: 22%;
+    width: 17%;
     height: 13%;
-    top: 0%;
-    left: 39%;
+    top: -1%;
+    left: 38%;
     padding: 0% 3% 3% 3%;
     border-bottom-right-radius: 50%;
     border-bottom-left-radius: 50%;
@@ -1660,8 +1757,8 @@ p {
 /* Top  */
 #container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer-top.expanded,
 #container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer-top.expanded {
-    top: 0%;
-    left: 39%;
+    top: -1%;
+    left: 38%;
 }
 
 /* Top Lighting Container */
@@ -1673,11 +1770,11 @@ p {
 
 /* Right */
 .cardContainer[type="room"] .lightingIconContainer-right {
-    width: 19%;
-    height: 13.4%;
+    width: 16%;
+    height: 11.4%;
     top: 44%;
     left: 81%;
-    padding: 1.8% 0% 3% 3%;
+    padding: 0% 0% 3% 3%;
     border-top-left-radius: 50%;
     border-bottom-left-radius: 50%;
 }
@@ -1691,12 +1788,12 @@ p {
 /* Right Lighting Container */
 #container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer-right.collapsed,
 #container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer-right.collapsed {
-    top: 16%;
+    top: 15%;
 }
 
 /* Bottom */
 .cardContainer[type="room"] .lightingIconContainer-bottom {
-    width: 22%;
+    width: 17%;
     height: 13%;
     padding: 2% 3% 0% 3%;
     bottom: -1%;
@@ -1714,14 +1811,14 @@ p {
 /* Bottom Lighting Container */
 #container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer-bottom.collapsed,
 #container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer-bottom.collapsed {
-    bottom: 60%;
+    bottom: 59%;
 }
 
 /* Left */
 .cardContainer[type="room"] .lightingIconContainer-left {
-    width: 18%;
-    height: 14%;
-    padding: 2.5% 2% 0% 0%;
+    width: 16%;
+    height: 12%;
+    padding: 0.5% 2% 0% 0%;
     top: 43%;
     left: 1%;
     border-bottom-right-radius: 50%;
@@ -1740,9 +1837,6 @@ p {
     top: 15%;
 }
 
-
-
-
 /* 
     __     _         __     __   _              
    / /    (_)____ _ / /_   / /_ (_)____   ____ _
@@ -1756,24 +1850,19 @@ p {
  ___/ // /_/ // / / / / // /_/ // /_/ // /      
 /____/ \__, //_/ /_/ /_//_.___/ \____//_/
       /____/                         
-      
-*Desktop*
-*Static Styles*
 */
 
 .cardContainer[type="room"] .lightingIconContainer .lightingIcon {
     width: 100%;
 }
 
-/* Top  */
 .cardContainer[type="room"] .lightingIconContainer-top .lightingIcon {
-    margin-top: 9%;
+    margin-top: 14%;
     margin-right: 0%;
     margin-bottom: 0%;
     margin-left: 0%;
 }
 
-/* Right */
 .cardContainer[type="room"] .lightingIconContainer-right .lightingIcon {
     margin-top: 1%;
     margin-right: 0%;
@@ -1781,7 +1870,6 @@ p {
     margin-left: 0%;
 }
 
-/* Bottom */
 .cardContainer[type="room"] .lightingIconContainer-bottom .lightingIcon {
     margin-top: 0%;
     margin-right: 0%;
@@ -1789,7 +1877,6 @@ p {
     margin-left: 0%;
 }
 
-/* Left */
 .cardContainer[type="room"] .lightingIconContainer-left .lightingIcon {
     margin-top: 5%;
     margin-right: 0%;
@@ -1812,25 +1899,26 @@ p {
  ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______       
 /_____//_____//_____//_____//_____//_____//_____//_____//_____//_____//_____/       
 
-*Desktop*
-*Static Styles*
 */
 #tableauSection {
     top: 0px;
     height: 550px;
 }
 
-/* #container.tabletView #tableauSection.collapsed {
-    top: 541px;
+#container.tabletView #tableauSection {
+    top: 0px;
+    height: 557px;
 }
 
-#container.tabletView #tableauSection.expanded {
-    top: 233px;
-} */
+#container.tabletView #tableauSection.expanded  {
+    top: 0px;
+    height: 557px;
+}
 
-/* #tableauSection .inactive.collapsed {
-    height: 242px;
-} */
+#container.tabletView #tableauSection.collapsed {
+    top: 0px;
+    height: 557px;
+}
 
 #tableauSection .gameSectionContent {
     top: 0px;
@@ -1840,9 +1928,13 @@ p {
     top: -55px;
 }
 
+#container.desktopView #tableauContainerInnerOverlay {
+    width: 657px;
+}
+
 #container.tabletView #tableauContainerOuterOverlay,
 #container.tabletView #tableauContainerInnerOverlay {
-    height: 550px;
+    height: 557px;
     width: 515px;
 }
 
@@ -1852,7 +1944,12 @@ p {
 }
 
 #container.tabletView #tableauContainerOuterOverlay.collapsed {
-    top: 245px;
+    top: 347px;
+}
+
+#container.tabletView #tableauContainerInnerOverlay,
+#container.mobileView #tableauContainerInnerOverlay {
+    width: 99.2%;
 }
 
 #container.tabletView #tableauContainerInnerOverlay.expanded,
@@ -1861,7 +1958,7 @@ p {
 }
 
 #container.tabletView #tableauContainerInnerOverlay.collapsed {
-    top: 301px;
+    top: 200px;
 }
 
 #container.tabletView #tableauSection .gameSectionOverlayParent.expanded {
@@ -1881,52 +1978,72 @@ p {
 #container #tableauSection #homeContentContainer {
     margin: 0 auto;
     position: relative;
+    width: 100%;
+    height: 481px;
     top: 60px;
 }
 
-#container.desktopView #tableauSection #homeContentContainer {
-    width: 100%;
-    height: 481px;
+#container.tabletView #tableauSection #homeContentContainer {
+    width: 99%;
+    height: 486px;
+    top: 65px;
 }
 
-#container.tabletView #tableauSection #homeContentContainer,
-#container.mobileView #tableauSection #homeContentContainer {
-    width: 99%;
-    height: 463px;
+#container.tabletView #tableauSection #homeContentContainer.expanded {
+    top: 65px;
+}
+
+#container.tabletView #tableauSection #homeContentContainer.collapsed {
+    top: 69px;
 }
 
 #tableauSection #playerInfoContainer {
     overflow: hidden;
     float: left;
+    position: relative;
 }
 
 #container.desktopView #tableauSection #playerInfoContainer {
     width: 129px;
     height: 480px;
-    position: relative;
     margin-left: 5px;
 }
 
 #container.tabletView #tableauSection #playerInfoContainer,
 #container.mobileView #tableauSection #playerInfoContainer {
     width: 135px;
-    height: 460px;
+    height: 480px;
 }
+
 
 #tableauSection #playerInfoContainer .playerInfoTitle {
     font-style: italic;
     font-weight: bold;
-    top: 0px;
     position: absolute;
+    top: 26%;
+    z-index: 2;
+    color: #3aa5729e;
+    font-size: 16px;
     width: 100%;
+    line-height: 20px;
+    opacity: 1;
 }
 
-#container.tabletView #tableauSection #playerInfoContainer .playerInfoTitle.expanded {
-    top: 0px;
+#container.tabletView #tableauSection #playerInfoContainer .playerInfoTitle {
+    top: 30%;
+    font-size: 14px;
+    line-height: 15px;
+    opacity: 1;
 }
 
-#container.tabletView #tableauSection #playerInfoContainer .playerInfoTitle.collapsed {
-    top: -23px;
+#container.tabletView #tableauSection #playerInfoContainer .playerInfoTitle.expanded,
+#container.mobileView #tableauSection #playerInfoContainer .playerInfoTitle.expanded {
+    opacity: 1;
+}
+
+#container.tabletView #tableauSection #playerInfoContainer .playerInfoTitle.collapsed,
+#container.mobileView #tableauSection #playerInfoContainer .playerInfoTitle.collapsed {
+    opacity: 0;
 }
 
 /* 
@@ -1940,15 +2057,13 @@ p {
   / /_/ // // __ `// ___// _ \             
  / ____// // /_/ // /__ /  __/             
 /_/    /_/ \__,_/ \___/ \___/
-
-*Desktop*
-*Static Styles*                                       
+                                     
 */
 
 #tableauSection #playerInfoContainer #cardToPlace {
     position: absolute;
     width: 105px;
-    height: 203px;
+    height: 173px;
     top: 0px;
 }
 
@@ -1956,24 +2071,28 @@ p {
     left: 10px;
 }
 
-#container.tabletView #tableauSection #playerInfoContainer #cardToPlace,
-#container.mobileView #tableauSection #playerInfoContainer #cardToPlace{
+#container.mobileView #tableauSection #playerInfoContainer #cardToPlace {
     left: 16px;
 }
 
+#container.tabletView #tableauSection #playerInfoContainer #cardToPlace {
+    top: 6px;
+    left: 11px;
+}
+
 #container.tabletView #tableauSection #playerInfoContainer #cardToPlace.expanded {
-    top: -4px;
+    top: 6px;
     left: 11px;
 }
 
 #container.tabletView #tableauSection #playerInfoContainer #cardToPlace.collapsed {
-    top: -26px;
-    left: 14px;
+    top: 6px;
+    left: 11px;
 }
 
 #tableauSection #playerInfoContainer #cardToPlace > .flip-plant,
 #tableauSection #playerInfoContainer #cardToPlace > .cardContainer {
-    top: 31px;
+    top: 3px;
     left: 0px;
     overflow: hidden;
 }
@@ -1990,8 +2109,9 @@ p {
 
 #container.desktopView #tableauSection #playerInfoContainer #cardToPlace .flip-plant.expanded.startingPosAnimate,
 #container.tabletView #tableauSection #playerInfoContainer #cardToPlace .flip-plant.expanded.startingPosAnimate {
-    top: 31px;
+    top: 3px;
     left: 0px;
+    z-index:4;
 }
 
 #container.desktopView #tableauSection #playerInfoContainer #cardToPlace .flip-plant.expanded.startingPosAnimate.startingPos,
@@ -2004,7 +2124,7 @@ p {
     position: absolute;
     width: 104%;
     max-width: 104%;
-    top: 28px;
+    top: 0px;
     left: -2px;
 }
 
@@ -2026,51 +2146,75 @@ p {
 */
 
 #tableauSection #playerInfoContainer .itemContainer {
-    width: 101px;
-    height: 100px;
+    width: 81px;
+    height: 80px;
     position: absolute;
     left: 13px;
     overflow: hidden;
 }
 
+#container.tabletView #tableauSection #playerInfoContainer .itemContainer {
+    width: 71px;
+    height: 70px;
+}
+
+/* CHOSEN ITEM CONTAINER */
+
 #tableauSection #playerInfoContainer #chosenItemContainer.itemContainer {
-    top: 209px;
-    left: 14px;
+    top: 192px;
+    left: 22px;
+}
+
+#container.tabletView #tableauSection #playerInfoContainer #chosenItemContainer.itemContainer {
+    top: 192px;
+    left: 28px;
 }
 
 #container.tabletView #tableauSection #playerInfoContainer #chosenItemContainer.itemContainer.expanded {
-    top: 206px;
-    left: 13px;
+    top: 192px;
+    left: 28px;
 }
 
 #container.tabletView #tableauSection #playerInfoContainer #chosenItemContainer.itemContainer.collapsed {
-    top: 149px;
-    left: -3px;
+    top: 190px;
+    left: 33px;
 }
 
+/* STORED ITEM CONTAINER */
+
 #tableauSection #playerInfoContainer #storedItemContainer.itemContainer {
-    top: 376px;
-    left: 17px;
+    top: 360px;
+    left: 22px;
+}
+
+#container.tabletView #tableauSection #playerInfoContainer #storedItemContainer.itemContainer {
+    top: 340px;
+    left: 28px;
 }
 
 #container.tabletView #tableauSection #playerInfoContainer #storedItemContainer.itemContainer.expanded {
-    top: 361px;
-    left: 13px;
+    top: 340px;
+    left: 28px;
 }
 
 #container.tabletView #tableauSection #playerInfoContainer #storedItemContainer.itemContainer.collapsed {
-    top: 149px;
-    left: 54px;
+    top: 263px;
+    left: 33px;
 }
 
 #tableauSection #playerInfoContainer .itemContainer .itemBackground {
-    width: 50%;
+    width: 75%;
     display: block;
     position: absolute;
-    top: 28px;
-    left: 17px;
+    top: 0px;
+    left: 0px;
     transform: scale(1.3);
     transform-origin: left top;
+}
+
+#container.tabletView #tableauSection #playerInfoContainer .itemContainer .itemBackground,
+#container.mobileView #tableauSection #playerInfoContainer .itemContainer .itemBackground {
+    width: 78%;
 }
 
 #container.tabletView #tableauSection #playerInfoContainer .itemContainer .itemBackground.expanded,
@@ -2080,10 +2224,36 @@ p {
 
 #container.tabletView #tableauSection #playerInfoContainer .itemContainer .itemBackground.collapsed,
 #container.mobileView #tableauSection #playerInfoContainer .itemContainer .itemBackground.collapsed {
-    transform: scale(1);
+    transform: scale(1.1);
 }
 
+#tableauSection #playerInfoContainer .storageIcon {
+    transform-origin: left top;
+    display: block;
+    position: absolute;
+    z-index: 2;
+    color: #125d16;
+}
 
+#container.desktopView #tableauSection #playerInfoContainer .storageIcon {
+    top: 421px;
+    left: 80px;
+    font-size: 27px;
+}
+
+#container.tabletView #tableauSection #playerInfoContainer .storageIcon {
+    top: 395px;
+    left: 77px;
+    font-size: 25px;
+}
+
+#container.tabletView #tableauSection #playerInfoContainer .storageIcon.expanded {
+    top: 395px;
+}
+
+#container.tabletView #tableauSection #playerInfoContainer .storageIcon.collapsed {
+    top: 309px;
+}
 
 
 /* 
@@ -2103,36 +2273,68 @@ p {
 *Static Styles*                                                                 
 */
 
-#container.desktopView #tableauSection #playerInfoContainer .swapItemsBtn {
+/* 
+#container.mobileView #tableauSection #playerInfoContainer #swapItemsBtnContainer {
+    width: 8.5vw;
+    height: 9vw;
+    top: 15.2vw;
+    left: 80.2vw;
+    opacity: 1;
+}
+
+#container.mobileView #tableauSection #playerInfoContainer #swapItemsBtnContainer.expanded {
+    opacity: 1;
+}
+
+#container.mobileView #tableauSection #playerInfoContainer #swapItemsBtnContainer.collapsed {
+    opacity: 0;
+}
+
+#container.mobileView #tableauSection #playerInfoContainer #swapItemsBtnContainer .swapItemsBtn {
+    height: 93%;
+    width: 97%;
+    font-size: 7.3vw;
+    line-height: 3.1vw;
+}
+ */
+
+
+#tableauSection #playerInfoContainer #swapItemsBtnContainer {
     position: absolute;
-    top: 317px;
-    left: 26px;
-    height: 50px;
+    width: 45px;
+    height: 58px;
+    top: 273px;
+    left: 43px;
     overflow: hidden;
-    font-size: 16px;
-    line-height: 19px;
-    padding: 0px 18px;
+    opacity: 1;
 }
 
-#container.tabletView #tableauSection #playerInfoContainer .swapItemsBtn {
+#tableauSection #playerInfoContainer #swapItemsBtnContainer.expanded {
+    opacity: 1;
+}
+
+#tableauSection #playerInfoContainer #swapItemsBtnContainer.collapsed {
+    opacity: 0;
+}
+
+#tableauSection #playerInfoContainer #swapItemsBtnContainer .swapItemsBtn {
+    display: none;
     position: absolute;
-    top: 309px;
-    left: 24px;
-    height: 50px;
-    overflow: hidden;
-    font-size: 16px;
-    line-height: 19px;
-    padding: 0px 18px;
+    top: 0px;
+    left: 0px;
+    height: 93%;
+    width: 97%;
+    font-size: 34px;
+    line-height: 16px;
+    padding: 0px 0px;
 }
 
-#container.tabletView #tableauSection #playerInfoContainer .swapItemsBtn.expanded {
-    height: 50px;
+#tableauSection #playerInfoContainer #swapItemsBtnContainer .swapItemsBtn.activeBtn {
+    display:block;
 }
 
-#container.tabletView #tableauSection #playerInfoContainer .swapItemsBtn.collapsed,
-#container.mobileView #tableauSection #playerInfoContainer .swapItemsBtn.collapsed {
-    height: 0px;
-    margin: 0px 0px 0px 0px;
+#tableauSection #playerInfoContainer #swapItemsBtnContainer .swapItemsBtn[disabled] {
+    opacity: .9;
 }
 
 /* 
@@ -2167,7 +2369,7 @@ p {
 }
 
 #container.desktopView #tableauSection #homeContentContainer #mapContainerOuterOverlay {
-    width: 500px;
+    width: 504px;
     height: 470px;
     right: 16px;
 }
@@ -2178,12 +2380,12 @@ p {
 }
 
 #container.tabletView #tableauSection #homeContentContainer #mapContainerOuterOverlay.collapsed {
-    top: -247px;
+    top: -147px;
 }
 
 #tableauSection #homeContentContainer #mapContainerInnerOverlay {
-    width: 370px;
-    height: 480px;
+    width: 500px;
+    height: 470px;
     position: absolute;
     top: 0px;
     right: 0px;
@@ -2201,9 +2403,14 @@ p {
     border-top-left-radius: 10px;
 }
 
-#container.desktopView #tableauSection #homeContentContainer #mapContainerInnerOverlay {
-    width: 500px;
-    height: 470px;
+#container.tabletView #tableauSection #homeContentContainer #mapContainerInnerOverlay {
+    width: 370px;
+    height: 480px;
+}
+
+#container.tabletView #tableauSection #homeContentContainer #mapContainerInnerOverlay,
+#container.mobileView #tableauSection #homeContentContainer #mapContainerInnerOverlay {
+    width: 366px;
 }
 
 #container.tabletView #tableauSection #homeContentContainer #mapContainerInnerOverlay.expanded,
@@ -2212,7 +2419,7 @@ p {
 }
 
 #container.tabletView #tableauSection #homeContentContainer #mapContainerInnerOverlay.collapsed {
-    top: 249px;
+    top: 149px;
 }
 
 #tableauSection #mapContainerOverlay {
@@ -2220,8 +2427,8 @@ p {
 }
 
 #tableauSection #mapContainer {
-    width: 370px;
-    height: 480px;
+    width: 504px;
+    height: 470px;
     background-color: #f7f7f752;
     background-image: url(../img/bg2.jpg);
     background-size: cover;
@@ -2234,9 +2441,9 @@ p {
     right: -2px;
 }
 
-#container.desktopView #tableauSection #mapContainer {
-    width: 500px;
-    height: 470px;
+#container.tabletView #tableauSection #mapContainer {
+    width: 369px;
+    height: 480px;
 }
 
 #container.tabletView #tableauSection #mapContainer.expanded {
@@ -2280,9 +2487,9 @@ p {
     box-shadow: 0px 0px 8px transparent;
 }
 
-#tableauSection #mapContainer #mapHiddenOverlay .mapTileContainer.temporaryPlacement,
-#tableauSection #mapContainer #mapHiddenOverlay .mapTileContainer.temporaryPlacement .cardContainer  {
-    box-shadow: 0px 0px 8px #33ff00;
+#tableauSection #mapContainer #mapHiddenOverlay .mapTileContainer.potentialPlacement.temporaryPlacement,
+#tableauSection #mapContainer #mapHiddenOverlay .mapTileContainer.potentialPlacement.temporaryPlacement .cardContainer  {
+    box-shadow: 0px 0px 4px 2px #e1ff00;
 }
 
 #tableauSection #mapContainer #mapHiddenOverlay .mapTileContainer.potentialPlacement {
@@ -2350,7 +2557,7 @@ p {
 #tableauSection #mapContainer #placedCardOptions {
     width: 100%;
     height: 58px;
-    padding: 3px 0px 0px 15px;
+    padding: 3px 0px 0px 38px;
     position: absolute;
     z-index: 14;
     bottom: 0px;
@@ -2359,28 +2566,35 @@ p {
     transition: all .7s ease-in-out;
 }
 
-#container.desktopView #tableauSection #mapContainer #placedCardOptions {
-    padding: 3px 0px 0px 73px;
+#container.tabletView #tableauSection #mapContainer #placedCardOptions {
+    height: 48px;
+    padding: 2px 0px 0px 9px;
+    position: absolute;
 }
 
 #tableauSection #mapContainer #placedCardOptions.expanded {
     bottom: 0px;
 }
 
-#tableauSection #mapContainer #placedCardOptions.collapsed {
-    bottom: -60px;
+#tableauSection #mapContainer #placedCardOptions.collapsed,
+#tableauSection.collapsed #mapContainer.collapsed #placedCardOptions.expanded {
+    bottom: -62px;
 }
 
 #tableauSection #mapContainer #placedCardOptions .button {
     float: left;
-    margin: 5px 8px;
+    margin: 5px 17px;
     font-size: 15px;
-    width: 107px;
+    width: 116px;
+    padding: 0px 10px;
 }
 
-#container.desktopView #tableauSection #mapContainer #placedCardOptions .button {
-    margin: 5px 13px;
-    width: 124px;
+#container.tabletView #tableauSection #mapContainer #placedCardOptions .button {
+    margin: 5px 8px;
+    font-size: 13px;
+    width: 80px;
+    height: 20px;
+    padding: 6px 10px;
 }
 
 #tableauSection #mapContainer #placedCardOptions .button .icon ion-icon {
@@ -2403,17 +2617,41 @@ p {
  */
 
  #mapContainer #verdancyVisibilityContainer {
-    width: 40px;
-    height: 49px;
+    width: 50px;
+    height: 56px;
     position: absolute;
     top: 5px;
     right: 8px;
+    z-index: 1;
 }
 
-#container.desktopView #mapContainer #verdancyVisibilityContainer {
-    width: 50px;
-    height: 56px;
+#container.tabletView #tableauSection #verdancyVisibilityContainer #verdancyVisibilityContainerOverlay,
+#container.mobileView #tableauSection #verdancyVisibilityContainer #verdancyVisibilityContainerOverlay {
+    transform-origin: right top;
+    transform: scale(1);
+    width:100%;
+    height:100%;
 }
+
+#container.tabletView #tableauSection #verdancyVisibilityContainer #verdancyVisibilityContainerOverlay.expanded,
+#container.mobileView #tableauSection #verdancyVisibilityContainer #verdancyVisibilityContainerOverlay.expanded {
+    transform: scale(1);
+}
+
+#container.tabletView #tableauSection #verdancyVisibilityContainer #verdancyVisibilityContainerOverlay.collapsed,
+#container.mobileView #tableauSection #verdancyVisibilityContainer #verdancyVisibilityContainerOverlay.collapsed {
+    transform: scale(.8);
+}
+
+#container.tabletView #mapContainer #verdancyVisibilityContainer.expanded {
+    top: 5px;
+}
+
+
+#container.tabletView #mapContainer #verdancyVisibilityContainer.collapsed {
+    top: 125px;
+}
+
 
 #mapContainer #verdancyVisibilityContainer:not(.disableVerdancyVisibility) {
     cursor: hand;
@@ -2455,14 +2693,9 @@ p {
 
 #mapContainer #verdancyVisibilityContainer .showHideVerdancyIconContainer {
     position: absolute;
-    top: 6px;
-    left: 5px;
-    z-index: 15;
-}
-
-#container.desktopView #mapContainer #verdancyVisibilityContainer .showHideVerdancyIconContainer {
     top: 11px;
     left: 11px;
+    z-index: 15;
 }
 
 #mapContainer #verdancyVisibilityContainer.showVerdancy #showVerdancyIconContainer.showHideVerdancyIconContainer,
@@ -2513,25 +2746,46 @@ p {
     position: absolute;
     top: 5px;
     left: 6px;
-    width: 91px;
-    height: 42px;
+    width: 107px;
+    height: 48px;
     z-index: 15;
     opacity: 1;
 }
 
-#container.desktopView #tableauSection #mapZoomControls {
-    width: 107px;
+#container.tabletView #tableauSection #mapZoomControls {
+    width: 114px;
     height: 48px;
+    top: 5px;
 }
 
-#container.tabletView #tableauSection #mapZoomControls.expanded,
-#container.mobileView #tableauSection #mapZoomControls.expanded {
-    opacity: 1;
+#container.tabletView #tableauSection #mapZoomControls.expanded {
+    width: 114px;
+    height: 48px;
+    top: 5px;
 }
 
-#container.tabletView #tableauSection #mapZoomControls.collapsed,
-#container.mobileView #tableauSection #mapZoomControls.collapsed {
-    opacity: 0;
+#container.tabletView #tableauSection #mapZoomControls.collapsed {
+    width: 114px;
+    height: 48px;
+    top: 126px;
+}
+
+#container.tabletView #tableauSection #mapZoomControls #mapZoomControlsOverlay,
+#container.mobileView #tableauSection #mapZoomControls #mapZoomControlsOverlay {
+    transform-origin: left top;
+    transform: scale(1);
+    width:100%;
+    height:100%;
+}
+
+#container.tabletView #tableauSection #mapZoomControls #mapZoomControlsOverlay.expanded,
+#container.mobileView #tableauSection #mapZoomControls #mapZoomControlsOverlay.expanded {
+    transform: scale(1);
+}
+
+#container.tabletView #tableauSection #mapZoomControls #mapZoomControlsOverlay.collapsed,
+#container.mobileView #tableauSection #mapZoomControls #mapZoomControlsOverlay.collapsed {
+    transform: scale(.8);
 }
 
 #tableauSection #mapZoomControls .zoomIcon {
@@ -2542,6 +2796,10 @@ p {
 
 #container.desktopView #tableauSection #mapZoomControls .zoomIcon {
     width: 47px;
+}
+
+#container.tabletView #tableauSection #mapZoomControls .zoomIcon {
+    width: 46px;
 }
 
 #tableauSection #mapZoomControls .zoomIcon.inactiveZoom {
@@ -2565,6 +2823,10 @@ p {
     left: 50px;
 }
 
+#container.tabletView #tableauSection #mapZoomControls .zoomInIcon {
+    left: 66px;
+}
+
 #container.desktopView #tableauSection #mapZoomControls .zoomInIcon {
     left: 60px;
 }
@@ -2582,28 +2844,43 @@ p {
 */
 
 #tableauSection #mapNavControls {
-    width: 100px;
-    height: 100px;
+    width: 110px;
+    height: 110px;
     position: absolute;
     z-index: 15;
     bottom: 3px;
     right: 3px;
-    opacity: 1;
 }
 
-#container.desktopView #tableauSection #mapNavControls {
-    width: 110px;
-    height: 110px;
+#container.tabletView #tableauSection #mapNavControls {
+    width: 119px;
+    height: 119px;
 }
 
-#container.tabletView #tableauSection #mapNavControls.expanded,
-#container.mobileView #tableauSection #mapNavControls.expanded {
-    opacity: 1;
+#container.tabletView #tableauSection #mapNavControls.expanded {
+    bottom: 3px;
 }
 
-#container.tabletView #tableauSection #mapNavControls.collapsed,
-#container.mobileView #tableauSection #mapNavControls.collapsed {
-    opacity: 0;
+#container.tabletView #tableauSection #mapNavControls.collapsed {
+    bottom: 29px;
+}
+
+#container.tabletView #tableauSection #mapNavControls #mapNavControlsOverlay,
+#container.mobileView #tableauSection #mapNavControls #mapNavControlsOverlay {
+    transform-origin: right bottom!important;
+    transform: scale(1);
+    width:100%;
+    height:100%;
+}
+
+#container.tabletView #tableauSection #mapNavControls #mapNavControlsOverlay.expanded,
+#container.mobileView #tableauSection #mapNavControls #mapNavControlsOverlay.expanded {
+    transform: scale(1);
+}
+
+#container.tabletView #tableauSection #mapNavControls #mapNavControlsOverlay.collapsed,
+#container.mobileView #tableauSection #mapNavControls #mapNavControlsOverlay.collapsed {
+    transform: scale(.8);
 }
 
 #tableauSection #mapNavControls #mapNavBackground {
@@ -2630,57 +2907,6 @@ p {
     cursor:pointer;
 }
 
-/* Up */
-#tableauSection #mapNavControls #upArrow.arrowImg {
-    transform: rotate(270deg);
-    top: 9px;
-    right: 32px;
-}
-
-/* Up Arrow */
-#tableauSection #mapNavControls #upArrow.arrowImg.activeArrow {    
-	-webkit-transform: rotate(270deg) translateX(2px);
-	transform: rotate(270deg) translateX(2px);
-}
-
-/* Right */
-#tableauSection #mapNavControls #rightArrow.arrowImg {
-    transform: rotate(0deg);
-    top: 39px;
-    right: 3px;
-}
-
-/* Down */
-#tableauSection #mapNavControls #downArrow.arrowImg {
-    transform: rotate(90deg);
-    top: 67px;
-    right: 35px;
-}
-
-/* Left */
-#tableauSection #mapNavControls #leftArrow.arrowImg {
-    transform: rotate(180deg);
-    top: 36px;
-    right: 62px;
-}
-
-/* Right Arrow */
-#tableauSection #mapNavControls #rightArrow.arrowImg.activeArrow {    
-	-webkit-transform: rotate(0deg) translateX(2px);
-	transform: rotate(0deg) translateX(2px);
-}
-
-/* Down Arrow */
-#tableauSection #mapNavControls #downArrow.arrowImg.activeArrow {    
-	-webkit-transform: rotate(90deg) translateX(2px);
-	transform: rotate(90deg) translateX(2px);
-}
-
-/* Left Arrow */
-#tableauSection #mapNavControls #leftArrow.arrowImg.activeArrow {    
-	-webkit-transform: rotate(180deg) translateX(2px);
-	transform: rotate(180deg) translateX(2px);  
-} 
 
 #container.desktopView #tableauSection #mapNavControls .arrowImg {
     width: 40px;
@@ -2706,6 +2932,76 @@ p {
     top: 37px;
     right: 67px;
 }
+
+#container.tabletView #tableauSection #mapNavControls .arrowImg {
+    width: 40px;
+}
+
+/* Up */
+#container.tabletView #tableauSection #mapNavControls #upArrow.arrowImg {
+    top: 9px;
+    right: 38px;
+}
+/* Right */
+#container.tabletView #tableauSection #mapNavControls #rightArrow.arrowImg {
+    top: 45px;
+    right: 3px;
+}
+/* Down */
+#container.tabletView #tableauSection #mapNavControls #downArrow.arrowImg {
+    top: 80px;
+    right: 41px;
+}
+/* Left */
+#container.tabletView #tableauSection #mapNavControls #leftArrow.arrowImg {
+    top: 43px;
+    right: 75px;
+}
+
+/* Up */
+#tableauSection #mapNavControls #upArrow.arrowImg {
+    transform: rotate(270deg);
+}
+
+/* Right */
+#tableauSection #mapNavControls #rightArrow.arrowImg {
+    transform: rotate(0deg);
+}
+
+/* Down */
+#tableauSection #mapNavControls #downArrow.arrowImg {
+    transform: rotate(90deg);
+}
+
+/* Left */
+#tableauSection #mapNavControls #leftArrow.arrowImg {
+    transform: rotate(180deg);
+}
+
+/* Up Arrow */
+#tableauSection #mapNavControls #upArrow.arrowImg.activeArrow {    
+	-webkit-transform: rotate(270deg) translateX(2px);
+	transform: rotate(270deg) translateX(2px);
+}
+
+/* Right Arrow */
+#tableauSection #mapNavControls #rightArrow.arrowImg.activeArrow {    
+	-webkit-transform: rotate(0deg) translateX(2px);
+	transform: rotate(0deg) translateX(2px);
+}
+
+/* Down Arrow */
+#tableauSection #mapNavControls #downArrow.arrowImg.activeArrow {    
+	-webkit-transform: rotate(90deg) translateX(2px);
+	transform: rotate(90deg) translateX(2px);
+}
+
+/* Left Arrow */
+#tableauSection #mapNavControls #leftArrow.arrowImg.activeArrow {    
+	-webkit-transform: rotate(180deg) translateX(2px);
+	transform: rotate(180deg) translateX(2px);  
+} 
+
 
 @media screen and (max-width: 539px) {
 
@@ -2738,22 +3034,49 @@ p {
 
     *Mobile*
     */
-    
 
+    .modal.notificationModal .modal-content {
+        top: 11%;
+        width: 61vw;
+    }
+
+    #scoringReminderModal.modal.notificationModal .modal-content {
+        top: 2%;
+        width: 84vw;
+    }
+
+    #scoringReminderModal.modal.notificationModal .modal-content #scoringAidImg {
+        width: 62vw;
+    }
+
+    .modal .modal-content .delete.closeModalTrigger.smallCloseCross {
+        padding: .6vw!important;
+    }
+    
+    .modal .modal-content .delete.closeModalTrigger.mediumCloseCross {
+        padding: 1.3vw!important;
+    }
+    
+    .modal .modal-content .delete.closeModalTrigger.largeCloseCross {
+        padding: 2vw!important;
+    }
+    
     #container.mobileView p {
         line-height: 4.3vw;
     }
 
-    body #container.mobileView #mainVerdantTitle {
+    #container.mobileView #mainVerdantTitle {
         text-align: center;
         margin: 3vw 0vw;
     }
 
-    body #container.mobileView #mainVerdantTitle img {
+    #container.mobileView #mainVerdantTitle img {
         width: 52vw;
+        margin-bottom: 0vw;
+        margin-left: 0vw;
     }
 
-    body #container.mobileView #maximizeScreenIcon {
+    #container.mobileView #maximizeScreenIcon {
         display:none;
     }
 
@@ -2764,8 +3087,8 @@ p {
     body.gameView #container.mobileView #maximizeScreenIcon,
     body.gameView #container.mobileView #minimizeScreenIcon {
         position: absolute;
-        top: 2.2vw;
-        right: 0vw;
+        top: 2.5vw;
+        right: 3vw;
         font-size: 7vw;
         cursor: hand;
         cursor: pointer;
@@ -2798,7 +3121,8 @@ p {
     */
 
     #container.mobileView #loaderLayer {
-        top: 50vw;
+        top: 0vw;
+        height: 50vh;
     }
 
     #container.mobileView #loaderLayer .loader-parent .loader-container .loader-wrapper .loading-message {
@@ -2844,7 +3168,8 @@ p {
 
     #container.mobileView #setupLayer #homepageButtonContainer .button {
         margin: 0vw 2vw;
-        width: 31vw;
+        width: 23vw;
+        height: 6vw;
         font-size: 3.5vw;
     }
 
@@ -2885,14 +3210,16 @@ p {
     }
 
     #container.mobileView #gameLayer #topInfoBar {
-        width: 77vw;
+        width: 100vw;
+        height: 10vw;
         border: 0vw solid transparent;
-        margin: 0vw auto 2.5vw;
-        padding: 1vw 0vw;
+        margin: 0vw auto 0vw;
+        padding: 1vw 0vw 0vw;
         border-radius: 1.2vw;
         position: absolute;
         top: 0vw;
-        right: 14.5vw;
+        left: 0vw;
+        z-index: 1;
     }
 
     #container.mobileView #gameLayer #topInfoBar #secondaryVerdantTitle {
@@ -2906,30 +3233,40 @@ p {
         width: 30vw;
     }
 
-    #container.mobileView #gameLayer #topInfoBar .infoBarColumn {
-        width: 29vw;
-        font-size: 2.8vw;
-        margin: 0vw 20vw 0vw 0vw;
+    #gameLayer #topInfoBar #infoBarStats {
+        width: 28vw;
+        float: left;
+        margin: .5vw 0vw 0vw 3vw;
+        font-size: 3vw;
+        line-height: 2.3vw;
     }
 
-    #container.mobileView #gameLayer #topInfoBar .infoBarColumn.leftColumn {
-        float: right;
-        text-align: center;
-        margin-left: 0vw;
-        margin-top: .54vw;
-        margin-right: 11vw;
+    #container.mobileView #gameLayer #topInfoBar #infoBarStats .infoBarStatContainer {
+        margin-bottom: 0vw;
+        height: 4vw;
     }
 
-    #container.mobileView #gameLayer #topInfoBar .infoBarColumn.rightColumn {
+    #container.mobileView #gameLayer #topInfoBar #infoBarStats .infoBarStatContainer .infoBarStatTitle {
+        width: 24vw;
+        float: left;
+        text-align: right;
+    }
+
+    #container.mobileView #gameLayer #topInfoBar #infoBarStats .infoBarStatContainer .infoBarStatData {
+        width: 4vw;
         float: right;
         text-align: center;
-        margin-top: 0vw;
-        margin-right: 0vw;
-        margin-right: 11vw;
+        font-weight: bold;
+    }
+
+    #container.mobileView #gameLayer #topInfoBar #showScoringRemindersBtn {
+        font-size: 2.7vw;
+        margin: 1.4vw 0vw 0vw 5vw;
+        padding: 0vw 4vw;
     }
 
     #container.mobileView #gameLayer #gameSectionsParent {
-        width: 98%;
+        width: 96%;
         top: 12vw;
     }
 
@@ -2958,8 +3295,8 @@ p {
         position: absolute;
         top: -2%;
         left: -2%;
-        width: 147%;
-        max-width: 147%;
+        width: 153%;
+        max-width: 153%;
         z-index: -9;
         border-radius: 3vw;
     }
@@ -2967,27 +3304,6 @@ p {
     /* #container.mobileView #gameLayer #gameSectionsParent .gameSection .gameSectionContent {
         padding-top: 1.8vw;
     } */
-
-    #container.mobileView #gameLayer #gameSectionsParent .gameSection .gameSectionBorder.innerBorder {
-        border: .3vw solid #41a742;
-    }
-
-    #container.mobileView #gameLayer #gameSectionsParent .gameSection .inactive ion-icon[name="expand"] {
-        display:none!important;
-    }
-
-    #container.mobileView #gameLayer #gameSectionsParent .gameSection .gameSectionBorder {
-        border-radius: 0.5vw;
-    }
-
-    #container.mobileView #gameLayer #gameSectionsParent .gameSection .gameSectionBorder.outerBorder {
-        border: .1vw solid #41a742;
-        padding: .2vw;
-    }
-
-    #container.mobileView #gameLayer #gameSectionsParent .gameSection .gameSectionBorder.innerBorder {
-        border: .5vw solid #41a742;
-    }
 
     #container.mobileView #gameLayer .titleContainer {
         top: 2.2vw;
@@ -3007,6 +3323,23 @@ p {
     #container.mobileView #gameLayer .titleContainer .title {
         font-size: 5vw;
     }
+
+    #container.mobileView #swapSectionsIcon, #container.mobileView #swapSectionsIcon {
+        font-size: 8vw;
+        width: 8vw;
+        height: 8vw;
+        top: 39.4vw;
+        left: 44vw;
+        box-shadow: 0vw 0vw 0.6vw 0.6vw #424242;
+    }
+
+    #container.mobileView #swapSectionsIcon, #container.mobileView #swapSectionsIcon.expanded {
+        top: 39.4vw;
+    }
+
+    #container.mobileView #swapSectionsIcon, #container.mobileView #swapSectionsIcon.collapsed {
+        top: 97vw;
+    }
     
     
     /* 
@@ -3021,7 +3354,8 @@ p {
 
     #container.mobileView #marketContainerOuterOverlay {
         height: 100vw;
-        width: 100%;
+        width: 96vw;
+        left: 0vw;
     }
     
     #container.mobileView #marketContainerOuterOverlay.expanded {
@@ -3029,7 +3363,11 @@ p {
     }
 
     #container.mobileView #marketContainerOuterOverlay.collapsed {
-        top: -60.5vw;
+        top: -57.5vw;
+    }
+
+    #container.mobileView #marketContainerInnerOverlay {
+        width: 95.2vw;
     }
 
     #container.mobileView #marketContainerInnerOverlay.expanded {
@@ -3037,7 +3375,7 @@ p {
     }
 
     #container.mobileView #marketContainerInnerOverlay.collapsed {
-        top: 60.5vw;
+        top: 57.5vw;
     }
 
     #container.mobileView #marketSection {
@@ -3069,7 +3407,11 @@ p {
 
     #container.mobileView #marketSection .marketColumn {
         width: 20.5vw;
-        margin: 0vw 0vw 0vw 3.6vw;
+        margin: 0vw 0vw 0vw 3.3vw;
+    }
+
+    #marketSection .marketColumn .cardsAndItemContainer {
+        height: 77vw;
     }
 
     /* 
@@ -3316,9 +3658,21 @@ p {
     #container.mobileView #tableauContainerInnerOverlay,
     #container.mobileView #tableauSection,
     #container.mobileView #tableauSection .gameSectionContent {
-        height: 145vw;
-        width: 100%;
+        height: 146vw;
+        width: 96vw;
     }
+
+    #container.mobileView #tableauContainerOuterOverlay {
+        width: 96vw;
+    }
+
+    #container.mobileView #tableauContainerInnerOverlay {
+        width: 95vw;
+    }
+
+
+
+    
 
     #container.mobileView #tableauSection,
     #container.mobileView #tableauSection .gameSectionContent {
@@ -3326,15 +3680,15 @@ p {
     }
 
     #container.mobileView #tableauContainerOuterOverlay {
-        top: 40.5vw;
+        top: 44.5vw;
     }
 
     #container.mobileView #tableauContainerOuterOverlay.expanded {
-        top: 40.5vw;
+        top: 44.5vw;
     }
 
     #container.mobileView #tableauContainerOuterOverlay.collapsed {
-        top: 27vw;
+        top: 28vw;
     }
 
     #container.mobileView #tableauContainerInnerOverlay {
@@ -3348,8 +3702,6 @@ p {
     #container.mobileView #tableauContainerInnerOverlay.collapsed {
         top: 74vw;
     }
-
-    
 
     #container.mobileView #tableauSection .gameSectionContent.expanded {
         top: 0vw;
@@ -3377,7 +3729,15 @@ p {
 
     #container.mobileView #tableauSection #homeContentContainer {
         height: 142.5vw;
-        top: 1.3vw;
+        top: 2.1vw;
+    }
+
+    #container.mobileView #tableauSection #homeContentContainer.expanded {
+        top: 2.1vw;
+    }
+
+    #container.mobileView #tableauSection #homeContentContainer.collapsed {
+        top: 1vw;
     }
 
     #container.mobileView #tableauSection #playerInfoContainer {
@@ -3404,20 +3764,13 @@ p {
         height: 40vw;
     }
 
-    /* #container.mobileView #tableauSection #playerInfoContainer #cardToPlace.expanded {
-        top: -0.4vw;
-        left: 49.8vw;
+    #container.mobileView #tableauSection #playerInfoContainer .playerInfoTitle {
+        top: 21%;
+        font-size: 3.1vw;
+        line-height: 3.8vw;
+        opacity: 1;
     }
-
-    #container.mobileView #tableauSection #playerInfoContainer #cardToPlace.collapsed {
-        top: -5.8vw;
-        left: 1.8vw;
-    } */
-
-    /* #container.mobileView #tableauSection #playerInfoContainer .playerInfoTitle.desktopElement,
-    #container.mobileView #tableauSection #playerInfoContainer .playerInfoTitle.tabletElement {
-        display:none
-    } */
+/* 
 
     #container.mobileView #tableauSection #playerInfoContainer .playerInfoTitle.mobileElement {
         bottom: 45%;
@@ -3438,9 +3791,10 @@ p {
 
     #container.mobileView #tableauSection #playerInfoContainer .playerInfoTitle.mobileElement.collapsed {
         opacity: 0;
-    }
+    } */
 
     #container.mobileView #tableauSection #playerInfoContainer #cardToPlace .flip-plant.expanded {
+        transform-origin: left top;
         top: 1vw;
         left: .5vw;
         z-index: 3;
@@ -3448,7 +3802,7 @@ p {
     
     #container.mobileView #tableauSection #playerInfoContainer #cardToPlace .flip-plant.expanded.startingPosAnimate {
         transition: left 1.6s ease-in-out, top 1.6s ease-in-out;
-        top: 1vw;
+        top: 1.1vw;
         left: .5vw;
     }
     
@@ -3480,11 +3834,12 @@ p {
 
     #container.mobileView #tableauSection #playerInfoContainer #cardToPlace > .flip-plant,
     #container.mobileView #tableauSection #playerInfoContainer #cardToPlace > .cardContainer {
+        transform-origin: left top;
         height: 32.1vw;
         width: 20.5vw;
         transform: scale(1.17);
-        top: 3.7vw;
-        left: 2.2vw;
+        top: 1.1vw;
+        left: 0.5vw;
     }
 
     #container.mobileView #tableauSection #playerInfoContainer .itemContainer {
@@ -3555,44 +3910,46 @@ p {
         transform: scale(1);
     }
 
-    #container.mobileView #tableauSection #playerInfoContainer .storageIcon.mobileElement {
+    #container.mobileView #tableauSection #playerInfoContainer .storageIcon {
         position: absolute;
-        bottom: .5vw;
-        right: 3.4vw;
-        font-size: 5vw;
+        top: 35vw;
+        left: 88.4vw;
+        font-size: 5.2vw;
         z-index: 3;
         opacity: 1;
         color: #0a704e;
     }
 
-    #container.mobileView #tableauSection #playerInfoContainer .storageIcon.mobileElement.expanded {
+    #container.mobileView #tableauSection #playerInfoContainer .storageIcon.expanded {
         opacity: 1;
     }
 
-    #container.mobileView #tableauSection #playerInfoContainer .storageIcon.mobileElement.collapsed {
+    #container.mobileView #tableauSection #playerInfoContainer .storageIcon.collapsed {
         opacity: 0;
     }
 
-    #container.mobileView #tableauSection #playerInfoContainer .swapItemsBtn {
-        top: 14.9vw;
-        left: 80vw;
+    #container.mobileView #tableauSection #playerInfoContainer #swapItemsBtnContainer {
+        width: 8.5vw;
         height: 9vw;
-        width: 9vw;
-        font-size: 6.3vw;
-        line-height: 3.1vw;
-        padding: 0vw 2vw;
-        z-index: 1;
+        top: 15.2vw;
+        left: 80.2vw;
         opacity: 1;
     }
 
-    #container.mobileView #tableauSection #playerInfoContainer .swapItemsBtn.expanded {
+    #container.mobileView #tableauSection #playerInfoContainer #swapItemsBtnContainer.expanded {
         opacity: 1;
     }
 
-    #container.mobileView #tableauSection #playerInfoContainer .swapItemsBtn.collapsed {
+    #container.mobileView #tableauSection #playerInfoContainer #swapItemsBtnContainer.collapsed {
         opacity: 0;
     }
 
+    #container.mobileView #tableauSection #playerInfoContainer #swapItemsBtnContainer .swapItemsBtn {
+        height: 93%;
+        width: 97%;
+        font-size: 7.3vw;
+        line-height: 3.1vw;
+    }
 
     /* 
         __  ___            
@@ -3606,10 +3963,10 @@ p {
     */
 
     #container.mobileView #tableauSection #homeContentContainer #mapContainerOuterOverlay {
-        width: 95.2vw;
+        width: 93.2vw;
         height: 101vw;
         top: 40.6vw;
-        right: .5vw;
+        right: 1.9vw;
         border-bottom-width: .5vw;
         border-bottom-right-radius: 2vw;
         border-bottom-left-radius: 2vw;
@@ -3620,17 +3977,17 @@ p {
     }
     
     #container.mobileView #tableauSection #homeContentContainer #mapContainerOuterOverlay.collapsed {
-        top: -24.5vw;
+        top: -23vw;
     }
     
     #container.mobileView #tableauSection #homeContentContainer #mapContainerInnerOverlay {
+        width: 92.3vw;
+        height: 100%;
         border-right-width: .5vw;
         border-left-width: .5vw;
         border-top-width: .5vw;
         border-top-right-radius: 2vw;
         border-top-left-radius: 2vw;
-        width: 100%;
-        height: 100%;
     }
     
     #container.mobileView #tableauSection #homeContentContainer #mapContainerInnerOverlay.expanded {
@@ -3638,7 +3995,7 @@ p {
     }
     
     #container.mobileView #tableauSection #homeContentContainer #mapContainerInnerOverlay.collapsed {
-        top: 33.2vw;
+        top: 31.7vw;
     }
     
     #container.mobileView #tableauSection #mapContainerOverlay {
@@ -3671,10 +4028,10 @@ p {
 
     #container.mobileView #tableauSection #mapContainer #mapHiddenOverlay {
         margin-left: -51.7vw;
-        margin-top: -35vw;
+        margin-top: -38vw;
         top: 0vw;
         left: 0vw;
-        width: 198vw;
+        width: 201.5vw;
         height: 169vw;
         transform: scale(.9);
     }
@@ -3744,8 +4101,8 @@ p {
 
 
     #tableauSection #mapContainer #placedCardOptions {
-        height: 13vw;
-        padding: 1.2vw 0.2vw 1.4vw 4vw;
+        height: 9.8vw;
+        padding: 1.2vw 0.2vw 1.4vw 3vw;
         z-index: 14;
         bottom: 0vw;
         left: 0vw;
@@ -3756,13 +4113,15 @@ p {
     }
 
     #tableauSection #mapContainer #placedCardOptions.collapsed {
-        bottom: -13vw;
+        bottom: -14vw;
     }
 
     #tableauSection #mapContainer #placedCardOptions .button {
-        margin: 1vw 2.5vw;
-        font-size: 3.2vw;
-        width: 26vw;
+        margin: .5vw 2.5vw;
+        font-size: 3.1vw;
+        width: 18vw;
+        padding: 0.4vw 2vw;
+        height: 7vw;
     }
 
     #tableauSection #mapContainer #placedCardOptions .button .icon ion-icon {
@@ -3789,6 +4148,14 @@ p {
         height: 11.5vw;
         top: 1vw;
         right: 2vw;
+    }
+
+    #mapContainer #verdancyVisibilityContainer.expanded {
+        top: 1vw;
+    }
+
+    #mapContainer #verdancyVisibilityContainer.collapsed {
+        top: 18vw;
     }
 
     #mapContainer #verdancyVisibilityContainer .verdancyVisibilityImg.verdancyMainImgInactive {
@@ -3840,17 +4207,17 @@ p {
 
     #container.mobileView #tableauSection #mapZoomControls {
         top: 1.5vw;
-        right: 47vw;
-        width: 20vw;
-        height: 9vw;
+        left: 1vw;
+        width: 23vw;
+        height: 10vw;
     }
 
     #container.mobileView #tableauSection #mapZoomControls.expanded {
-        right: 46vw;
+        top: 1.5vw;
     }
 
     #container.mobileView #tableauSection #mapZoomControls.collapsed {
-        right: 46vw;
+        top: 17.5vw;
     }
 
     #container.mobileView #tableauSection #mapZoomControls .zoomIcon {
@@ -3887,11 +4254,11 @@ p {
     }
 
     #container.mobileView #tableauSection #homeContentContainer #mapNavControls.expanded {
-        opacity: 1;
+        bottom: .5vw;
     }
 
     #container.mobileView #tableauSection #homeContentContainer #mapNavControls.collapsed {
-        opacity: 0;
+        bottom: 15.5vw;
     }
 
     #container.mobileView #tableauSection #mapNavControls #mapNavBackground {
@@ -3916,7 +4283,7 @@ p {
     /* Up Arrow */
     #container.mobileView #tableauSection #mapNavControls #upArrow.arrowImg {
         top: 1.9vw;
-        right: 8.5vw;
+        right: 8.4vw;
     }
 
     /* Right Arrow */
@@ -3928,13 +4295,13 @@ p {
     /* Down Arrow */
     #container.mobileView #tableauSection #mapNavControls #downArrow.arrowImg {
         top: 17.6vw;
-        right: 9vw;
+        right: 9.1vw;
     }
 
     /* Left Arrow */
     #container.mobileView #tableauSection #mapNavControls #leftArrow.arrowImg {
         top: 9.2vw;
-        right: 16.5vw;
+        right: 16.1vw;
     }
 
 
