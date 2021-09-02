@@ -167,23 +167,15 @@ jQuery.fn.extend({
 
 		var $element = $(this);
         var $oldParent = $element.parent()
-
-        console.log(`$element = `, $element);
-        console.log(`$oldParent = `, $oldParent);
         
 		newParent = $(newParent); // Allow passing in either a JQuery object or selector
 		var oldOffset = $element.offset();
         $(this).appendTo(newParent);
         var newOffset = $element.offset();
 
-        console.log(`newParent = `, newParent);
-        console.log(`oldOffset = `, oldOffset);
-        console.log(`newOffset = `, newOffset);
-
 		var temp = $element.clone().appendTo('body');
 
 		if($element[0].className.indexOf("activeCard") >= 0) {
-            console.log(`$element[0].className.indexOf("activeCard") >= 0`);
 
 			let mapZoomScale = Number(zoomLevel)/10;
             let cardToPlaceScale = 1;
@@ -200,9 +192,7 @@ jQuery.fn.extend({
 
             let zIndex = 1000;
 
-			
 			if(newParent[0].offsetParent.id == 'mapHiddenOverlay') {
-                console.log(`newParent[0].offsetParent.id == 'mapHiddenOverlay'`);
 
                 if($oldParent[0].className == 'mapTileContainer potentialPlacement activePotentialPlacement') {
                     startWidth = $element[0].offsetWidth * mapZoomScale;
@@ -211,21 +201,13 @@ jQuery.fn.extend({
                     startWidth = $element[0].offsetWidth * cardToPlaceScale;
 				    startHeight = $element[0].offsetHeight * cardToPlaceScale;
                 }      
-
-                console.log(`mapZoomScale = "${mapZoomScale}"`);
-                console.log(`$element[0].offsetWidth = "${$element[0].offsetWidth}"`);
-                console.log(`$element[0].offsetHeight = "${$element[0].offsetHeight}"`);
 				
 				endWidth = $element[0].offsetWidth * mapZoomScale;
 				endHeight = $element[0].offsetHeight * mapZoomScale;
 
-                console.log(`endWidth = "${endWidth}"`);
-                console.log(`endHeight = "${endHeight}"`);
-
                 zIndex = 10;
 
 			} else if(newParent[0].offsetParent.id == 'playerInfoContainer' || newParent[0].offsetParent.id == 'homeContentContainer') {
-                console.log(`newParent[0].offsetParent.id == 'playerInfoContainer'`);
 				startWidth = $element[0].offsetWidth * mapZoomScale;
                 startHeight = $element[0].offsetHeight * mapZoomScale;
 				
