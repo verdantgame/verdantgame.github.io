@@ -1738,6 +1738,7 @@ p {
     position: absolute;
     background-color: #f7efda;
     border: 1px red solid;
+    padding: 0px!important;
 }
 
 /* Top  */
