@@ -3387,7 +3387,7 @@ p {
     }
 
     #container.mobileView #marketContainerInnerOverlay {
-        width: 95.2vw;
+        width: 96vw;
     }
 
     #container.mobileView #marketContainerInnerOverlay.expanded {
@@ -3687,12 +3687,8 @@ p {
     }
 
     #container.mobileView #tableauContainerInnerOverlay {
-        width: 95vw;
+        width: 96vw;
     }
-
-
-
-    
 
     #container.mobileView #tableauSection,
     #container.mobileView #tableauSection .gameSectionContent {
@@ -4001,7 +3997,7 @@ p {
     }
     
     #container.mobileView #tableauSection #homeContentContainer #mapContainerInnerOverlay {
-        width: 92.3vw;
+        width: 93.2vw;
         height: 100%;
         border-right-width: .5vw;
         border-left-width: .5vw;
