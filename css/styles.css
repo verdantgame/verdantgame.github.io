@@ -3263,7 +3263,7 @@ p {
     }
 
     #container.iosDevice #gameLayer #topInfoBar #infoBarStats {
-        width: 32vw;
+        width: 34vw;
     }
 
     #container.mobileView #gameLayer #topInfoBar #infoBarStats .infoBarStatContainer {
