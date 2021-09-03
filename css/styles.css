@@ -1740,7 +1740,7 @@ p {
 }
 
 #container.mobileView .cardContainer[type="room"] .lightingIconContainer {
-    padding: .6vw!important;
+    padding: 0vw .6vw .6vw .6vw!important;
     width: 5vw!important;
     height: 5vw!important;
 }
