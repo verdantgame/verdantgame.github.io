@@ -2648,7 +2648,7 @@ p {
 
 #container.tabletView #tableauSection #verdancyVisibilityContainer #verdancyVisibilityContainerOverlay,
 #container.mobileView #tableauSection #verdancyVisibilityContainer #verdancyVisibilityContainerOverlay {
-    transform-origin: right top;
+    transform-origin: right top!important;
     transform: scale(1);
     width:100%;
     height:100%;
@@ -3263,8 +3263,8 @@ p {
     }
 
     #container.iosDevice #gameLayer #topInfoBar #infoBarStats {
-        width: 36vw;
-        margin: .5vw 1vw 0vw 2vw;
+        width: 31vw;
+        margin: 1vw 1vw 0vw 3vw;
     }
 
     #container.mobileView #gameLayer #topInfoBar #infoBarStats .infoBarStatContainer {
@@ -3276,6 +3276,10 @@ p {
         width: 24vw;
         float: left;
         text-align: right;
+    }
+
+    #container.mobileView.iosDevice #gameLayer #topInfoBar #infoBarStats .infoBarStatContainer .infoBarStatTitle {
+        width: 26vw;
     }
 
     #container.mobileView #gameLayer #topInfoBar #infoBarStats .infoBarStatContainer .infoBarStatData {
