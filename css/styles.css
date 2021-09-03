@@ -1851,6 +1851,8 @@ p {
 
 .cardContainer[type="room"] .lightingIconContainer .lightingIcon {
     width: 100%;
+    padding: 0px!important;
+    margin: 0px!important;
 }
 
 .cardContainer[type="room"] .lightingIconContainer-top .lightingIcon {
