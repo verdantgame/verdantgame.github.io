@@ -955,6 +955,9 @@ function temporarilyLockMap(timePeriod) {
 
 function processMapMovement(thisDirection){
 
+    let startTopPos = mapMoveAmount.cardPos.top * mapMoveAmount.view[currentView].zoomIncs[zoomLevel].vertical;
+    let startLeftPos = mapMoveAmount.cardPos.left * mapMoveAmount.view[currentView].zoomIncs[zoomLevel].horizontal;
+
 	if(thisDirection == 'up' || thisDirection == 'down') {	
 		if(thisDirection == 'up') {
 			mapMoveAmount.cardPos.top++;
@@ -963,7 +966,7 @@ function processMapMovement(thisDirection){
 		}
 		// checkMapLimits('vertical', thisDirection, mapMoveAmount.cardPos.top);
         checkMapLimits();
-		updateMapPosition('vertical');
+		// updateMapPosition('vertical');
 	}
 
 	if(thisDirection == 'left' || thisDirection == 'right') {	
@@ -974,14 +977,33 @@ function processMapMovement(thisDirection){
 		}
 		// checkMapLimits('horizontal', thisDirection, mapMoveAmount.cardPos.left);
         checkMapLimits();
-		updateMapPosition('horizontal');
+		// updateMapPosition('horizontal');
 	}
+
+    let endTopPos = mapMoveAmount.cardPos.top * mapMoveAmount.view[currentView].zoomIncs[zoomLevel].vertical;
+    let endLeftPos = mapMoveAmount.cardPos.left * mapMoveAmount.view[currentView].zoomIncs[zoomLevel].horizontal;
+
+    animateMap(startTopPos, startLeftPos, endTopPos, endLeftPos);
 
 	$(`#mapNavControls #${thisDirection}Arrow`).addClass('activeArrow');
 	setTimeout(function(){
 		$('.activeArrow').removeClass('activeArrow');
 	}, 100);
 
+}
+
+function updateMapPosition(moveDirection) {
+	if(moveDirection == 'horizontal') {
+		let newLeftPosNum = (mapMoveAmount.cardPos.left * mapMoveAmount.view[currentView].zoomIncs[zoomLevel].horizontal);
+		let newLeftPos = newLeftPosNum + mapMoveAmount.view[currentView].unit;
+		$('#mapContainer #mapHiddenOverlay').css('left', newLeftPos);
+        // animateMap(startTop, startLeft, endTop, endLeft);
+	} else if(moveDirection == 'vertical') {
+		let newTopPosNum = (mapMoveAmount.cardPos.top * mapMoveAmount.view[currentView].zoomIncs[zoomLevel].vertical);
+		let newTopPos = newTopPosNum + mapMoveAmount.view[currentView].unit;
+		$('#mapContainer #mapHiddenOverlay').css('top', newTopPos);
+        // animateMap(startTop, startLeft, endTop, endLeft);
+	}
 }
 
 function checkMapLimits(){
@@ -1076,18 +1098,6 @@ function setZoom(newZoom, el) {
 	el.style["transformOrigin"] = transformOriginPercentages;
 
 	calculateViewableCardLimits();
-}
-
-function updateMapPosition(moveDirection) {
-	if(moveDirection == 'horizontal') {
-		let newLeftPosNum = (mapMoveAmount.cardPos.left * mapMoveAmount.view[currentView].zoomIncs[zoomLevel].horizontal);
-		let newLeftPos = newLeftPosNum + mapMoveAmount.view[currentView].unit;
-		$('#mapContainer #mapHiddenOverlay').css('left', newLeftPos);
-	} else if(moveDirection == 'vertical') {
-		let newTopPosNum = (mapMoveAmount.cardPos.top * mapMoveAmount.view[currentView].zoomIncs[zoomLevel].vertical);
-		let newTopPos = newTopPosNum + mapMoveAmount.view[currentView].unit;
-		$('#mapContainer #mapHiddenOverlay').css('top', newTopPos);
-	}
 }
 
 function generatePossibleMapPlacements(){
