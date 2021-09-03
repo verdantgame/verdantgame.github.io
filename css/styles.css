@@ -3252,7 +3252,7 @@ p {
     }
 
     #gameLayer #topInfoBar #infoBarStats {
-        width: 28vw;
+        width: 29vw;
         float: left;
         margin: .5vw 0vw 0vw 3vw;
         font-size: 3vw;
