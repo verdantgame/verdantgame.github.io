@@ -593,7 +593,7 @@ p {
 }
 
 #container.tabletView #marketContainerInnerOverlay.gameSectionContainerInnerOverlay {
-    width: 511px;
+    width: 515px;
 }
 
 .gameSectionContainerInnerOverlay {
@@ -1948,8 +1948,7 @@ p {
     width: 515px;
 }
 
-#container.tabletView #tableauContainerOuterOverlay.expanded,
-#container.mobileView #tableauContainerOuterOverlay.expanded {
+#container.tabletView #tableauContainerOuterOverlay.expanded {
     top: 231px;
 }
 
@@ -1957,9 +1956,8 @@ p {
     top: 347px;
 }
 
-#container.tabletView #tableauContainerInnerOverlay,
-#container.mobileView #tableauContainerInnerOverlay {
-    width: 99.2%;
+#container.tabletView #tableauContainerInnerOverlay {
+    width: 515px;
 }
 
 #container.tabletView #tableauContainerInnerOverlay.expanded,
@@ -2313,25 +2311,30 @@ p {
     position: absolute;
     width: 45px;
     height: 58px;
-    top: 288px;
+    top: 275px;
     left: 41px;
     overflow: hidden;
     opacity: 1;
 }
 
-#tableauSection.tabletView #playerInfoContainer #swapItemsBtnContainer,
-#tableauSection.mobileView #playerInfoContainer #swapItemsBtnContainer {
+#container.tabletView #tableauSection #playerInfoContainer #swapItemsBtnContainer,
+#container.mobileView #tableauSection #playerInfoContainer #swapItemsBtnContainer {
     top: 275px;
     left: 43px;
-}
-
-#tableauSection.tabletView #playerInfoContainer #swapItemsBtnContainer.expanded,
-#tableauSection.mobileView #playerInfoContainer #swapItemsBtnContainer.expanded {
     opacity: 1;
 }
 
-#tableauSection.tabletView #playerInfoContainer #swapItemsBtnContainer.collapsed,
-#tableauSection.mobileView #playerInfoContainer #swapItemsBtnContainer.collapsed {
+#container.tabletView #tableauSection #playerInfoContainer #swapItemsBtnContainer.expanded,
+#container.mobileView #tableauSection #playerInfoContainer #swapItemsBtnContainer.expanded {
+    top: 275px;
+    left: 43px;
+    opacity: 1;
+}
+
+#container.tabletView #tableauSection #playerInfoContainer #swapItemsBtnContainer.collapsed,
+#container.mobileView #tableauSection #playerInfoContainer #swapItemsBtnContainer.collapsed {
+    top: 275px;
+    left: 43px;
     opacity: 0;
 }
 
@@ -3098,12 +3101,12 @@ p {
         display:none;
     }
 
-    body.gameView #container.mobileView #maximizeScreenIcon {
+    body.gameView #container.mobileView:not(.iosDevice) #maximizeScreenIcon {
         display:block;
     }
 
-    body.gameView #container.mobileView #maximizeScreenIcon,
-    body.gameView #container.mobileView #minimizeScreenIcon {
+    body.gameView #container.mobileView:not(.iosDevice) #maximizeScreenIcon,
+    body.gameView #container.mobileView:not(.iosDevice) #minimizeScreenIcon {
         position: absolute;
         top: 2.5vw;
         right: 3vw;
@@ -3257,6 +3260,10 @@ p {
         margin: .5vw 0vw 0vw 3vw;
         font-size: 3vw;
         line-height: 2.3vw;
+    }
+
+    #gameLayer #topInfoBar #infoBarStats.iosDevice {
+        width: 32vw;
     }
 
     #container.mobileView #gameLayer #topInfoBar #infoBarStats .infoBarStatContainer {
