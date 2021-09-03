@@ -1737,8 +1737,12 @@ p {
 .cardContainer[type="room"] .lightingIconContainer {
     position: absolute;
     background-color: #f7efda;
-    border: 1px red solid;
-    padding: 0px!important;
+}
+
+#container.mobileView .cardContainer[type="room"] .lightingIconContainer {
+    padding: .3vw!important;
+    width: 5vw!important;
+    height: 5vw!important;
 }
 
 /* Top  */
@@ -1852,8 +1856,6 @@ p {
 
 .cardContainer[type="room"] .lightingIconContainer .lightingIcon {
     width: 100%;
-    padding: 0px!important;
-    margin: 0px!important;
 }
 
 .cardContainer[type="room"] .lightingIconContainer-top .lightingIcon {
