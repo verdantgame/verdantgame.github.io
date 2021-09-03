@@ -3234,7 +3234,7 @@ p {
         width: 100vw;
         height: 10vw;
         border: 0vw solid transparent;
-        margin: 0vw auto 0vw;
+        margin: 2vw auto 2vw;
         padding: 1vw 0vw 0vw;
         border-radius: 1.2vw;
         position: absolute;
@@ -3299,7 +3299,7 @@ p {
 
     #container.mobileView #gameLayer #gameSectionsParent {
         width: 96%;
-        top: 12vw;
+        top: 15vw;
     }
 
     #container.mobileView #gameLayer .gameSectionOverlayParent .gameSectionOverlayBorder.outerBorder {
