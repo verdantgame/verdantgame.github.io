@@ -506,23 +506,20 @@ p {
     top: 519px;
 }
 
-#container #swapSectionsIcon ion-icon[name="arrow-up-circle-outline"] {
-    transition: transform .7s ease-in-out;
+#container #swapSectionsIcon ion-icon {
+    opacity: 0;
+    transition: opacity .7s ease-in-out;
     position: absolute;
     top: 0px;
     left: 0px;
-    transform: rotate(180deg);
+    z-index: 8;
 }
 
-#container #swapSectionsIcon.expanded ion-icon[name="arrow-up-circle-outline"] {
-    transform: rotate(180deg);
+#container #swapSectionsIcon.collapsed ion-icon[name="arrow-up-circle-outline"],
+#container #swapSectionsIcon.expanded ion-icon[name="arrow-down-circle-outline"] {
+    opacity: 1;
+    z-index: 9;
 }
-
-#container #swapSectionsIcon.collapsed ion-icon[name="arrow-up-circle-outline"] {
-    transform: rotate(0deg);
-}
-
-
 
 /*    
     __  ___        _                            
@@ -775,7 +772,7 @@ p {
 }
 
 #container.desktopView #marketContainerInnerOverlay.gameSectionContainerInnerOverlay {
-    width: 505px;
+    width: 509px;
 }
 
 #container.tabletView #marketContainerOuterOverlay.expanded {
@@ -898,7 +895,7 @@ p {
 
 #container.desktopView #marketSection .marketColumn.activeColumn .cardsAndItemContainer {
     transition: all .2s ease-in-out;
-    transform: scale(1.35);
+    transform: scale(1.25);
     top: -50px;
     z-index: 2;
 }
@@ -1939,7 +1936,7 @@ p {
 }
 
 #container.desktopView #tableauContainerInnerOverlay {
-    width: 657px;
+    width: 661px;
 }
 
 #container.tabletView #tableauContainerOuterOverlay,
@@ -2311,28 +2308,25 @@ p {
     position: absolute;
     width: 45px;
     height: 58px;
-    top: 275px;
+    top: 288px;
     left: 41px;
     overflow: hidden;
     opacity: 1;
 }
 
-#container.tabletView #tableauSection #playerInfoContainer #swapItemsBtnContainer,
-#container.mobileView #tableauSection #playerInfoContainer #swapItemsBtnContainer {
+#container.tabletView #tableauSection #playerInfoContainer #swapItemsBtnContainer {
     top: 275px;
     left: 43px;
     opacity: 1;
 }
 
-#container.tabletView #tableauSection #playerInfoContainer #swapItemsBtnContainer.expanded,
-#container.mobileView #tableauSection #playerInfoContainer #swapItemsBtnContainer.expanded {
+#container.tabletView #tableauSection #playerInfoContainer #swapItemsBtnContainer.expanded {
     top: 275px;
     left: 43px;
     opacity: 1;
 }
 
-#container.tabletView #tableauSection #playerInfoContainer #swapItemsBtnContainer.collapsed,
-#container.mobileView #tableauSection #playerInfoContainer #swapItemsBtnContainer.collapsed {
+#container.tabletView #tableauSection #playerInfoContainer #swapItemsBtnContainer.collapsed {
     top: 275px;
     left: 43px;
     opacity: 0;
@@ -2405,7 +2399,7 @@ p {
 }
 
 #tableauSection #homeContentContainer #mapContainerInnerOverlay {
-    width: 500px;
+    width: 504px;
     height: 470px;
     position: absolute;
     top: 0px;
@@ -3056,9 +3050,22 @@ p {
     *Mobile*
     */
 
+    .modal .modal-content p {
+        font-size: 3.5vw;
+        line-height: 4.3vw;
+    }
+
     .modal.notificationModal .modal-content {
         top: 11%;
         width: 61vw;
+    }
+
+    .modal.notificationModal .modal-content[btns="1"] .button:not(.delete.closeModalTrigger) {
+        display: block;
+        margin: 5vw auto 0vw;
+        padding: 0vw 4vw;
+        font-size: 3.2vw;
+        width: 20vw;
     }
 
     #scoringReminderModal.modal.notificationModal .modal-content {
@@ -3071,15 +3078,15 @@ p {
     }
 
     .modal .modal-content .delete.closeModalTrigger.smallCloseCross {
-        padding: .6vw!important;
+        padding: 1vw!important;
     }
     
     .modal .modal-content .delete.closeModalTrigger.mediumCloseCross {
-        padding: 1.3vw!important;
+        padding: 2vw!important;
     }
     
     .modal .modal-content .delete.closeModalTrigger.largeCloseCross {
-        padding: 2vw!important;
+        padding: 3vw!important;
     }
     
     #container.mobileView p {
