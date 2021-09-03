@@ -111,51 +111,31 @@ function animateElem(elem, mode) {
     } else {
         requestAnimationFrame(function(){
             elem[0].classList.add(`${animationClasses[mode].transition}Transition`);
-            // $(elem).parent().one("webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend", function() {
-            //     elem[0].classList.remove(`${animationClasses[mode].transition}Transition`);
-            //     elem[0].classList.remove('animatingElem');
-            // });
         }); 
 
     }
 
 }
 
-function animateMap(elem, mode) {
+function animateMap(startTop, startLeft, endTop, endLeft) {
 
-    elem[0].style.transformOrigin = 'top left';
-    
-    let startTopPos = $(elem).position().top;
-    let startLeftPos = $(elem).position().left;
+    var currentTransform = $('#mapHiddenOverlay').css('transform');
+    var splitTransform = currentTransform.split('(');
+    var zoomAmount = splitTransform[1].split(',');
 
-    elem[0].classList.add('animatingElem');
-    elem[0].classList.add(animationClasses[mode].finish);
-    elem[0].classList.remove(animationClasses[mode].start);
+    console.log(`transform: scale(${zoomAmount[0]})`);
 
-    let endTopPos = $(elem).position().top;
-    let endLeftPos = $(elem).position().left;
-
-    if(startTopPos != endTopPos || startLeftPos != endLeftPos) {
-
-        var invertedTop = startTopPos - endTopPos;
-        var invertedLeft = startLeftPos - endLeftPos;
-        
-        elem[0].style.transform = `
-            translate(${invertedLeft}px, ${invertedTop}px)
-        `;
-
-        requestAnimationFrame(function(){
-            elem[0].classList.add(`${animationClasses[mode].transition}Transition`);
-            elem[0].style.transform = '';
-            $(elem).parent().one("webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend", function() {
-                elem[0].style.transformOrigin = '';
-                elem[0].classList.remove(`${animationClasses[mode].transition}Transition`);
-                elem[0].classList.remove('animatingElem');
-            });
-        }); 
-
-    }
-
+    $('#mapHiddenOverlay').css({
+        'top': endTop,
+        'left': endLeft
+    });
+    var invertedTop = startTop - endTop;
+    var invertedLeft = startLeft - endLeft;
+    var invertedTransform =  `translate(${invertedLeft}px, ${invertedTop}px) scale(${zoomAmount[0]})`;
+    $('#mapHiddenOverlay').css('transform', invertedTransform);
+    requestAnimationFrame(function(){
+        $('#mapHiddenOverlay').css('transform', `scale(${zoomAmount[0]})`);
+    }); 
 }
 
 jQuery.fn.extend({
