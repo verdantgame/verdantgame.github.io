@@ -1737,6 +1737,7 @@ p {
 .cardContainer[type="room"] .lightingIconContainer {
     position: absolute;
     background-color: #f7efda;
+    border: 1px red solid;
 }
 
 /* Top  */
