@@ -36,6 +36,7 @@ let oppositePos = {
 let mapVerdancyVisible = false;
 
 $(document).ready(function(){
+    checkIOS();
     checkScreenWidth();
     generateModalButtonNums();
     $('#loaderLayer').fadeIn('fast');
@@ -51,6 +52,12 @@ function preloadImgsCallback(){
         setupDrawPiles();
         initiateMap();  
     }, 400);
+};
+
+function checkIOS() {
+    if (/iPad|iPhone|iPod/.test(navigator.platform)) {
+        $('#container').addClass('iosDevice');
+    }
 }
 
 var rulesURL = 'files/rules.pdf';
