@@ -2980,21 +2980,21 @@ p.mapDebug {
 }
 
 #tableauSection #playerInfoContainer .tableauItemTitle {
-    width: 69px;
+    width: 59px;
     font-size: 15px;
     line-height: 19px;
-    text-align: left;
-    font-style: italic;
+    text-align: right;
+    /* font-style: italic; */
     font-weight: bold;
     color: #3aa572;
     opacity: 1;
     position: absolute;
-    left: 16px;
+    left: 15px;
     z-index: 2;
 }
 
 #tableauSection #playerInfoContainer .tableauItemTitle span {
-    font-size: 25px;
+    font-size: 18px;
     line-height: 4px;
 }
 
@@ -3070,7 +3070,6 @@ p.mapDebug {
     color: #3aa572c7;
     font-size: 16px;
     line-height: 19px;
-    font-style: italic;
     font-weight: bold;
     text-align: left;
     position: absolute;
@@ -4163,13 +4162,32 @@ p.mapDebug {
         animation-iteration-count: 1;
         animation-timing-function: ease-out;
         animation-fill-mode: both;
-    /* animation: actionRequired 1.3s ease-out;
-    animation-iteration-count: infinite; */
     opacity: 0.0;
     border: 3px solid #f4ff00;
     box-shadow: 0px 0px 5px 1px #f4ff00;
-    /* box-shadow: inset 0px 0px 5px 1px #f4ff00; */
-    /* border: 3px solid #1e6817; */
+    border-radius: 30px;
+    height: 55px;
+    width: 55px;
+    display: inline-block;
+    text-align: center;
+}
+
+.actionRequiredAnimation {
+    -webkit-animation-name: actionRequired; 
+    -webkit-animation-delay: .3s;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-timing-function: ease-out;
+    -webkit-animation-fill-mode: both;
+        animation-name: actionRequired;
+        animation-delay: .3s;
+        animation-duration: 1s;
+        animation-iteration-count: 1;
+        animation-timing-function: ease-out;
+        animation-fill-mode: both;
+    opacity: 0.0;
+    border: 3px solid #f4ff00;
+    box-shadow: 0px 0px 5px 1px #f4ff00;
     border-radius: 30px;
     height: 55px;
     width: 55px;
