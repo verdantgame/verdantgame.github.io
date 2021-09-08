@@ -9,6 +9,7 @@
 
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-extensions@4.0.0/dist/css/bulma-extensions.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@creativebulma/bulma-tooltip@1.2.0/dist/bulma-tooltip.min.css">
 
 	<link rel="stylesheet" type="text/css" href="css/styles.css">
 
@@ -102,6 +103,7 @@
 
 					<div id="greenThumbsAmountContainer" class="infoBarStatContainer">
 						<p id="greenThumbsAmountTitle" class="infoBarStatTitle">Green Thumbs:</p>
+						<p id="greenThumbsUpdateInfo" class="infoBarUpdateData subtractVal">2</p>
 						<p id="greenThumbsAmountInfo" class="infoBarStatData">2</p>
 						<div class="clear"></div>
 					</div>
@@ -115,9 +117,10 @@
 
 			</div>
 
-			<div id="gameSectionsParent">
+			<div id="gameSectionsParent" current-phase="setup">
 
 				<div data-animation-group="market" id="marketContainerOuterOverlay" class="expanded gameSectionContainerOuterOverlay gameSectionContainerOverlay">
+					<div id="marketInactiveOverlay"></div>
 					<div data-animation-group="market" id="marketContainerInnerOverlay" class="expanded gameSectionContainerInnerOverlay gameSectionContainerOverlay">
 						<div data-animation-group="market" id="marketSection" class="gameSection expanded initSetup animatingElem mediumTransition" style="transform-origin: left top;">
 							<div class="bgOverlay"></div>
@@ -126,7 +129,95 @@
 								<div id="marketTitleContainer" class="titleContainer">
 									<p id="marketTitle" class="title is-3 has-text-centered">Market</p>
 								</div>
-								<div id="marketCardColumns"></div>
+
+								<button id="replaceMarketItemsBtn" class="button is-success greenThumbActionBtn marketActionButton" title="Instructions Button" disabled>
+									<img class="twoThumbsImg" src="img/thumbs/dual.png">
+									<p>Replace 1-4<br />market items</p>
+								</button>
+
+								<button id="viewPotScoringBtn" class="button is-info showPotScoringLayer marketActionButton" title="Instructions Button" disabled>
+									<img class="allPotsImg" src="img/pots/allPotsImg.png">
+									<p>View Pot<br />scoring info</p>
+								</button>
+
+								<button id="chooseAnyCardItemBtn" class="button is-success greenThumbActionBtn marketActionButton" title="Instructions Button" disabled>
+									<img class="twoThumbsImg" src="img/thumbs/dual.png">
+									<p>Choose any<br />card + item</p>
+								</button>
+
+								<div id="confirmChosenColumnContainer" class="marketActionContainer" view-category="plant" view-column="0">
+
+									<button class="delete closeMarketActionTrigger" aria-label="close" title="Close button image"></button>
+
+									<div class="bgOverlay"></div>
+									<img class="gameSectionBg" src="img/bg.jpg" alt="">
+
+									<p class="arrowLabelToPlantCards">Plant cards</p>
+									<p class="arrowLabelToRoomCards">Room cards</p>
+
+									<div id="columnToConfirm"></div>
+									<p arrow-direction="up" id="upZoomColumnArrow" class="zoomedColumnNavArrow">&#8249;</p>
+									<p arrow-direction="right" id="rightZoomColumnArrow" class="zoomedColumnNavArrow">&#8249;</p>
+									<p arrow-direction="down" id="downZoomColumnArrow" class="zoomedColumnNavArrow">&#8249;</p>
+									<p arrow-direction="left" id="leftZoomColumnArrow" class="zoomedColumnNavArrow">&#8249;</p>
+
+									<div class="btnContainer">
+										<button id="cancelColumnChoice" class="columnChoiceConfirmationBtn button is-danger">
+											<span>Cancel</span>
+											<span class="icon">
+												<ion-icon name="close-circle-outline"></ion-icon>
+											</span>
+										</button>
+										<button id="confirmColumnChoice" class="columnChoiceConfirmationBtn button is-success">
+											<span>Confirm</span>
+											<span class="icon">
+												<ion-icon name="checkmark-circle-outline"></ion-icon>
+											</span>
+										</button>
+									</div>
+								</div>
+
+								<div id="marketCardColumns" class="expanded"></div>
+
+								<div id="potScoringInfoContainer" class="animatingElem mediumTransition collapsed" style="transform-origin: left top;">
+
+									<div id="plantPotScoringInstructions">
+										<p>If you complete a plant, the Plant Pot Token from the <span class="firstPotToUseColor">4th column of the Market</span> will be used.</p>
+
+										<p>If you complete multiple plants on a single turn, <span class="secondPotToUseColor">the next lowest value Plant Pot Token from the discard pile</span> will be used, <span class="thirdPotToUseColor">and so on.</span></p>
+
+										<p>At the end of each turn, the pot in the 4th column will be discarded (if not claimed), the pots in the other columns will move to the next column to the right, and the next pot from the draw pile will move to the 1st column.</p>
+									</div>
+
+									<p id="potDrawPileTitle" class="title is-5 has-text-centered potCategoryTitle">Draw Pile</p>
+									<p id="potDiscardPileTitle" class="title is-5 has-text-centered potCategoryTitle">Discard Pile</p>
+
+									<!-- Draw Pile Arrows -->
+									<p class="gameFlowArrow drawPileArrow middleArrow">&#8593;</p>
+									<p class="gameFlowArrow drawPileArrow bottomArrow">&#8593;</p>
+
+									<!-- Bottom Column Arrows -->
+									<p class="gameFlowArrow columnFlowArrow leftArrow">&#8594;</p>
+									<p class="gameFlowArrow columnFlowArrow middleArrow">&#8594;</p>
+									<p class="gameFlowArrow columnFlowArrow rightArrow">&#8594;</p>
+
+									<!-- Discard Pile Arrows -->
+									<p class="gameFlowArrow discardPileArrow middleArrow">&#8595;</p>
+									<p class="gameFlowArrow discardPileArrow bottomArrow">&#8595;</p>
+
+									<div id="potScoringDescriptions">
+										<div class="firstPotDescription potLabelDescription">
+											<p>First pot available for first completed plant this turn.</p>
+										</div>
+										<div class="secondPotDescription potLabelDescription">
+											<p>Second pot available for second completed plant this turn.</p>
+										</div>
+										<div class="thirdPotDescription potLabelDescription">
+											<p>Third pot available for third completed plant this turn etc.</p>
+										</div>
+									</div>
+									<div id="fourthColumnPotLabelSelection"></div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -134,6 +225,7 @@
 
 				<div data-animation-group="tableau" id="swapSectionsIcon" class="collapsed initSetup">
 					<ion-icon name="arrow-up-circle-outline" role="img" class="md hydrated" aria-label="arrow up circle outline"></ion-icon>
+					<ion-icon name="arrow-down-circle-outline" role="img" class="md hydrated" aria-label="arrow up circle outline"></ion-icon>
 				</div>
 
 				<div data-animation-group="tableau" id="tableauContainerOuterOverlay" class="collapsed gameSectionContainerOuterOverlay gameSectionContainerOverlay">
@@ -148,36 +240,33 @@
 								<div data-animation-group="tableau" id="homeContentContainer" class="collapsed">
 									<div data-animation-group="tableau" id="playerInfoContainer" class="animatingElem mediumTransition collapsed" style="transform-origin: left top;">
 
+										<button id="addOneVerdancyToPlantBtn" class="button is-success greenThumbActionBtn" title="Instructions Button" disabled>
+											<img class="twoThumbsImg" src="img/thumbs/dual.png">
+											<p>+1 Verdancy<br>to any plant</p>
+										</button>
+
 										<div data-animation-group="tableau" id="cardToPlace" class="collapsed">
-											<p data-animation-group="tableau" class="playerInfoTitle collapsed has-text-centered">Card to<br />place</p>
+											<p data-animation-group="tableau" class="cardToPlaceTitle collapsed has-text-centered">Card to<br />place</p>
 											<img data-animation-group="tableau" id="chosenCardBackground" class="collapsed" src="img/card-storage.png">
 										</div>
 
-										<div data-animation-group="tableau" id="chosenItemContainer" class="itemContainer collapsed">
-											<p data-animation-group="tableau" class="playerInfoTitle collapsed has-text-centered">Chosen<br />Item</p>
+										<p data-animation-group="tableau" id="chosenItemTitle" class="tableauItemTitle">Chosen<br>Item <span>&#8658;</span></p>
+
+										<div data-animation-group="tableau" id="chosenItemParentContainer" class="itemContainerParent collapsed">
 											<img data-animation-group="tableau" id="chosenItemBackground" class="itemBackground collapsed" src="img/item-storage.png">
+											<div id="chosenItemContainer" class="itemContainer"></div>
 										</div>
 
-										<div data-animation-group="tableau" id="swapItemsBtnContainer" class="animatingElem mediumTransition collapsed" title="Swap Items" style="transform-origin: left top;">
-
-											<button data-animation-group="tableau" data-swap-type="chosen-to-stored" class="button is-primary swapItemsBtn animatingElem mediumTransition expanded activeBtn" title="Swap Items" disabled="">
-												<ion-icon name="arrow-down-outline"></ion-icon>
-											</button>
-
-											<button data-animation-group="tableau" data-swap-type="stored-to-chosen" class="button is-primary swapItemsBtn animatingElem mediumTransition expanded" title="Swap Items" disabled="">
-												<ion-icon name="arrow-up-outline"></ion-icon>
-											</button>
-
-											<button data-animation-group="tableau" data-swap-type="both-items" class="button is-primary swapItemsBtn animatingElem mediumTransition expanded" title="Swap Items" disabled="">
-												<ion-icon name="swap-vertical-outline"></ion-icon>
-											</button>
+										<div data-animation-group="tableau" id="swapItemsBtnContainer" class="animatingElem mediumTransition expanded" title="Swap Items">
+											<button data-animation-group="tableau" class="button is-success useItemsBtn expanded" title="Use Item" disabled>Use Item</button>
+											<button data-animation-group="tableau" class="button is-link swapItemsBtn expanded" title="Store Item" disabled>Store Item</button>
 										</div>
 
-										<ion-icon data-animation-group="tableau" name="archive" class="storageIcon collapsed"></ion-icon>
+										<p data-animation-group="tableau" id="storedItemTitle" class="tableauItemTitle">Stored<br>Item <span>&#8658;</span></p>
 
-										<div data-animation-group="tableau" id="storedItemContainer" class="itemContainer collapsed">
-											<p data-animation-group="tableau" class="playerInfoTitle collapsed has-text-centered">Stored<br />Item</p>
+										<div data-animation-group="tableau" id="storedItemParentContainer" class="itemContainerParent collapsed">
 											<img data-animation-group="tableau" id="storedItemBackground" class="itemBackground collapsed" src="img/item-storage.png">
+											<div id="storedItemContainer" class="itemContainer"></div>
 										</div>
 
 									</div>
@@ -210,8 +299,8 @@
 
 												<div data-animation-group="tableau" id="mapZoomControls" class="collapsed">
 													<div data-animation-group="tableau" id="mapZoomControlsOverlay" class="collapsed animatingElem mediumTransition">
-														<img data-zoom-mode="zoomOut" class="zoomIcon zoomOutIcon activeZoom" src="img/map/zoomOut.png" />
 														<img data-zoom-mode="zoomIn" class="zoomIcon zoomInIcon activeZoom" src="img/map/zoomIn.png" />
+														<img data-zoom-mode="zoomOut" class="zoomIcon zoomOutIcon activeZoom" src="img/map/zoomOut.png" />
 													</div>
 												</div>
 
@@ -226,18 +315,33 @@
 												</div>
 
 												<div id="placedCardOptions" class="collapsed">
-
 													<button id="cancelCardPlacement" class="button is-danger">
 														<span>Cancel</span>
 														<span class="icon">
-															<ion-icon name="close-circle" role="img" class="md hydrated" aria-label="close circle"></ion-icon>
+															<ion-icon name="close-circle-outline"></ion-icon>
 														</span>
 													</button>
 
 													<button id="confirmCardPlacement" class="button is-success">
 														<span>Confirm</span>
 														<span class="icon">
-															<ion-icon name="checkmark-circle" role="img" class="md hydrated" aria-label="checkmark circle"></ion-icon>
+															<ion-icon name="checkmark-circle-outline"></ion-icon>
+														</span>
+													</button>
+												</div>
+
+												<div id="placedItemOptions" class="collapsed">
+													<button id="cancelItemPlacement" class="button is-danger">
+														<span>Cancel</span>
+														<span class="icon">
+															<ion-icon name="close-circle-outline"></ion-icon>
+														</span>
+													</button>
+
+													<button id="confirmItemPlacement" class="button is-success">
+														<span>Confirm</span>
+														<span class="icon">
+															<ion-icon name="checkmark-circle-outline"></ion-icon>
 														</span>
 													</button>
 												</div>
