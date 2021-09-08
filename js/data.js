@@ -341,3 +341,9 @@ var itemsAndNurtureItems = {
     'items': ['bird', 'cat', 'chair', 'dog', 'fish', 'lamp', 'shelf', 'sofa', 'table'], // 9 items in each 5 room colors = 45 total
     'itemsNurture': ['fertilizer', 'trowel', 'watering-can'] // 15 each = 45 total
 };
+
+var nurtureItemsExplanation = {
+    'fertilizer': 'Add 3 verdancy to a single plant.',
+    'trowel': 'Add 1 verdancy to three separate plants.',
+    'watering-can': 'Add 1 verdancy to all plants surrounding a single room.'
+};
