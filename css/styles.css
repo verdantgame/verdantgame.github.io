@@ -1,5 +1,39 @@
+html {
+    background-color: #fafafa!important;
+}
+
 :root {
     --animate-duration: 5s;
+}
+
+/* .button {
+    box-shadow: 1px 1px 5px 0px #484848!important;
+} */
+
+.disableInteraction {
+    pointer-events: none;
+}
+
+.itemToken,
+.cardContainer,
+.button {
+    transition: box-shadow .4s ease-in-out;
+    box-shadow: 1px 1px 3px 0px #484848;
+}
+
+.cardContainer.initBoxShadow {
+    box-shadow: 1px 1px 3px 0px transparent;
+}
+
+#tableauSection #mapContainer #mapHiddenOverlay .mapTileContainer.potentialPlacement.temporaryPlacement,
+#tableauSection #mapContainer #mapHiddenOverlay .mapTileContainer.potentialPlacement.temporaryPlacement .cardContainer,
+#tableauSection #mapContainer #mapHiddenOverlay .mapTileContainer.potentialItemPlacement.temporaryItemPlacement,
+#tableauSection #mapContainer #mapHiddenOverlay .mapTileContainer.potentialItemPlacement.temporaryItemPlacement .roomCardItemContainer,
+.cardContainer.potentialMarketCardChoice,
+.cardContainer.activeCard,
+.itemToken.potentialMarketItemChoice,
+.itemToken.activeItem {
+    box-shadow: 0px 0px 0px 3px #e1ff00;
 }
 
 .button[disabled] {
@@ -42,6 +76,15 @@ body {
     box-sizing: content-box; */
 }
 
+p.mapDebug {
+    display:none;
+    font-size: 11px;
+    text-align: center;
+    position: absolute;
+    width: 100%;
+    font-weight: bold;
+}
+
 #container.desktopView {
     max-width: 1250px;
 }
@@ -70,15 +113,59 @@ body {
     display:none;
 }
 
-p {
-    line-height: 23px;
-}
-
 .layer {
     display: none;
     position: absolute;
     top: 0px;
     width: 100%;
+}
+
+[data-tooltip]:not(.is-disabled):before {
+    font-size: 14px!important;
+    line-height: 16px!important;
+    border-radius: 10px!important;
+    text-align: center!important;
+    width: 256px!important;
+    max-width: 256px!important;
+    margin-bottom: -1px!important;
+    z-index: 9999!important;
+    left: -270%!important;
+    box-shadow: 2px 2px 2px 1px #4a4a4ac4!important;
+}
+
+#marketSection .marketColumn[column="0"] .cardsAndItemContainer .itemToken .nurtureItemExplanation[data-tooltip]:not(.is-disabled).has-tooltip-bottom:before {
+    left: 147%!important;
+    width: 172px!important;
+}
+
+#marketSection .marketColumn[column="1"] .cardsAndItemContainer .itemToken .nurtureItemExplanation[data-tooltip]:not(.is-disabled).has-tooltip-bottom:before {
+    left: 29%!important;
+    width: 172px!important;
+}
+
+#marketSection .marketColumn[column="2"] .cardsAndItemContainer .itemToken .nurtureItemExplanation[data-tooltip]:not(.is-disabled).has-tooltip-bottom:before {
+    left: 29%!important;
+    width: 172px!important;
+}
+
+#marketSection .marketColumn[column="3"] .cardsAndItemContainer .itemToken .nurtureItemExplanation[data-tooltip]:not(.is-disabled).has-tooltip-bottom:before {
+    left: -290%!important;
+    width: 172px!important;
+}
+
+#playerInfoContainer .itemContainerParent .itemContainer .itemToken .nurtureItemExplanation[data-tooltip]:not(.is-disabled).has-tooltip-bottom:before {
+    font-size: 13px!important;
+    line-height: 15px!important;
+    border-radius: 10px!important;
+    text-align: center!important;
+    width: 110px!important;
+    max-width: 110px!important;
+    margin-bottom: -1px!important;
+    z-index: 9999!important;
+    transform: translate(-42%,-32%);
+    top: auto!important;
+    box-shadow: 2px 2px 2px 1px #4a4a4ac4!important;
+    padding: 8px 4px!important;
 }
 
 .modal {
@@ -179,11 +266,11 @@ p {
 #container #mainVerdantTitle {
     display: block;
     text-align: center;
-    margin: 10px 0px 8px;
+    margin: 10px 0px 0px;
 }
 
 #container #mainVerdantTitle img {
-    width: 240px;
+    width: 298px;
     margin-bottom: 0px;
     margin-left: 13px;
 }
@@ -225,7 +312,7 @@ p {
     font-weight: 400;
     line-height: 1.5;
     position: absolute;
-    top: 35%;
+    top: 20%;
     left: 50%;
 }
 
@@ -315,15 +402,15 @@ p {
 #setupLayer .subtitle {
     font-style: italic;
     text-align: center;
-    width: 440px;
-    margin: 11px auto 15px;
-    font-size: 16px;
-    line-height: 22px;
+    width: 502px;
+    margin: 9px auto 20px;
+    font-size: 18px;
+    line-height: 25px;
 }
 
 #setupLayer #homepageButtonContainer {
     width: 340px;
-    margin: 16px auto 20px;
+    margin: 16px auto 27px;
 }
 
 #setupLayer #homepageButtonContainer .button {
@@ -345,8 +432,13 @@ p {
     margin: 0px auto 0px;
 }
 
+#setupLayer #demoDisclaimer .message-body {
+    padding: 14px 24px;
+}
+
 #setupLayer #demoDisclaimer .message-body p {
-    margin-bottom: 13px;
+    margin-bottom: 14px;
+    line-height: 22px;
 }
      
 /*                                                                                                  
@@ -389,8 +481,8 @@ p {
 
 #gameLayer #topInfoBar {
     display: block;
-    width: 752px;
-    margin: 10px auto 5px;
+    width: 662px;
+    margin: 9px auto 0px;
     padding: 5px 0px;
     border-radius: 9px;
     height: 73px;
@@ -409,7 +501,7 @@ p {
 #container #gameLayer #topInfoBar #secondaryVerdantTitle {
     margin-bottom: 0px;
     float: left;
-    width: 236px;
+    width: 206px;
 }
 
 #container.tabletView #gameLayer #topInfoBar #secondaryVerdantTitle {
@@ -418,10 +510,12 @@ p {
 }
 
 #gameLayer #topInfoBar #infoBarStats {
-    width: 204px;
+    width: 172px;
     float: left;
-    margin: 12px 0px 0px 60px;
-    font-size: 20px;
+    margin: 8px 0px 0px 54px;
+    font-size: 18px;
+    line-height: 22px;
+    position: relative;
 }
 
 #container.tabletView #gameLayer #topInfoBar #infoBarStats {
@@ -440,7 +534,7 @@ p {
 }
 
 #gameLayer #topInfoBar #infoBarStats .infoBarStatContainer .infoBarStatTitle {
-    width: 169px;
+    width: 144px;
     float: left;
     text-align: center;
 }
@@ -451,10 +545,40 @@ p {
 }
 
 #gameLayer #topInfoBar #infoBarStats .infoBarStatContainer .infoBarStatData {
-    width: 32px;
+    width: 25px;
     float: right;
     text-align: center;
     font-weight: bold;
+}
+
+#gameLayer #topInfoBar #infoBarStats #greenThumbsUpdateInfo {
+    display:none;
+    width: 22px;
+    height: 23px;
+    position: absolute;
+    top: 25px;
+    left: 169px;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 30px;
+    padding: 2px -1px;
+    font-size: 21px;
+}
+
+#gameLayer #topInfoBar #infoBarStats #greenThumbsUpdateInfo.subtractVal {
+    color: red;
+}
+
+#gameLayer #topInfoBar #infoBarStats #greenThumbsUpdateInfo.subtractVal:before {
+    content: '-';
+}
+
+#gameLayer #topInfoBar #infoBarStats #greenThumbsUpdateInfo.addVal {
+    color: #25e645;
+}
+
+#gameLayer #topInfoBar #infoBarStats #greenThumbsUpdateInfo.addVal:before {
+    content: '+';
 }
 
 #container.tabletView #gameLayer #topInfoBar #infoBarStats .infoBarStatContainer .infoBarStatData {
@@ -462,10 +586,10 @@ p {
 }
 
 #gameLayer #topInfoBar #showScoringRemindersBtn {
-    font-size: 18px;
-    margin: 15px 0px 0px 79px;
+    font-size: 17px;
+    margin: 9px 0px 0px 77px;
     padding: 0px 38px;
-    height: 49px;
+    height: 46px;
 }
 
 #container.tabletView #gameLayer #topInfoBar #showScoringRemindersBtn {
@@ -521,6 +645,102 @@ p {
     z-index: 9;
 }
 
+.greenThumbActionBtn.button,
+#viewPotScoringBtn.button {
+    white-space: normal;
+    padding: 0px;
+    font-size: 14px;
+    line-height: 15px;
+    position: absolute;
+    border-radius: 15px;
+    display: block;
+    z-index:1;
+}
+
+#viewPotScoringBtn.button {
+    width: 136px;
+    height: 47px;
+    top: 64px;
+    left: 188px;
+}
+
+#viewPotScoringBtn.button .allPotsImg {
+    width: 37px;
+    margin-top: 0px;
+    margin-bottom: 1px;
+    position: absolute;
+    top: 9px;
+    left: 8px;
+    opacity: 1;
+}
+
+#viewPotScoringBtn.button p {
+    text-align: center;
+    margin-top: 4px;
+    position: absolute;
+    top: 3px;
+    right: 10px;
+}
+
+
+#replaceMarketItemsBtn.greenThumbActionBtn {
+    width: 156px;
+    height: 47px;
+    top: 64px;
+    left: 13px;
+}
+
+#chooseAnyCardItemBtn.greenThumbActionBtn {
+    width: 152px;
+    height: 47px;
+    top: 64px;
+    left: 342px;
+}
+
+.greenThumbActionBtn.button .twoThumbsImg {
+    width: 53px;
+    position: absolute;
+    top: 2px;
+    left: 5px;
+}
+
+.greenThumbActionBtn.button p {
+    text-align: center;
+    margin-top: 4px;
+    position: absolute;
+    top: 2px;
+}
+
+#replaceMarketItemsBtn.greenThumbActionBtn p {
+    right: 10px;
+}
+
+#chooseAnyCardItemBtn.greenThumbActionBtn p {
+    right: 12px;
+}
+
+#tableauSection #playerInfoContainer #addOneVerdancyToPlantBtn.greenThumbActionBtn {
+    width: 99px;
+    height: 86px;
+    top: 0px;
+    left: 22px;
+}
+
+#tableauSection #playerInfoContainer #addOneVerdancyToPlantBtn.greenThumbActionBtn .twoThumbsImg {
+    width: 53px;
+    position: absolute;
+    top: 5px;
+    left: 23px;
+}
+
+#tableauSection #playerInfoContainer #addOneVerdancyToPlantBtn.greenThumbActionBtn p {
+    text-align: center;
+    margin-top: 4px;
+    position: absolute;
+    top: 43px;
+    left: 9px;
+}
+
 /*    
     __  ___        _                            
    /  |/  /____ _ (_)____                       
@@ -546,7 +766,7 @@ p {
 #container.desktopView #gameLayer #gameSectionsParent .gameSection {
     position: unset;
     width: 100%;
-    height: 550px;
+    height: 609px;
     margin: 0px 0px;
     float: left;
     overflow: hidden;
@@ -593,8 +813,22 @@ p {
     width: 515px;
 }
 
+#marketInactiveOverlay {
+    display:none;
+    width: 100%;
+    height: 100%;
+    background-color: #00000087;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 10;
+}
+
+/* #marketInactiveOverlay.activeOverlay {
+    display:block;
+} */
+
 .gameSectionContainerInnerOverlay {
-    width: 99.2%;
     height: 100%;
     position: absolute;
     overflow: hidden;
@@ -613,13 +847,13 @@ p {
 
 #container.desktopView #gameLayer #marketContainerOuterOverlay.gameSectionContainerOuterOverlay {
     width: 509px;
-    height: 550px;
+    height: 610px;
     left: 0px;
 }
 
 #container.desktopView #gameLayer #tableauContainerOuterOverlay.gameSectionContainerOuterOverlay {
     width: 661px;
-    height: 550px;
+    height: 610px;
     right: 0px;
 }
 
@@ -634,11 +868,11 @@ p {
 
 #gameLayer .bgOverlay,
 #gameLayer .gameSectionBg {
-    width: 108%;
-    max-width: 108%;
+    width: 120%;
+    max-width: 120%;
     position: absolute;
     top: -2%;
-    left: -4%;
+    left: -2%;
 }
 
 #gameLayer .bgOverlay {
@@ -700,10 +934,12 @@ p {
 }
 
 #gameLayer .titleContainer {
+    display:block;
     height: 34px;
+    width: 89px;
     position: absolute;
     top: 11px;
-    left: 31px;
+    left: 27px;
     border-bottom: 1px solid #003823;
 }
 
@@ -723,6 +959,351 @@ p {
 #container.tabletView #gameLayer .titleContainer .title {
     font-size: 25px;
 }
+
+#marketSection .gameSectionContent #potScoringInfoContainer {
+    height: 458px;
+    width: 440px;
+    position: absolute;
+    top: 129px;
+    left: 38px;
+    opacity: 0;
+}
+
+#marketSection .gameSectionContent #potScoringInfoContainer.expanded {
+    opacity: 1;
+    z-index: 3;
+}
+
+#marketSection .gameSectionContent #potScoringInfoContainer.collapsed {
+    opacity: 0;
+    z-index: 0;
+}
+
+#marketSection .gameSectionContent #potScoringInfoContainer #plantPotScoringInstructions {
+    position: absolute;
+    top: 55px;
+    left: 77px;
+    width: 270px;
+    border: 1px solid #6c6c6c;
+    padding: 10px 22px;
+    border-radius: 10px;
+    background-color: #ffffff8a;
+    border-radius: 10px;
+    box-shadow: 0px 0px 4px 1px #5d5d5d;
+}
+
+#marketSection .gameSectionContent #potScoringInfoContainer #plantPotScoringInstructions p {
+    font-size: 16px;
+    line-height: 20px;
+    margin-bottom: 11px;
+}
+
+#marketSection .gameSectionContent #potScoringInfoContainer #plantPotScoringInstructions p span {
+    font-weight:bold;
+    /* text-decoration: underline; */
+}
+
+#marketSection .gameSectionContent #potScoringInfoContainer #plantPotScoringInstructions p span.firstPotToUseColor {
+    color: #4cc647;
+}
+
+#marketSection .gameSectionContent #potScoringInfoContainer #plantPotScoringInstructions p span.secondPotToUseColor {
+    color: #ffac00;
+}
+
+#marketSection .gameSectionContent #potScoringInfoContainer #plantPotScoringInstructions p span.thirdPotToUseColor {
+    color: #f00;
+}
+
+#marketSection .gameSectionContent #potScoringInfoContainer #fourthColumnPotLabelSelection {
+    border: 3px solid #4cc647;
+}
+
+#marketSection .gameSectionContent #potScoringInfoContainer #potDiscardPile .potDiscardSlot[data-pot-discard-slot="0"] {
+    border: 3px solid #ffac00;
+}
+
+#marketSection .gameSectionContent #potScoringInfoContainer #potDiscardPile .potDiscardSlot[data-pot-discard-slot="1"] {
+    border: 3px solid #f00;
+}
+
+#marketSection .gameSectionContent #potScoringInfoContainer .potCategoryTitle  {
+    position: absolute;
+    top: 375px;
+    width: 75px;
+    font-size: 21px;
+    line-height: 25px;
+    color: #5a5a5a;
+}
+
+#marketSection .gameSectionContent #potScoringInfoContainer #potDrawPileTitle.potCategoryTitle  {
+    left: -11px;
+}
+
+#marketSection .gameSectionContent #potScoringInfoContainer #potDiscardPileTitle.potCategoryTitle  {
+    left: 365px;
+}
+
+#marketSection .gameSectionContent #potScoringInfoContainer .gameFlowArrow {
+    position: absolute;
+    opacity: 1;
+    color: #8a8a8a;
+    font-size: 46px;
+}
+
+#marketSection .gameSectionContent #potScoringInfoContainer .gameFlowArrow.drawPileArrow {
+    left: -26px;
+}
+
+#marketSection .gameSectionContent #potScoringInfoContainer .gameFlowArrow.discardPileArrow {
+    left: 442px;
+}
+
+#marketSection .gameSectionContent #potScoringInfoContainer .gameFlowArrow.drawPileArrow.middleArrow,
+#marketSection .gameSectionContent #potScoringInfoContainer .gameFlowArrow.discardPileArrow.middleArrow {
+    top: 50px;
+}
+
+#marketSection .gameSectionContent #potScoringInfoContainer .gameFlowArrow.drawPileArrow.bottomArrow,
+#marketSection .gameSectionContent #potScoringInfoContainer .gameFlowArrow.discardPileArrow.bottomArrow {
+    top: 190px;
+}
+
+#marketSection .gameSectionContent #potScoringInfoContainer .gameFlowArrow.columnFlowArrow {
+    top: -16px;
+}
+
+#marketSection .gameSectionContent #potScoringInfoContainer .gameFlowArrow.columnFlowArrow.leftArrow {
+    left: 69px;
+}
+
+#marketSection .gameSectionContent #potScoringInfoContainer .gameFlowArrow.columnFlowArrow.middleArrow {
+    left: 195px;
+}
+
+#marketSection .gameSectionContent #potScoringInfoContainer .gameFlowArrow.columnFlowArrow.rightArrow {
+    left: 321px;
+}
+
+#marketSection .gameSectionContent #potScoringInfoContainer #potScoringDescriptions {
+    display:none;
+}
+
+#marketSection .gameSectionContent #potScoringInfoContainer #potScoringDescriptions .potLabelDescription {
+    width: 244px;
+    height: 48px;
+    padding: 2px 9px 0px;
+    position: absolute;
+    left: 112px;
+    box-shadow: 0px 0px 8px #424242;
+    border-radius: 6px;
+    line-height: 17px;
+    text-align: center;
+    font-size: 14px;
+    background-color: #ffffff4a;
+}
+
+#marketSection .gameSectionContent #potScoringInfoContainer #potScoringDescriptions .potLabelDescription.firstPotDescription {
+    top: 433px;
+    left: 191px;
+    border: 3px solid #4cc647;
+}
+
+#marketSection .gameSectionContent #potScoringInfoContainer .potLabelDescription.secondPotDescription {
+    top: 315px;
+    border: 3px solid #efff00;
+}
+
+#marketSection .gameSectionContent #potScoringInfoContainer .potLabelDescription.thirdPotDescription {
+    top: 255px;
+    border: 3px solid #f00;
+}
+
+#marketSection .gameSectionContent #potScoringInfoContainer #potDrawPile {
+    height: 371px;
+    width: 65px;
+    position: absolute;
+}
+
+#marketSection .gameSectionContent #potScoringInfoContainer.expanded #potDrawPile {
+    top: 46px;
+    left: 0px;
+}
+
+#marketSection .gameSectionContent #potScoringInfoContainer.collapsed #potDrawPile {
+    top: 0px;
+    left: -125px;
+}
+
+#marketSection .gameSectionContent #potScoringInfoContainer #potDiscardPile {
+    height: 371px;
+    width: 65px;
+    position: absolute;
+}
+
+#marketSection .gameSectionContent #potScoringInfoContainer.expanded #potDiscardPile {
+    top: 46px;
+    right: 4px;
+}
+
+#marketSection .gameSectionContent #potScoringInfoContainer.collapsed #potDiscardPile {
+    top: 0px;
+    right: -121px;
+}
+
+#marketSection .gameSectionContent #potScoringInfoContainer #potDrawPile .potDrawSlot {
+    position: absolute;
+    width: 55px;
+    height: 37px;
+}
+
+#marketSection .gameSectionContent #potScoringInfoContainer #potDrawPile .potDrawSlot[data-pot-draw-slot="0"] {
+    top: 5px;
+    opacity: .9;
+}
+
+#marketSection .gameSectionContent #potScoringInfoContainer #potDrawPile .potDrawSlot[data-pot-draw-slot="1"] {
+    top: 51px;
+    opacity: .8;
+}
+
+#marketSection .gameSectionContent #potScoringInfoContainer #potDrawPile .potDrawSlot[data-pot-draw-slot="2"] {
+    top: 97px;
+    opacity: .7;
+}
+
+#marketSection .gameSectionContent #potScoringInfoContainer #potDrawPile .potDrawSlot[data-pot-draw-slot="3"] {
+    top: 143px;
+    opacity: .6;
+}
+
+#marketSection .gameSectionContent #potScoringInfoContainer #potDrawPile .potDrawSlot[data-pot-draw-slot="4"] {
+    top: 189px;
+    opacity: .5;
+}
+
+#marketSection .gameSectionContent #potScoringInfoContainer #potDrawPile .potDrawSlot[data-pot-draw-slot="5"] {
+    top: 235px;
+    opacity: .4;
+}
+
+#marketSection .gameSectionContent #potScoringInfoContainer #potDrawPile .potDrawSlot[data-pot-draw-slot="6"] {
+    top: 281px;
+    opacity: .2;
+}
+
+#marketSection .gameSectionContent #potScoringInfoContainer #potDrawPile .potDrawSlot[data-pot-draw-slot="7"] {
+    top: 327px;
+    opacity: 0;
+}
+
+#marketSection .gameSectionContent #potScoringInfoContainer #potDiscardPile .potDiscardSlot {
+    position: absolute;
+    width: 64px;
+    height: 46px;
+    box-shadow: 0px 0px 3px #424242;
+    border-radius: 16px;
+}
+
+#marketSection .gameSectionContent #potScoringInfoContainer #fourthColumnPotLabelSelection {
+    width: 64px;
+    height: 49px;
+    position: absolute;
+    top: -2px;
+    left: 370px;
+    box-shadow: 0px 0px 3px #424242;
+    border-radius: 16px;
+    line-height: 20px;
+    z-index: -1;
+}
+
+#marketSection .gameSectionContent #potScoringInfoContainer #potDiscardPile .potDiscardSlot[data-pot-discard-slot="0"] {
+    top: 9px;
+    opacity: 1;
+    box-shadow: 0px 0px 3px #424242;
+    border-radius: 16px;
+}
+
+#marketSection .gameSectionContent #potScoringInfoContainer #potDiscardPile .potDiscardSlot[data-pot-discard-slot="1"] {
+    top: 62px;
+    opacity: 1;
+    box-shadow: 0px 0px 3px #424242;
+    border-radius: 16px;
+}
+
+#marketSection .gameSectionContent #potScoringInfoContainer #potDiscardPile .potDiscardSlot[data-pot-discard-slot="2"] {
+    top: 115px;
+    opacity: .8;
+}
+
+#marketSection .gameSectionContent #potScoringInfoContainer #potDiscardPile .potDiscardSlot[data-pot-discard-slot="3"] {
+    top: 168px;
+    opacity: .6;
+}
+
+#marketSection .gameSectionContent #potScoringInfoContainer #potDiscardPile .potDiscardSlot[data-pot-discard-slot="4"] {
+    top: 221px;
+    opacity: .4;
+}
+
+#marketSection .gameSectionContent #potScoringInfoContainer #potDiscardPile .potDiscardSlot[data-pot-discard-slot="5"] {
+    top: 274px;
+    opacity: 0.2;
+}
+
+#marketSection .gameSectionContent #potScoringInfoContainer #potDiscardPile .potDiscardSlot[data-pot-discard-slot="6"] {
+    top: 327px;
+    opacity: 0;
+}
+
+#marketSection .gameSectionContent #potScoringInfoContainer #potDiscardPile .potDiscardSlot[data-pot-discard-slot="7"] {
+    top: 380px;
+    opacity: 0;
+}
+
+#marketSection .gameSectionContent #potScoringInfoContainer #potDiscardPile .potDiscardSlot[data-pot-discard-slot="8"] {
+    top: 433px;
+    opacity: 0;
+}
+
+#marketSection .gameSectionContent #potScoringInfoContainer #potDiscardPile .potDiscardSlot[data-pot-discard-slot="9"] {
+    top: 486px;
+    opacity: 0;
+}
+
+#marketSection .gameSectionContent #potScoringInfoContainer #potDiscardPile .potDiscardSlot[data-pot-discard-slot="10"] {
+    top: 539px;
+    opacity: 0;
+}
+
+#marketSection .gameSectionContent #potScoringInfoContainer #potDiscardPile .potDiscardSlot[data-pot-discard-slot="11"] {
+    top: 592px;
+    opacity: 0;
+}
+
+
+
+
+
+
+
+#marketSection .gameSectionContent #potScoringInfoContainer #potDrawPile .potDrawSlot .plantPotContainer {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 55px;
+    height: 37px;
+}
+
+#marketSection .gameSectionContent #potScoringInfoContainer #potDrawPile .potDrawSlot .plantPotContainer .plantPot,
+#marketSection .gameSectionContent #potScoringInfoContainer #potDrawPile .potDrawSlot .plantPotContainer .plantPotScoring {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+
+
 
 /*                                                                                        
  ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______
@@ -804,10 +1385,17 @@ p {
     top: -101px;
 }
 
-#marketSection #marketCardColumns { 
+#marketSection #marketCardColumns,
+#marketSection #marketCardColumnsToConfirm { 
     position: absolute;
-    top: 75px;
-    left: 24px;
+    top: 134px;
+    left: 13px;
+    z-index: 2;
+    transform-origin: left top;
+}
+
+#marketSection #marketCardColumns.collapsed .marketColumn .cardsAndItemContainer {
+    opacity: 0;
 }
 
 #container.tabletView #marketSection #marketCardColumns { 
@@ -818,16 +1406,289 @@ p {
 #marketSection .marketColumn {
     width: 105px;
     float: left;
-    margin: 0px 0px 0px 16px;
+    margin: 0px 0px 0px 20px;
+    position: relative;
 }
 
-/* #container.desktopView #marketSection .marketColumn {
-    height: 450px;
+.marketActionContainer {
+    display: none;
+    width: 350px;
+    height: 497px;
+    top: 38px;
+    left: 80px;
+    position: absolute;
+    z-index: 11;
+    background-color: #ffffff;
+    border-style: outset!important;
+    border-radius: 10px;
+    box-shadow: 0px 0px 3px 1px #000;
+    overflow: hidden;
 }
 
-#container.desktopView #marketSection .marketColumn:hover {
-    height: 450px;
+.marketActionContainer .delete.closeMarketActionTrigger {
+    right: 4px;
+    top: 4px;
+    position: absolute;
+    height: 35px;
+    width: 35px;
+    max-width: 35px;
+    max-height: 35px;
+    background-color: rgb(10 10 10 / 42%);
+    z-index: 9;
+}
+
+.marketActionContainer .bgOverlay,
+.marketActionContainer .gameSectionBg {
+    width: 150%!important;
+    max-width: 150%!important;
+}
+
+#confirmChosenColumnContainer.marketActionContainer .arrowLabelToRoomCards {
+    position: absolute;
+    top: 384px;
+    left: 119px;
+    font-weight: bold;
+    font-style: italic;
+    font-size: 19px;
+    color: #717171a3;
+    line-height: 21px;
+    text-align: center;
+}
+
+#confirmChosenColumnContainer.marketActionContainer[view-category="plant"] .arrowLabelToPlantCards,
+#confirmChosenColumnContainer.marketActionContainer[view-category="room"] .arrowLabelToRoomCards {
+    display:none
+}
+
+#confirmChosenColumnContainer.marketActionContainer .arrowLabelToPlantCards {
+    position: absolute;
+    top: 30px;
+    left: 121px;
+    font-weight: bold;
+    font-style: italic;
+    font-size: 19px;
+    color: #717171a3;
+    line-height: 21px;
+    text-align: center;
+}
+
+.marketActionContainer .btnContainer {
+    width: 271px;
+    height: 44px;
+    position: absolute;
+    bottom: 20px;
+    left: 42px;
+    z-index: 3;
+}
+
+.marketActionContainer .btnContainer .button {
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
+    margin-left: 22px;
+    width: 117px;
+    font-size: 16px;
+}
+
+.marketActionContainer .btnContainer .button:first-child {
+    margin-left: 0px;
+}
+
+.marketActionContainer .btnContainer .button ion-icon {
+    font-size: 30px;
+    cursor:pointer;
+    cursor:hand;
+}
+
+#confirmChosenColumnContainer.marketActionContainer[view-category="plant"] #confirmChosenColumnContainerOverlay {
+    top: -30px;
+}
+
+#confirmChosenColumnContainer.marketActionContainer[view-category="plant"] #columnToConfirm #marketCardColumnsToConfirm.expanded {
+    top: 8px;
+}
+
+#confirmChosenColumnContainer.marketActionContainer[view-category="room"] #columnToConfirm #marketCardColumnsToConfirm.expanded {
+    top: -207px;
+}
+
+#confirmChosenColumnContainer.marketActionContainer[view-category="plant"] #upZoomColumnArrow,
+#confirmChosenColumnContainer.marketActionContainer[view-category="room"] #downZoomColumnArrow {
+    display:none;
+}
+
+#confirmChosenColumnContainer.marketActionContainer #columnToConfirm {
+    transition: all 0.5s ease-in-out!important;
+    width: 155px;
+    height: 287px;
+    position: relative;
+    left: 94px;
+}
+
+#confirmChosenColumnContainer.marketActionContainer[view-category="plant"] #columnToConfirm {
+    top: 35px;
+}
+
+#confirmChosenColumnContainer.marketActionContainer[view-category="room"] #columnToConfirm {
+    top: 123px;
+}
+
+#confirmChosenColumnContainer.marketActionContainer #columnToConfirm #marketCardColumnsToConfirm {
+    transition: all 0.5s ease-in-out!important;
+    transform: scale(1.2);
+    width: 490px;
+}
+
+#confirmChosenColumnContainer.marketActionContainer[view-column="0"] #columnToConfirm #marketCardColumnsToConfirm.expanded {
+    left: 14px;
+}
+
+#confirmChosenColumnContainer.marketActionContainer[view-column="1"] #columnToConfirm #marketCardColumnsToConfirm.expanded {
+    left: -136px;
+}
+
+#confirmChosenColumnContainer.marketActionContainer[view-column="2"] #columnToConfirm #marketCardColumnsToConfirm.expanded {
+    left: -286px;
+}
+
+#confirmChosenColumnContainer.marketActionContainer[view-column="3"] #columnToConfirm #marketCardColumnsToConfirm.expanded {
+    left: -436px;
+}
+
+#confirmChosenColumnContainer.marketActionContainer #columnToConfirm #marketCardColumnsToConfirm .marketColumn {
+    transition: all 0.5s ease-in-out!important;
+    opacity: 1;
+}
+
+#confirmChosenColumnContainer.marketActionContainer[view-column="0"] #columnToConfirm #marketCardColumnsToConfirm.expanded .marketColumn:not([column="0"]),
+#confirmChosenColumnContainer.marketActionContainer[view-column="1"] #columnToConfirm #marketCardColumnsToConfirm.expanded .marketColumn:not([column="1"]),
+#confirmChosenColumnContainer.marketActionContainer[view-column="2"] #columnToConfirm #marketCardColumnsToConfirm.expanded .marketColumn:not([column="2"]),
+#confirmChosenColumnContainer.marketActionContainer[view-column="3"] #columnToConfirm #marketCardColumnsToConfirm.expanded .marketColumn:not([column="3"]) {
+    opacity: .2;
+}
+
+#confirmChosenColumnContainer.marketActionContainer[view-category="plant"] #columnToConfirm #marketCardColumnsToConfirm.expanded .marketColumn .cardsAndItemContainer .cardContainer[cardtype="room"],
+#confirmChosenColumnContainer.marketActionContainer[view-category="room"] #columnToConfirm #marketCardColumnsToConfirm.expanded .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"] {
+    opacity: 0;
+}
+
+#confirmChosenColumnContainer.marketActionContainer #columnToConfirm #marketCardColumnsToConfirm .marketColumn .cardsAndItemContainer .cardContainer {
+    transition: all 0.5s ease-in-out;
+    box-shadow: 1px 1px 3px 0px #484848;
+}
+
+#confirmChosenColumnContainer.marketActionContainer[view-column="0"][view-category="plant"] #columnToConfirm #marketCardColumnsToConfirm.expanded .marketColumn[column="0"] .cardsAndItemContainer .cardContainer[cardtype="plant"],
+#confirmChosenColumnContainer.marketActionContainer[view-column="0"] #columnToConfirm #marketCardColumnsToConfirm.expanded .marketColumn[column="0"] .cardsAndItemContainer .itemToken,
+#confirmChosenColumnContainer.marketActionContainer[view-column="0"][view-category="room"] #columnToConfirm #marketCardColumnsToConfirm.expanded .marketColumn[column="0"] .cardsAndItemContainer .cardContainer[cardtype="room"],
+#confirmChosenColumnContainer.marketActionContainer[view-column="1"][view-category="plant"] #columnToConfirm #marketCardColumnsToConfirm.expanded .marketColumn[column="1"] .cardsAndItemContainer .cardContainer[cardtype="plant"],
+#confirmChosenColumnContainer.marketActionContainer[view-column="1"] #columnToConfirm #marketCardColumnsToConfirm.expanded .marketColumn[column="1"] .cardsAndItemContainer .itemToken,
+#confirmChosenColumnContainer.marketActionContainer[view-column="1"][view-category="room"] #columnToConfirm #marketCardColumnsToConfirm.expanded .marketColumn[column="1"] .cardsAndItemContainer .cardContainer[cardtype="room"],
+#confirmChosenColumnContainer.marketActionContainer[view-column="2"][view-category="plant"] #columnToConfirm #marketCardColumnsToConfirm.expanded .marketColumn[column="2"] .cardsAndItemContainer .cardContainer[cardtype="plant"],
+#confirmChosenColumnContainer.marketActionContainer[view-column="2"] #columnToConfirm #marketCardColumnsToConfirm.expanded .marketColumn[column="2"] .cardsAndItemContainer .itemToken,
+#confirmChosenColumnContainer.marketActionContainer[view-column="2"][view-category="room"] #columnToConfirm #marketCardColumnsToConfirm.expanded .marketColumn[column="2"] .cardsAndItemContainer .cardContainer[cardtype="room"],
+#confirmChosenColumnContainer.marketActionContainer[view-column="3"][view-category="plant"] #columnToConfirm #marketCardColumnsToConfirm.expanded .marketColumn[column="3"] .cardsAndItemContainer .cardContainer[cardtype="plant"],
+#confirmChosenColumnContainer.marketActionContainer[view-column="3"] #columnToConfirm #marketCardColumnsToConfirm.expanded .marketColumn[column="3"] .cardsAndItemContainer .itemToken,
+#confirmChosenColumnContainer.marketActionContainer[view-column="3"][view-category="room"] #columnToConfirm #marketCardColumnsToConfirm.expanded .marketColumn[column="3"] .cardsAndItemContainer .cardContainer[cardtype="room"] {
+    box-shadow: 0px 0px 0px 3px #e1ff00;
+}
+
+#confirmChosenColumnContainer.marketActionContainer #columnToConfirm #marketCardColumnsToConfirm.expanded .marketColumn .cardsAndItemContainer .itemToken .nurtureItemExplanation {
+    display:none;
+}
+
+#confirmChosenColumnContainer.marketActionContainer #columnToConfirm #marketCardColumnsToConfirm.expanded .marketColumn {
+    margin: 0px 0px 0px 20px;
+}
+
+#confirmChosenColumnContainer.marketActionContainer #columnToConfirm #marketCardColumnsToConfirm.expanded .marketColumn:first-child {
+    margin: 0px 0px 0px 0px;
+}
+
+#confirmChosenColumnContainer.marketActionContainer #columnToConfirm #marketCardColumnsToConfirm.expanded .marketColumn .plantPotContainer {
+    display:none;
+}
+
+#confirmChosenColumnContainer.marketActionContainer .zoomedColumnNavArrow {
+    font-size: 160px;
+    line-height: 12px;
+    position: absolute;
+    z-index: 3;
+    color: #125d16c2;
+    text-shadow: 6px 0px 2px #109816;
+    cursor: pointer;
+    cursor: hand;
+}
+
+#confirmChosenColumnContainer.marketActionContainer #upZoomColumnArrow {
+    left: 145px;
+    top: 56px;
+    width: 52px;
+    height: 59px;
+    transform: rotate(90deg);
+}
+
+#confirmChosenColumnContainer.marketActionContainer #rightZoomColumnArrow {
+    left: 267px;
+    top: 183px;
+    width: 51px;
+    height: 57px;
+    transform: rotate(180deg);
+}
+
+#confirmChosenColumnContainer.marketActionContainer #downZoomColumnArrow {
+    left: 145px;
+    top: 327px;
+    width: 52px;
+    height: 59px;
+    transform: rotate(270deg);
+}
+
+#confirmChosenColumnContainer.marketActionContainer #leftZoomColumnArrow {
+    left: 22px;
+    top: 181px;
+    width: 54px;
+    height: 58px;
+    transform: rotate(0deg);
+}
+
+#confirmChosenColumnContainer.marketActionContainer[view-column="0"] #leftZoomColumnArrow,
+#confirmChosenColumnContainer.marketActionContainer[view-column="3"] #rightZoomColumnArrow {
+    display: none;
+}
+
+/* #confirmChosenColumnContainer.marketActionContainer[view-column="0"] #confirmChosenColumnContainerOverlay #leftZoomColumnArrow ion-icon */
+
+/* 
+
+#confirmChosenMarketCardAndItemContainer.marketActionContainer #cardToConfirm {
+    width: 161px;
+    height: 250px;
+    margin-right: 10px;
+    float: left;
+    position: relative;
+    position: absolute;
+    top: 23px;
+    left: 120px;
+}
+
+#confirmChosenMarketCardAndItemContainer.marketActionContainer #cardToConfirm .cardContainer {
+    transform: scale(1.5);
+}
+
+#confirmChosenMarketCardAndItemContainer.marketActionContainer #itemToConfirm {
+    width: 76px;
+    height: 76px;
+    position: absolute;
+    top: 280px;
+    left: 164px;
+}
+
+#confirmChosenMarketCardAndItemContainer.marketActionContainer #itemToConfirm .itemToken {
+    transform: scale(1.6);
 } */
+
+
+
 
 /* 
     ____          __ 
@@ -865,6 +1726,24 @@ p {
     left: -500px;
 }
 
+.plantPotContainer .plantPot,
+.plantPotContainer .plantPotScoring {
+    transition: opacity .7s ease-in-out;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+.plantPotContainer.showScoring .plantPot,
+.plantPotContainer.hideScoring .plantPotScoring {
+    opacity: 0;
+}
+
+.plantPotContainer.hideScoring .plantPot,
+.plantPotContainer.showScoring .plantPotScoring {
+    opacity: 1;
+}
+
 
 /* 
    ______                  __               
@@ -883,32 +1762,26 @@ p {
 */
 
 #marketSection .marketColumn .cardsAndItemContainer {
-    height: 400px;
+    transition: opacity .7s ease-in-out;
+    height: 407px;
     transform: scale(1);
     position:relative;
     z-index: 0;
-    cursor:hand;
-    cursor:pointer;
     top:0px;
     opacity: 1;
 }
 
-#container.desktopView #marketSection .marketColumn.activeColumn .cardsAndItemContainer {
-    transition: all .2s ease-in-out;
-    transform: scale(1.25);
-    top: -50px;
-    z-index: 2;
+#gameSectionsParent[current-phase="market-selection"] #marketSection.gameSection .gameSectionContent > #marketCardColumns .marketColumn .cardsAndItemContainer {
+    cursor:hand;
+    cursor:pointer;
 }
 
-#container.desktopView #marketSection .marketColumn.deactivedColumn .cardsAndItemContainer {
-    transition: all .2s ease-in-out;
-    transform: scale(1);
-    top:0px;
-    z-index: 2;
+#container.desktopView #gameSectionsParent[current-phase="market-selection"] #marketSection .marketColumn:not(.activeColumn) .cardsAndItemContainer {
+    z-index: 0;
 }
 
-#marketSection #marketCardColumns.activeColumnView .marketColumn:not(.activeColumn) .cardsAndItemContainer {
-    opacity: .5;
+#container.desktopView #gameSectionsParent[current-phase="market-selection"] #marketSection .marketColumn.activeColumn .cardsAndItemContainer {
+    z-index: 2;
 }
 
 #marketSection .marketColumn:first-child {
@@ -931,15 +1804,20 @@ p {
 *Static Styles*                       
 */
 
-#marketSection .marketColumn .itemToken {
-    width: 46px;
+.itemToken {
     position: absolute;
-    top: 174px;
+    width: 46px;
+    height: 46px;
+    border-radius: 6px;
+}
+
+#marketSection .marketColumn .itemToken {
+    top: 180px;
     left: 30px;
 }
 
 #container.tabletView #marketSection .marketColumn .itemToken.expanded {
-    top: 174px;
+    top: 180px;
     left: 30px;
 }
 
@@ -955,14 +1833,47 @@ p {
 
 #container.desktopView #marketSection .marketColumn .itemToken.expanded.startingPosAnimate,
 #container.tabletView #marketSection .marketColumn .itemToken.expanded.startingPosAnimate {
-    top: 174px;
+    top: 180px;
     left: 30px;
 }
 
 #container.desktopView #marketSection .marketColumn .itemToken.expanded.startingPosAnimate.startingPos,
 #container.tabletView #marketSection .marketColumn .itemToken.expanded.startingPosAnimate.startingPos {
-    top: 174px;
+    top: 180px;
     left: -500px;
+}
+
+.itemToken .nurtureItemExplanation {
+    position: absolute;
+    top: -9px;
+    left: 34px;
+    font-size: 27px;
+    padding: 0px;
+    margin: 0px;
+    width: 20px;
+    height: 20px;
+    background-color: #00a651;
+    border-radius: 30px;
+    color: #FFF;
+    box-shadow: 0px 0px 3px 2px #4a4a4a;
+}
+
+.itemToken .nurtureItemExplanation ion-icon {
+    padding: 0px;
+    margin: 0px;
+    position: absolute;
+    top: -4px;
+    left: -4px;
+}
+
+/* Nurture Item Token Explanations - Tooltips */
+
+#gameSectionsParent #marketSection .marketColumn.activeColumn {
+    z-index: 2;
+}
+
+#gameSectionsParent #marketSection .marketColumn.deactivedColumn {
+    z-index: 0;
 }
 
 /* 
@@ -986,10 +1897,10 @@ p {
     left: 0px;
 }
 
-#marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"],
+#marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"],
 #marketSection .marketColumn .cardsAndItemContainer .flip-plant,
 #marketSection .marketColumn .cardsAndItemContainer .flip-plant .backOfCardContainer,
-#marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="room"],
+#marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="room"],
 #marketSection .marketColumn .cardsAndItemContainer .flip-room,
 #marketSection .marketColumn .cardsAndItemContainer .flip-room .backOfCardContainer {
     position: absolute;
@@ -997,38 +1908,38 @@ p {
     height: 164px;
 }
 
-#marketSection.desktopView .marketColumn .cardsAndItemContainer .flip-card.flip-back.flip-plant .flip-card-inner .flip-card-back .cardContainer[type="plant"],
-#marketSection.desktopView .marketColumn .cardsAndItemContainer .flip-card.flip-back.flip-room .flip-card-inner .flip-card-back .cardContainer[type="room"],
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .flip-card.flip-back.flip-plant .flip-card-inner .flip-card-back .cardContainer[type="plant"].expanded,
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .flip-card.flip-back.flip-room .flip-card-inner .flip-card-back .cardContainer[type="room"].expanded,
+#marketSection.desktopView .marketColumn .cardsAndItemContainer .flip-card.flip-back.flip-plant .flip-card-inner .flip-card-back .cardContainer[cardtype="plant"],
+#marketSection.desktopView .marketColumn .cardsAndItemContainer .flip-card.flip-back.flip-room .flip-card-inner .flip-card-back .cardContainer[cardtype="room"],
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .flip-card.flip-back.flip-plant .flip-card-inner .flip-card-back .cardContainer[cardtype="plant"].expanded,
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .flip-card.flip-back.flip-room .flip-card-inner .flip-card-back .cardContainer[cardtype="room"].expanded,
 #marketSection .marketColumn .cardsAndItemContainer .flip-card.flip-back.flip-plant .flip-card-inner .flip-card-front .backOfCardContainer,
 #marketSection .marketColumn .cardsAndItemContainer .flip-card.flip-back.flip-room .flip-card-inner .flip-card-front .backOfCardContainer {
     background-color: #f7efda;
     top: 0px;
 }
 
-#marketSection .marketColumn .cardsAndItemContainer > .cardContainer[type="plant"] {
+#marketSection .marketColumn .cardsAndItemContainer > .cardContainer[cardtype="plant"] {
     top: 0px;
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"].expanded,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"].expanded {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"].expanded,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"].expanded {
     top: 0px;
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"].collapsed {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"].collapsed {
     top: -99px;
 }
 
-#marketSection .marketColumn .cardsAndItemContainer > .cardContainer[type="room"] {
-    top: 235px;
+#marketSection .marketColumn .cardsAndItemContainer > .cardContainer[cardtype="room"] {
+    top: 239px;
 }   
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="room"].expanded {
-    top: 235px;
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="room"].expanded {
+    top: 239px;
 }   
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="room"].collapsed {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="room"].collapsed {
     top: 29px;
 }
  
@@ -1069,15 +1980,15 @@ p {
     background-color: #f7efda;
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] .cardContainerOverlay.expanded,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] .cardContainerOverlay.expanded,
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .cardContainerOverlay.expanded,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .cardContainerOverlay.expanded {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"] .cardContainerOverlay.expanded,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"] .cardContainerOverlay.expanded,
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="room"] .cardContainerOverlay.expanded,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="room"] .cardContainerOverlay.expanded {
     top:0px;
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] .cardContainerOverlay.collapsed,
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .cardContainerOverlay.collapsed {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"] .cardContainerOverlay.collapsed,
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="room"] .cardContainerOverlay.collapsed {
     top:100px;
 }
 
@@ -1178,77 +2089,77 @@ p {
     left: -500px;
 }
 
-.cardContainer[type="plant"] .plant {
+.cardContainer[cardtype="plant"] .plant {
     opacity: 1;
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] .plant.expanded,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] .plant.expanded {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"] .plant.expanded,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"] .plant.expanded {
     opacity: 1;
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] .plant.collapsed,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] .plant.collapsed {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"] .plant.collapsed,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"] .plant.collapsed {
     opacity: .15;
 }
 
-.cardContainer[type="plant"] .plantImgContainer > .plantImg,
-.cardContainer[type="plant"] .lightingIconContainer > .lightingIcon {
+.cardContainer[cardtype="plant"] .plantImgContainer > .plantImg,
+.cardContainer[cardtype="plant"] .lightingIconContainer > .lightingIcon {
     display:block;
     margin:0 auto;
 }
 
-.cardContainer[type="plant"] .plantBannerContainer {
+.cardContainer[cardtype="plant"] .plantBannerContainer {
     position: absolute;
     width: 31%;
-    left: -4.5%;
+    left: -2.5%;
     top: 0%;
     height: 26%;
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] .plantBannerContainer.expanded,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] .plantBannerContainer.expanded {
-    left: -4.5%;
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"] .plantBannerContainer.expanded,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"] .plantBannerContainer.expanded {
+    left: -2.5%;
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] .plantBannerContainer.collapsed,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] .plantBannerContainer.collapsed {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"] .plantBannerContainer.collapsed,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"] .plantBannerContainer.collapsed {
     left: -23.5%;
 }
 
-.cardContainer[type="plant"] .plantBannerContainer > .plantBanner {
+.cardContainer[cardtype="plant"] .plantBannerContainer > .plantBanner {
     width: 68%;
     transform:scale(1);
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] .plantBannerContainer > .plantBanner.expanded,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] .plantBannerContainer > .plantBanner.expanded {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"] .plantBannerContainer > .plantBanner.expanded,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"] .plantBannerContainer > .plantBanner.expanded {
     transform:scale(1);
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] .plantBannerContainer > .plantBanner.collapsed,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] .plantBannerContainer > .plantBanner.collapsed {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"] .plantBannerContainer > .plantBanner.collapsed,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"] .plantBannerContainer > .plantBanner.collapsed {
     transform: scale(2);
 }
 
-.cardContainer[type="plant"] .plantSymbolContainer {
+.cardContainer[cardtype="plant"] .plantSymbolContainer {
     position: absolute;
     top: 4.5%;
-    left: 1.5%;
+    left: 3.5%;
     width: 18.5%;
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] .plantSymbolContainer.expanded,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] .plantSymbolContainer.expanded {
-    left: 1.5%;
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"] .plantSymbolContainer.expanded,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"] .plantSymbolContainer.expanded {
+    left: 3.5%;
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] .plantSymbolContainer.collapsed,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] .plantSymbolContainer.collapsed {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"] .plantSymbolContainer.collapsed,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"] .plantSymbolContainer.collapsed {
     left: -18.5%;
 }
 
-.cardContainer[type="plant"] .plantVerdancyContainer {
+.cardContainer[cardtype="plant"] .plantVerdancyContainer {
     position: absolute;
     top: 1%;
     left: 72%;
@@ -1256,32 +2167,32 @@ p {
     height: 18%;
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] .plantVerdancyContainer.expanded,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] .plantVerdancyContainer.expanded {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"] .plantVerdancyContainer.expanded,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"] .plantVerdancyContainer.expanded {
     left: 72%;
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] .plantVerdancyContainer.collapsed,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] .plantVerdancyContainer.collapsed {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"] .plantVerdancyContainer.collapsed,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"] .plantVerdancyContainer.collapsed {
     left: 66%;
 }
 
-.cardContainer[type="plant"] .plantVerdancyContainer > .plantVerdancy {
+.cardContainer[cardtype="plant"] .plantVerdancyContainer > .plantVerdancy {
     width: 68%;
     transform:scale(1);
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] .plantVerdancyContainer > .plantVerdancy.expanded,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] .plantVerdancyContainer > .plantVerdancy.expanded {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"] .plantVerdancyContainer > .plantVerdancy.expanded,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"] .plantVerdancyContainer > .plantVerdancy.expanded {
     transform:scale(1);
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] .plantVerdancyContainer > .plantVerdancy.collapsed,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] .plantVerdancyContainer > .plantVerdancy.collapsed {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"] .plantVerdancyContainer > .plantVerdancy.collapsed,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"] .plantVerdancyContainer > .plantVerdancy.collapsed {
     transform:scale(1.3);
 }
 
-.cardContainer[type="plant"] .plantVPsContainer {
+.cardContainer[cardtype="plant"] .plantVPsContainer {
     position: absolute;
     top: 13.5%;
     left: 74%;
@@ -1289,242 +2200,241 @@ p {
     height: 18%;
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] .plantVPsContainer.expanded,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] .plantVPsContainer.expanded {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"] .plantVPsContainer.expanded,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"] .plantVPsContainer.expanded {
     top: 13.5%;
     left: 74%;
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] .plantVPsContainer.collapsed,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] .plantVPsContainer.collapsed {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"] .plantVPsContainer.collapsed,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"] .plantVPsContainer.collapsed {
     top: 20.5%;
     left: 66%;
 }
 
-.cardContainer[type="plant"] .plantVPsContainer > .plantVPs {
+.cardContainer[cardtype="plant"] .plantVPsContainer > .plantVPs {
     width: 68%;
     transform:scale(1);
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] .plantVPsContainer > .plantVPs.expanded,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] .plantVPsContainer > .plantVPs.expanded {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"] .plantVPsContainer > .plantVPs.expanded,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"] .plantVPsContainer > .plantVPs.expanded {
     transform:scale(1);
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] .plantVPsContainer > .plantVPs.collapsed,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] .plantVPsContainer > .plantVPs.collapsed {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"] .plantVPsContainer > .plantVPs.collapsed,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"] .plantVPsContainer > .plantVPs.collapsed {
     transform:scale(1.3);
 }
 
-.cardContainer[type="plant"] .lightingIconContainer {
+.cardContainer[cardtype="plant"] .lightingIconContainer {
     position: absolute;
     width: 22%;
     height: 12%;
 }
 
-.cardContainer[type="plant"] .lightingIconContainer > .lightingIcon {
+.cardContainer[cardtype="plant"] .lightingIconContainer > .lightingIcon {
     width: 68%;
 }
 
 /* 1x Lighting */
-.cardContainer[type="plant"][data-lighting-num="1"] .lightingIconContainer-one {
+.cardContainer[cardtype="plant"][data-lighting-num="1"] .lightingIconContainer-one {
     top: 1%;
     left: 39%;
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][data-lighting-num="1"] .lightingIconContainer-one.expanded,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][data-lighting-num="1"] .lightingIconContainer-one.expanded {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"][data-lighting-num="1"] .lightingIconContainer-one.expanded,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"][data-lighting-num="1"] .lightingIconContainer-one.expanded {
     top: 1%;
     left: 39%;
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][data-lighting-num="1"] .lightingIconContainer-one.collapsed,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][data-lighting-num="1"] .lightingIconContainer-one.collapsed {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"][data-lighting-num="1"] .lightingIconContainer-one.collapsed,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"][data-lighting-num="1"] .lightingIconContainer-one.collapsed {
     top: 12%;
     left: 36%;
 }
 
-.cardContainer[type="plant"][data-lighting-num="1"] .lightingIconContainer-one > .lightingIcon-one {
+.cardContainer[cardtype="plant"][data-lighting-num="1"] .lightingIconContainer-one > .lightingIcon-one {
     width: 68%;
     transform:scale(1);
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][data-lighting-num="1"] .lightingIconContainer-one > .lightingIcon-one.expanded,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][data-lighting-num="1"] .lightingIconContainer-one > .lightingIcon-one.expanded {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"][data-lighting-num="1"] .lightingIconContainer-one > .lightingIcon-one.expanded,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"][data-lighting-num="1"] .lightingIconContainer-one > .lightingIcon-one.expanded {
     transform:scale(1);
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][data-lighting-num="1"] .lightingIconContainer-one > .lightingIcon-one.collapsed,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][data-lighting-num="1"] .lightingIconContainer-one > .lightingIcon-one.collapsed {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"][data-lighting-num="1"] .lightingIconContainer-one > .lightingIcon-one.collapsed,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"][data-lighting-num="1"] .lightingIconContainer-one > .lightingIcon-one.collapsed {
     transform:scale(1.3);
 }
 
 /* 2x Lighting */
-.cardContainer[type="plant"][data-lighting-num="2"] .lightingIconContainer-one {
+.cardContainer[cardtype="plant"][data-lighting-num="2"] .lightingIconContainer-one {
     top: 1%;
     left: 32%;
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][data-lighting-num="2"] .lightingIconContainer-one.expanded,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][data-lighting-num="2"] .lightingIconContainer-one.expanded {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"][data-lighting-num="2"] .lightingIconContainer-one.expanded,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"][data-lighting-num="2"] .lightingIconContainer-one.expanded {
     top: 1%;
     left: 32%;
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][data-lighting-num="2"] .lightingIconContainer-one.collapsed,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][data-lighting-num="2"] .lightingIconContainer-one.collapsed {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"][data-lighting-num="2"] .lightingIconContainer-one.collapsed,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"][data-lighting-num="2"] .lightingIconContainer-one.collapsed {
     top: 5%;
     left: 36%;
 }
 
-.cardContainer[type="plant"][data-lighting-num="2"] .lightingIconContainer-one > .lightingIcon-one {
+.cardContainer[cardtype="plant"][data-lighting-num="2"] .lightingIconContainer-one > .lightingIcon-one {
     width: 68%;
     transform:scale(1);
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][data-lighting-num="2"] .lightingIconContainer-one > .lightingIcon-one.expanded,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][data-lighting-num="2"] .lightingIconContainer-one > .lightingIcon-one.expanded {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"][data-lighting-num="2"] .lightingIconContainer-one > .lightingIcon-one.expanded,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"][data-lighting-num="2"] .lightingIconContainer-one > .lightingIcon-one.expanded {
     transform:scale(1);
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][data-lighting-num="2"] .lightingIconContainer-one > .lightingIcon-one.collapsed,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][data-lighting-num="2"] .lightingIconContainer-one > .lightingIcon-one.collapsed {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"][data-lighting-num="2"] .lightingIconContainer-one > .lightingIcon-one.collapsed,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"][data-lighting-num="2"] .lightingIconContainer-one > .lightingIcon-one.collapsed {
     transform:scale(1.3);
 }
 
-.cardContainer[type="plant"][data-lighting-num="2"] .lightingIconContainer-two {
+.cardContainer[cardtype="plant"][data-lighting-num="2"] .lightingIconContainer-two {
     top: 1%;
     left: 47%;
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][data-lighting-num="2"] .lightingIconContainer-two.expanded,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][data-lighting-num="2"] .lightingIconContainer-two.expanded {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"][data-lighting-num="2"] .lightingIconContainer-two.expanded,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"][data-lighting-num="2"] .lightingIconContainer-two.expanded {
     top: 1%;
     left: 47%;
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][data-lighting-num="2"] .lightingIconContainer-two.collapsed,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][data-lighting-num="2"] .lightingIconContainer-two.collapsed {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"][data-lighting-num="2"] .lightingIconContainer-two.collapsed,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"][data-lighting-num="2"] .lightingIconContainer-two.collapsed {
     top: 19%;
     left: 36%;
 }
 
-.cardContainer[type="plant"][data-lighting-num="2"] .lightingIconContainer-two > .lightingIcon-two {
+.cardContainer[cardtype="plant"][data-lighting-num="2"] .lightingIconContainer-two > .lightingIcon-two {
     width: 68%;
     transform:scale(1);
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][data-lighting-num="2"] .lightingIconContainer-two > .lightingIcon-two.expanded,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][data-lighting-num="2"] .lightingIconContainer-two > .lightingIcon-two.expanded {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"][data-lighting-num="2"] .lightingIconContainer-two > .lightingIcon-two.expanded,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"][data-lighting-num="2"] .lightingIconContainer-two > .lightingIcon-two.expanded {
     transform:scale(1);
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][data-lighting-num="2"] .lightingIconContainer-two > .lightingIcon-two.collapsed,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][data-lighting-num="2"] .lightingIconContainer-two > .lightingIcon-two.collapsed {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"][data-lighting-num="2"] .lightingIconContainer-two > .lightingIcon-two.collapsed,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"][data-lighting-num="2"] .lightingIconContainer-two > .lightingIcon-two.collapsed {
     transform:scale(1.3);
 }
 
 /* 3x Lighting */
-.cardContainer[type="plant"][data-lighting-num="3"] .lightingIconContainer-one {
+.cardContainer[cardtype="plant"][data-lighting-num="3"] .lightingIconContainer-one {
     top: 1%;
     left: 24%;
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][data-lighting-num="3"] .lightingIconContainer-one.expanded,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][data-lighting-num="3"] .lightingIconContainer-one.expanded {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"][data-lighting-num="3"] .lightingIconContainer-one.expanded,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"][data-lighting-num="3"] .lightingIconContainer-one.expanded {
     top: 1%;
     left: 24%;
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][data-lighting-num="3"] .lightingIconContainer-one.collapsed,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][data-lighting-num="3"] .lightingIconContainer-one.collapsed {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"][data-lighting-num="3"] .lightingIconContainer-one.collapsed,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"][data-lighting-num="3"] .lightingIconContainer-one.collapsed {
     top: 1%;
     left: 36%;
 }
 
-.cardContainer[type="plant"][data-lighting-num="3"] .lightingIconContainer-one > .lightingIcon-one {
+.cardContainer[cardtype="plant"][data-lighting-num="3"] .lightingIconContainer-one > .lightingIcon-one {
     width: 68%;
     transform:scale(1);
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][data-lighting-num="3"] .lightingIconContainer-one > .lightingIcon-one.expanded,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][data-lighting-num="3"] .lightingIconContainer-one > .lightingIcon-one.expanded {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"][data-lighting-num="3"] .lightingIconContainer-one > .lightingIcon-one.expanded,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"][data-lighting-num="3"] .lightingIconContainer-one > .lightingIcon-one.expanded {
     transform:scale(1);
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][data-lighting-num="3"] .lightingIconContainer-one > .lightingIcon-one.collapsed,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][data-lighting-num="3"] .lightingIconContainer-one > .lightingIcon-one.collapsed {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"][data-lighting-num="3"] .lightingIconContainer-one > .lightingIcon-one.collapsed,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"][data-lighting-num="3"] .lightingIconContainer-one > .lightingIcon-one.collapsed {
     transform:scale(1.3);
 }
 
-.cardContainer[type="plant"][data-lighting-num="3"] .lightingIconContainer-two {
+.cardContainer[cardtype="plant"][data-lighting-num="3"] .lightingIconContainer-two {
     top: 1%;
     left: 39%;
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][data-lighting-num="3"] .lightingIconContainer-two.expanded,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][data-lighting-num="3"] .lightingIconContainer-two.expanded {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"][data-lighting-num="3"] .lightingIconContainer-two.expanded,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"][data-lighting-num="3"] .lightingIconContainer-two.expanded {
     top: 1%;
     left: 39%;
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][data-lighting-num="3"] .lightingIconContainer-two.collapsed,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][data-lighting-num="3"] .lightingIconContainer-two.collapsed {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"][data-lighting-num="3"] .lightingIconContainer-two.collapsed,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"][data-lighting-num="3"] .lightingIconContainer-two.collapsed {
     top: 14%;
     left: 36%;
 }
 
-.cardContainer[type="plant"][data-lighting-num="3"] .lightingIconContainer-two > .lightingIcon-two {
+.cardContainer[cardtype="plant"][data-lighting-num="3"] .lightingIconContainer-two > .lightingIcon-two {
     width: 68%;
     transform:scale(1);
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][data-lighting-num="3"] .lightingIconContainer-two > .lightingIcon-two.expanded,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][data-lighting-num="3"] .lightingIconContainer-two > .lightingIcon-two.expanded {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"][data-lighting-num="3"] .lightingIconContainer-two > .lightingIcon-two.expanded,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"][data-lighting-num="3"] .lightingIconContainer-two > .lightingIcon-two.expanded {
     transform:scale(1);
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][data-lighting-num="3"] .lightingIconContainer-two > .lightingIcon-two.collapsed,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][data-lighting-num="3"] .lightingIconContainer-two > .lightingIcon-two.collapsed {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"][data-lighting-num="3"] .lightingIconContainer-two > .lightingIcon-two.collapsed,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"][data-lighting-num="3"] .lightingIconContainer-two > .lightingIcon-two.collapsed {
     transform:scale(1.3);
 }
 
-.cardContainer[type="plant"][data-lighting-num="3"] .lightingIconContainer-three {
+.cardContainer[cardtype="plant"][data-lighting-num="3"] .lightingIconContainer-three {
     top: 1%;
     left: 54%;
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][data-lighting-num="3"] .lightingIconContainer-three.expanded,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][data-lighting-num="3"] .lightingIconContainer-three.expanded {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"][data-lighting-num="3"] .lightingIconContainer-three.expanded,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"][data-lighting-num="3"] .lightingIconContainer-three.expanded {
     top: 1%;
     left: 54%;
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][data-lighting-num="3"] .lightingIconContainer-three.collapsed,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][data-lighting-num="3"] .lightingIconContainer-three.collapsed {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"][data-lighting-num="3"] .lightingIconContainer-three.collapsed,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"][data-lighting-num="3"] .lightingIconContainer-three.collapsed {
     top: 26%;
     left: 36%;
 }
 
-.cardContainer[type="plant"][data-lighting-num="3"] .lightingIconContainer-three > .lightingIcon-three {
+.cardContainer[cardtype="plant"][data-lighting-num="3"] .lightingIconContainer-three > .lightingIcon-three {
     width: 68%;
     transform:scale(1);
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][data-lighting-num="3"] .lightingIconContainer-three > .lightingIcon-three.expanded,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][data-lighting-num="3"] .lightingIconContainer-three > .lightingIcon-three.expanded {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"][data-lighting-num="3"] .lightingIconContainer-three > .lightingIcon-three.expanded,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"][data-lighting-num="3"] .lightingIconContainer-three > .lightingIcon-three.expanded {
     transform:scale(1);
 }
 
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][data-lighting-num="3"] .lightingIconContainer-three > .lightingIcon-three.collapsed,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"][data-lighting-num="3"] .lightingIconContainer-three > .lightingIcon-three.collapsed {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"][data-lighting-num="3"] .lightingIconContainer-three > .lightingIcon-three.collapsed,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"][data-lighting-num="3"] .lightingIconContainer-three > .lightingIcon-three.collapsed {
     transform:scale(1.3);
 }
 
-
-.cardContainer .lightingIconContainer > .lightingIcon.matchedLighting,
-.cardContainer .verdancyIconsAndVPLayer > .verdancyLightingIcon.matchedLighting {
-    transition: all .5s ease-in-out!important;
+.cardContainer[cardtype="room"] .lightingIconContainer > .lightingIcon.matchedLighting,
+.cardContainer[cardtype="plant"] .verdancyIconsAndVPLayer > .verdancyLightingIcon.matchedLighting {
+    transition: all .5s ease-in-out;
     background-color: #e9ff00;
     border-radius: 50%;
     transform: scale(1);
@@ -1532,7 +2442,7 @@ p {
 
 .cardContainer .lightingIconContainer > .lightingIcon.matchedLighting.matchedLightingAnimation,
 .cardContainer .verdancyIconsAndVPLayer > .verdancyLightingIcon.matchedLighting.matchedLightingAnimation {
-    transform: scale(1.4);
+    transform: scale(1.4)!important;
 }
 
 .verdancyIconsAndVPLayer {
@@ -1557,59 +2467,59 @@ p {
     opacity: 1;
 }
 
-.cardContainer[type="plant"] .verdancyIconsAndVPLayer .verdancyLayerImg {
+.cardContainer[cardtype="plant"] .verdancyIconsAndVPLayer .verdancyLayerImg {
     position: absolute;
 }
 
-.cardContainer[type="plant"] .verdancyIconsAndVPLayer .verdancyLayerBadge {
+.cardContainer[cardtype="plant"] .verdancyIconsAndVPLayer .verdancyLayerBadge {
     width: 32%;
     left: 14%;
     top: 1%;
 }
 
-.cardContainer[type="plant"] .verdancyIconsAndVPLayer .vpReminderIcon {
+.cardContainer[cardtype="plant"] .verdancyIconsAndVPLayer .vpReminderIcon {
     width: 33%;
     top: 1%;
     left: 53%;
 }
 
-.cardContainer[type="plant"] .verdancyIconsAndVPLayer .verdancyLightingIcon {
+.cardContainer[cardtype="plant"] .verdancyIconsAndVPLayer .verdancyLightingIcon {
     /* transition: all .7s ease-in-out; */
     position: absolute;
     width: 21%;
 }
 
-.cardContainer[type="plant"][data-lighting-num="1"] .verdancyIconsAndVPLayer .verdancyLightingIcon-one {
+.cardContainer[cardtype="plant"][data-lighting-num="1"] .verdancyIconsAndVPLayer .verdancyLightingIcon-one {
     top: 22.5%;
     left: 39.2%;
 }
 
-.cardContainer[type="plant"][data-lighting-num="2"] .verdancyIconsAndVPLayer .verdancyLightingIcon-one {
+.cardContainer[cardtype="plant"][data-lighting-num="2"] .verdancyIconsAndVPLayer .verdancyLightingIcon-one {
     top: 22.5%;
     left: 26.2%;
 }
 
-.cardContainer[type="plant"][data-lighting-num="2"] .verdancyIconsAndVPLayer .verdancyLightingIcon-two {
+.cardContainer[cardtype="plant"][data-lighting-num="2"] .verdancyIconsAndVPLayer .verdancyLightingIcon-two {
     top: 22.5%;
     left: 52.2%;
 }
 
-.cardContainer[type="plant"][data-lighting-num="3"] .verdancyIconsAndVPLayer .verdancyLightingIcon-one {
+.cardContainer[cardtype="plant"][data-lighting-num="3"] .verdancyIconsAndVPLayer .verdancyLightingIcon-one {
     top: 22.5%;
     left: 11.2%;
 }
 
-.cardContainer[type="plant"][data-lighting-num="3"] .verdancyIconsAndVPLayer .verdancyLightingIcon-two {
+.cardContainer[cardtype="plant"][data-lighting-num="3"] .verdancyIconsAndVPLayer .verdancyLightingIcon-two {
     top: 22.5%;
     left: 39.2%;
 }
 
-.cardContainer[type="plant"][data-lighting-num="3"] .verdancyIconsAndVPLayer .verdancyLightingIcon-three {
+.cardContainer[cardtype="plant"][data-lighting-num="3"] .verdancyIconsAndVPLayer .verdancyLightingIcon-three {
     top: 22.5%;
     left: 66.7%;
 }
 
-.cardContainer[type="plant"] .verdancyIconsAndVPLayer .verdancyIconsParentContainer {
+.cardContainer[cardtype="plant"] .verdancyIconsAndVPLayer .verdancyIconsParentContainer {
     width: 105%;
     height: 62%;
     position: absolute;
@@ -1617,20 +2527,20 @@ p {
     left: 0%;
 }
 
-.cardContainer[type="plant"] .verdancyIconsAndVPLayer .verdancyIconsParentContainer .verdancyIconContainer {
+.cardContainer[cardtype="plant"] .verdancyIconsAndVPLayer .verdancyIconsParentContainer .verdancyIconContainer {
     width: 23.6%;
     height: 34%;
     float: left;
     margin: 0% 0% 0% 6.5%;
 }
 
-.cardContainer[type="plant"] .verdancyIconsAndVPLayer .verdancyIconsParentContainer .verdancyIconContainer .verdancyIconPosContainer {
+.cardContainer[cardtype="plant"] .verdancyIconsAndVPLayer .verdancyIconsParentContainer .verdancyIconContainer .verdancyIconPosContainer {
     width: 100%;
     height: 100%;
     position: relative;
 }
 
-.cardContainer[type="plant"] .verdancyIconsAndVPLayer .verdancyIconsParentContainer .verdancyIconContainer .verdancyIcon {
+.cardContainer[cardtype="plant"] .verdancyIconsAndVPLayer .verdancyIconsParentContainer .verdancyIconContainer .verdancyIcon {
     transition: opacity .3s ease-in-out;
     opacity: 0;
     position:absolute;
@@ -1638,18 +2548,18 @@ p {
     left:0vw;
 }
 
-.cardContainer[type="plant"] .verdancyIconsAndVPLayer .verdancyIconsParentContainer .verdancyIconContainer.incompleteVerdancy .verdancyIcon.incompleteVerdancyIcon,
-.cardContainer[type="plant"] .verdancyIconsAndVPLayer .verdancyIconsParentContainer .verdancyIconContainer.completeVerdancy .verdancyIcon.completeVerdancyIcon {
+.cardContainer[cardtype="plant"] .verdancyIconsAndVPLayer .verdancyIconsParentContainer .verdancyIconContainer.incompleteVerdancy .verdancyIcon.incompleteVerdancyIcon,
+.cardContainer[cardtype="plant"] .verdancyIconsAndVPLayer .verdancyIconsParentContainer .verdancyIconContainer.completeVerdancy .verdancyIcon.completeVerdancyIcon {
     opacity: 1;
 }
 
-.cardContainer[type="plant"] .verdancyIconsAndVPLayer[verdancy-icons="4"] .verdancyIconsParentContainer .verdancyIconContainer:last-child,
-.cardContainer[type="plant"] .verdancyIconsAndVPLayer[verdancy-icons="7"] .verdancyIconsParentContainer .verdancyIconContainer:last-child {
+.cardContainer[cardtype="plant"] .verdancyIconsAndVPLayer[verdancy-icons="4"] .verdancyIconsParentContainer .verdancyIconContainer:last-child,
+.cardContainer[cardtype="plant"] .verdancyIconsAndVPLayer[verdancy-icons="7"] .verdancyIconsParentContainer .verdancyIconContainer:last-child {
     margin: 0% 0% 1% 36%;
 }
 
-.cardContainer[type="plant"] .verdancyIconsAndVPLayer[verdancy-icons="5"] .verdancyIconsParentContainer .verdancyIconContainer:nth-child(4),
-.cardContainer[type="plant"] .verdancyIconsAndVPLayer[verdancy-icons="8"] .verdancyIconsParentContainer .verdancyIconContainer:nth-child(7) {
+.cardContainer[cardtype="plant"] .verdancyIconsAndVPLayer[verdancy-icons="5"] .verdancyIconsParentContainer .verdancyIconContainer:nth-child(4),
+.cardContainer[cardtype="plant"] .verdancyIconsAndVPLayer[verdancy-icons="8"] .verdancyIconsParentContainer .verdancyIconContainer:nth-child(7) {
     margin: 0% 0% 1% 22%;
 }
 
@@ -1672,7 +2582,7 @@ p {
 
 
 #marketSection .marketColumn .cardsAndItemContainer .flip-card.flip-back.flip-room {
-    top: 235px;
+    top: 239px;
     left: 0px;
 }
 
@@ -1682,7 +2592,7 @@ p {
 }
 
 #container.tabletView #marketSection .marketColumn .cardsAndItemContainer .flip-card.flip-back.flip-room.expanded {
-    top: 235px;
+    top: 239px;
 }
 
 #container.desktopView #marketSection .marketColumn .cardsAndItemContainer .flip-card.flip-back.flip-room.expanded.startingPosAnimate,
@@ -1692,26 +2602,78 @@ p {
 
 #container.desktopView #marketSection .marketColumn .cardsAndItemContainer .flip-card.flip-back.flip-room.expanded.startingPosAnimate,
 #container.tabletView #marketSection .marketColumn .cardsAndItemContainer .flip-card.flip-back.flip-room.expanded.startingPosAnimate {
-    top: 235px;
+    top: 239px;
     left: 0px;
 }
 
 #container.desktopView #marketSection .marketColumn .cardsAndItemContainer .flip-card.flip-back.flip-room.expanded.startingPosAnimate.startingPos,
 #container.tabletView #marketSection .marketColumn .cardsAndItemContainer .flip-card.flip-back.flip-room.expanded.startingPosAnimate.startingPos {
-    top: 235px;
+    top: 239px;
     left: -500px;
 }
 
-/* #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="room"].collapsed {
+/* #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="room"].collapsed {
     height: 70px;
 } */
 
-.cardContainer[type="room"] .room,
+.cardContainer[cardtype="room"] .room,
 .flip-room .roomBack {
     top: 0px;
     left: 0px;
     height: 100%;
     position: absolute;
+}
+
+
+.cardContainer[cardtype="room"] .roomCardItemContainer {
+    width: 44%;
+    height: 28%;
+    position: absolute;
+    top: 36%;
+    left: 28%;
+    border-radius: 11%;
+}
+
+#tableauSection #mapContainer #mapHiddenOverlay .mapTileContainer.potentialPlacement {
+    background-color: transparent;
+    box-shadow: 0px 0px 8px transparent;
+    border-radius: 6px;
+}
+
+#tableauSection #mapContainer #mapHiddenOverlay .mapTileContainer.potentialPlacement.activePotentialPlacement {
+    background-color: #00ff244a;
+    box-shadow: 0px 0px 8px #424242;
+    cursor: hand;
+    cursor: pointer;
+}
+
+#tableauSection #mapContainer #mapHiddenOverlay .mapTileContainer.potentialPlacement.activePotentialPlacement.cardPlacementPreview {
+    background-color: #f7efda;
+}
+
+#tableauSection #mapContainer #mapHiddenOverlay .mapTileContainer.potentialPlacement.activePotentialPlacement .cardContainer {
+    opacity: .5;
+}
+
+
+#tableauSection #mapContainer #mapHiddenOverlay .mapTileContainer.potentialItemPlacement[cardtype="room"] {
+    background-color: transparent;
+    box-shadow: 0px 0px 8px transparent;
+    border-radius: 6px;
+}
+
+#tableauSection #mapContainer #mapHiddenOverlay .mapTileContainer.potentialItemPlacement.activePotentialItemPlacement:not(.temporaryItemPlacement)[cardtype="room"] {
+    cursor: pointer;
+    cursor: hand;
+}
+
+#tableauSection #mapContainer #mapHiddenOverlay .mapTileContainer.potentialItemPlacement.activePotentialItemPlacement[cardtype="room"] .roomCardItemContainer {
+    background-color: #ffffff96;
+    box-shadow: 0px 0px 0px 3px #e1ff00!important;
+}
+
+#tableauSection #mapContainer #mapHiddenOverlay .mapTileContainer.potentialItemPlacement.activePotentialItemPlacement:not(.temporaryItemPlacement)[cardtype="room"] .roomCardItemContainer .itemToken {
+    opacity: .5;
 }
 
 
@@ -1731,19 +2693,19 @@ p {
 *Static Styles*                                                                                                    
 */
 
-.cardContainer[type="room"] .lightingIconContainer {
+.cardContainer[cardtype="room"] .lightingIconContainer {
     position: absolute;
     background-color: #f7efda;
 }
 
-#container.mobileView .cardContainer[type="room"] .lightingIconContainer {
+#container.mobileView .cardContainer[cardtype="room"] .lightingIconContainer {
     padding: 0vw .6vw .6vw .6vw!important;
     width: 5vw!important;
     height: 5vw!important;
 }
 
 /* Top  */
-.cardContainer[type="room"] .lightingIconContainer-top {
+.cardContainer[cardtype="room"] .lightingIconContainer-top {
     width: 25%;
     height: 15%;
     top: -1%;
@@ -1754,21 +2716,21 @@ p {
 }
 
 /* Top  */
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer-top.expanded,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer-top.expanded {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="room"] .lightingIconContainer-top.expanded,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="room"] .lightingIconContainer-top.expanded {
     top: -1%;
     left: 38.7%;
 }
 
 /* Top Lighting Container */
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer-top.collapsed,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer-top.collapsed {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="room"] .lightingIconContainer-top.collapsed,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="room"] .lightingIconContainer-top.collapsed {
     top: 0%;
     left: 38%;
 }
 
 /* Right */
-.cardContainer[type="room"] .lightingIconContainer-right {
+.cardContainer[cardtype="room"] .lightingIconContainer-right {
     width: 20.7%;
     height: 13.4%;
     top: 43.8%;
@@ -1778,24 +2740,24 @@ p {
     border-bottom-left-radius: 50%;
 }
 
-#container.mobileView .cardContainer[type="room"] .lightingIconContainer-right {
+#container.mobileView .cardContainer[cardtype="room"] .lightingIconContainer-right {
     left: 80%;
 }
 
 /* Right */
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer-right.expanded,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer-right.expanded {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="room"] .lightingIconContainer-right.expanded,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="room"] .lightingIconContainer-right.expanded {
     top: 43.8%;
 }
 
 /* Right Lighting Container */
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer-right.collapsed,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer-right.collapsed {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="room"] .lightingIconContainer-right.collapsed,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="room"] .lightingIconContainer-right.collapsed {
     top: 15%;
 }
 
 /* Bottom */
-.cardContainer[type="room"] .lightingIconContainer-bottom {
+.cardContainer[cardtype="room"] .lightingIconContainer-bottom {
     width: 25%;
     height: 13%;
     padding: 2% 3% 0% 3%;
@@ -1806,19 +2768,19 @@ p {
 }
 
 /* Bottom */
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer-bottom.expanded,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer-bottom.expanded {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="room"] .lightingIconContainer-bottom.expanded,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="room"] .lightingIconContainer-bottom.expanded {
     bottom: 0%;
 }
 
 /* Bottom Lighting Container */
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer-bottom.collapsed,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer-bottom.collapsed {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="room"] .lightingIconContainer-bottom.collapsed,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="room"] .lightingIconContainer-bottom.collapsed {
     bottom: 61%;
 }
 
 /* Left */
-.cardContainer[type="room"] .lightingIconContainer-left {
+.cardContainer[cardtype="room"] .lightingIconContainer-left {
     width: 20.5%;
     height: 14%;
     padding: 1% 2.2% 0% 0%;
@@ -1829,14 +2791,14 @@ p {
 }
 
 /* Left */
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer-left.expanded,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer-left.expanded {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="room"] .lightingIconContainer-left.expanded,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="room"] .lightingIconContainer-left.expanded {
     top: 43%;
 }
 
 /* Left Lighting Container */
-#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer-left.collapsed,
-#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .lightingIconContainer-left.collapsed {
+#container.tabletView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="room"] .lightingIconContainer-left.collapsed,
+#container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="room"] .lightingIconContainer-left.collapsed {
     top: 15%;
 }
 
@@ -1855,36 +2817,39 @@ p {
       /____/                         
 */
 
-.cardContainer[type="room"] .lightingIconContainer .lightingIcon {
+.cardContainer[cardtype="room"] .lightingIconContainer .lightingIcon {
     width: 100%;
+    background-color: transparent;
+    border-radius: 50%;
+    transform: scale(1);
 }
 
-#container.mobileView .cardContainer[type="room"] .lightingIconContainer .lightingIcon {
+#container.mobileView .cardContainer[cardtype="room"] .lightingIconContainer .lightingIcon {
     margin: 0px!important;
 }
 
-.cardContainer[type="room"] .lightingIconContainer-top .lightingIcon {
+.cardContainer[cardtype="room"] .lightingIconContainer-top .lightingIcon {
     margin-top: 14%;
     margin-right: 0%;
     margin-bottom: 0%;
     margin-left: 0%;
 }
 
-.cardContainer[type="room"] .lightingIconContainer-right .lightingIcon {
+.cardContainer[cardtype="room"] .lightingIconContainer-right .lightingIcon {
     margin-top: 1%;
     margin-right: 0%;
     margin-bottom: 0%;
     margin-left: 0%;
 }
 
-.cardContainer[type="room"] .lightingIconContainer-bottom .lightingIcon {
+.cardContainer[cardtype="room"] .lightingIconContainer-bottom .lightingIcon {
     margin-top: 0%;
     margin-right: 0%;
     margin-bottom: 0%;
     margin-left: 0%;
 }
 
-.cardContainer[type="room"] .lightingIconContainer-left .lightingIcon {
+.cardContainer[cardtype="room"] .lightingIconContainer-left .lightingIcon {
     margin-top: 5%;
     margin-right: 0%;
     margin-bottom: 0%;
@@ -1984,8 +2949,8 @@ p {
     margin: 0 auto;
     position: relative;
     width: 100%;
-    height: 481px;
-    top: 60px;
+    height: 543px;
+    top: 66px;
 }
 
 #container.tabletView #tableauSection #homeContentContainer {
@@ -2009,28 +2974,56 @@ p {
 }
 
 #container.desktopView #tableauSection #playerInfoContainer {
-    width: 129px;
-    height: 480px;
-    margin-left: 5px;
+    width: 139px;
+    height: 533px;
+    margin-left: 0px;
 }
 
-#container.tabletView #tableauSection #playerInfoContainer,
+#tableauSection #playerInfoContainer .tableauItemTitle {
+    width: 69px;
+    font-size: 15px;
+    line-height: 19px;
+    text-align: left;
+    font-style: italic;
+    font-weight: bold;
+    color: #3aa572;
+    opacity: 1;
+    position: absolute;
+    left: 16px;
+    z-index: 2;
+}
+
+#tableauSection #playerInfoContainer .tableauItemTitle span {
+    font-size: 25px;
+    line-height: 4px;
+}
+
+#tableauSection #playerInfoContainer #chosenItemTitle.tableauItemTitle {
+    top: 301px;
+}
+
+#tableauSection #playerInfoContainer #storedItemTitle.tableauItemTitle {
+    top: 477px;
+}
+
+
+/* #container.tabletView #tableauSection #playerInfoContainer,
 #container.mobileView #tableauSection #playerInfoContainer {
     width: 135px;
     height: 480px;
 }
 
-
 #tableauSection #playerInfoContainer .playerInfoTitle {
     font-style: italic;
     font-weight: bold;
     position: absolute;
-    top: 26%;
+    left: 2%;
+    top: 27%;
     z-index: 2;
     color: #3aa5729e;
-    font-size: 16px;
-    width: 100%;
-    line-height: 20px;
+    font-size: 14px;
+    width: 96%;
+    line-height: 15px;
     opacity: 1;
 }
 
@@ -2049,7 +3042,7 @@ p {
 #container.tabletView #tableauSection #playerInfoContainer .playerInfoTitle.collapsed,
 #container.mobileView #tableauSection #playerInfoContainer .playerInfoTitle.collapsed {
     opacity: 0;
-}
+} */
 
 /* 
    ______                  __   ______     
@@ -2069,11 +3062,27 @@ p {
     position: absolute;
     width: 105px;
     height: 173px;
-    top: 0px;
+    top: 105px;
+}
+
+#tableauSection #playerInfoContainer #cardToPlace .cardToPlaceTitle {
+    width: 69px;
+    color: #3aa572c7;
+    font-size: 16px;
+    line-height: 19px;
+    font-style: italic;
+    font-weight: bold;
+    text-align: left;
+    position: absolute;
+    top: 22px;
+    left: 17px;
+    z-index: 2;
+    opacity: 1;
+    transform-origin: left top;
 }
 
 #container.desktopView  #tableauSection #playerInfoContainer #cardToPlace {
-    left: 10px;
+    left: 19px;
 }
 
 #container.mobileView #tableauSection #playerInfoContainer #cardToPlace {
@@ -2103,7 +3112,7 @@ p {
 }
 
 #container.tabletView #tableauSection #playerInfoContainer #cardToPlace .flip-plant.expanded {
-    top: 31px;
+    top: 3px;
     left: 0px;
 }
 
@@ -2150,64 +3159,74 @@ p {
 *Static Styles*
 */
 
-#tableauSection #playerInfoContainer .itemContainer {
-    width: 81px;
-    height: 80px;
+#tableauSection #playerInfoContainer .itemContainerParent {
+    width: 55px;
+    height: 55px;
     position: absolute;
-    left: 13px;
-    overflow: hidden;
+    overflow: visible;
 }
 
-#container.tabletView #tableauSection #playerInfoContainer .itemContainer {
+#tableauSection #playerInfoContainer .itemContainerParent .itemContainer {
+    width: 46px;
+    height: 46px;
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    transform: scale(1);
+    transform-origin: left top;
+    z-index: 9;
+}
+
+#container.tabletView #tableauSection #playerInfoContainer .itemContainerParent {
     width: 71px;
     height: 70px;
 }
 
 /* CHOSEN ITEM CONTAINER */
 
-#tableauSection #playerInfoContainer #chosenItemContainer.itemContainer {
-    top: 192px;
-    left: 22px;
+#tableauSection #playerInfoContainer #chosenItemParentContainer.itemContainerParent {
+    top: 296px;
+    left: 78px;
 }
 
-#container.tabletView #tableauSection #playerInfoContainer #chosenItemContainer.itemContainer {
-    top: 192px;
-    left: 28px;
+#container.tabletView #tableauSection #playerInfoContainer #chosenItemParentContainer.itemContainerParent {
+    top: 296px;
+    left: 78px;
 }
 
-#container.tabletView #tableauSection #playerInfoContainer #chosenItemContainer.itemContainer.expanded {
-    top: 192px;
-    left: 28px;
+#container.tabletView #tableauSection #playerInfoContainer #chosenItemParentContainer.itemContainerParent.expanded {
+    top: 296px;
+    left: 78px;
 }
 
-#container.tabletView #tableauSection #playerInfoContainer #chosenItemContainer.itemContainer.collapsed {
-    top: 190px;
-    left: 33px;
+#container.tabletView #tableauSection #playerInfoContainer #chosenItemParentContainer.itemContainerParent.collapsed {
+    top: 296px;
+    left: 78px;
 }
 
 /* STORED ITEM CONTAINER */
 
-#tableauSection #playerInfoContainer #storedItemContainer.itemContainer {
-    top: 360px;
-    left: 22px;
+#tableauSection #playerInfoContainer #storedItemParentContainer.itemContainerParent {
+    top: 471px;
+    left: 78px;
 }
 
-#container.tabletView #tableauSection #playerInfoContainer #storedItemContainer.itemContainer {
-    top: 340px;
-    left: 28px;
+#container.tabletView #tableauSection #playerInfoContainer #storedItemParentContainer.itemContainerParent {
+    top: 471px;
+    left: 78px;
 }
 
-#container.tabletView #tableauSection #playerInfoContainer #storedItemContainer.itemContainer.expanded {
-    top: 340px;
-    left: 28px;
+#container.tabletView #tableauSection #playerInfoContainer #storedItemParentContainer.itemContainerParent.expanded {
+    top: 471px;
+    left: 78px;
 }
 
-#container.tabletView #tableauSection #playerInfoContainer #storedItemContainer.itemContainer.collapsed {
-    top: 263px;
-    left: 33px;
+#container.tabletView #tableauSection #playerInfoContainer #storedItemParentContainer.itemContainerParent.collapsed {
+    top: 471px;
+    left: 78px;
 }
 
-#tableauSection #playerInfoContainer .itemContainer .itemBackground {
+#tableauSection #playerInfoContainer .itemContainerParent .itemBackground {
     width: 75%;
     display: block;
     position: absolute;
@@ -2217,20 +3236,37 @@ p {
     transform-origin: left top;
 }
 
-#container.tabletView #tableauSection #playerInfoContainer .itemContainer .itemBackground,
-#container.mobileView #tableauSection #playerInfoContainer .itemContainer .itemBackground {
+#container.tabletView #tableauSection #playerInfoContainer .itemContainerParent .itemBackground,
+#container.mobileView #tableauSection #playerInfoContainer .itemContainerParent .itemBackground {
     width: 78%;
 }
 
-#container.tabletView #tableauSection #playerInfoContainer .itemContainer .itemBackground.expanded,
-#container.mobileView #tableauSection #playerInfoContainer .itemContainer .itemBackground.expanded {
+#container.tabletView #tableauSection #playerInfoContainer .itemContainerParent .itemBackground.expanded,
+#container.mobileView #tableauSection #playerInfoContainer .itemContainerParent .itemBackground.expanded {
     transform: scale(1.3);
 }
 
-#container.tabletView #tableauSection #playerInfoContainer .itemContainer .itemBackground.collapsed,
-#container.mobileView #tableauSection #playerInfoContainer .itemContainer .itemBackground.collapsed {
+#container.tabletView #tableauSection #playerInfoContainer .itemContainerParent .itemBackground.collapsed,
+#container.mobileView #tableauSection #playerInfoContainer .itemContainerParent .itemBackground.collapsed {
     transform: scale(1.1);
 }
+
+
+#container.tabletView #tableauSection #playerInfoContainer .itemContainerParent .itemContainer,
+#container.mobileView #tableauSection #playerInfoContainer .itemContainerParent .itemContainer {
+    width: 46px;
+    height: 46px;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    transform: scale(1.18);
+    transform-origin: left top;
+}
+
+/* #container.tabletView #tableauSection #playerInfoContainer .itemContainerParent .itemContainer .itemToken,
+#container.mobileView #tableauSection #playerInfoContainer .itemContainerParent .itemContainer .itemToken {
+    transform: scale(1.5);
+} */
 
 #tableauSection #playerInfoContainer .storageIcon {
     transform-origin: left top;
@@ -2241,9 +3277,9 @@ p {
 }
 
 #container.desktopView #tableauSection #playerInfoContainer .storageIcon {
-    top: 421px;
-    left: 80px;
-    font-size: 27px;
+    top: 497px;
+    left: 86px;
+    font-size: 29px;
 }
 
 #container.tabletView #tableauSection #playerInfoContainer .storageIcon {
@@ -2304,16 +3340,38 @@ p {
  */
 
 
-#tableauSection #playerInfoContainer #swapItemsBtnContainer {
+ #tableauSection #playerInfoContainer #swapItemsBtnContainer {
     position: absolute;
-    width: 45px;
-    height: 58px;
-    top: 288px;
-    left: 41px;
+    width: 103px;
+    height: 96px;
+    top: 364px;
+    left: 23px;
     overflow: hidden;
     opacity: 1;
 }
 
+#tableauSection #playerInfoContainer #swapItemsBtnContainer .button {
+    width: 100px;
+    height: 39px;
+    padding: 0px 0px;
+    font-size: 15px;
+    line-height: 17px;
+    position: absolute;
+    left: 0px;
+}
+
+#tableauSection #playerInfoContainer #swapItemsBtnContainer .button.useItemsBtn {
+    top: 0px;
+}
+
+#tableauSection #playerInfoContainer #swapItemsBtnContainer .button.swapItemsBtn {
+    top: 52px;
+}
+
+
+
+
+/* 
 #container.tabletView #tableauSection #playerInfoContainer #swapItemsBtnContainer {
     top: 275px;
     left: 43px;
@@ -2339,7 +3397,7 @@ p {
     left: 0px;
     height: 93%;
     width: 97%;
-    font-size: 34px;
+    font-size: 26px;
     line-height: 16px;
     padding: 0px 0px;
 }
@@ -2350,7 +3408,7 @@ p {
 
 #tableauSection #playerInfoContainer #swapItemsBtnContainer .swapItemsBtn[disabled] {
     opacity: .9;
-}
+} */
 
 /* 
     __  ___                                             
@@ -2385,8 +3443,8 @@ p {
 
 #container.desktopView #tableauSection #homeContentContainer #mapContainerOuterOverlay {
     width: 504px;
-    height: 470px;
-    right: 16px;
+    height: 529px;
+    right: 9px;
 }
 
 #container.tabletView #tableauSection #homeContentContainer #mapContainerOuterOverlay.expanded,
@@ -2400,7 +3458,7 @@ p {
 
 #tableauSection #homeContentContainer #mapContainerInnerOverlay {
     width: 504px;
-    height: 470px;
+    height: 528px;
     position: absolute;
     top: 0px;
     right: 0px;
@@ -2443,7 +3501,7 @@ p {
 
 #tableauSection #mapContainer {
     width: 504px;
-    height: 470px;
+    height: 525px;
     background-color: #f7f7f752;
     background-image: url(../img/bg2.jpg);
     background-size: cover;
@@ -2486,6 +3544,7 @@ p {
 
 #container.desktopView #tableauSection #mapContainer #mapHiddenOverlay {
     margin-left: -250px;
+    margin-top: -171px;
 }
 
 #tableauSection #mapContainer #mapHiddenOverlay .mapTileContainer {
@@ -2497,16 +3556,13 @@ p {
 }
 
 #tableauSection #mapContainer #mapHiddenOverlay .mapTileContainer,
-#tableauSection #mapContainer #mapHiddenOverlay .mapTileContainer .cardContainer {
+#tableauSection #mapContainer #mapHiddenOverlay .mapTileContainer .cardContainer,
+#tableauSection #mapContainer #mapHiddenOverlay .mapTileContainer .roomCardItemContainer {
     transition: box-shadow .1s ease-in-out background-color .1s ease-in-out;
     box-shadow: 0px 0px 8px transparent;
 }
 
-#tableauSection #mapContainer #mapHiddenOverlay .mapTileContainer.potentialPlacement.temporaryPlacement,
-#tableauSection #mapContainer #mapHiddenOverlay .mapTileContainer.potentialPlacement.temporaryPlacement .cardContainer  {
-    box-shadow: 0px 0px 4px 2px #e1ff00;
-}
-
+#tableauSection #mapContainer #mapHiddenOverlay .mapTileContainer.potentialPlacement,
 #tableauSection #mapContainer #mapHiddenOverlay .mapTileContainer.potentialPlacement {
     background-color: transparent;
     box-shadow: 0px 0px 8px transparent;
@@ -2569,10 +3625,11 @@ p {
 */
 
 
-#tableauSection #mapContainer #placedCardOptions {
+#tableauSection #mapContainer #placedCardOptions,
+#tableauSection #mapContainer #placedItemOptions {
     width: 100%;
-    height: 58px;
-    padding: 3px 0px 0px 68px;
+    height: 62px;
+    padding: 3px 0px 0px 85px;
     position: absolute;
     z-index: 14;
     bottom: 0px;
@@ -2581,30 +3638,36 @@ p {
     transition: all .7s ease-in-out;
 }
 
-#container.tabletView #tableauSection #mapContainer #placedCardOptions {
+#container.tabletView #tableauSection #mapContainer #placedCardOptions,
+#container.tabletView #tableauSection #mapContainer #placedItemOptions {
     height: 55px;
     padding: 0px 0px 0px 9px;
     position: absolute;
 }
 
-#tableauSection #mapContainer #placedCardOptions.expanded {
+#tableauSection #mapContainer #placedCardOptions.expanded,
+#tableauSection #mapContainer #placedItemOptions.expanded {
     bottom: 0px;
 }
 
 #tableauSection #mapContainer #placedCardOptions.collapsed,
-#tableauSection.collapsed #mapContainer.collapsed #placedCardOptions.expanded {
+#tableauSection.collapsed #mapContainer.collapsed #placedCardOptions.expanded   ,
+#tableauSection #mapContainer #placedItemOptions.collapsed,
+#tableauSection.collapsed #mapContainer.collapsed #placedItemOptions.expanded {
     bottom: -62px;
 }
 
-#tableauSection #mapContainer #placedCardOptions .button {
+#tableauSection #mapContainer #placedCardOptions .button,
+#tableauSection #mapContainer #placedItemOptions .button {
     float: left;
-    margin: 5px 15px;
-    font-size: 15px;
-    width: 120px;
+    margin: 7px 25px 0px 3px;
+    font-size: 16px;
+    width: 122px;
     padding: 0px 0px;
 }
 
-#container.tabletView #tableauSection #mapContainer #placedCardOptions .button {
+#container.tabletView #tableauSection #mapContainer #placedCardOptions .button,
+#container.tabletView #tableauSection #mapContainer #placedItemOptions .button {
     margin: 6px 6px 0px;
     font-size: 15px;
     width: 107px;
@@ -2612,10 +3675,12 @@ p {
     padding: 0px 0px;
 }
 
-#tableauSection #mapContainer #placedCardOptions .button .icon ion-icon {
+#tableauSection #mapContainer #placedCardOptions .button .icon ion-icon,
+#tableauSection #mapContainer #placedItemOptions .button .icon ion-icon {
     height: 22px;
     width: 23px;
 }
+
 
 /* 
  _    __                 __                          
@@ -2761,7 +3826,7 @@ p {
     position: absolute;
     top: 5px;
     left: 11px;
-    width: 107px;
+    width: 112px;
     height: 48px;
     z-index: 15;
     opacity: 1;
@@ -2826,24 +3891,24 @@ p {
     cursor:pointer;
 }
 
-/* Zoom Out Icon */
-
-#tableauSection #mapZoomControls .zoomOutIcon {
-    left: 0px;
-}
-
 /* Zoom In Icon */
 
 #tableauSection #mapZoomControls .zoomInIcon {
-    left: 50px;
+    left: 0px;
 }
 
-#container.tabletView #tableauSection #mapZoomControls .zoomInIcon {
-    left: 66px;
+/* Zoom Out Icon */
+
+#tableauSection #mapZoomControls .zoomOutIcon {
+    left: 64px;
 }
 
-#container.desktopView #tableauSection #mapZoomControls .zoomInIcon {
+#container.tabletView #tableauSection #mapZoomControls .zoomOutIcon {
     left: 60px;
+}
+
+#container.desktopView #tableauSection #mapZoomControls .zoomOutIcon {
+    left: 66px;
 }
 
 /* 
@@ -3017,6 +4082,165 @@ p {
 	transform: rotate(180deg) translateX(2px);  
 } 
 
+.pulsate-fwd {
+	-webkit-animation: pulsate-fwd 2s ease-in-out infinite both;
+	        animation: pulsate-fwd 2s ease-in-out infinite both;
+}
+
+/* ----------------------------------------------
+ * Generated by Animista on 2021-9-6 6:17:48
+ * Licensed under FreeBSD License.
+ * See http://animista.net/license for more info. 
+ * w: http://animista.net, t: @cssanimista
+ * ---------------------------------------------- */
+
+/**
+ * ----------------------------------------
+ * animation pulsate-fwd
+ * ----------------------------------------
+ */
+ @-webkit-keyframes pulsate-fwd {
+    0% {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+    }
+    50% {
+      -webkit-transform: scale(1.03);
+              transform: scale(1.03);
+    }
+    100% {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+    }
+  }
+  @keyframes pulsate-fwd {
+    0% {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+    }
+    50% {
+      -webkit-transform: scale(1.03);
+              transform: scale(1.03);
+    }
+    100% {
+      -webkit-transform: scale(1);
+              transform: scale(1);
+    }
+  }
+
+/* Load this as a way of letting the user know where action is required: */
+/* <div class="pulsate-css"></div> */
+
+
+.actionRequiredContainer {
+    position: absolute;
+    height: 55px;
+    width: 55px;
+    z-index: 1;
+}
+
+.mapTileContainer > .actionRequiredContainer,
+.cardContainer > .actionRequiredContainer {
+    top: 54px;
+    left: 26px;
+}
+
+.roomCardItemContainer > .actionRequiredContainer {
+    top: -5px;
+    left: -4px;
+}
+
+.actionRequiredAnimation {
+    -webkit-animation-name: actionRequired; 
+    -webkit-animation-delay: .3s;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-timing-function: ease-out;
+    -webkit-animation-fill-mode: both;
+        animation-name: actionRequired;
+        animation-delay: .3s;
+        animation-duration: 1s;
+        animation-iteration-count: 1;
+        animation-timing-function: ease-out;
+        animation-fill-mode: both;
+    /* animation: actionRequired 1.3s ease-out;
+    animation-iteration-count: infinite; */
+    opacity: 0.0;
+    border: 3px solid #f4ff00;
+    box-shadow: 0px 0px 5px 1px #f4ff00;
+    /* box-shadow: inset 0px 0px 5px 1px #f4ff00; */
+    /* border: 3px solid #1e6817; */
+    border-radius: 30px;
+    height: 55px;
+    width: 55px;
+    display: inline-block;
+    text-align: center;
+}
+  
+  @-webkit-keyframes actionRequired {
+    0% {
+        -webkit-transform: scale(0.1, 0.1);
+        opacity: 0.0;
+    }
+    50% {
+        opacity: 1.0;
+    }
+    100% {
+        -webkit-transform: scale(1.2, 1.2);
+        opacity: 0.0;
+    }
+}
+
+@keyframes actionRequired {
+    0% {
+        -webkit-transform: scale(0.1, 0.1);
+        opacity: 0.0;
+    }
+    50% {
+        opacity: 1.0;
+    }
+    100% {
+        -webkit-transform: scale(1.2, 1.2);
+        opacity: 0.0;
+    }
+}
+
+
+/* ----------------------------------------------
+ * Generated by Animista on 2021-9-7 23:14:27
+ * Licensed under FreeBSD License.
+ * See http://animista.net/license for more info. 
+ * w: http://animista.net, t: @cssanimista
+ * ---------------------------------------------- */
+
+/**
+ * ----------------------------------------
+ * animation color-change-2x
+ * ----------------------------------------
+ */
+
+.color-change-2x {
+	-webkit-animation: color-change-2x 2s linear infinite alternate both;
+	        animation: color-change-2x 2s linear infinite alternate both;
+}
+
+ @-webkit-keyframes color-change-2x {
+    0% {
+      background: #e7ea19;
+    }
+    100% {
+      background: #45ff2c;
+    }
+  }
+  @keyframes color-change-2x {
+    0% {
+      background: #e7ea19;
+    }
+    100% {
+      background: #45ff2c;
+    }
+  }
+
 
 @media screen and (max-width: 539px) {
 
@@ -3087,10 +4311,6 @@ p {
     
     .modal .modal-content .delete.closeModalTrigger.largeCloseCross {
         padding: 3vw!important;
-    }
-    
-    #container.mobileView p {
-        line-height: 4.3vw;
     }
 
     #container.mobileView #mainVerdantTitle {
@@ -3496,10 +4716,10 @@ p {
     */
 
 
-    #container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"],
+    #container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"],
     #container.mobileView #marketSection .marketColumn .cardsAndItemContainer .flip-plant,
     #container.mobileView #marketSection .marketColumn .cardsAndItemContainer .flip-plant .backOfCardContainer,
-    #container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="room"],
+    #container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="room"],
     #container.mobileView #marketSection .marketColumn .cardsAndItemContainer .flip-room,
     #container.mobileView #marketSection .marketColumn .cardsAndItemContainer .flip-room .backOfCardContainer {
         height: 32.1vw;
@@ -3507,8 +4727,8 @@ p {
         transform: scale(1);
     }
 
-    #container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] .cardContainerOverlay.collapsed,
-    #container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .cardContainerOverlay.collapsed {
+    #container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"] .cardContainerOverlay.collapsed,
+    #container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="room"] .cardContainerOverlay.collapsed {
         top: 20vw;
     }
 
@@ -3540,11 +4760,11 @@ p {
         left: -98vw;
     }
 
-    #container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"].collapsed {
+    #container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"].collapsed {
         top: -20vw;
     }
 
-    #container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="plant"] .cardContainerOverlay.collapsed {
+    #container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="plant"] .cardContainerOverlay.collapsed {
         top: 20vw;
     }
 
@@ -3606,15 +4826,15 @@ p {
     *Mobile*
     */
 
-    #container.mobileView #marketSection .marketColumn .cardsAndItemContainer > .cardContainer[type="room"].expanded {
+    #container.mobileView #marketSection .marketColumn .cardsAndItemContainer > .cardContainer[cardtype="room"].expanded {
         top: 45vw;
     }
 
-    #container.mobileView #marketSection .marketColumn .cardsAndItemContainer > .cardContainer[type="room"].collapsed {
+    #container.mobileView #marketSection .marketColumn .cardsAndItemContainer > .cardContainer[cardtype="room"].collapsed {
         top: 4.5vw;
     }
 
-    #container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[type="room"] .cardContainerOverlay.collapsed {
+    #container.mobileView #marketSection .marketColumn .cardsAndItemContainer .cardContainer[cardtype="room"] .cardContainerOverlay.collapsed {
         top: 20vw;
     }
 
@@ -3635,7 +4855,7 @@ p {
         left: -98vw;
     }
 
-    #container.mobileView .cardContainer[type="room"],
+    #container.mobileView .cardContainer[cardtype="room"],
     #container.mobileView .flip-room,
     #container.mobileView .flip-room .backOfCardContainer {
         height: 32.1vw;
@@ -3877,68 +5097,68 @@ p {
         left: 0.5vw;
     }
 
-    #container.mobileView #tableauSection #playerInfoContainer .itemContainer {
+    #container.mobileView #tableauSection #playerInfoContainer .itemContainerParent {
         width: 14.2vw;
         height: 14.7vw;
         z-index: 0;
     }
 
-    /* #container.mobileView #tableauSection #playerInfoContainer .itemContainer.expanded {
+    /* #container.mobileView #tableauSection #playerInfoContainer .itemContainerParent.expanded {
         width: 14.2vw;
         height: 14.7vw;
     }
 
-    #container.mobileView #tableauSection #playerInfoContainer .itemContainer.collapsed {
+    #container.mobileView #tableauSection #playerInfoContainer .itemContainerParent.collapsed {
         width: 14.2vw;
         height: 14.7vw;
     } */
 
-    #container.mobileView #tableauSection #playerInfoContainer #chosenItemContainer.itemContainer,
-    #container.mobileView #tableauSection #playerInfoContainer #chosenItemContainer.itemContainer {
+    #container.mobileView #tableauSection #playerInfoContainer #chosenItemParentContainer.itemContainerParent,
+    #container.mobileView #tableauSection #playerInfoContainer #chosenItemParentContainer.itemContainerParent {
         top: 0.2vw;
         left: 77.3vw;
     }
 
-    #container.mobileView #tableauSection #playerInfoContainer #chosenItemContainer.itemContainer.expanded {
+    #container.mobileView #tableauSection #playerInfoContainer #chosenItemParentContainer.itemContainerParent.expanded {
         top: 0.2vw;
         left: 77.3vw;
     }
     
-    #container.mobileView #tableauSection #playerInfoContainer #chosenItemContainer.itemContainer.collapsed {
+    #container.mobileView #tableauSection #playerInfoContainer #chosenItemParentContainer.itemContainerParent.collapsed {
         top: 0.2vw;
         left: 77.3vw;
     }
 
-    #container.mobileView #tableauSection #playerInfoContainer #storedItemContainer.itemContainer {
+    #container.mobileView #tableauSection #playerInfoContainer #storedItemParentContainer.itemContainerParent {
         top: 24.4vw;
         left: 77.3vw;
     }
     
-    #container.mobileView #tableauSection #playerInfoContainer #storedItemContainer.itemContainer.expanded {
+    #container.mobileView #tableauSection #playerInfoContainer #storedItemParentContainer.itemContainerParent.expanded {
         top: 24.4vw;
         left: 77.3vw;
     }
 
-    #container.mobileView #tableauSection #playerInfoContainer #storedItemContainer.itemContainer.collapsed {
+    #container.mobileView #tableauSection #playerInfoContainer #storedItemParentContainer.itemContainerParent.collapsed {
         top: 24.4vw;
         left: 77.3vw;
     }
 
-    #container.mobileView #tableauSection #playerInfoContainer .itemContainer .itemBackground {
+    #container.mobileView #tableauSection #playerInfoContainer .itemContainerParent .itemBackground {
         top: 0vw;
         left: 0vw;
         width: 100%;
         transform: scale(1);
     }
 
-    #container.mobileView #tableauSection #playerInfoContainer .itemContainer .itemBackground.expanded {
+    #container.mobileView #tableauSection #playerInfoContainer .itemContainerParent .itemBackground.expanded {
         top: 0vw;
         left: 0vw;
         width: 100%;
         transform: scale(1);
     }
 
-    #container.mobileView #tableauSection #playerInfoContainer .itemContainer .itemBackground.collapsed {
+    #container.mobileView #tableauSection #playerInfoContainer .itemContainerParent .itemBackground.collapsed {
         top: 0vw;
         left: 0vw;
         width: 100%;
@@ -4259,15 +5479,16 @@ p {
         width: 10vw;
     }
 
-    #container.mobileView #tableauSection #mapZoomControls .zoomIcon.zoomOutIcon {
+    #container.mobileView #tableauSection #mapZoomControls .zoomIcon.zoomInIcon {
         top: 0vw;
         left: 0vw;
     }
-
-    #container.mobileView #tableauSection #mapZoomControls .zoomIcon.zoomInIcon {
+    
+    #container.mobileView #tableauSection #mapZoomControls .zoomIcon.zoomOutIcon {
         top: 0vw;
         left: 13vw;
     }
+
 
     /* 
         _   __               _                __   _             
