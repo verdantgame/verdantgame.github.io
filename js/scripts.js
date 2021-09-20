@@ -2218,7 +2218,7 @@ function gainPlantPots() {
 
         let completedPotTickHTML = `
             <div class="completedPotTickContainer completed-plant-tick-animation">
-                <img class="completedTickImg" src="img/tick4.png" alt="" />
+                <img class="completedTickImg" src="img/tick.png" alt="" />
             </div>
         `;
 
