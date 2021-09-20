@@ -41,6 +41,16 @@ let animationClasses = {
         'finish': 'collapsed',
         'transition': 'quick' // .2s
     },
+    'showRoundEndOptions': {
+        'start': 'collapsed',
+        'finish': 'expanded',
+        'transition': 'medium' // .2s
+    },
+    'hideRoundEndOptions': {
+        'start': 'expanded',
+        'finish': 'collapsed',
+        'transition': 'medium' // .2s
+    },
     'showPotScoring': {
         'start': 'collapsed',
         'finish': 'expanded',
@@ -50,6 +60,31 @@ let animationClasses = {
         'start': 'expanded',
         'finish': 'collapsed',
         'transition': 'medium' // .7s
+    },
+    'marketSlide': {
+        'start': 'startPosAnimate',
+        'finish': 'endPosAnimate',
+        'transition': 'medium' // .7s
+    },
+    'showNurtureItemOptions': {
+        'start': 'collapsed',
+        'finish': 'expanded',
+        'transition': 'quick' // .2s
+    },
+    'hideNurtureItemOptions': {
+        'start': 'expanded',
+        'finish': 'collapsed',
+        'transition': 'quick' // .2s
+    },
+    'showAddOneVerdancyOption': {
+        'start': 'collapsed',
+        'finish': 'expanded',
+        'transition': 'quick' // .2s
+    },
+    'hideAddOneVerdancyOption': {
+        'start': 'expanded',
+        'finish': 'collapsed',
+        'transition': 'quick' // .2s
     }
 }
 
@@ -96,7 +131,6 @@ function swapActiveMainSection(){
 }
 
 function animateElem(elem, mode) {
-
     elem[0].style.transformOrigin = 'top left';
     
     let startTopPos = $(elem).position().top;
@@ -132,9 +166,7 @@ function animateElem(elem, mode) {
         requestAnimationFrame(function(){
             elem[0].classList.add(`${animationClasses[mode].transition}Transition`);
         }); 
-
     }
-
 }
 
 function animateMap(startTop, startLeft, endTop, endLeft) {
@@ -161,287 +193,67 @@ jQuery.fn.extend({
     // Origin: Davy8 (http://stackoverflow.com/a/5212193/796832)
     parentToAnimate: function(newParent, duration) {
 
-        $(this).removeClass('animatingElem mediumTransition');
+        // console.log('newParent', newParent);
+        // console.log('duration', duration);
 
+        $(this).removeClass('animatingElem mediumTransition');
 		var $element = $(this);
 
         // console.log('$element', $element);
-        // console.log('$element[0]', $element[0]);
 
-        var $oldParent = $element.parent()
-
-        // console.log('$oldParent', $oldParent);
-        // console.log('$oldParent[0]', $oldParent[0]);
+        // // console.log('$element = ', $element);
         
-		newParent = $(newParent); // Allow passing in either a JQuery object or selector
+        var $oldParent = $element.parent()
+		var $newParent = $(newParent); // Allow passing in either a JQuery object or selector
 
-        // console.log('newParent', newParent);
-        // console.log('newParent[0]', newParent[0]);
+        // console.log('$element', $oldParent);
+        // console.log('$element', newParent);
 
 		var oldOffset = $element.offset();
         $(this).appendTo(newParent);
         var newOffset = $element.offset();
 
+        // console.log(`oldOffset = ${oldOffset}`);
+        // console.log(`newOffset = ${newOffset}`);
+        
 		var temp = $element.clone().appendTo('body');
 
-        // console.log('$element[0].className', $element[0].className);
+        var startScale = $oldParent.closest('[animation-scale-amount]').attr('animation-scale-amount');
+        var endScale = $newParent.closest('[animation-scale-amount]').attr('animation-scale-amount');
 
-        let mapZoomScale = Number(zoomLevel)/10;
+        // console.log(`startScale = ${startScale}`);
+        // console.log(`endScale = ${endScale}`);
 
-		if($element[0].className.indexOf("activeCard") >= 0) {
+        let startWidth = $element[0].offsetWidth * startScale;
+        let startHeight = $element[0].offsetHeight * startScale;
+        let endWidth = $element[0].offsetWidth * endScale;
+        let endHeight = $element[0].offsetHeight * endScale;
 
-            let cardToPlaceScale = 1;
+        // console.log(`startWidth = ${startWidth}`);
+        // console.log(`startHeight = ${startHeight}`);
+        // console.log(`endWidth = ${endWidth}`);
+        // console.log(`endHeight = ${endHeight}`);
 
-            if($('#container').hasClass('mobileView')) cardToPlaceScale = 1.17;
+        temp.css({
+            'width': startWidth,
+            'height': startHeight,
+            'position': 'absolute',
+            'top': oldOffset.top,
+            'left': oldOffset.left,
+            'zIndex': 10
+        });
+        
+        $element.hide();
 
-			let startWidth = 0;
-			let startHeight = 0;
-			let endWidth = 0;
-			let endHeight = 0;
-
-			let startOpacity = 1;
-			let endOpacity = 1;
-
-            let zIndex = 1000;
-
-			if(newParent[0].offsetParent.id == 'mapHiddenOverlay') {
-
-                if($oldParent[0].className == 'mapTileContainer potentialPlacement activePotentialPlacement') {
-                    startWidth = $element[0].offsetWidth * mapZoomScale;
-                    startHeight = $element[0].offsetHeight * mapZoomScale;
-                } else {
-                    startWidth = $element[0].offsetWidth * cardToPlaceScale;
-				    startHeight = $element[0].offsetHeight * cardToPlaceScale;
-                }      
-				
-				endWidth = $element[0].offsetWidth * mapZoomScale;
-				endHeight = $element[0].offsetHeight * mapZoomScale;
-
-                zIndex = 10;
-
-			} else if(newParent[0].offsetParent.id == 'playerInfoContainer' || newParent[0].offsetParent.id == 'homeContentContainer') {
-				startWidth = $element[0].offsetWidth * mapZoomScale;
-                startHeight = $element[0].offsetHeight * mapZoomScale;
-				
-				endWidth = $element[0].offsetWidth * cardToPlaceScale;
-				endHeight = $element[0].offsetHeight * cardToPlaceScale;
-
-                zIndex = 10;
-			}
-            
-			temp.css({
-                'width': startWidth,
-				'height': startHeight,
-				'position': 'absolute',
-                'top': oldOffset.top,
-				'left': oldOffset.left,
-				'opacity': startOpacity,
-				'zIndex': zIndex
-			});
-			
-			$element.hide();
-
-			temp.animate({
-				'width': endWidth,
-				'height': endHeight,
-                'top': newOffset.top,
-				'left': newOffset.left,
-				'opacity': endOpacity,
-				'zIndex': zIndex
-			}, duration, function() {
-				$element.show();
-				temp.remove();
-			});
-
-		} else if($element[0].className.indexOf("cardContainer") >= 0) {
-
-            let cardToPlaceScale = 1;
-
-            if($('#container').hasClass('mobileView')) cardToPlaceScale = 1.17;
-
-			let startWidth = 0;
-			let startHeight = 0;
-			let endWidth = 0;
-			let endHeight = 0;
-
-			let startOpacity = 1;
-			let endOpacity = 1;
-
-            let zIndex = 1000;
-
-			if(newParent[0].offsetParent.id == 'mapHiddenOverlay') {
-
-                if($oldParent[0].className == 'mapTileContainer potentialPlacement activePotentialPlacement') {
-                    startWidth = $element[0].offsetWidth * mapZoomScale;
-                    startHeight = $element[0].offsetHeight * mapZoomScale;
-                } else {
-                    startWidth = $element[0].offsetWidth * cardToPlaceScale;
-				    startHeight = $element[0].offsetHeight * cardToPlaceScale;
-                }      
-				
-				endWidth = $element[0].offsetWidth * mapZoomScale;
-				endHeight = $element[0].offsetHeight * mapZoomScale;
-
-                zIndex = 10;
-
-			} else if(newParent[0].offsetParent.id == 'playerInfoContainer' || newParent[0].offsetParent.id == 'homeContentContainer') {
-				startWidth = $element[0].offsetWidth;
-                startHeight = $element[0].offsetHeight;
-				
-				endWidth = $element[0].offsetWidth * cardToPlaceScale;
-				endHeight = $element[0].offsetHeight * cardToPlaceScale;
-
-                zIndex = 10;
-			}
-            
-			temp.css({
-                'width': startWidth,
-				'height': startHeight,
-				'position': 'absolute',
-                'top': oldOffset.top,
-				'left': oldOffset.left,
-				'opacity': startOpacity,
-				'zIndex': zIndex
-			});
-			
-			$element.hide();
-
-			temp.animate({
-				'width': endWidth,
-				'height': endHeight,
-                'top': newOffset.top,
-				'left': newOffset.left,
-				'opacity': endOpacity,
-				'zIndex': zIndex
-			}, duration, function() {
-				$element.show();
-				temp.remove();
-			});
-        } else if($element[0].className.indexOf("itemToken") >= 0) {
-
-            // console.log(`$element[0].className.indexOf("itemToken") >= 0`);
-
-			let startWidth = 0;
-			let startHeight = 0;
-			let endWidth = 0;
-			let endHeight = 0;
-
-			let startOpacity = 1;
-			let endOpacity = 1;
-
-            let zIndex = 1000;
-
-            // console.log(`$oldParent[0].className = "${$oldParent[0].className}"`);
-            // console.log(`newParent[0].classname = "${newParent[0].classname}"`);
-            // console.log(`newParent[0].offsetParent.id = "${newParent[0].offsetParent.id}"`);
-
-			if($oldParent[0].className == "itemContainer" && newParent[0].offsetParent.id == "chosenItemParentContainer" || $oldParent[0].className == "itemContainer" && newParent[0].offsetParent.id == "storedItemParentContainer") {
-
-                // console.log(`$oldParent[0].className == 'cardsAndItemContainer'`);
-
-                startWidth = $element[0].offsetWidth;
-                startHeight = $element[0].offsetHeight;
-
-                // console.log(`startWidth = "${startWidth}"`);
-                // console.log(`startHeight = "${startHeight}"`);
-				
-				endWidth = $element[0].offsetWidth;
-				endHeight = $element[0].offsetHeight;
-
-                // console.log(`endWidth = "${endWidth}"`);
-                // console.log(`endHeight = "${endHeight}"`);
-
-                zIndex = 10;
-                
-			} else if($oldParent[0].className == 'cardsAndItemContainer') {
-
-                // console.log(`$oldParent[0].className == 'cardsAndItemContainer'`);
-
-                startWidth = $element[0].offsetWidth;
-                startHeight = $element[0].offsetHeight;
-
-                // console.log(`startWidth = "${startWidth}"`);
-                // console.log(`startHeight = "${startHeight}"`);
-				
-				endWidth = $element[0].offsetWidth;
-				endHeight = $element[0].offsetHeight;
-
-                // console.log(`endWidth = "${endWidth}"`);
-                // console.log(`endHeight = "${endHeight}"`);
-
-                zIndex = 10;
-                
-			} else if($oldParent[0].className == "itemContainer") {
-
-                // console.log(`$oldParent[0].className == "itemContainer"`);
-
-                startWidth = $element[0].offsetWidth;
-                startHeight = $element[0].offsetHeight;
-
-                // console.log(`startWidth = "${startWidth}"`);
-                // console.log(`startHeight = "${startHeight}"`);
-				
-				endWidth = $element[0].offsetWidth * mapZoomScale;
-				endHeight = $element[0].offsetHeight * mapZoomScale;
-
-                // console.log(`mapZoomScale = "${mapZoomScale}"`);
-                // console.log(`$element[0].offsetWidth = "${$element[0].offsetWidth}"`);
-                // console.log(`$element[0].offsetHeight = "${$element[0].offsetHeight}"`);
-
-                // console.log(`endWidth = "${endWidth}"`);
-                // console.log(`endHeight = "${endHeight}"`);
-
-                zIndex = 10;
-			} else if(newParent[0].offsetParent.id == 'chosenItemParentContainer') {
-
-                // console.log(`newParent[0].offsetParent.id == 'chosenItemParentContainer'`);
-
-                startWidth = $element[0].offsetWidth * mapZoomScale;
-                startHeight = $element[0].offsetHeight * mapZoomScale;
-
-                // console.log(`mapZoomScale = "${mapZoomScale}"`);
-                // console.log(`$element[0].offsetWidth = "${$element[0].offsetWidth}"`);
-                // console.log(`$element[0].offsetHeight = "${$element[0].offsetHeight}"`);
-
-                // console.log(`startWidth = "${startWidth}"`);
-                // console.log(`startHeight = "${startHeight}"`);
-				
-				endWidth = $element[0].offsetWidth;
-				endHeight = $element[0].offsetHeight;
-
-                // console.log(`endWidth = "${endWidth}"`);
-                // console.log(`endHeight = "${endHeight}"`);
-
-                zIndex = 10;
-
-			}
-            
-			temp.css({
-                'width': startWidth,
-				'height': startHeight,
-				'position': 'absolute',
-                'top': oldOffset.top,
-				'left': oldOffset.left,
-				'opacity': startOpacity,
-				'zIndex': zIndex,
-                'overflow': 'visible'
-			});
-			
-			$element.hide();
-
-			temp.animate({
-				'width': endWidth,
-				'height': endHeight,
-                'top': newOffset.top,
-				'left': newOffset.left,
-				'opacity': endOpacity,
-				'zIndex': zIndex,
-                'overflow': 'visible'
-			}, duration, function() {
-				$element.show();
-				temp.remove();
-			});
-        }
-
+        temp.animate({
+            'width': endWidth,
+            'height': endHeight,
+            'top': newOffset.top,
+            'left': newOffset.left,
+            'zIndex': 10
+        }, duration, function() {
+            $element.show();
+            temp.remove();
+        });
     }
 });
