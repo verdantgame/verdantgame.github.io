@@ -17,11 +17,10 @@
 	<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 	<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-	<link rel="manifest" href="site.webmanifest">
+
 	<link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5">
 	<meta name="msapplication-TileColor" content="#da532c">
 	<meta name="theme-color" content="#ffffff">
-
 
 	<!-- Font for Titles -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -40,6 +39,9 @@
 
 		gtag('config', 'G-F576KC8537');
 	</script>
+
+	<!-- UNCOMMENT WHEN GOING LIVE!!! -->
+	<link rel="manifest" href="site.webmanifest">
 
 </head>
 
@@ -101,10 +103,11 @@
 						<div class="clear"></div>
 					</div>
 
-					<div id="greenThumbsAmountContainer" class="infoBarStatContainer">
+					<div id="greenThumbsAmountContainer" class="infoBarStatContainer" animation-scale-amount="1">
 						<p id="greenThumbsAmountTitle" class="infoBarStatTitle">Green Thumbs:</p>
 						<p id="greenThumbsUpdateInfo" class="infoBarUpdateData subtractVal">2</p>
 						<p id="greenThumbsAmountInfo" class="infoBarStatData">2</p>
+						<div id="greenThumbsEndPoint"></div>
 						<div class="clear"></div>
 					</div>
 
@@ -117,7 +120,9 @@
 
 			</div>
 
-			<div id="gameSectionsParent" current-phase="setup">
+			<div id="gameSectionsParent" current-phase="setup" turns-left="13">
+
+				<!-- <div id="newMarketCardsHiddenOverlay"></div> -->
 
 				<div data-animation-group="market" id="marketContainerOuterOverlay" class="expanded gameSectionContainerOuterOverlay gameSectionContainerOverlay">
 					<div id="marketInactiveOverlay"></div>
@@ -140,10 +145,42 @@
 									<p>View Pot<br />scoring info</p>
 								</button>
 
-								<button id="chooseAnyCardItemBtn" class="button is-success greenThumbActionBtn marketActionButton" title="Instructions Button" disabled>
+								<button id="chooseAnyMarketCardItemBtn" class="button is-success greenThumbActionBtn marketActionButton" title="Instructions Button" disabled>
 									<img class="twoThumbsImg" src="img/thumbs/dual.png">
 									<p>Choose any<br />card + item</p>
 								</button>
+
+								<div id="replaceMarketItemsInstructionsAndBtns" class="greenThumbActionInstructionsContainer">
+									<p>Select up to four market items tokens to replace.</p>
+									<button id="cancelReplaceMarketItemsAction" class="cancelMarketGreenThumbAction greenThumbInstructionsBtn button is-danger"><span>Cancel</span>
+										<span class="icon">
+											<ion-icon name="close-circle-outline"></ion-icon>
+										</span>
+									</button>
+									<button id="confirmReplaceMarketItemsAction" class="confirmMarketGreenThumbAction greenThumbInstructionsBtn button is-success" disabled="">
+										<span>Confirm</span>
+										<span class="icon">
+											<ion-icon name="checkmark-circle-outline"></ion-icon>
+										</span>
+									</button>
+								</div>
+
+								<div id="chooseAnyMarketCardItemBtnInstructionsAndBtns" class="greenThumbActionInstructionsContainer">
+									<p>Select an item and card from different columns.</p>
+									<button id="cancelChooseAnyMarketCardItemAction" class="cancelMarketGreenThumbAction greenThumbInstructionsBtn button is-danger"><span>Cancel</span>
+										<span class="icon">
+											<ion-icon name="close-circle-outline"></ion-icon>
+										</span>
+									</button>
+									<button id="confirmChooseAnyMarketCardItemAction" class="confirmMarketGreenThumbAction greenThumbInstructionsBtn button is-success" disabled="">
+										<span>Confirm</span>
+										<span class="icon">
+											<ion-icon name="checkmark-circle-outline"></ion-icon>
+										</span>
+									</button>
+								</div>
+
+								<div id="marketCardColumns" class="expanded" animation-scale-amount="1"></div>
 
 								<div id="confirmChosenColumnContainer" class="marketActionContainer" view-category="plant" view-column="0">
 
@@ -177,9 +214,7 @@
 									</div>
 								</div>
 
-								<div id="marketCardColumns" class="expanded"></div>
-
-								<div id="potScoringInfoContainer" class="animatingElem mediumTransition collapsed" style="transform-origin: left top;">
+								<div id="potScoringInfoContainer" class="animatingElem mediumTransition collapsed" style="transform-origin: left top;" discarded-pots="0">
 
 									<div id="plantPotScoringInstructions">
 										<p>If you complete a plant, the Plant Pot Token from the <span class="firstPotToUseColor">4th column of the Market</span> will be used.</p>
@@ -238,7 +273,24 @@
 									<p id="playerTableauTitle" class="title is-3 has-text-centered">Home</p>
 								</div>
 								<div data-animation-group="tableau" id="homeContentContainer" class="collapsed">
-									<div data-animation-group="tableau" id="playerInfoContainer" class="animatingElem mediumTransition collapsed" style="transform-origin: left top;">
+
+									<div id="undoNextRoundBtnContainer" class="collapsed disableUndoBtn">
+										<button id="undoAction" class="button is-danger">
+											<span class="icon">
+												<ion-icon name="arrow-undo"></ion-icon>
+											</span>
+											<span class="btnText">Undo Action</span>
+										</button>
+
+										<button id="nextRound" class="button is-success" disabled>
+											<span class="btnText">Next Round</span>
+											<span class="icon">
+												<ion-icon name="play-forward"></ion-icon>
+											</span>
+										</button>
+									</div>
+
+									<div data-animation-group="tableau" id="playerInfoContainer" class="animatingElem mediumTransition collapsed" style="transform-origin: left top;" animation-scale-amount="1">
 
 										<button id="addOneVerdancyToPlantBtn" class="button is-success greenThumbActionBtn" title="Instructions Button" disabled>
 											<img class="twoThumbsImg" src="img/thumbs/dual.png">
@@ -250,19 +302,22 @@
 											<img data-animation-group="tableau" id="chosenCardBackground" class="collapsed" src="img/card-storage.png">
 										</div>
 
-										<p data-animation-group="tableau" id="chosenItemTitle" class="tableauItemTitle">Chosen<br>Item <span>&#8658;</span></p>
+										<div data-animation-group="tableau" id="useItemBtnContainer" class="animatingElem mediumTransition expanded" title="Use Item Button Container">
+											<button data-animation-group="tableau" class="button is-success useItemsBtn expanded" title="Use Item Button" disabled>Use Nurture<br>Item Action</button>
+										</div>
+
+										<p data-animation-group="tableau" id="chosenItemTitle" class="tableauItemTitle">Chosen<br>Item</p>
 
 										<div data-animation-group="tableau" id="chosenItemParentContainer" class="itemContainerParent collapsed">
 											<img data-animation-group="tableau" id="chosenItemBackground" class="itemBackground collapsed" src="img/item-storage.png">
 											<div id="chosenItemContainer" class="itemContainer"></div>
 										</div>
 
-										<div data-animation-group="tableau" id="swapItemsBtnContainer" class="animatingElem mediumTransition expanded" title="Swap Items">
-											<button data-animation-group="tableau" class="button is-success useItemsBtn expanded" title="Use Item" disabled>Use Item</button>
-											<button data-animation-group="tableau" class="button is-link swapItemsBtn expanded" title="Store Item" disabled>Store Item</button>
+										<div data-animation-group="tableau" id="swapItemsBtnContainer" class="animatingElem mediumTransition expanded" title="Swap Item Button Container">
+											<button data-animation-group="tableau" class="button is-link swapItemsBtn expanded" title="Swap Item Button" disabled>Store Item <span>&#8595;</span></button>
 										</div>
 
-										<p data-animation-group="tableau" id="storedItemTitle" class="tableauItemTitle">Stored<br>Item <span>&#8658;</span></p>
+										<p data-animation-group="tableau" id="storedItemTitle" class="tableauItemTitle">Stored<br>Item</p>
 
 										<div data-animation-group="tableau" id="storedItemParentContainer" class="itemContainerParent collapsed">
 											<img data-animation-group="tableau" id="storedItemBackground" class="itemBackground collapsed" src="img/item-storage.png">
@@ -345,6 +400,48 @@
 														</span>
 													</button>
 												</div>
+
+
+												<div id="nurtureItemOptions" class="collapsed">
+
+													<p id="wateringCan-instructions" class="nurtureItemInstructions">Select a room card to add one verdancy<br />to each plant card surrounding it.</p>
+													<p id="trowel-instructions" class="nurtureItemInstructions">Select up to three plant cards<br />to add one verdancy to.</p>
+													<p id="fertilizer-instructions" class="nurtureItemInstructions">Select one plant card to add up<br />to three verdancy to.</p>
+
+													<button id="cancelNurtureItemAction" class="button is-danger">
+														<span>Cancel</span>
+														<span class="icon">
+															<ion-icon name="close-circle-outline"></ion-icon>
+														</span>
+													</button>
+
+													<button nurture-item-action="none" id="confirmNurtureItemAction" class="button is-success" disabled>
+														<span>Confirm</span>
+														<span class="icon">
+															<ion-icon name="checkmark-circle-outline"></ion-icon>
+														</span>
+													</button>
+												</div>
+
+												<div id="addOneVerdancyOption" class="collapsed">
+
+													<p id="addOneVerdancy-instructions">Select a plant card to add one verdancy to.</p>
+
+													<button id="cancelAddOneVerdancyAction" class="button is-danger">
+														<span>Cancel</span>
+														<span class="icon">
+															<ion-icon name="close-circle-outline"></ion-icon>
+														</span>
+													</button>
+
+													<button id="confirmAddOneVerdancyAction" class="button is-success" disabled>
+														<span>Confirm</span>
+														<span class="icon">
+															<ion-icon name="checkmark-circle-outline"></ion-icon>
+														</span>
+													</button>
+												</div>
+
 											</div>
 										</div>
 									</div>
@@ -353,28 +450,6 @@
 						</div>
 					</div>
 				</div>
-			</div>
-		</div>
-	</div>
-
-	<div id="placeFirstCardModal" class="modal notificationModal">
-		<div class="modal-background"></div>
-		<div class="modal-content">
-			<div class="notification">
-				<button class="delete closeModalTrigger smallCloseCross" aria-label="close" title="Close button image"></button>
-				<p class="has-text-centered">Choose the position of your starting plant card.</p>
-				<button id="placeFirstPlantCardBtn" class="button is-danger closeModalTrigger button-is-centered" title="Close modal button">Close</button>
-			</div>
-		</div>
-	</div>
-
-	<div id="startFirstTurnModal" class="modal notificationModal">
-		<div class="modal-background"></div>
-		<div class="modal-content">
-			<div class="notification">
-				<button class="delete closeModalTrigger smallCloseCross" aria-label="close" title="Close button image"></button>
-				<p class="has-text-centered">Now choose a card and item from the market to place in your home.</p>
-				<button id="startFirstTurnBtn" class="button is-danger closeModalTrigger button-is-centered" title="Close modal button">Close</button>
 			</div>
 		</div>
 	</div>
@@ -390,6 +465,50 @@
 		</div>
 	</div>
 
+	<div id="placeFirstCardModal" class="modal notificationModal">
+		<div class="modal-background"></div>
+		<div class="modal-content">
+			<div class="notification">
+				<button class="delete closeModalTrigger mediumCloseCross" aria-label="close" title="Close button image"></button>
+				<p class="has-text-centered">Choose the position of your starting plant card.</p>
+				<button id="placeFirstPlantCardBtn" class="button is-danger closeModalTrigger button-is-centered" title="Close modal button">Close</button>
+			</div>
+		</div>
+	</div>
+
+	<div id="startFirstTurnModal" class="modal notificationModal">
+		<div class="modal-background"></div>
+		<div class="modal-content">
+			<div class="notification">
+				<button class="delete closeModalTrigger mediumCloseCross" aria-label="close" title="Close button image"></button>
+				<p class="has-text-centered">Now choose a card and item from the market to place in your home.</p>
+				<button id="startFirstTurnBtn" class="button is-danger closeModalTrigger button-is-centered" title="Close modal button">Close</button>
+			</div>
+		</div>
+	</div>
+
+	<div id="plantPlacementsExhaustedModal" class="modal notificationModal">
+		<div class="modal-background"></div>
+		<div class="modal-content">
+			<div class="notification">
+				<button class="delete closeModalTrigger mediumCloseCross" aria-label="close" title="Close button image"></button>
+				<p class="has-text-centered">There is no valid plant card placements available in your tableau. Please pick a room card to place instead.</p>
+				<button class="button is-danger closeModalTrigger button-is-centered" title="Close modal button">Close</button>
+			</div>
+		</div>
+	</div>
+
+	<div id="roomPlacementsExhaustedModal" class="modal notificationModal">
+		<div class="modal-background"></div>
+		<div class="modal-content">
+			<div class="notification">
+				<button class="delete closeModalTrigger mediumCloseCross" aria-label="close" title="Close button image"></button>
+				<p class="has-text-centered">There is no valid room card placements available in your tableau. Please pick a plant card to place instead.</p>
+				<button class="button is-danger closeModalTrigger button-is-centered" title="Close modal button">Close</button>
+			</div>
+		</div>
+	</div>
+
 	<script type="module" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.esm.js"></script>
 	<script nomodule="" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.js"></script>
 	<script defer src="https://cdn.jsdelivr.net/npm/bulma-extensions@4.0.0/dist/js/bulma-extensions.min.js"></script>
@@ -397,6 +516,9 @@
 	<script type="text/javascript" src="js/data.js"></script>
 	<script type="text/javascript" src="js/animations.js"></script>
 	<script type="text/javascript" src="js/scripts.js"></script>
+
+	<!-- CAN DELETE THIS WHEN GOING LIVE: -->
+	<!-- <script type="text/javascript" src="js/image-preloader.js"></script> -->
 
 </body>
 
