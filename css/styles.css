@@ -31,7 +31,7 @@ html {
 .itemToken.potentialMarketItemChoice,
 .cardContainer.activePlacement,
 .itemToken.activePlacement {
-    box-shadow: 0px 0px 0px 3px #e1ff00;
+    box-shadow: 0px 0px 0px 3px #fbff00;
 }
 
 .button[disabled] {
@@ -532,7 +532,7 @@ p.mapDebug {
 #gameLayer #topInfoBar #infoBarStats {
     width: 172px;
     float: left;
-    margin: 8px 0px 0px 54px;
+    margin: 0px 0px 0px 54px;
     font-size: 18px;
     line-height: 22px;
     position: relative;
@@ -546,7 +546,13 @@ p.mapDebug {
 }
 
 #gameLayer #topInfoBar #infoBarStats .infoBarStatContainer {
-    margin-bottom: 4px;
+    transition: background-color .5s ease-in-out;
+    border-radius: 10px;
+    padding: 4px 0px;
+}
+
+#gameLayer #topInfoBar #infoBarStats .infoBarStatContainer.infoChange {
+    background-color: #fbff00;
 }
 
 #container.tabletView #gameLayer #topInfoBar #infoBarStats .infoBarStatContainer {
@@ -571,13 +577,13 @@ p.mapDebug {
     font-weight: bold;
 }
 
-#gameLayer #topInfoBar #infoBarStats #greenThumbsUpdateInfo {
+#gameLayer #topInfoBar #infoBarStats #greenThumbsUpdateInfo,
+#gameLayer #topInfoBar #infoBarStats #turnsRemainingUpdateInfo {
     display:none;
     width: 22px;
     height: 23px;
     position: absolute;
-    top: 25px;
-    left: 169px;
+    left: 174px;
     text-align: center;
     font-weight: bold;
     border-radius: 30px;
@@ -586,11 +592,20 @@ p.mapDebug {
     text-shadow: 0px 0px 1px #000000;
 }
 
+#gameLayer #topInfoBar #infoBarStats #turnsRemainingUpdateInfo {
+    top: 3px;
+}
 
+#gameLayer #topInfoBar #infoBarStats #greenThumbsUpdateInfo {
+    top: 33px;
+}
+
+#gameLayer #topInfoBar #infoBarStats #turnsRemainingUpdateInfo.subtractVal,
 #gameLayer #topInfoBar #infoBarStats #greenThumbsUpdateInfo.subtractVal {
     color: red;
 }
 
+#gameLayer #topInfoBar #infoBarStats #turnsRemainingUpdateInfo.subtractVal:before,
 #gameLayer #topInfoBar #infoBarStats #greenThumbsUpdateInfo.subtractVal:before {
     content: '-';
 }
@@ -601,6 +616,14 @@ p.mapDebug {
 
 #gameLayer #topInfoBar #infoBarStats #greenThumbsUpdateInfo.addVal:before {
     content: '+';
+}
+
+#gameLayer #topInfoBar #infoBarStats #greenThumbsEndPoint {
+    position: absolute;
+    height: 45px;
+    width: 45px;
+    top: 8px;
+    right: -10px;
 }
 
 #gameLayer #topInfoBar #infoBarStats #greenThumbsEndPoint {
@@ -775,47 +798,6 @@ p.mapDebug {
     left: 9px;
 }
 
-#gameLayer #topInfoBar #infoBarStats #greenThumbsUpdateInfo {
-    display:none;
-    width: 22px;
-    height: 23px;
-    position: absolute;
-    top: 25px;
-    left: 169px;
-    text-align: center;
-    font-weight: bold;
-    border-radius: 30px;
-    padding: 2px -1px;
-    font-size: 21px;
-    text-shadow: 0px 0px 1px #000000;
-}
-
-
-#gameLayer #topInfoBar #infoBarStats #greenThumbsUpdateInfo.subtractVal {
-    color: red;
-}
-
-#gameLayer #topInfoBar #infoBarStats #greenThumbsUpdateInfo.subtractVal:before {
-    content: '-';
-}
-
-#gameLayer #topInfoBar #infoBarStats #greenThumbsUpdateInfo.addVal {
-    color: #25e645;
-}
-
-#gameLayer #topInfoBar #infoBarStats #greenThumbsUpdateInfo.addVal:before {
-    content: '+';
-}
-
-#gameLayer #topInfoBar #infoBarStats #greenThumbsEndPoint {
-    position: absolute;
-    height: 45px;
-    width: 45px;
-    top: 8px;
-    right: -10px;
-}
-
-
 .insufficient-green-thumbs {
     color: red;
 	-webkit-animation: insufficient-green-thumbs 1.6s both;
@@ -959,7 +941,7 @@ p.mapDebug {
 }
 
 .thisMarketCardOrItem:hover {
-    box-shadow: 0px 0px 0px 3px #e1ff00;
+    box-shadow: 0px 0px 0px 3px #fbff00;
 }
 
 
@@ -1934,7 +1916,7 @@ p.mapDebug {
 #confirmChosenColumnContainer.marketActionContainer[view-column="3"][view-category="plant"] #columnToConfirm #marketCardColumnsToConfirm.expanded .marketColumn[column="3"] .cardsAndItemContainer .marketCardOverlay.marketPlantCardOverlay,
 #confirmChosenColumnContainer.marketActionContainer[view-column="3"] #columnToConfirm #marketCardColumnsToConfirm.expanded .marketColumn[column="3"] .cardsAndItemContainer .itemToken,
 #confirmChosenColumnContainer.marketActionContainer[view-column="3"][view-category="room"] #columnToConfirm #marketCardColumnsToConfirm.expanded .marketColumn[column="3"] .cardsAndItemContainer .marketCardOverlay.marketRoomCardOverlay {
-    box-shadow: 0px 0px 0px 3px #e1ff00;
+    box-shadow: 0px 0px 0px 3px #fbff00;
 }
 
 #confirmChosenColumnContainer.marketActionContainer #columnToConfirm #marketCardColumnsToConfirm.expanded .marketColumn .cardsAndItemContainer .itemToken .nurtureItemExplanation {
@@ -2425,7 +2407,7 @@ p.mapDebug {
 #gameSectionsParent[current-phase="market-selection"] #marketSection.gameSection.chooseAnyCardItemGreenThumbAction .gameSectionContent > #marketCardColumns .marketColumn .cardsAndItemContainer .marketCardOverlay.potentialCardItemComboCard .cardContainer,
 #gameSectionsParent[current-phase="market-selection"] #marketSection.gameSection.chooseAnyCardItemGreenThumbAction .gameSectionContent > #marketCardColumns .marketColumn .cardsAndItemContainer .marketItemOverlay:hover .itemToken,
 #gameSectionsParent[current-phase="market-selection"] #marketSection.gameSection.chooseAnyCardItemGreenThumbAction .gameSectionContent > #marketCardColumns .marketColumn .cardsAndItemContainer .marketItemOverlay.potentialCardItemComboItem .itemToken {
-    box-shadow: 0px 0px 0px 3px #e1ff00;
+    box-shadow: 0px 0px 0px 3px #fbff00;
 }
 
 #gameSectionsParent[current-phase="market-selection"] #marketSection.gameSection.replaceMarketItemsGreenThumbAction .gameSectionContent > #marketCardColumns .marketColumn .cardsAndItemContainer .marketItemOverlay.potentialItemToReplace .itemToken,
@@ -3420,7 +3402,7 @@ p.mapDebug {
 
 #tableauSection #mapContainer #mapHiddenOverlay .mapTileContainer.potentialItemPlacement.activePotentialItemPlacement[cardtype="room"] .roomCardItemContainer {
     background-color: #ffffff96;
-    box-shadow: 0px 0px 0px 3px #e1ff00;
+    box-shadow: 0px 0px 0px 3px #fbff00;
 }
 
 #tableauSection #mapContainer #mapHiddenOverlay .mapTileContainer.potentialItemPlacement.activePotentialItemPlacement:not(.temporaryItemPlacement)[cardtype="room"] .roomCardItemContainer .itemToken {
@@ -4892,8 +4874,12 @@ p.mapDebug {
 
 #marketSection .marketColumn .cardsAndItemContainer .marketCardOverlay .cardContainer.newCardContainer.oneColumnOffset.startingPosAnimate,
 #marketSection .marketColumn .cardsAndItemContainer .marketCardOverlay .cardContainer.newCardContainer.twoColumnOffset.startingPosAnimate,
+#marketSection .marketColumn .cardsAndItemContainer .marketCardOverlay .cardContainer.newCardContainer.threeColumnOffset.startingPosAnimate,
+#marketSection .marketColumn .cardsAndItemContainer .marketCardOverlay .cardContainer.newCardContainer.fourColumnOffset.startingPosAnimate,
 #marketSection .marketColumn .cardsAndItemContainer .marketItemOverlay .itemToken.newItemToken.oneColumnOffset.startingPosAnimate,
-#marketSection .marketColumn .cardsAndItemContainer .marketItemOverlay .itemToken.newItemToken.twoColumnOffset.startingPosAnimate {
+#marketSection .marketColumn .cardsAndItemContainer .marketItemOverlay .itemToken.newItemToken.twoColumnOffset.startingPosAnimate,
+#marketSection .marketColumn .cardsAndItemContainer .marketItemOverlay .itemToken.newItemToken.threeColumnOffset.startingPosAnimate,
+#marketSection .marketColumn .cardsAndItemContainer .marketItemOverlay .itemToken.newItemToken.fourColumnOffset.startingPosAnimate {
 	transition: left 1.0s ease-in-out;
     left: 0px;
 }
@@ -4906,6 +4892,16 @@ p.mapDebug {
 #marketSection .marketColumn .cardsAndItemContainer .marketCardOverlay .cardContainer.newCardContainer.twoColumnOffset.startingPosAnimate.startingPos,
 #marketSection .marketColumn .cardsAndItemContainer .marketItemOverlay .itemToken.newItemToken.twoColumnOffset.startingPosAnimate.startingPos {
 	left: -250px;
+}
+
+#marketSection .marketColumn .cardsAndItemContainer .marketCardOverlay .cardContainer.newCardContainer.threeColumnOffset.startingPosAnimate.startingPos,
+#marketSection .marketColumn .cardsAndItemContainer .marketItemOverlay .itemToken.newItemToken.threeColumnOffset.startingPosAnimate.startingPos {
+	left: -375px;
+}
+
+#marketSection .marketColumn .cardsAndItemContainer .marketCardOverlay .cardContainer.newCardContainer.fourColumnOffset.startingPosAnimate.startingPos,
+#marketSection .marketColumn .cardsAndItemContainer .marketItemOverlay .itemToken.newItemToken.fourColumnOffset.startingPosAnimate.startingPos {
+	left: -500px;
 }
 
 .mapTileContainer.potentialNurtureItemTarget,
@@ -5382,18 +5378,18 @@ p.mapDebug {
 
  @-webkit-keyframes box-shadow-color-change {
     0% {
-          box-shadow: 0px 0px 0px 3px #e1ff00;
+          box-shadow: 0px 0px 0px 3px #fbff00;
     }
     100% {
-          box-shadow: 0px 0px 0px 3px #e1ff0000;
+          box-shadow: 0px 0px 0px 3px #fbff0000;
     }
   }
   @keyframes box-shadow-color-change {
     0% {
-          box-shadow: 0px 0px 0px 3px #e1ff00;
+          box-shadow: 0px 0px 0px 3px #fbff00;
     }
     100% {
-          box-shadow: 0px 0px 0px 3px #e1ff0000;
+          box-shadow: 0px 0px 0px 3px #fbff0000;
     }
   }
 
@@ -5491,9 +5487,90 @@ p.mapDebug {
     }
   }
   
+  .modal-content .notification p {
+    line-height: 20px;
+    font-size: 16px;
+    margin-bottom: 14px;
+}
+
+  #finalScoringModal .modal-content {
+    top: 11%;
+    width: 510px;
+  }
+
+  #finalScoringModal .modal-content .notification {
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    padding: 33px 40px 35px;
+    position: relative;
+    height: 312px;
+}
+
+#finalScoringModal .modal-content .notification #showFinalScore {
+    margin: 23px auto 0px;
+    display: none;
+    position: absolute;
+    top: 225px;
+    left: 170px;
+}
+
+#finalScoringModal .modal-content .notification #scoringCountdownTimer {
+    margin-top: 24px;
+}
+
+#finalScoringModal .modal-content .notification #scoringCountdownTimer ion-icon[name="leaf"] {
+    color: green;
+}
+
+@media screen and (max-width: 1222px) {
+    #container.desktopView #marketContainerInnerOverlay.gameSectionContainerInnerOverlay {
+        width: 509px;
+        height: 608px;
+    }
+
+    #container .gameSectionContainerOuterOverlay {
+        position: unset;
+        float: left;
+    }
+
+    #gameLayer #gameSectionsParent {
+        position: relative;
+        margin: 13px auto 0px;
+        width: 654px;
+        height: 990px;
+        overflow: hidden;
+    }
+
+    #container.desktopView #gameLayer #marketContainerOuterOverlay.gameSectionContainerOuterOverlay {
+        width: 665px;
+        height: 610px;
+        left: 0px;
+        overflow: hidden;
+    }
+
+    #container.desktopView #marketContainerInnerOverlay.gameSectionContainerInnerOverlay {
+        width: 663px;
+        height: 608px;
+        overflow: hidden;
+    }
+
+    #container.desktopView #gameLayer #tableauContainerOuterOverlay.gameSectionContainerOuterOverlay {
+        margin-top: 10px;
+    }
+
+    #container.desktopView #gameLayer #gameSectionsParent .gameSection {
+        position: unset;
+        width: 100%;
+        height: 609px;
+        margin: 0px 0px;
+        float: left;
+        overflow: hidden;
+    }
+
+}
   
   
-@media screen and (max-width: 539px) {
+/* @media screen and (max-width: 539px) {
 
     .desktopElement,
     .tabletElement {
@@ -5502,7 +5579,8 @@ p.mapDebug {
 
     .mobileElement {
         display:block;
-    }
+    } */
+    
 
 /* @media screen and (max-width: 1222px) { */
 
@@ -5524,7 +5602,7 @@ p.mapDebug {
 
     *Mobile*
     */
-
+/* 
     .modal .modal-content p {
         font-size: 3.5vw;
         line-height: 4.3vw;
@@ -5600,7 +5678,7 @@ p.mapDebug {
     #container.desktopView #maximizeScreenIcon,
     #container.tabletView #maximizeScreenIcon {
         display:none;
-    }
+    } */
 
 
     /* 
@@ -5619,7 +5697,7 @@ p.mapDebug {
     *Mobile*
     */
 
-    #container.mobileView #loaderLayer {
+    /* #container.mobileView #loaderLayer {
         top: 0vw;
         height: 50vh;
     }
@@ -5635,7 +5713,7 @@ p.mapDebug {
 
     #container.mobileView #setupLayer {
         height: 211vw;
-    }
+    } */
 
     /* 
        _____        __                
@@ -5652,7 +5730,7 @@ p.mapDebug {
                  
     *Mobile*
     */
-
+/* 
     #container.mobileView #setupLayer .subtitle {
         width: 68vw;
         margin: 0vw auto 0vw;
@@ -5686,7 +5764,7 @@ p.mapDebug {
         font-size: 3.5vw;
         line-height: 4.9vw;
         margin-bottom: 3vw;
-    }
+    } */
 
     /* 
        ______                         
@@ -5703,7 +5781,7 @@ p.mapDebug {
                  
     *Mobile*
     */
-
+/* 
     #container.mobileView #gameLayer.layer {
         top: 0vw;
     }
@@ -5811,10 +5889,6 @@ p.mapDebug {
         border-radius: 3vw;
     }
 
-    /* #container.mobileView #gameLayer #gameSectionsParent .gameSection .gameSectionContent {
-        padding-top: 1.8vw;
-    } */
-
     #container.mobileView #gameLayer .titleContainer {
         top: 2.2vw;
         left: 5vw;
@@ -5849,7 +5923,7 @@ p.mapDebug {
 
     #container.mobileView #swapSectionsIcon, #container.mobileView #swapSectionsIcon.collapsed {
         top: 97vw;
-    }
+    } */
     
     
     /* 
@@ -5862,7 +5936,7 @@ p.mapDebug {
     *Mobile*
     */
 
-    #container.mobileView #marketContainerOuterOverlay {
+    /* #container.mobileView #marketContainerOuterOverlay {
         height: 100vw;
         width: 96vw;
         left: 0vw;
@@ -5922,7 +5996,7 @@ p.mapDebug {
 
     #marketSection .marketColumn .cardsAndItemContainer {
         height: 77vw;
-    }
+    } */
 
     /* 
         ____          __ 
@@ -5934,7 +6008,7 @@ p.mapDebug {
     *Mobile*
     */
 
-
+/* 
     #container.mobileView #marketSection .marketColumn .plantPotOverlay {
         transition: left 1.0s ease-in-out;
         width: 10.3vw;
@@ -5948,7 +6022,7 @@ p.mapDebug {
 
     #container.mobileView #marketSection .marketColumn .plantPotOverlay.expanded.startingPos.startingPosAnimate {
         left: -98vw;
-    }
+    } */
 
     /* 
        ______                  __               
@@ -5966,7 +6040,7 @@ p.mapDebug {
     *Static Styles*                                                                                                                   
     */
 
-
+/* 
     #container.mobileView #marketSection .marketColumn .cardsAndItemContainer .marketCardOverlay .cardContainer[cardtype="plant"],
     #container.mobileView #marketSection .marketColumn .cardsAndItemContainer .flip-plant,
     #container.mobileView #marketSection .marketColumn .cardsAndItemContainer .flip-plant .backOfCardContainer,
@@ -5981,7 +6055,7 @@ p.mapDebug {
     #container.mobileView #marketSection .marketColumn .cardsAndItemContainer .marketCardOverlay .cardContainer[cardtype="plant"] .cardContainerOverlay.collapsed,
     #container.mobileView #marketSection .marketColumn .cardsAndItemContainer .marketCardOverlay .cardContainer[cardtype="room"] .cardContainerOverlay.collapsed {
         top: 20vw;
-    }
+    } */
 
     /*
         ____   __               __          
@@ -5997,7 +6071,7 @@ p.mapDebug {
                                                              
     *Mobile*
     */
-
+/* 
     #container.mobileView #marketSection .marketColumn .cardsAndItemContainer .flip-card.flip-back.flip-plant.expanded {
         left: 0vw;
     }
@@ -6017,7 +6091,7 @@ p.mapDebug {
 
     #container.mobileView #marketSection .marketColumn .cardsAndItemContainer .marketCardOverlay .cardContainer[cardtype="plant"] .cardContainerOverlay.collapsed {
         top: 20vw;
-    }
+    } */
 
     /* 
         __  ___              __          __ 
@@ -6033,7 +6107,7 @@ p.mapDebug {
                                             
     *Mobile*
     */
-
+/* 
     #container.mobileView #marketSection .marketColumn .itemToken {
         width: 9vw;
         top: 34vw;
@@ -6061,7 +6135,7 @@ p.mapDebug {
         top: 13.8vw;
         left: 5.85vw;
     }
-    
+     */
     /* 
         ____                         
        / __ \ ____   ____   ____ ___ 
@@ -6076,7 +6150,7 @@ p.mapDebug {
                                     
     *Mobile*
     */
-
+/* 
     #container.mobileView #marketSection .marketColumn .cardsAndItemContainer > .cardContainer[cardtype="room"].expanded {
         top: 45vw;
     }
@@ -6111,7 +6185,7 @@ p.mapDebug {
     #container.mobileView .flip-room .backOfCardContainer {
         height: 32.1vw;
         width: 20.5vw;
-    }
+    } */
 
 
     /* 
@@ -6129,7 +6203,7 @@ p.mapDebug {
     *Mobile*
     */
 
-    #container.mobileView .flip-card {
+    /* #container.mobileView .flip-card {
         height: 32.1vw;
         width: 20.5vw;
     }
@@ -6143,7 +6217,7 @@ p.mapDebug {
     #container.mobileView .backOfCardContainer {
         height: 32.1vw;
         width: 20.5vw;
-    }
+    } */
 
     /*                                                                                     
      ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______
@@ -6163,7 +6237,7 @@ p.mapDebug {
     
     *Mobile*
     */
-
+/* 
     #container.mobileView #tableauContainerOuterOverlay,
     #container.mobileView #tableauContainerInnerOverlay,
     #container.mobileView #tableauSection,
@@ -6276,28 +6350,7 @@ p.mapDebug {
         line-height: 3.8vw;
         opacity: 1;
     }
-/* 
 
-    #container.mobileView #tableauSection #playerInfoContainer .playerInfoTitle.mobileElement {
-        bottom: 45%;
-        top: auto;
-        z-index: 2;
-        color: #3aa572d1;
-        font-size: 3vw;
-        height: 4.5vw;
-        width: 79%;
-        left: 11%;
-        line-height: 3.2vw;
-        opacity: 1;
-    }
-
-    #container.mobileView #tableauSection #playerInfoContainer .playerInfoTitle.mobileElement.expanded {
-        opacity: 1;
-    }
-
-    #container.mobileView #tableauSection #playerInfoContainer .playerInfoTitle.mobileElement.collapsed {
-        opacity: 0;
-    } */
 
     #container.mobileView #tableauSection #playerInfoContainer #cardToPlace .flip-plant.expanded {
         transform-origin: left top;
@@ -6353,16 +6406,6 @@ p.mapDebug {
         height: 14.7vw;
         z-index: 0;
     }
-
-    /* #container.mobileView #tableauSection #playerInfoContainer .itemContainerParent.expanded {
-        width: 14.2vw;
-        height: 14.7vw;
-    }
-
-    #container.mobileView #tableauSection #playerInfoContainer .itemContainerParent.collapsed {
-        width: 14.2vw;
-        height: 14.7vw;
-    } */
 
     #container.mobileView #tableauSection #playerInfoContainer #chosenItemParentContainer.itemContainerParent,
     #container.mobileView #tableauSection #playerInfoContainer #chosenItemParentContainer.itemContainerParent {
@@ -6455,7 +6498,7 @@ p.mapDebug {
         width: 97%;
         font-size: 7.3vw;
         line-height: 3.1vw;
-    }
+    } */
 
     /* 
         __  ___            
@@ -6467,7 +6510,7 @@ p.mapDebug {
                   
     *Mobile*
     */
-
+/* 
     #container.mobileView #tableauSection #homeContentContainer #mapContainerOuterOverlay {
         width: 93.2vw;
         height: 101vw;
@@ -6589,7 +6632,7 @@ p.mapDebug {
     #container.mobileView #tableauSection #mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room.startingPosAnimate.startingPos {
         top: -93vw;
         left: -21vw;
-    }
+    } */
         
     /* 
         ____   __                        __       ______                  __        
@@ -6605,7 +6648,7 @@ p.mapDebug {
         /_/                                                                        
     */
 
-
+/* 
     #tableauSection #mapContainer #placedCardOptions {
         height: 12.8vw;
         padding: 1.2vw 0.2vw 1.4vw 3vw;
@@ -6665,7 +6708,7 @@ p.mapDebug {
     #tableauSection #mapContainer #nurtureItemActionOptions .button .icon ion-icon {
         width: 5vw;
         height: 5vw;
-    }
+    } */
 
     /* 
     _    __                 __                          
@@ -6680,7 +6723,7 @@ p.mapDebug {
     /_/ |_| \___/ \__, / \__,_//_//_/    \___/ \__,_/    
                     /_/                                  
     */
-
+/* 
     #mapContainer #verdancyVisibilityContainer {
         width: 10vw;
         height: 11.5vw;
@@ -6731,7 +6774,7 @@ p.mapDebug {
 
     #mapContainer #verdancyVisibilityContainer.disableVerdancyVisibility .showHideVerdancyIconContainer .verdancyVisibilityIcon.verdancyIconMain {
         color: #9b9b9b;
-    }
+    } */
 
     /* 
      _____                         
@@ -6742,7 +6785,7 @@ p.mapDebug {
     
     *Mobile*
     */
-
+/* 
     #container.mobileView #tableauSection #mapZoomControls {
         top: 1.5vw;
         left: 1vw;
@@ -6770,7 +6813,7 @@ p.mapDebug {
     #container.mobileView #tableauSection #mapZoomControls .zoomIcon.zoomOutIcon {
         top: 0vw;
         left: 13vw;
-    }
+    } */
 
 
     /* 
@@ -6784,7 +6827,7 @@ p.mapDebug {
     *Mobile*
     */
 
-    #container.mobileView #tableauSection #mapNavControls {
+    /* #container.mobileView #tableauSection #mapNavControls {
         bottom: .5vw;
         right: .5vw;
         width: 26vw;
@@ -6803,7 +6846,7 @@ p.mapDebug {
     #container.mobileView #tableauSection #mapNavControls #mapNavBackground {
         top: 0vw;
         right: 0vw;
-    }
+    } */
 
     /* 
         ___                                     
@@ -6815,33 +6858,33 @@ p.mapDebug {
     *Mobile*                        
     */
 
-    #container.mobileView #tableauSection #mapNavControls .arrowImg {
+    /* #container.mobileView #tableauSection #mapNavControls .arrowImg {
         width: 9vw;
-    }
+    } */
 
     /* Up Arrow */
-    #container.mobileView #tableauSection #mapNavControls #upArrow.arrowImg {
+    /* #container.mobileView #tableauSection #mapNavControls #upArrow.arrowImg {
         top: 1.9vw;
         right: 8.4vw;
-    }
+    } */
 
     /* Right Arrow */
-    #container.mobileView #tableauSection #mapNavControls #rightArrow.arrowImg {
+    /* #container.mobileView #tableauSection #mapNavControls #rightArrow.arrowImg {
         top: 9.6vw;
         right: 1.3vw;
-    }
+    } */
 
     /* Down Arrow */
-    #container.mobileView #tableauSection #mapNavControls #downArrow.arrowImg {
+    /* #container.mobileView #tableauSection #mapNavControls #downArrow.arrowImg {
         top: 17.6vw;
         right: 9.1vw;
-    }
+    } */
 
     /* Left Arrow */
-    #container.mobileView #tableauSection #mapNavControls #leftArrow.arrowImg {
+    /* #container.mobileView #tableauSection #mapNavControls #leftArrow.arrowImg {
         top: 9.2vw;
         right: 16.1vw;
-    }
+    } */
 
 
-}
+/* } */
