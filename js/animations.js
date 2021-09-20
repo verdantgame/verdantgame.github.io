@@ -121,7 +121,7 @@ function swapActiveMainSection(){
         sectionStates.tableau = 'expanded';
     }
 
-    temporarilyLockMap(700);
+    // temporarilyLockMap(700);
 
     // lockMap = true;
     // setTimeout(function(){
