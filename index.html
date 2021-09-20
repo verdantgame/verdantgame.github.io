@@ -47,7 +47,7 @@
 
 <body>
 	<div id="full-bg"></div>
-	<div id="container">
+	<div id="container" class="desktopView">
 
 		<div id="loaderLayer" class="layer">
 			<div class="loader-parent">
@@ -100,13 +100,14 @@
 					<div id="turnsRemainingContainer" class="infoBarStatContainer">
 						<p id="turnsRemainingTitle" class="infoBarStatTitle">Turns Remaining:</p>
 						<p id="turnsRemainingInfo" class="infoBarStatData">13</p>
+						<p id="turnsRemainingUpdateInfo" class="infoBarUpdateData subtractVal">1</p>
 						<div class="clear"></div>
 					</div>
 
 					<div id="greenThumbsAmountContainer" class="infoBarStatContainer" animation-scale-amount="1">
 						<p id="greenThumbsAmountTitle" class="infoBarStatTitle">Green Thumbs:</p>
-						<p id="greenThumbsUpdateInfo" class="infoBarUpdateData subtractVal">2</p>
 						<p id="greenThumbsAmountInfo" class="infoBarStatData">2</p>
+						<p id="greenThumbsUpdateInfo" class="infoBarUpdateData subtractVal">2</p>
 						<div id="greenThumbsEndPoint"></div>
 						<div class="clear"></div>
 					</div>
@@ -505,6 +506,45 @@
 				<button class="delete closeModalTrigger mediumCloseCross" aria-label="close" title="Close button image"></button>
 				<p class="has-text-centered">There is no valid room card placements available in your tableau. Please pick a plant card to place instead.</p>
 				<button class="button is-danger closeModalTrigger button-is-centered" title="Close modal button">Close</button>
+			</div>
+		</div>
+	</div>
+
+	<div id="finalScoringModal" class="modal notificationModal">
+		<div class="modal-background"></div>
+		<div class="modal-content">
+			<div class="notification">
+				<button class="delete closeModalTrigger mediumCloseCross" aria-label="close" title="Close button image"></button>
+				<p>If you enjoyed Verdant, you can get a Kickstarter Edition of the game, complete with Kickstarter promo cards not available with the retail edition, all for a pledge of just $29 ($50 MSRP value!)</p>
+				<p>This is your first and best opportunity to support our small collaborative and get a great deal on the game!</p>
+				<p><a href="http://www.verdantgame.com" target="_blank">https://www.verdantgame.com</a></p>
+				<p>Thanks so much for playing!</p>
+
+				<div id="scoringCountdownTimer">
+					<ion-icon name="leaf-outline"></ion-icon>
+					<ion-icon name="leaf-outline"></ion-icon>
+					<ion-icon name="leaf-outline"></ion-icon>
+					<ion-icon name="leaf-outline"></ion-icon>
+					<ion-icon name="leaf-outline"></ion-icon>
+					<ion-icon name="leaf-outline"></ion-icon>
+					<ion-icon name="leaf-outline"></ion-icon>
+					<ion-icon name="leaf-outline"></ion-icon>
+					<ion-icon name="leaf-outline"></ion-icon>
+					<ion-icon name="leaf-outline"></ion-icon>
+					<ion-icon name="leaf-outline"></ion-icon>
+					<ion-icon name="leaf-outline"></ion-icon>
+					<ion-icon name="leaf-outline"></ion-icon>
+					<ion-icon name="leaf-outline"></ion-icon>
+					<ion-icon name="leaf-outline"></ion-icon>
+					<ion-icon name="leaf-outline"></ion-icon>
+					<ion-icon name="leaf-outline"></ion-icon>
+					<ion-icon name="leaf-outline"></ion-icon>
+					<ion-icon name="leaf-outline"></ion-icon>
+					<ion-icon name="leaf-outline"></ion-icon>
+					<ion-icon name="leaf-outline"></ion-icon>
+				</div>
+
+				<button id="showFinalScore" class="button is-success closeModalTrigger button-is-centered" title="Close modal button">See your score!</button>
 			</div>
 		</div>
 	</div>
