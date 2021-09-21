@@ -5951,12 +5951,11 @@ p.mapDebug {
       }
   }
   
-
 #developerCredit {
     font-weight: bold;
     position: absolute;
     bottom: 0px;
-    right: 10px;
+    left: 10px;
     font-size: 12px;
 }
 
