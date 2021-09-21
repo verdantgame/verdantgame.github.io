@@ -73,7 +73,6 @@ $(document).on(touchEvent, '#frontPageGameInstructionsButton', function(){
 	openInNewTab(rulesURL);
 });
 
-
 $(document).on(touchEvent, '#viewPotScoringBtn', function(){
     if($('#viewPotScoringBtn').hasClass('showPotScoringLayer')) {
         togglePotScoringLayerVisibility('show');
@@ -81,7 +80,6 @@ $(document).on(touchEvent, '#viewPotScoringBtn', function(){
         togglePotScoringLayerVisibility('hide');
     }
 });
-
 
 function setupDrawPiles(){
     // create and shuffle plant card draw pile array
@@ -171,6 +169,10 @@ function togglePotScoringLayerVisibility(mode) {
 }
 
 $(document).on(touchEvent, '#startGame', function(){
+    $('#keyboardKeysModal').addClass('is-active');
+});
+
+$(document).on(touchEvent, '#commenceGame', function(){
 	$('.layer').fadeOut();
     setTimeout(function(){
         // console.log(` '#startGame' - setTimeout(function(){}, 400)`);
@@ -325,6 +327,12 @@ function chooseStartingPlayerCards() {
 $(document).on(touchEvent, '#showScoringRemindersBtn', function(){
     $('#scoringReminderModal').addClass('is-active');
 });
+
+$(document).on(touchEvent, '#scoringRemindersFinalScoreBtn', function(){
+    $('#scoringReminderModal').addClass('is-active');
+});
+
+
 
 // $(window).resize(function() {
 //     checkScreenWidth();
@@ -485,6 +493,28 @@ function generateCard(thisCard, cardType, mode, thisSection) {
     // console.log(`generateCard(thisCard, cardType, mode, thisSection)`);
     // console.log(`generateCard(${thisCard}, ${cardType}, ${mode}, ${thisSection})`);
 
+    // 0:
+    //     cardType: "plant"
+    //     id: "livingStone"
+    //     img: "unusual-4"
+    //     lighting: ['full']
+    //     name: "Living Stone"
+    //     plantType: "unusual"
+    //     verdancyRequired: 3
+    //     vps: 3
+
+
+    // 0:
+    //     cardType: "room"
+    //     img: "foliage"
+    //     item: "none"
+    //     lighting: (4) ['half', 'full', 'full', 'none']
+
+    
+
+    // 'flowering': [  // lighting key = ['top', 'right', 'bottom', 'left']
+    //     ['half', 'full', 'half', 'none'], // flowering-room-0
+
 	var thisCardHTML = `
         ${mode == 'init' ? `
             <div data-animation-group="${thisSection}" class="flip-card flip-back flip-${cardType} expanded${thisSection == 'tableau' ? ` startingPos startingPosAnimate` : ``}">
@@ -497,7 +527,7 @@ function generateCard(thisCard, cardType, mode, thisSection) {
                         <div class="flip-card-back">
         ` : ``}
 
-                    <div data-animation-group="${thisSection}" class="${mode == 'market' ? `newCardContainer ` : ``}cardContainer expanded initBoxShadow" cardtype="${cardType}"${cardType == 'plant' ? ` data-lighting-num="${thisCard.lighting.length}"` : ``}`;
+                    <div data-animation-group="${thisSection}" class="${mode == 'market' ? `newCardContainer ` : ``}cardContainer expanded initBoxShadow" cardtype="${cardType}"${cardType == 'plant' ? ` plant-vps="${thisCard.vps}" plant-type="${thisCard.plantType}" data-lighting-num="${thisCard.lighting.length}"` : ` room-type="${thisCard.img}"`}`;
                     if(cardType == 'plant') {
                         thisCardHTML += ` data-lighting-types="`;
                         for (let i = 0; i < thisCard.lighting.length; i++) {
@@ -606,9 +636,21 @@ function generateItem(thisItem, mode) {
     // itemDetails[0] = itemsNurture
     // itemDetails[1] = trowel
 
+    // 0: "itemsNurture_trowel"
+    // 1: "items_flowering-cat"
+
     let itemDetails = thisItem.split('_');
+    let itemRoom = '';
+    let itemName = '';
+
+    if(itemDetails[0] == 'items') {
+        let normalItemSplit = itemDetails[1].split('-');
+        itemRoom = normalItemSplit[0];
+        itemName = normalItemSplit[1];
+    }
+
     let thisItemHTML = `
-        <div data-animation-group="market" item-type="${itemDetails[0] == 'itemsNurture' ? `nurture` : `normal`}" item-name="${itemDetails[1]}" class="${mode == 'market' ? `newItemToken ` : `animatingElem mediumTransition `}itemToken expanded" >
+        <div data-animation-group="market" item-type="${itemDetails[0] == 'itemsNurture' ? `nurture` : `normal`}" item-name="${itemDetails[1]}"${itemDetails[0] == 'items' ? ` matching-room="${itemRoom}" furniture-pet-name="${itemName}"` : ``} class="${mode == 'market' ? `newItemToken ` : `animatingElem mediumTransition `}itemToken expanded" >
             <div class="hiddenBlackOverlay inactiveBlackOverlay"></div>
             <img src="img/${itemDetails[0]}/${itemDetails[1]}.png" />
         ${itemDetails[0] == 'itemsNurture' ? `
@@ -1469,44 +1511,44 @@ var mapMoveAmount = {
 		'desktopView': {
             'zoomIncs': {
                 '13': {
-                    'vertical': '60',
-                    'horizontal': '70'
+                    'vertical': '45',
+                    'horizontal': '55'
                 },
                 '12': {
-                    'vertical': '60',
-                    'horizontal': '70'
+                    'vertical': '45',
+                    'horizontal': '55'
                 },
                 '11': {
-                    'vertical': '55',
-                    'horizontal': '65'
+                    'vertical': '40',
+                    'horizontal': '50'
                 },
                 '10': {
-                    'vertical': '55',
-                    'horizontal': '65'
+                    'vertical': '40',
+                    'horizontal': '50'
                 },
                 '9': {
-                    'vertical': '50',
-                    'horizontal': '60'
+                    'vertical': '35',
+                    'horizontal': '45'
                 },
                 '8': {
-                    'vertical': '50',
-                    'horizontal': '60'
+                    'vertical': '35',
+                    'horizontal': '45'
                 },
                 '7': {
-                    'vertical': '45',
-                    'horizontal': '55'
+                    'vertical': '30',
+                    'horizontal': '40'
                 },
                 '6': {
-                    'vertical': '45',
-                    'horizontal': '55'
+                    'vertical': '30',
+                    'horizontal': '40'
                 },
                 '5': {
-                    'vertical': '35',
-                    'horizontal': '45'
+                    'vertical': '20',
+                    'horizontal': '25'
                 },
                 '4': {
-                    'vertical': '35',
-                    'horizontal': '45'
+                    'vertical': '20',
+                    'horizontal': '25'
                 },
             },
 			'unit': 'px'
@@ -1721,7 +1763,7 @@ function generateMap() {
 	var mapHTML = `<div id="mapHiddenOverlay" animation-scale-amount=".9" style="transform: scale(0.9);">`;
 	for (let i = 0; i < mapData.length; i++) {
 		for (let j = 0; j < mapData[i].length; j++) {
-			mapHTML += `<div data-map-row="${mapData[i][j].row}" data-map-column="${mapData[i][j].column}" id="row-${mapData[i][j].row}-column-${mapData[i][j].column}" class="mapTileContainer"><p class="mapDebug">row-${mapData[i][j].row}-column-${mapData[i][j].column}</p></div>`;
+			mapHTML += `<div data-map-row="${mapData[i][j].row}" data-map-column="${mapData[i][j].column}" id="row-${mapData[i][j].row}-column-${mapData[i][j].column}" class="mapTileContainer"></div>`;
 		}
 	}
     mapHTML += `
@@ -1742,10 +1784,6 @@ function calculateViewableCardLimits() {
 }
 
 $(document).keydown(function(e){
-
-    // console.log(`$(document).keydown(function(e)`);
-    // console.log(`e = `, e);
-    // console.log(`e.which = ${e.which}`);
 
 	if(!lockMap) {
 		lockMap = true;
@@ -2384,6 +2422,8 @@ function activateNextRoundBtn(){
     }
 }
 
+let leafCountdownInterval;
+
 $(document).on(touchEvent,'#undoNextRoundBtnContainer #nextRound',function(){
 
     lockMap = true;
@@ -2393,9 +2433,7 @@ $(document).on(touchEvent,'#undoNextRoundBtnContainer #nextRound',function(){
 
     if($(this).hasClass('finalScoring')) {
         $('#finalScoringModal').addClass('is-active');
-        setTimeout(function(){
-            leafCountdownInterval = setInterval(leafCountdownFunction, 200);
-        }, 1000)
+        leafCountdownInterval = setInterval(leafCountdownFunction, 120);
         return;
     }
 
@@ -3462,6 +3500,10 @@ $(document).on(touchEvent,'#confirmItemPlacement.button',function(){
     $(`#${placedMapID} .cardContainer .roomCardItemContainer .itemToken`).addClass('placedItem').removeClass('activePlacement');
     $(`#${placedMapID}`).attr('placed-item', placedItemName);
 
+    let splitItemName = placedItemName.split('-');
+    $(`#${placedMapID}`).attr('item-room-type', splitItemName[0]);
+    $(`#${placedMapID}`).attr('furniture-pet-name', splitItemName[1]);
+
     // console.log(`placedMapID = ${placedMapID}`);
     // console.log(`placedItemName = ${placedItemName}`);
     // console.log(`#${placedMapID} .cardContainer .roomCardItemContainer .itemToken`);
@@ -4337,29 +4379,380 @@ function findMapNeighbours(thisRow, thisColumn, criteria, returnPositions){
     }
 }
 
-let leafCountdownInterval;
-
-function finalScoringProcess() {
-    $('#finalScoringModal').addClass('is-active');
-    leafCountdownInterval = setInterval(leafCountdownFunction, 200);
-}
+let leafFadeAwayInterval;
+let currentLeafWave = 0;
 
 function leafCountdownFunction(){
-    if($('#finalScoringModal .modal-content .notification #scoringCountdownTimer ion-icon[name="leaf-outline"]:first-child').length) {
-        $('#finalScoringModal .modal-content .notification #scoringCountdownTimer ion-icon[name="leaf-outline"]:first-child').attr('name', 'leaf');
+    if($('#finalScoringModal .modal-content .notification #scoringCountdownTimer ion-icon[name="leaf-outline"]').length) {
+        $('#finalScoringModal .modal-content .notification #scoringCountdownTimer ion-icon[name="leaf-outline"]').eq(0).attr('name', 'leaf');
     } else {
         clearInterval(leafCountdownInterval);
-        $('#finalScoringModal .modal-content .notification #scoringCountdownTimer').fadeOut();
+
+        $('#finalScoringModal .modal-content .notification #scoringCountdownTimer').fadeOut()
+
         setTimeout(function(){
-            $('#finalScoringModal .modal-content .notification #showFinalScore').fadeIn();
+            $('#finalScoringModal .modal-content .notification #enterNameAndFinalScoringBtn').fadeIn();
         }, 400);
+        // setTimeout(function(){
+        //     leafFadeAwayInterval = setInterval(leafFadeAwayFunction, 120);
+        // }, 1000);
     }
 }
 
+// function leafFadeAwayFunction(){
+//     $(`#scoringCountdownTimer ion-icon[name="leaf"][fade-out-wave="${currentLeafWave}"]`).remove();
+//     // $(`#scoringCountdownTimer ion-icon[name="leaf"][fade-out-wave="${currentLeafWave}"]`).addClass('remove-end-game-leaf-animations');
+//     currentLeafWave++;
+
+//     if(currentLeafWave == 21) {
+//         clearInterval(leafFadeAwayInterval);
+//         finalScoringProcess()
+//         setTimeout(function(){
+//             $('#finalScoringModal .modal-content .notification #scoringCountdownTimer').remove();
+//             $('#finalScoringModal .modal-content .notification #enterNameAndFinalScoringBtn').fadeIn();
+//         }, 1500);
+//     }
+
+//     if($('#finalScoringModal .modal-content .notification #scoringCountdownTimer ion-icon[name="leaf-outline"]').length) {
+//         $('#finalScoringModal .modal-content .notification #scoringCountdownTimer ion-icon[name="leaf-outline"]').eq(0).attr('name', 'leaf');
+//     } else {
+//         clearInterval(leafCountdownInterval);
+//         finalScoringProcess();
+        
+//     }
+// }
+
 $(document).on(touchEvent, '#finalScoringModal .modal-content .notification #showFinalScore', function(){
+    lockMap = true;
     $('#finalScoringModal').removeClass('is-active');
+    $('.layer').fadeOut();
+
+    let playersName = $('#finalScoringModal .modal-content .notification #enterNameAndFinalScoringBtn #playerNameInput').val();
+    if(playersName != '') {
+        $('#finalScore #fs-name').html(playersName);
+    } else {
+        $('#finalScore #fs-name').html('Player');
+    }
+    
+    setTimeout(function(){
+        finalScoringProcess();
+        $('#scoringLayer.layer').fadeIn();
+    }, 600);
 });
 
+
+
+function finalScoringProcess() {
+   
+    $('.mapTileContainer[cardtype]').clone().appendTo('#mapAndFinalScoreContainer #finalMap');
+
+    $('#finalMap .mapTileContainer[cardtype="plant"][plant-pot="none"]').each(function(){
+        let topCardLayer = $(this).find('.cardContainer');
+        $(topCardLayer).append('<div class="finalScoringVerdancyEarned"></div>');
+        let finalScoringVerdancyEarnedContainer = $(topCardLayer).find('.finalScoringVerdancyEarned');
+        let verdancyEarnedNum = $(this).find('.completeVerdancy').length;
+        $(finalScoringVerdancyEarnedContainer).attr('final-scoring-verdancy-amount', verdancyEarnedNum);
+        $(this).find('.completeVerdancy').appendTo(finalScoringVerdancyEarnedContainer);
+    });
+
+    setupCarousel();
+    finalScoringCalculation();
+}
+
+function finalScoringCalculation() {
+    console.clear();
+
+    let completedPlantsFinalVPs = 0;
+    let leftOverVerdancyFinalVPs = 0;
+    let potPointsFinalVPs = 0;
+    let roomPointsFinalVPs = 0;
+    let uniquePetsFurnitureFinalVPs = 0;
+    let plantCollectorBonusFinalVPs = 0;
+    let decoratorBonusFinalVPs = 0;
+
+    $('#finalMap .mapTileContainer[cardtype="plant"]:not([plant-pot="none"]) .cardContainer').each(function(){
+        let thisCompletedPlantVPs = parseInt($(this).attr('plant-vps'));
+        completedPlantsFinalVPs = completedPlantsFinalVPs + thisCompletedPlantVPs;
+        // console.log(`completedPlantsFinalVPs = ${completedPlantsFinalVPs}`);
+    });
+
+    // console.log(`FINAL completedPlantsFinalVPs = ${completedPlantsFinalVPs}`);
+    
+    $('#fs-completedPlants').html(completedPlantsFinalVPs);
+
+    // leftOverVerdancy total / 2 = VPs (rounded down) Math.floor
+
+
+
+    let totalLeftOverVerdancy = 0;
+
+    $('#finalMap .mapTileContainer[cardtype="plant"][plant-pot="none"] .cardContainer .finalScoringVerdancyEarned').each(function(){
+        let thisCardLeftOverVerdancy = parseInt($(this).attr('final-scoring-verdancy-amount'));
+        // console.log(`thisCardLeftOverVerdancy = ${thisCardLeftOverVerdancy}`);
+        totalLeftOverVerdancy = totalLeftOverVerdancy + thisCardLeftOverVerdancy;
+        // console.log(`totalLeftOverVerdancy = ${totalLeftOverVerdancy}`);
+    });
+
+    // console.log(`FINAL totalLeftOverVerdancy = ${totalLeftOverVerdancy}`);
+    leftOverVerdancyFinalVPs = Math.floor(totalLeftOverVerdancy / 2);
+    // console.log(`leftOverVerdancy = ${leftOverVerdancyFinalVPs}`);
+    $('#fs-leftOverVerdancy').html(leftOverVerdancyFinalVPs);
+
+
+    let potPointsRange = ['terracotta', 'porcelain', 'wood', 'concrete']; // index = plant pot points
+
+    $('#finalMap .mapTileContainer[cardtype="plant"]:not([plant-pot="none"])').each(function(){
+        let thisPlantPotType = $(this).attr('plant-pot');
+        // console.log(`thisPlantPotType = ${thisPlantPotType}`);
+        // console.log(`potPointsRange.indexOf(thisPlantPotType) = ${potPointsRange.indexOf(thisPlantPotType)}`);
+        // console.log(`potPointsFinalVPs = ${potPointsFinalVPs}`);
+        potPointsFinalVPs = potPointsFinalVPs + potPointsRange.indexOf(thisPlantPotType);
+        // console.log(`potPointsFinalVPs = ${potPointsFinalVPs}`);
+    });
+
+    $('#fs-potPoints').html(potPointsFinalVPs);
+
+
+    // roomPoints
+    
+    $('#finalMap .mapTileContainer[cardtype="room"]').each(function(){
+
+        let thisRow = $(this).data('map-row');
+        let thisColumn = $(this).data('map-column');
+
+        // console.log(`thisRow = ${thisRow}`)
+        // console.log(`thisColumn = ${thisColumn}`)
+
+        let thisRoomType = $(this).find('.cardContainer').attr('room-type');
+        let thisPlacedItemType = $(this).attr('item-room-type');
+        let thisRoomMatchingPoints = 1;
+
+        // console.log(`thisRoomType = ${thisRoomType}`);
+        // console.log(`thisPlacedItemType = ${thisPlacedItemType}`);
+
+        if (typeof thisPlacedItemType !== typeof undefined && thisPlacedItemType !== false) {
+            if(thisRoomType == thisPlacedItemType) {
+                // console.log(`IF (thisRoomType == thisPlacedItemType)`)
+                thisRoomMatchingPoints = 2;
+            }
+        }
+
+        // console.log(`thisRoomMatchingPoints = ${thisRoomMatchingPoints}`)
+
+        let roomAndPlantTypeMatches = 0;
+    
+        if($(`#row-${thisRow - 1}-column-${thisColumn}`).length) {
+            // console.log(`IF($('#row-${thisRow - 1}-column-${thisColumn}').length)`);
+            let firstNeighbourPlantType = $(`#row-${thisRow - 1}-column-${thisColumn} .cardContainer`).attr('plant-type');
+            // console.log(`firstNeighbourPlantType = ${firstNeighbourPlantType}`);
+            if(firstNeighbourPlantType == thisRoomType) {
+                // console.log(`IF (firstNeighbourPlantType == thisRoomType)`);
+                roomAndPlantTypeMatches++;
+            }
+        }
+        
+        if($(`#row-${thisRow}-column-${thisColumn + 1}`).length) {
+            // console.log(`IF($('#row-${thisRow}-column-${thisColumn + 1}').length)`);
+            let secondNeighbourPlantType = $(`#row-${thisRow - 1}-column-${thisColumn} .cardContainer`).attr('plant-type');
+            // console.log(`secondNeighbourPlantType = ${secondNeighbourPlantType}`);
+            if(secondNeighbourPlantType == thisRoomType) {
+                // console.log(`IF (secondNeighbourPlantType == thisRoomType)`);
+                roomAndPlantTypeMatches++;
+            }
+        }
+        
+        if($(`#row-${thisRow + 1}-column-${thisColumn}`).length) {
+            // console.log(`IF($('#row-${thisRow + 1}-column-${thisColumn}').length)`);
+            let thirdNeighbourPlantType = $(`#row-${thisRow - 1}-column-${thisColumn} .cardContainer`).attr('plant-type');
+            // console.log(`thirdNeighbourPlantType = ${thirdNeighbourPlantType}`);
+            if(thirdNeighbourPlantType == thisRoomType) {
+                // console.log(`IF (thirdNeighbourPlantType == thisRoomType)`);
+                roomAndPlantTypeMatches++;
+            }
+        }
+        
+        if($(`#row-${thisRow}-column-${thisColumn - 1}`).length) {
+            // console.log(`IF ($('#row-${thisRow}-column-${thisColumn - 1}').length)`);
+            let fourthNeighbourPlantType = $(`#row-${thisRow - 1}-column-${thisColumn} .cardContainer`).attr('plant-type');
+            // console.log(`fourthNeighbourPlantType = ${fourthNeighbourPlantType}`);
+            if(fourthNeighbourPlantType == thisRoomType) {
+                // console.log(`IF (fourthNeighbourPlantType == thisRoomType)`);
+                roomAndPlantTypeMatches++;
+            }
+        }
+
+        // console.log(`roomAndPlantTypeMatches = ${roomAndPlantTypeMatches}`)
+
+        if(roomAndPlantTypeMatches != 0) {
+            // console.log(`roomAndPlantTypeMatches = ${roomAndPlantTypeMatches}`);
+            // console.log(`thisRoomMatchingPoints = ${thisRoomMatchingPoints}`);
+            let totalMatchedRoomAndPlantsPoints = roomAndPlantTypeMatches * thisRoomMatchingPoints
+            // console.log(`totalMatchedRoomAndPlantsPoints = ${totalMatchedRoomAndPlantsPoints}`);
+            roomPointsFinalVPs = roomPointsFinalVPs + totalMatchedRoomAndPlantsPoints;
+            // console.log(`roomPointsFinalVPs = ${roomPointsFinalVPs}`);
+        }
+
+    });
+
+    // console.log(`roomPointsFinalVPs = ${roomPointsFinalVPs}`);
+
+    $('#fs-roomPoints').html(roomPointsFinalVPs);
+
+
+    // uniquePetsFurniture
+
+    let uniqueFurnitureAndPetsScoringRange = [0, 1, 3, 6, 9, 12, 16, 20, 25];
+
+    let allFurnitureAndPets = [];
+    $('#finalMap .mapTileContainer[placed-item]').each(function(){
+        // console.log(`$(this).attr('furniture-pet-name') = ${$(this).attr('furniture-pet-name')}`);
+        allFurnitureAndPets.push($(this).attr('furniture-pet-name'));
+    });
+
+    let uniqueFurnitureAndPets = allFurnitureAndPets.filter(onlyUnique);
+    // console.log(`uniqueFurnitureAndPets = ${uniqueFurnitureAndPets}`);
+    // console.log(`uniqueFurnitureAndPets.length = ${uniqueFurnitureAndPets.length}`);
+    // console.log(`uniqueFurnitureAndPetsScoringRange = ${uniqueFurnitureAndPetsScoringRange}`);
+    uniquePetsFurnitureFinalVPs = uniqueFurnitureAndPetsScoringRange[uniqueFurnitureAndPets.length];
+    // console.log(`uniquePetsFurnitureFinalVPs = ${uniquePetsFurnitureFinalVPs}`);
+
+    $('#fs-uniquePetsFurniture').html(uniquePetsFurnitureFinalVPs);
+
+    // plantCollectorBonus
+    let allPlantTypes = [];
+
+    $('#finalMap .mapTileContainer[cardtype="plant"] .cardContainer').each(function(){
+        // console.log(`$(this).attr('plant-type') = ${$(this).attr('plant-type')}`)
+        allPlantTypes.push($(this).attr('plant-type'));
+    });
+
+    let uniquePlantTypes = allPlantTypes.filter(onlyUnique);
+    uniquePlantTypes.length == 5 ? plantCollectorBonusFinalVPs = 3 : plantCollectorBonusFinalVPs = 0;
+    $('#fs-plantCollectorBonus').html(plantCollectorBonusFinalVPs);
+
+
+    // decoratorBonus
+    let allRoomTypes = [];
+
+    $('#finalMap .mapTileContainer[cardtype="room"] .cardContainer').each(function(){
+        // console.log(`$(this).attr('room-type') = ${$(this).attr('room-type')}`)
+        allRoomTypes.push($(this).attr('room-type'));
+    });
+
+    let uniqueRoomTypes = allRoomTypes.filter(onlyUnique);
+    uniqueRoomTypes.length == 5 ? decoratorBonusFinalVPs = 3 : decoratorBonusFinalVPs = 0;
+    $('#fs-decoratorBonus').html(decoratorBonusFinalVPs);
+
+    let finalScoreVPs = completedPlantsFinalVPs + leftOverVerdancyFinalVPs + potPointsFinalVPs + roomPointsFinalVPs + uniquePetsFurnitureFinalVPs + plantCollectorBonusFinalVPs + decoratorBonusFinalVPs;
+
+    $('#fs-totalScore').html(finalScoreVPs);
+
+    let scoringRanges = $('#scoringTable .scoreRangeLabel').length;
+
+    for (let i = 0; i < scoringRanges; i++) {
+        let thisLowRange = parseInt($(`#scoringTable .scoreRangeLabel[score-range-num="${i}"]`).data('low-range'));
+        let thisHighRange = parseInt($(`#scoringTable .scoreRangeLabel[score-range-num="${i}"]`).data('high-range'));
+        if(finalScoreVPs > thisLowRange && finalScoreVPs < thisHighRange) {
+            $(`#scoringTable .scoreRangeLabel[score-range-num="${i}"]`).addClass('currentScoreRanking');
+            break;
+        }
+    }
+}
+
+$(document).on(touchEvent, '#shareYourResults', function(){
+    const finalScoreContainer = document.querySelector('#mapAndFinalScoreContainer');
+	html2canvas(finalScoreContainer).then(function(canvas) {
+        canvas.setAttribute("id", "verdant-final-score");
+        document.body.appendChild(canvas);
+        var link = document.createElement('a');
+        link.download = 'verdant-score.png';
+        link.href = document.getElementById('verdant-final-score').toDataURL();
+        link.crossOrigin="anonymous";
+        link.click();
+    });
+});
+
+function initSlideshow(container, animation){
+    /*
+    * @param {String} container Class or ID of the animation container
+    * @param {String} animation Name of the animation, e.g. smoothscroll
+    */
+    var sliderWidth = 0;	
+    var slidesNumber = 22;
+    var sliderHeight = 188;
+    var slideWidth = 152;
+    var totalAnimationWidth = 2093;
+    let containerWidth = 258;
+    // detect number of visible slides
+    var slidesVisible = containerWidth / slideWidth;	
+    var maxSlidesVisible = Math.ceil(slidesVisible);
+
+    // count slides to determine animation speed
+    var speed = slidesNumber*4;
+    // append the tail	
+    $(container+'>div>div').slice(0,maxSlidesVisible).clone().appendTo($(container+'>div'));	
+
+    // set slider dimensions
+    $(container+'>div').css({'width':'440px','height':sliderHeight});
+
+    //   Insert styles to html
+    $("<style type='text/css'>@keyframes "+animation+" { 0% { margin-left: 0px; } 100% { margin-left: -"+totalAnimationWidth+"px; } } "+container+">div>div:first-child { -webkit-animation: "+animation+" "+speed+"s linear infinite; -moz-animation: "+animation+" "+speed+"s linear infinite; -ms-animation: "+animation+" "+speed+"s linear infinite; -o-animation: "+animation+" "+speed+"s linear infinite; animation: "+animation+" "+speed+"s linear infinite; }</style>").appendTo("head");	
+}
+
+function setupCarousel(){
+    let carouselRaw = [
+        {   
+            'id': 'g',
+            'config': [5, 3, 3],
+            'order': [0, 1, 2],
+            'pos': 0
+        },{
+            'id': 'p',
+            'config': [4, 4, 4, 4, 4],
+            'order': [0, 1, 2, 3, 4],
+            'pos': 0
+        }
+    ];
+
+    for (let i = 0; i < carouselRaw.length; i++) {
+        shuffle(carouselRaw[i]['order']);
+    }
+
+    let masterIndex = 0;
+    let carouselData = [];
+
+    while (carouselData.length < 17) {
+        let thisIndex = carouselRaw[masterIndex]['pos'];
+        let thisRange = carouselRaw[masterIndex]['config'][carouselRaw[masterIndex]['order'][thisIndex]];
+        let uniqueCombo = false;
+        while (!uniqueCombo) {
+            let randNum = Math.floor(Math.random() * thisRange);
+            let thisCombo = `${carouselRaw[masterIndex]['id']}-${carouselRaw[masterIndex]['order'][thisIndex]}-${randNum}`;
+            if(carouselData.indexOf(thisCombo) == -1) {		
+                carouselData.push(thisCombo);
+                uniqueCombo = true;
+            }
+        }
+        carouselRaw[masterIndex]['pos'] == carouselRaw[masterIndex]['config'].length - 1 ? carouselRaw[masterIndex]['pos'] = 0 : carouselRaw[masterIndex]['pos']++;
+
+        masterIndex == 0 ? masterIndex = 1 : masterIndex = 0;
+    }
+
+    let carouselHTML = '';
+
+    for (let i = 0; i < carouselData.length; i++) {
+        carouselHTML += `
+            <div class="slideshow-slide">
+                <img src="img/demo-carousel/${carouselData[i]}.jpg">
+            </div>
+        `;
+    }
+
+    $('#shareInstructions #shareInstructionsContent .slideshow-block > .slideshow-animation').html(carouselHTML);
+    setTimeout(function(){
+        initSlideshow('#shareInstructions #shareInstructionsContent .slideshow-block', 'smoothscroll');
+    }, 100);
+}
 
 function countInArray(array, what) {
     var count = 0;
