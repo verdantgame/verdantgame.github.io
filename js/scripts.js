@@ -4652,7 +4652,7 @@ function finalScoringCalculation() {
     for (let i = 0; i < scoringRanges; i++) {
         let thisLowRange = parseInt($(`#scoringTable .scoreRangeLabel[score-range-num="${i}"]`).data('low-range'));
         let thisHighRange = parseInt($(`#scoringTable .scoreRangeLabel[score-range-num="${i}"]`).data('high-range'));
-        if(finalScoreVPs > thisLowRange && finalScoreVPs < thisHighRange) {
+        if(finalScoreVPs >= thisLowRange && finalScoreVPs <= thisHighRange) {
             $(`#scoringTable .scoreRangeLabel[score-range-num="${i}"]`).addClass('currentScoreRanking');
             break;
         }
