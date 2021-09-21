@@ -217,7 +217,9 @@ const preload = src => new Promise(function(resolve, reject) {
     'img/verdancy-active.png',
     'img/verdancy-inactive.png',
     'img/verdancy-inactive2.png',
-    'img/verdancy-shadow.png'
+    'img/verdancy-shadow.png',
+    'img/keyboard-keys-move.png',
+    'img/keyboard-keys-zoom-in-out.png'
   ];
   
   preloadAll(sources)
