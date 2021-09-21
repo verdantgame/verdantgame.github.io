@@ -25,7 +25,7 @@
 	<!-- Font for Titles -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Serif+Text&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Serif+Text&family=Architects+Daughter&display=swap" rel="stylesheet">
 
 	<!-- Font for Matching Lighting Types -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
@@ -453,6 +453,76 @@
 				</div>
 			</div>
 		</div>
+
+		<div id="scoringLayer" class="layer">
+
+			<p id="developerCredit">&#60;Coded by <a href="https://www.buymeacoffee.com/Vzb9xJW" target="_blank">Gavin McGruddy</a>&#62;</p>
+
+			<div id="mapAndFinalScoreContainer">
+
+				<div class="bgOverlay"></div>
+				<img class="gameSectionBg" src="img/bg-wide.jpg" />
+
+				<div id="scoringTable">
+					<p score-range-num="4" class="scoreRangeLabel" data-low-range="50" data-high-range="59">50+ points<br />A good start!</p>
+					<p score-range-num="3" class="scoreRangeLabel" data-low-range="60" data-high-range="69">60+ points<br />You&rsquo;re getting it!</p>
+					<p score-range-num="2" class="scoreRangeLabel" data-low-range="70" data-high-range="79">70+ points<br />Very Good!</p>
+					<p score-range-num="1" class="scoreRangeLabel" data-low-range="80" data-high-range="89">80+ points<br />Excellent!</p>
+					<p score-range-num="0" class="scoreRangeLabel" data-low-range="90" data-high-range="999">90+ points<br />Elite!</p>
+				</div>
+
+				<div id="finalMap">
+				</div>
+
+				<div id="finalScore">
+					<img id="finalScoreBgImg" src="img/scorepad.jpg" />
+					<p id="fs-name" class="finalScoreText">GAVIN</p>
+					<p id="fs-completedPlants" class="finalScoreText vpText finalScoreVPs"></p>
+					<p id="fs-leftOverVerdancy" class="finalScoreText vpText finalScoreVPs"></p>
+					<p id="fs-potPoints" class="finalScoreText vpText finalScoreVPs"></p>
+					<p id="fs-roomPoints" class="finalScoreText vpText finalScoreVPs"></p>
+					<p id="fs-uniquePetsFurniture" class="finalScoreText vpText finalScoreVPs"></p>
+					<p id="fs-plantCollectorBonus" class="finalScoreText vpText finalScoreVPs"></p>
+					<p id="fs-decoratorBonus" class="finalScoreText vpText finalScoreVPs"></p>
+					<p id="fs-totalScore" class="finalScoreText vpText"></p>
+				</div>
+
+				<div id="backVerdantTodayContainer">
+					<p id="backVerdantText">Back Verdant today for only $29!</p>
+					<p id="backVerdantLink"><a href="http://www.verdantgame.com" target="_blank">www.verdantgame.com</a></p>
+				</div>
+
+			</div>
+
+			<div id="shareInstructions">
+				<div class="bgOverlay"></div>
+				<img class="gameSectionBg" src="img/bg-narrow.jpg" alt="">
+				<div id="shareInstructionsContent">
+					<img id="shareInstructionsVerdantTitleImg" src="img/box-cover.png" alt="Verdant Title">
+					<p>Share a screenshot of your completed home and challenge your friends to beat your high score! #VerdantGame @flatoutgames</p>
+					<button id="scoringRemindersFinalScoreBtn" class="button is-warning">Scoring</button>
+					<p>This online demo <span style="font-weight: bold; text-decoration: underline">only contains a sample</span> of the content available in the full game! Back today to get access to the following plant and goals cards and more!</p>
+					<div class="slideshow-block">
+						<div class="slideshow-animation"></div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="keyboardKeysModal" class="modal notificationModal">
+		<div class="modal-background closableModalBackground"></div>
+		<div class="modal-content">
+			<div class="notification">
+				<p>If you're playing on a computer, you can use following keyboard keys to interact with the map while playing:</p>
+				<p class="has-text-centered title is-6">Navigating Around Map:</p>
+				<img id="keyboardMoveKeysImg" class="keyboardImg" src="img/keyboard-keys-move.png" alt="Move map keyboard keys image">
+				<p class="has-text-centered title is-6">Zoom in / Zoom out:</p>
+				<img id="keyboardRotateKeysImg" class="keyboardImg" src="img/keyboard-keys-zoom-in-out.png" alt="Rotate placed tile keyboard keys image">
+				<button id="commenceGame" class="button is-success button-is-centered closeModalTrigger" title="Start game button">Start Game</button>
+			</div>
+		</div>
 	</div>
 
 	<div id="scoringReminderModal" class="modal notificationModal">
@@ -514,37 +584,80 @@
 		<div class="modal-background"></div>
 		<div class="modal-content">
 			<div class="notification">
-				<button class="delete closeModalTrigger mediumCloseCross" aria-label="close" title="Close button image"></button>
 				<p>If you enjoyed Verdant, you can get a Kickstarter Edition of the game, complete with Kickstarter promo cards not available with the retail edition, all for a pledge of just $29 ($50 MSRP value!)</p>
 				<p>This is your first and best opportunity to support our small collaborative and get a great deal on the game!</p>
-				<p><a href="http://www.verdantgame.com" target="_blank">https://www.verdantgame.com</a></p>
-				<p>Thanks so much for playing!</p>
-
-				<div id="scoringCountdownTimer">
-					<ion-icon name="leaf-outline"></ion-icon>
-					<ion-icon name="leaf-outline"></ion-icon>
-					<ion-icon name="leaf-outline"></ion-icon>
-					<ion-icon name="leaf-outline"></ion-icon>
-					<ion-icon name="leaf-outline"></ion-icon>
-					<ion-icon name="leaf-outline"></ion-icon>
-					<ion-icon name="leaf-outline"></ion-icon>
-					<ion-icon name="leaf-outline"></ion-icon>
-					<ion-icon name="leaf-outline"></ion-icon>
-					<ion-icon name="leaf-outline"></ion-icon>
-					<ion-icon name="leaf-outline"></ion-icon>
-					<ion-icon name="leaf-outline"></ion-icon>
-					<ion-icon name="leaf-outline"></ion-icon>
-					<ion-icon name="leaf-outline"></ion-icon>
-					<ion-icon name="leaf-outline"></ion-icon>
-					<ion-icon name="leaf-outline"></ion-icon>
-					<ion-icon name="leaf-outline"></ion-icon>
-					<ion-icon name="leaf-outline"></ion-icon>
-					<ion-icon name="leaf-outline"></ion-icon>
-					<ion-icon name="leaf-outline"></ion-icon>
-					<ion-icon name="leaf-outline"></ion-icon>
+				<p class="has-text-centered"><a href="http://www.verdantgame.com" target="_blank">https://www.verdantgame.com</a></p>
+				<p class="has-text-centered">Thanks so much for playing!</p>
+				<div id="scoringCountdownTimer" style="display: block;">
+					<ion-icon fade-out-wave="21" name="leaf-outline"></ion-icon>
+					<ion-icon fade-out-wave="20" name="leaf-outline"></ion-icon>
+					<ion-icon fade-out-wave="19" name="leaf-outline"></ion-icon>
+					<ion-icon fade-out-wave="18" name="leaf-outline"></ion-icon>
+					<ion-icon fade-out-wave="17" name="leaf-outline"></ion-icon>
+					<ion-icon fade-out-wave="16" name="leaf-outline"></ion-icon>
+					<ion-icon fade-out-wave="15" name="leaf-outline"></ion-icon>
+					<ion-icon fade-out-wave="14" name="leaf-outline"></ion-icon>
+					<ion-icon fade-out-wave="13" name="leaf-outline"></ion-icon>
+					<ion-icon fade-out-wave="12" name="leaf-outline"></ion-icon>
+					<ion-icon fade-out-wave="11" name="leaf-outline"></ion-icon>
+					<ion-icon fade-out-wave="10" name="leaf-outline"></ion-icon>
+					<ion-icon fade-out-wave="9" name="leaf-outline"></ion-icon>
+					<ion-icon fade-out-wave="8" name="leaf-outline"></ion-icon>
+					<ion-icon fade-out-wave="7" name="leaf-outline"></ion-icon>
+					<ion-icon fade-out-wave="6" name="leaf-outline"></ion-icon>
+					<ion-icon fade-out-wave="5" name="leaf-outline"></ion-icon>
+					<ion-icon fade-out-wave="4" name="leaf-outline"></ion-icon>
+					<ion-icon fade-out-wave="3" name="leaf-outline"></ion-icon>
+					<ion-icon fade-out-wave="2" name="leaf-outline"></ion-icon>
+					<ion-icon fade-out-wave="20" name="leaf-outline"></ion-icon>
+					<ion-icon fade-out-wave="19" name="leaf-outline"></ion-icon>
+					<ion-icon fade-out-wave="18" name="leaf-outline"></ion-icon>
+					<ion-icon fade-out-wave="17" name="leaf-outline"></ion-icon>
+					<ion-icon fade-out-wave="16" name="leaf-outline"></ion-icon>
+					<ion-icon fade-out-wave="15" name="leaf-outline"></ion-icon>
+					<ion-icon fade-out-wave="14" name="leaf-outline"></ion-icon>
+					<ion-icon fade-out-wave="13" name="leaf-outline"></ion-icon>
+					<ion-icon fade-out-wave="12" name="leaf-outline"></ion-icon>
+					<ion-icon fade-out-wave="11" name="leaf-outline"></ion-icon>
+					<ion-icon fade-out-wave="10" name="leaf-outline"></ion-icon>
+					<ion-icon fade-out-wave="9" name="leaf-outline"></ion-icon>
+					<ion-icon fade-out-wave="8" name="leaf-outline"></ion-icon>
+					<ion-icon fade-out-wave="7" name="leaf-outline"></ion-icon>
+					<ion-icon fade-out-wave="6" name="leaf-outline"></ion-icon>
+					<ion-icon fade-out-wave="5" name="leaf-outline"></ion-icon>
+					<ion-icon fade-out-wave="4" name="leaf-outline"></ion-icon>
+					<ion-icon fade-out-wave="3" name="leaf-outline"></ion-icon>
+					<ion-icon fade-out-wave="2" name="leaf-outline"></ion-icon>
+					<ion-icon fade-out-wave="1" name="leaf-outline"></ion-icon>
+					<ion-icon fade-out-wave="19" name="leaf-outline"></ion-icon>
+					<ion-icon fade-out-wave="18" name="leaf-outline"></ion-icon>
+					<ion-icon fade-out-wave="17" name="leaf-outline"></ion-icon>
+					<ion-icon fade-out-wave="16" name="leaf-outline"></ion-icon>
+					<ion-icon fade-out-wave="15" name="leaf-outline"></ion-icon>
+					<ion-icon fade-out-wave="14" name="leaf-outline"></ion-icon>
+					<ion-icon fade-out-wave="13" name="leaf-outline"></ion-icon>
+					<ion-icon fade-out-wave="12" name="leaf-outline"></ion-icon>
+					<ion-icon fade-out-wave="11" name="leaf-outline"></ion-icon>
+					<ion-icon fade-out-wave="10" name="leaf-outline"></ion-icon>
+					<ion-icon fade-out-wave="9" name="leaf-outline"></ion-icon>
+					<ion-icon fade-out-wave="8" name="leaf-outline"></ion-icon>
+					<ion-icon fade-out-wave="7" name="leaf-outline"></ion-icon>
+					<ion-icon fade-out-wave="6" name="leaf-outline"></ion-icon>
+					<ion-icon fade-out-wave="5" name="leaf-outline"></ion-icon>
+					<ion-icon fade-out-wave="4" name="leaf-outline"></ion-icon>
+					<ion-icon fade-out-wave="3" name="leaf-outline"></ion-icon>
+					<ion-icon fade-out-wave="2" name="leaf-outline"></ion-icon>
+					<ion-icon fade-out-wave="1" name="leaf-outline"></ion-icon>
+					<ion-icon fade-out-wave="0" name="leaf-outline"></ion-icon>
 				</div>
 
-				<button id="showFinalScore" class="button is-success closeModalTrigger button-is-centered" title="Close modal button">See your score!</button>
+				<div id="enterNameAndFinalScoringBtn">
+					<p>Your name / initials:<br>(6 character limit)</p>
+					<input id="playerNameInput" placeholder="Player Name" minlength="1" maxlength="6">
+					<div class="clear">
+					</div>
+					<button id="showFinalScore" class="button is-success closeModalTrigger button-is-centered" title="Close modal button">See your score!</button>
+				</div>
 			</div>
 		</div>
 	</div>
