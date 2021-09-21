@@ -4604,7 +4604,7 @@ function finalScoringCalculation() {
     let uniqueFurnitureAndPetsScoringRange = [0, 1, 3, 6, 9, 12, 16, 20, 25];
 
     let allFurnitureAndPets = [];
-    $('#finalMap .mapTileContainer[placed-item]').each(function(){
+    $('#finalMap .mapTileContainer[placed-item]:not([placed-item="none"])').each(function(){
         // console.log(`$(this).attr('furniture-pet-name') = ${$(this).attr('furniture-pet-name')}`);
         allFurnitureAndPets.push($(this).attr('furniture-pet-name'));
     });
