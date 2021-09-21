@@ -4517,6 +4517,8 @@ function finalScoringCalculation() {
     
     $('#finalMap .mapTileContainer[cardtype="room"]').each(function(){
 
+        // console.log(`/----------------NEW ROOM------------------/`);
+
         let thisRow = $(this).data('map-row');
         let thisColumn = $(this).data('map-column');
 
@@ -4553,7 +4555,7 @@ function finalScoringCalculation() {
         
         if($(`#row-${thisRow}-column-${thisColumn + 1}`).length) {
             // console.log(`IF($('#row-${thisRow}-column-${thisColumn + 1}').length)`);
-            let secondNeighbourPlantType = $(`#row-${thisRow - 1}-column-${thisColumn} .cardContainer`).attr('plant-type');
+            let secondNeighbourPlantType = $(`#row-${thisRow}-column-${thisColumn + 1} .cardContainer`).attr('plant-type');
             // console.log(`secondNeighbourPlantType = ${secondNeighbourPlantType}`);
             if(secondNeighbourPlantType == thisRoomType) {
                 // console.log(`IF (secondNeighbourPlantType == thisRoomType)`);
@@ -4563,7 +4565,7 @@ function finalScoringCalculation() {
         
         if($(`#row-${thisRow + 1}-column-${thisColumn}`).length) {
             // console.log(`IF($('#row-${thisRow + 1}-column-${thisColumn}').length)`);
-            let thirdNeighbourPlantType = $(`#row-${thisRow - 1}-column-${thisColumn} .cardContainer`).attr('plant-type');
+            let thirdNeighbourPlantType = $(`#row-${thisRow + 1}-column-${thisColumn} .cardContainer`).attr('plant-type');
             // console.log(`thirdNeighbourPlantType = ${thirdNeighbourPlantType}`);
             if(thirdNeighbourPlantType == thisRoomType) {
                 // console.log(`IF (thirdNeighbourPlantType == thisRoomType)`);
@@ -4573,7 +4575,7 @@ function finalScoringCalculation() {
         
         if($(`#row-${thisRow}-column-${thisColumn - 1}`).length) {
             // console.log(`IF ($('#row-${thisRow}-column-${thisColumn - 1}').length)`);
-            let fourthNeighbourPlantType = $(`#row-${thisRow - 1}-column-${thisColumn} .cardContainer`).attr('plant-type');
+            let fourthNeighbourPlantType = $(`#row-${thisRow}-column-${thisColumn - 1} .cardContainer`).attr('plant-type');
             // console.log(`fourthNeighbourPlantType = ${fourthNeighbourPlantType}`);
             if(fourthNeighbourPlantType == thisRoomType) {
                 // console.log(`IF (fourthNeighbourPlantType == thisRoomType)`);
