@@ -3729,6 +3729,7 @@ p.mapDebug {
     position: absolute;
     left: 11px;
     z-index: 2;
+    text-shadow: 0px 0px 5px #fff;
 }
 
 #tableauSection #playerInfoContainer .tableauItemTitle span {
