@@ -1209,8 +1209,10 @@ function processChosenAndItems(){
     let validCardPlacements = checkPotentialCardPlacements(potentialCardType, 'marketCardSelection');
 
     if(!validCardPlacements) {
+        console.log(`IF (!validCardPlacements)`);
         $(`#${potentialCardType}PlacementsExhaustedModal`).addClass('is-active');
     } else {
+        console.log(`IF (validCardPlacements)`);
 
         currentRoundActionLog = ['market-selection'];
 
@@ -1230,43 +1232,56 @@ function processChosenAndItems(){
         let currentGreenThumbs = parseInt($('#infoBarStats #greenThumbsAmountContainer #greenThumbsAmountInfo').html());
         let newGreenThumbAmount = chosenCardsGreenThumbs + currentGreenThumbs;
                         
+        console.log(`chosenCardsGreenThumbs = ${chosenCardsGreenThumbs}`);
+        console.log(`currentGreenThumbs = ${currentGreenThumbs}`);
+        console.log(`newGreenThumbAmount = ${newGreenThumbAmount}`);
 
         let extraTimeout = 0;
         
+        // check to see if there's any on the card that has been chosen by the player
+
         if(chosenCardsGreenThumbs > 0) {
+            console.log(`IF (oppositeCardGreenThumbs > 0)`);
             extraTimeout = 2550;            
             // $(`.lockedInCardOverlay .greenThumbMarketContainer`).fadeOut();
 
             setTimeout(function(){
+                console.log(`IF (validCardPlacements && chosenCardsGreenThumbs > 0) setTimeout(function(){}, 200)`);
                 if($(`.lockedInCardOverlay .newGreenThumbParentContainer[green-thumb-container="1"] .newGreenThumbContainer`).length) {
+                    console.log(`IF (validCardPlacements && chosenCardsGreenThumbs > 0 && $('.lockedInCardOverlay .newGreenThumbParentContainer[green-thumb-container="1"] .newGreenThumbContainer').length)`);
                     $(`.lockedInCardOverlay .newGreenThumbParentContainer[green-thumb-container="1"] .newGreenThumbContainer`).parentToAnimate($('#greenThumbsAmountContainer #greenThumbsEndPoint'), 1300);
                 }
         
                 if($(`.lockedInCardOverlay .newGreenThumbParentContainer[green-thumb-container="2"] .newGreenThumbContainer`).length) {
+                    console.log(`IF (validCardPlacements && chosenCardsGreenThumbs > 0 && $('.lockedInCardOverlay .newGreenThumbParentContainer[green-thumb-container="2"] .newGreenThumbContainer').length)`);
                     $(`.lockedInCardOverlay .newGreenThumbParentContainer[green-thumb-container="2"] .newGreenThumbContainer`).parentToAnimate($('#greenThumbsAmountContainer #greenThumbsEndPoint'), 1300);
                 }
             }, 200);
             
 
-            setTimeout(function(){                
+            setTimeout(function(){       
+                console.log(`IF (chosenCardsGreenThumbs > 0) setTimeout(function(){}, 1050)`);         
                 $('#infoBarStats #greenThumbsAmountContainer').addClass('infoChange')
             }, 1050);
             
 
             setTimeout(function(){                
+                console.log(`IF (chosenCardsGreenThumbs > 0) setTimeout(function(){}, 1550)`);         
                 $('#infoBarStats #greenThumbsAmountContainer #greenThumbsEndPoint').html('');
                 $('#infoBarStats #greenThumbsAmountContainer #greenThumbsAmountInfo').html(newGreenThumbAmount);
                 $('#infoBarStats #greenThumbsAmountContainer #greenThumbsUpdateInfo').addClass('addVal').html(chosenCardsGreenThumbs);
                 $('#infoBarStats #greenThumbsAmountContainer #greenThumbsUpdateInfo').fadeIn();
             }, 1550);
 
-            setTimeout(function(){                
+            setTimeout(function(){
+                console.log(`IF (chosenCardsGreenThumbs > 0) setTimeout(function(){}, 2550)`);                     
                 // $(`.lockedInCardOverlay .cardContainer .greenThumbMarketContainer`).remove();
                 $('#infoBarStats #greenThumbsAmountContainer #greenThumbsUpdateInfo').fadeOut();
                 $('#infoBarStats #greenThumbsAmountContainer').removeClass('infoChange')
             }, 2550);
 
             setTimeout(function(){
+                console.log(`IF (chosenCardsGreenThumbs > 0) setTimeout(function(){}, 3000)`);        
                 $('.addVal').removeClass('addVal');
             }, 3000);
         }
@@ -1274,9 +1289,14 @@ function processChosenAndItems(){
         let oppositeCardGreenThumbs = parseInt($('.marketColumn.lockedInColumn .cardsAndItemContainer .marketCardOverlay:not(.lockedInCardOverlay) .cardContainer .newGreenThumbMasterContainer').attr('total-green-thumbs'));        
         oppositeCardGreenThumbs++;        
 
+        console.log(`oppositeCardGreenThumbs = ${oppositeCardGreenThumbs}`);
+
         setTimeout(function(){            
 
             let randomThumb = Math.floor(Math.random() * 5);
+
+            console.log(`randomThumb = ${randomThumb}`);
+
             let confirmedGreenThumbHTML = `
                 <div class="newGreenThumbContainer new-green-thumb-animation">
                     <img class="greenThumb thumbImg" src="img/thumbs/${randomThumb}.png">
@@ -1289,38 +1309,48 @@ function processChosenAndItems(){
         }, extraTimeout + 400);
 
         if(oppositeCardGreenThumbs > 2) {            
+            console.log(`IF (oppositeCardGreenThumbs > 2)`);
+
             extraTimeout = extraTimeout + 2000;
 
-            setTimeout(function(){                
+            setTimeout(function(){              
+                console.log(`IF (oppositeCardGreenThumbs > 2) setTimeout(function(){}, 710)`);     
                 $('.marketColumn.lockedInColumn .cardsAndItemContainer .marketCardOverlay:not(.lockedInCardOverlay) .cardContainer .newGreenThumbMasterContainer').addClass('removeAllGreenThumbs');
             }, 710);
 
-            setTimeout(function(){                
+            setTimeout(function(){      
+                console.log(`IF (oppositeCardGreenThumbs > 2) setTimeout(function(){}, 1720)`);               
                 $('.marketColumn.lockedInColumn .cardsAndItemContainer .marketCardOverlay:not(.lockedInCardOverlay) .cardContainer .newGreenThumbMasterContainer .newGreenThumbContainer').fadeOut();
             }, 1720);
 
             setTimeout(function(){                
+                console.log(`IF (oppositeCardGreenThumbs > 2) setTimeout(function(){}, 2030)`);     
                 $('.marketColumn.lockedInColumn .cardsAndItemContainer .marketCardOverlay:not(.lockedInCardOverlay) .cardContainer .newGreenThumbMasterContainer .newGreenThumbContainer').remove();
                 $('.marketColumn.lockedInColumn .cardsAndItemContainer .marketCardOverlay:not(.lockedInCardOverlay) .cardContainer .newGreenThumbMasterContainer').attr('total-green-thumbs', '0');
             }, 2030);
 
         }
 
+        console.log(`extraTimeout = ${extraTimeout}`);     
+
         setTimeout(function(){            
+            console.log(`setTimeout(function(){}, ${extraTimeout} + 2500 = ${extraTimeout + 2500})`);     
             
             $('.newGreenThumbContainer.new-green-thumb-animation').removeClass('new-green-thumb-animation');
             
             swapActiveMainSection();
             $('#confirmChosenColumnContainer #columnToConfirm').html('');
-            $('.cardContainer.chosenMarketCard').parentToAnimate($('#tableauSection #homeContentContainer #playerInfoContainer #cardToPlace'), 1000);
+            $('.cardContainer.chosenMarketCard').parentToAnimate($('#tableauSection #homeContentContainer #playerInfoContainer #cardToPlace'), 2500);
             $('.itemToken.chosenMarketItem').parentToAnimate($('#tableauSection #homeContentContainer #playerInfoContainer #chosenItemParentContainer #chosenItemContainer'), 1000);
-        }, extraTimeout + 2000);
+        }, extraTimeout + 2500);
 
-        setTimeout(function(){            
+        setTimeout(function(){           
+            console.log(`setTimeout(function(){}, ${extraTimeout} + 2850 = ${extraTimeout + 2850})`);      
             animateElem($('#tableauSection #undoNextRoundBtnContainer'), 'showRoundEndOptions');
-        }, extraTimeout +  2350);
+        }, extraTimeout +  2850);
 
-        setTimeout(function(){            
+        setTimeout(function(){      
+            console.log(`setTimeout(function(){}, ${extraTimeout} + 3850 = ${extraTimeout + 3850})`);           
             $('#undoNextRoundBtnContainer #undoAction').removeAttr('disabled');
 
             $('#cardToPlace .cardContainer').attr('style', '');
@@ -1332,7 +1362,7 @@ function processChosenAndItems(){
             $('#addOneVerdancyToPlantBtn').removeAttr('disabled');
 
             showPotentialCardPlacements();
-        }, extraTimeout +  3350);
+        }, extraTimeout +  3850);
     }
 }
 
