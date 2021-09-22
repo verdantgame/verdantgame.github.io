@@ -5598,7 +5598,7 @@ p.mapDebug {
 
 #container #scoringLayer #mapAndFinalScoreContainer #finalScore .finalScoreText {
     position: absolute;
-    left: 83px;
+    left: 86px;
     color: green;
     width: 85px;
     text-align: center;
@@ -5618,35 +5618,35 @@ p.mapDebug {
 }
 
 #container #scoringLayer #mapAndFinalScoreContainer #finalScore #fs-completedPlants.finalScoreText.finalScoreVPs {
-    top: 65px;    
+    top: 67px;
 }
 
 #container #scoringLayer #mapAndFinalScoreContainer #finalScore #fs-leftOverVerdancy.finalScoreText.finalScoreVPs {
-    top: 132px;    
+    top: 134px;
 }
 
 #container #scoringLayer #mapAndFinalScoreContainer #finalScore #fs-potPoints.finalScoreText.finalScoreVPs {
-    top: 199px;    
+    top: 202px; 
 }
 
 #container #scoringLayer #mapAndFinalScoreContainer #finalScore #fs-roomPoints.finalScoreText.finalScoreVPs {
-    top: 266px;    
+    top: 268px; 
 }
 
 #container #scoringLayer #mapAndFinalScoreContainer #finalScore #fs-uniquePetsFurniture.finalScoreText.finalScoreVPs {
-    top: 330px;    
+    top: 336px;
 }
 
 #container #scoringLayer #mapAndFinalScoreContainer #finalScore #fs-plantCollectorBonus.finalScoreText.finalScoreVPs {
-    top: 398px;    
+    top: 403px;
 }
 
 #container #scoringLayer #mapAndFinalScoreContainer #finalScore #fs-decoratorBonus.finalScoreText {
-    top: 457px;    
+    top: 464px;
 }
 
 #container #scoringLayer #mapAndFinalScoreContainer #finalScore #fs-totalScore {
-    top: 517px;
+    top: 524px;
     font-size: 33px;
     font-weight: bold;
     height: 50px;
