@@ -68,7 +68,7 @@ $(document).on(touchEvent, '#frontPageGameInstructionsButton', function(){
 	openInNewTab(rulesURL);
 });
 
-$(document).on(touchEvent, '#viewPotScoringBtn', function(){
+$(document).on(touchEvent, '#viewPotScoringBtn:not([disabled])', function(){
     if($('#viewPotScoringBtn').hasClass('showPotScoringLayer')) {
         togglePotScoringLayerVisibility('show');
     } else if($('#viewPotScoringBtn').hasClass('hidePotScoringLayer')) {
@@ -622,7 +622,9 @@ function generateItem(thisItem, mode) {
 	return thisItemHTML;
 }
 
-$(document).on(touchEvent,'#replaceMarketItemsBtn',function(){
+// $(document).on(touchEvent,'#replaceMarketItemsBtn', function(){
+
+$(document).on(touchEvent,'#replaceMarketItemsBtn:not([disabled])',function(){
     let greenThumbActionCriteria = checkPlayersGreenThumbAmount();
     if(!greenThumbActionCriteria) {
         greenThumbAmountStatus('insufficientNum');
@@ -631,7 +633,7 @@ $(document).on(touchEvent,'#replaceMarketItemsBtn',function(){
     }
 });
 
-$(document).on(touchEvent,'#chooseAnyMarketCardItemBtn',function(){
+$(document).on(touchEvent,'#chooseAnyMarketCardItemBtn:not([disabled])',function(){
     let greenThumbActionCriteria = checkPlayersGreenThumbAmount();
     if(!greenThumbActionCriteria) {
         greenThumbAmountStatus('insufficientNum');
@@ -640,7 +642,7 @@ $(document).on(touchEvent,'#chooseAnyMarketCardItemBtn',function(){
     }
 });
 
-$(document).on(touchEvent,'#addOneVerdancyToPlantBtn',function(){
+$(document).on(touchEvent,'#addOneVerdancyToPlantBtn:not([disabled])',function(){
     let greenThumbActionCriteria = checkPlayersGreenThumbAmount();
     if(!greenThumbActionCriteria) {
         greenThumbAmountStatus('insufficientNum');
@@ -786,21 +788,6 @@ $(document).on(touchEvent,'#addOneVerdancyOption #confirmAddOneVerdancyAction',f
             auditSwapItemBtnText('swapItems');
         }
     }, 3200);
-
-
-    // if($('#cardToPlace .cardContainer.inactivePlacement').length) {
-    //     $('#cardToPlace .cardContainer.inactivePlacement').addClass('activePlacement').removeClass('inactivePlacement');
-    //     showPotentialCardPlacements();
-    // } else if($('#chosenItemContainer .itemToken.inactivePlacement').length) {
-    // 
-    //     $('#chosenItemContainer .itemToken.inactivePlacement').attr('style', '');
-    //     $('#chosenItemContainer .itemToken.inactivePlacement').addClass('activePlacement').removeClass('inactivePlacement');
-    //     checkChosenItemType();
-    // } else {
-    // 
-    //     $('#undoNextRoundBtnContainer #undoAction').removeAttr('disabled');
-    //     activateNextRoundBtn();
-    // }
 
 });
 
@@ -2687,7 +2674,7 @@ function checkChosenItemType(){
 }
 
 
-$(document).on(touchEvent,'#useItemBtnContainer .useItemsBtn',function(){    
+$(document).on(touchEvent,'#useItemBtnContainer .useItemsBtn:not([disabled])',function(){    
 
     toggleMapVerdancy('show');
     $('#verdancyVisibilityContainer').addClass('disableInteraction');
@@ -3143,7 +3130,7 @@ $(document).on(touchEvent,'#confirmItemPlacement.button',function(){
     }, 900);
 });
 
-$(document).on(touchEvent,'#swapItemsBtnContainer .swapItemsBtn',function(){
+$(document).on(touchEvent,'#swapItemsBtnContainer .swapItemsBtn:not([disabled])',function(){
 
     $('.activePlacement').addClass('inactivePlacement').removeClass('activePlacement');
     
