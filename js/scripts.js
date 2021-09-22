@@ -45,8 +45,6 @@ $(document).ready(function(){
     generateModalButtonNums();
     $('#loaderLayer').fadeIn('fast');
 
-    // <!-- UNCOMMENT WHEN GOING LIVE!!! -->
-
     setTimeout(function(){
         $.getScript("js/image-preloader.js");
     }, 210);
@@ -1316,18 +1314,18 @@ function processChosenAndItems(){
             setTimeout(function(){              
                 console.log(`IF (oppositeCardGreenThumbs > 2) setTimeout(function(){}, 710)`);     
                 $('.marketColumn.lockedInColumn .cardsAndItemContainer .marketCardOverlay:not(.lockedInCardOverlay) .cardContainer .newGreenThumbMasterContainer').addClass('removeAllGreenThumbs');
-            }, extraTimeout + 710);
+            }, 710);
 
             setTimeout(function(){      
                 console.log(`IF (oppositeCardGreenThumbs > 2) setTimeout(function(){}, 1720)`);               
                 $('.marketColumn.lockedInColumn .cardsAndItemContainer .marketCardOverlay:not(.lockedInCardOverlay) .cardContainer .newGreenThumbMasterContainer .newGreenThumbContainer').fadeOut();
-            }, extraTimeout + 1720);
+            }, 1720);
 
             setTimeout(function(){                
                 console.log(`IF (oppositeCardGreenThumbs > 2) setTimeout(function(){}, 2030)`);     
                 $('.marketColumn.lockedInColumn .cardsAndItemContainer .marketCardOverlay:not(.lockedInCardOverlay) .cardContainer .newGreenThumbMasterContainer .newGreenThumbContainer').remove();
                 $('.marketColumn.lockedInColumn .cardsAndItemContainer .marketCardOverlay:not(.lockedInCardOverlay) .cardContainer .newGreenThumbMasterContainer').attr('total-green-thumbs', '0');
-            }, extraTimeout + 2030);
+            }, 2030);
 
         }
 
@@ -1340,7 +1338,7 @@ function processChosenAndItems(){
             
             swapActiveMainSection();
             $('#confirmChosenColumnContainer #columnToConfirm').html('');
-            $('.cardContainer.chosenMarketCard').parentToAnimate($('#tableauSection #homeContentContainer #playerInfoContainer #cardToPlace'), 2500);
+            $('.cardContainer.chosenMarketCard').parentToAnimate($('#tableauSection #homeContentContainer #playerInfoContainer #cardToPlace'), 1000);
             $('.itemToken.chosenMarketItem').parentToAnimate($('#tableauSection #homeContentContainer #playerInfoContainer #chosenItemParentContainer #chosenItemContainer'), 1000);
         }, extraTimeout + 2500);
 
@@ -2678,14 +2676,14 @@ $(document).on(touchEvent,'#undoNextRoundBtnContainer #nextRound',function(){
 
     setTimeout(function(){        
         $('#infoBarStats #turnsRemainingContainer #turnsRemainingInfo.infoBarStatData').html(turnsRemaining);
-    }, 11100 + nextRoundProcessTimeout + multipleMarketReplacementsTimeout);
+    }, 10900 + nextRoundProcessTimeout + multipleMarketReplacementsTimeout);
 
     setTimeout(function(){        
 
         $('#infoBarStats #turnsRemainingContainer').removeClass('infoChange');
         $('#infoBarStats #turnsRemainingContainer #turnsRemainingUpdateInfo.infoBarUpdateData.subtractVal').fadeOut();
 
-    }, 11470 + nextRoundProcessTimeout + multipleMarketReplacementsTimeout);
+    }, 11070 + nextRoundProcessTimeout + multipleMarketReplacementsTimeout);
 
     setTimeout(function(){        
 
@@ -2697,11 +2695,11 @@ $(document).on(touchEvent,'#undoNextRoundBtnContainer #nextRound',function(){
         $('#marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer').append(actionRequiredHTML);
         updateDiscardPotTotal();
         lockMap = false;        
-    }, 12770 + nextRoundProcessTimeout + multipleMarketReplacementsTimeout);
+    }, 11770 + nextRoundProcessTimeout + multipleMarketReplacementsTimeout);
 
     setTimeout(function(){        
         $('#marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer .actionRequiredContainer').remove();
-    }, 14650 + nextRoundProcessTimeout + multipleMarketReplacementsTimeout);
+    }, 12650 + nextRoundProcessTimeout + multipleMarketReplacementsTimeout);
 
 });
 
