@@ -2,9 +2,6 @@
 var touchEvent = 'ontouchstart' in window ? 'touchstart' : 'click';
 touchEvent == 'touchstart' ? $('#container').addClass('touchDevice') : $('#container').addClass('nonTouchDevice');
 
-// for (const [key, value] of Object.entries(myObject)) {
-// }
-
 var turnsRemaining = 13;
 
 var allPlantCards = [];
@@ -943,9 +940,6 @@ $(document).on(touchEvent,'#gameSectionsParent[current-phase="market-selection"]
 
 });
 
-
-
-
 $(document).on(touchEvent,'#cancelChooseAnyMarketCardItemAction',function(){
     $('#marketSection').removeClass('chooseAnyCardItemGreenThumbAction marketGreenThumbAction');
     $('#chooseAnyMarketCardItemBtnInstructionsAndBtns #cancelChooseAnyMarketCardItemAction').removeAttr('disabled');
@@ -955,9 +949,6 @@ $(document).on(touchEvent,'#cancelChooseAnyMarketCardItemAction',function(){
     $('.cardItemComboItemChosen').removeClass('cardItemComboItemChosen');
     $('.potentialCardItemComboItem').removeClass('potentialCardItemComboItem');
 });
-
-
-
 
 $(document).on(touchEvent,'#gameSectionsParent[current-phase="market-selection"] #marketSection.gameSection.chooseAnyCardItemGreenThumbAction .gameSectionContent > #marketCardColumns .marketColumn .cardsAndItemContainer .marketCardOverlay:not(.potentialCardItemComboCard)',function(){
     $('.potentialCardItemComboCard').removeClass('potentialCardItemComboCard');
@@ -971,7 +962,6 @@ $(document).on(touchEvent,'#gameSectionsParent[current-phase="market-selection"]
     }
 });
 
-
 $(document).on(touchEvent,'#gameSectionsParent[current-phase="market-selection"] #marketSection.gameSection.chooseAnyCardItemGreenThumbAction .gameSectionContent > #marketCardColumns .marketColumn .cardsAndItemContainer .marketItemOverlay:not(.potentialCardItemComboItem)',function(){
     $('.potentialCardItemComboItem').removeClass('potentialCardItemComboItem');
     $(this).addClass('potentialCardItemComboItem');
@@ -983,13 +973,6 @@ $(document).on(touchEvent,'#gameSectionsParent[current-phase="market-selection"]
         $('#chooseAnyMarketCardItemBtnInstructionsAndBtns #confirmChooseAnyMarketCardItemAction').attr('disabled', 'disabled');
     }
 });
-
-
-// $(`.gameSectionContent > #marketCardColumns .marketColumn[column="${currentChosenColumn}"]`).addClass('potentialChosenColumn');
-// $(`.gameSectionContent > #marketCardColumns .marketColumn[column="${currentChosenColumn}"] .market${capitalizeFirstLetter(currentChosenCardType)}CardOverlay .cardContainer[cardtype="${currentChosenCardType}"]`).addClass('potentialMarketCardChoice');
-// $(`.gameSectionContent > #marketCardColumns .marketColumn[column="${currentChosenColumn}"] .market${capitalizeFirstLetter(currentChosenCardType)}CardOverlay`).addClass('potentialCardOverlayParent');
-// $(`.gameSectionContent > #marketCardColumns .marketColumn[column="${currentChosenColumn}"] .marketItemOverlay .itemToken`).addClass('potentialMarketItemChoice');
-// $(`.gameSectionContent > #marketCardColumns .marketColumn[column="${currentChosenColumn}"] .marketItemOverlay`).addClass('potentialItemOverlayParent');
 
 
 $(document).on(touchEvent,'#confirmChooseAnyMarketCardItemAction',function(){
@@ -1027,26 +1010,6 @@ $(document).on(touchEvent,'#confirmChooseAnyMarketCardItemAction',function(){
 });
 
 
-
-// $(document).on(touchEvent,'#confirmChosenColumnContainer.marketActionContainer .btnContainer #confirmColumnChoice',function(){
-// 
-//     processChosenAndItems();
-
-//     let potentialCardType = $('.marketCardOverlay.potentialCardOverlayParent .cardContainer').attr('cardtype');
-//     let validCardPlacements = checkPotentialCardPlacements(potentialCardType, 'marketCardSelection');
-
-//     if(!validCardPlacements) {
-//         $(`#${potentialCardType}PlacementsExhaustedModal`).addClass('is-active');
-//     } else {
-//         $('#confirmChosenColumnContainer.marketActionContainer').fadeOut();
-//         $('#marketInactiveOverlay').fadeOut();
-//         processChosenAndItems()
-//     }
-// });
-
-
-
-
 $(document).on('mouseenter','#marketSection.gameSection .marketColumn .cardsAndItemContainer .marketItemOverlay .itemToken .nurtureItemExplanation',function(){
     $(this).closest('.marketColumn').addClass('raisedColumn');
 });
@@ -1054,7 +1017,6 @@ $(document).on('mouseenter','#marketSection.gameSection .marketColumn .cardsAndI
 $(document).on('mouseleave','#marketSection.gameSection .marketColumn .cardsAndItemContainer .marketItemOverlay .itemToken .nurtureItemExplanation',function(){
     $('.raisedColumn').removeClass('raisedColumn');
 });
-
 
 $(document).on('mouseenter',' #gameSectionsParent[current-phase="market-selection"] .gameSection:not(.marketGreenThumbAction) .gameSectionContent > #marketCardColumns .marketColumn .cardContainer',function(){    
 
@@ -1187,7 +1149,6 @@ function closeConfirmChosenColumnContainer(){
 let currentRoundActionLog = [];
 
 $(document).on(touchEvent,'#confirmChosenColumnContainer.marketActionContainer .btnContainer #confirmColumnChoice',function(){    
-    // processChosenAndItems();
 
     let potentialCardType = $('.marketCardOverlay.potentialCardOverlayParent .cardContainer').attr('cardtype');
     let validCardPlacements = checkPotentialCardPlacements(potentialCardType, 'marketCardSelection');
@@ -1197,7 +1158,7 @@ $(document).on(touchEvent,'#confirmChosenColumnContainer.marketActionContainer .
     } else {
         $('#confirmChosenColumnContainer.marketActionContainer').fadeOut();
         $('#marketInactiveOverlay').fadeOut();
-        processChosenAndItems()
+        processChosenAndItems();
     }
 });
 
@@ -1223,9 +1184,6 @@ function processChosenAndItems(){
         $('#gameSectionsParent').attr('current-phase', 'card-item-placement');
         $('.greenThumbActionBtn.marketActionButton').attr('disabled', 'disabled');
 
-        // $('#confirmChosenColumnContainer.marketActionContainer').fadeOut();
-        // $('#marketInactiveOverlay').fadeOut();
-
         let chosenCardsGreenThumbs = parseInt($('.lockedInCardOverlay .cardContainer .newGreenThumbMasterContainer').attr('total-green-thumbs'));
         let currentGreenThumbs = parseInt($('#infoBarStats #greenThumbsAmountContainer #greenThumbsAmountInfo').html());
         let newGreenThumbAmount = chosenCardsGreenThumbs + currentGreenThumbs;
@@ -1235,13 +1193,10 @@ function processChosenAndItems(){
         console.log(`newGreenThumbAmount = ${newGreenThumbAmount}`);
 
         let extraTimeout = 0;
-        
-        // check to see if there's any on the card that has been chosen by the player
 
         if(chosenCardsGreenThumbs > 0) {
             console.log(`IF (oppositeCardGreenThumbs > 0)`);
             extraTimeout = 2550;            
-            // $(`.lockedInCardOverlay .greenThumbMarketContainer`).fadeOut();
 
             setTimeout(function(){
                 console.log(`IF (validCardPlacements && chosenCardsGreenThumbs > 0) setTimeout(function(){}, 200)`);
@@ -1255,14 +1210,12 @@ function processChosenAndItems(){
                     $(`.lockedInCardOverlay .newGreenThumbParentContainer[green-thumb-container="2"] .newGreenThumbContainer`).parentToAnimate($('#greenThumbsAmountContainer #greenThumbsEndPoint'), 1300);
                 }
             }, 200);
-            
 
             setTimeout(function(){       
                 console.log(`IF (chosenCardsGreenThumbs > 0) setTimeout(function(){}, 1050)`);         
                 $('#infoBarStats #greenThumbsAmountContainer').addClass('infoChange')
             }, 1050);
             
-
             setTimeout(function(){                
                 console.log(`IF (chosenCardsGreenThumbs > 0) setTimeout(function(){}, 1550)`);         
                 $('#infoBarStats #greenThumbsAmountContainer #greenThumbsEndPoint').html('');
@@ -1312,20 +1265,20 @@ function processChosenAndItems(){
             extraTimeout = extraTimeout + 2000;
 
             setTimeout(function(){              
-                console.log(`IF (oppositeCardGreenThumbs > 2) setTimeout(function(){}, 710)`);     
+                console.log(`IF (oppositeCardGreenThumbs > 2) setTimeout(function(){}, extraTimeout + 710)`);     
                 $('.marketColumn.lockedInColumn .cardsAndItemContainer .marketCardOverlay:not(.lockedInCardOverlay) .cardContainer .newGreenThumbMasterContainer').addClass('removeAllGreenThumbs');
-            }, 710);
+            }, extraTimeout + 710);
 
             setTimeout(function(){      
-                console.log(`IF (oppositeCardGreenThumbs > 2) setTimeout(function(){}, 1720)`);               
+                console.log(`IF (oppositeCardGreenThumbs > 2) setTimeout(function(){}, extraTimeout + 1720)`);               
                 $('.marketColumn.lockedInColumn .cardsAndItemContainer .marketCardOverlay:not(.lockedInCardOverlay) .cardContainer .newGreenThumbMasterContainer .newGreenThumbContainer').fadeOut();
-            }, 1720);
+            }, extraTimeout + 1720);
 
             setTimeout(function(){                
-                console.log(`IF (oppositeCardGreenThumbs > 2) setTimeout(function(){}, 2030)`);     
+                console.log(`IF (oppositeCardGreenThumbs > 2) setTimeout(function(){}, extraTimeout + 2030)`);     
                 $('.marketColumn.lockedInColumn .cardsAndItemContainer .marketCardOverlay:not(.lockedInCardOverlay) .cardContainer .newGreenThumbMasterContainer .newGreenThumbContainer').remove();
                 $('.marketColumn.lockedInColumn .cardsAndItemContainer .marketCardOverlay:not(.lockedInCardOverlay) .cardContainer .newGreenThumbMasterContainer').attr('total-green-thumbs', '0');
-            }, 2030);
+            }, extraTimeout + 2030);
 
         }
 
