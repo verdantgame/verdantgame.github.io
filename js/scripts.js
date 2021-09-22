@@ -1547,44 +1547,44 @@ var mapStats = {
 	},
 	'zoomStats': {
 		'13': {
-			xCardsVisible: 12, // horizontal
-			yCardsVisible: 12  // vertical
+			xCardsVisible: 24, // horizontal
+			yCardsVisible: 24  // vertical
 		},
         '12': {
-			xCardsVisible: 12, // horizontal
-			yCardsVisible: 12  // vertical
+			xCardsVisible: 24, // horizontal
+			yCardsVisible: 24  // vertical
 		},
         '11': {
-			xCardsVisible: 12, // horizontal
-			yCardsVisible: 12  // vertical
+			xCardsVisible: 24, // horizontal
+			yCardsVisible: 24  // vertical
 		},
         '10': {
-			xCardsVisible: 12, // horizontal
-			yCardsVisible: 12  // vertical
+			xCardsVisible: 24, // horizontal
+			yCardsVisible: 24  // vertical
 		},
         '9': {
-			xCardsVisible: 16, // horizontal
-			yCardsVisible: 12  // vertical
+			xCardsVisible: 32, // horizontal
+			yCardsVisible: 24  // vertical
 		},
         '8': {
-			xCardsVisible: 16, // horizontal
-			yCardsVisible: 12  // vertical
+			xCardsVisible: 32, // horizontal
+			yCardsVisible: 24  // vertical
 		},
 		'7': {
-			xCardsVisible: 16, // horizontal
-			yCardsVisible: 16  // vertical
+			xCardsVisible: 32, // horizontal
+			yCardsVisible: 32  // vertical
 		},
         '6': {
-			xCardsVisible: 16, // horizontal
-			yCardsVisible: 16  // vertical
+			xCardsVisible: 32, // horizontal
+			yCardsVisible: 32  // vertical
 		},
 		'5': {
-			xCardsVisible: 20, // horizontal
-			yCardsVisible: 16  // vertical
+			xCardsVisible: 40, // horizontal
+			yCardsVisible: 32  // vertical
 		},
         '4': {
-			xCardsVisible: 20, // horizontal
-			yCardsVisible: 16  // vertical
+			xCardsVisible: 40, // horizontal
+			yCardsVisible: 32  // vertical
 		},
 	},
 	'directionStatus': {
