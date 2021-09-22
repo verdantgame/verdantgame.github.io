@@ -83,8 +83,7 @@ $(document).on(touchEvent, '#viewPotScoringBtn', function(){
 
 function setupDrawPiles(){
     // create and shuffle plant card draw pile array
-    allPlantCards = shuffle(plantCards);
-    // console.log(`allPlantCards`, allPlantCards);
+    allPlantCards = shuffle(plantCards);    
 
     // create and shuffle room card draw pile array
     let initRoomCards = [];
@@ -101,8 +100,7 @@ function setupDrawPiles(){
         }
     }
 
-    allRoomCards = shuffle(initRoomCards);
-    // console.log(`allRoomCards`, allRoomCards);
+    allRoomCards = shuffle(initRoomCards);    
 
     // create and shuffle item tokens draw pile array
     let initItemTokens = [];
@@ -134,34 +132,29 @@ function setupDrawPiles(){
     }
     
     allItemTokens = shuffle(initItemTokens);
-
-    // console.log(`allItemTokens`, allItemTokens);
+    
 
     setupInitialCardsAndItems();
 }
 
-function togglePotScoringLayerVisibility(mode) {
-    // console.log(`mode = "${mode}"`);
+function togglePotScoringLayerVisibility(mode) {    
     $('#viewPotScoringBtn').addClass('disableInteraction');
     $('#replaceMarketItemsBtn').addClass('disableInteraction');
     $('#chooseAnyMarketCardItemBtn').addClass('disableInteraction');
-    if(mode == 'show') {
-        // console.log(`mode = 'show'`);
+    if(mode == 'show') {        
         $('#viewPotScoringBtn').children('p').html('Hide Pot<br>scoring info');
         $('#viewPotScoringBtn').addClass('hidePotScoringLayer').removeClass('showPotScoringLayer');
         $('.plantPotContainer.hideScoring').addClass('showScoring').removeClass('hideScoring');
         animateElem($('#potScoringInfoContainer'), 'collapsed');
         animateElem($('#marketCardColumns'), 'expanded');
-    } else if(mode == 'hide') {
-        // console.log(`mode = 'hide'`);
+    } else if(mode == 'hide') {        
         $('#viewPotScoringBtn').children('p').html('Show Pot<br>scoring info');
         $('#viewPotScoringBtn').addClass('showPotScoringLayer').removeClass('hidePotScoringLayer');
         $('.plantPotContainer.showScoring').addClass('hideScoring').removeClass('showScoring');
         animateElem($('#potScoringInfoContainer'), 'expanded');
         animateElem($('#marketCardColumns'), 'collapsed');
     }
-    setTimeout(function(){
-        // console.log(`togglePotScoringLayerVisibility - setTimeout(function(){}, 700)`);
+    setTimeout(function(){        
         $('#viewPotScoringBtn').removeClass('disableInteraction');
         $('#replaceMarketItemsBtn').removeClass('disableInteraction');
         $('#chooseAnyMarketCardItemBtn').removeClass('disableInteraction');
@@ -174,12 +167,10 @@ $(document).on(touchEvent, '#startGame', function(){
 
 $(document).on(touchEvent, '#commenceGame', function(){
 	$('.layer').fadeOut();
-    setTimeout(function(){
-        // console.log(` '#startGame' - setTimeout(function(){}, 400)`);
+    setTimeout(function(){        
         $('body').addClass('gameView');
         $('#gameLayer').fadeIn();
-        setTimeout(function(){
-            // console.log(` '#startGame' - setTimeout(function(){}, 400)`);
+        setTimeout(function(){            
             initMarketInterval = setInterval(initMarketFunc, 200);    
         }, 400);
     }, 400);
@@ -188,52 +179,38 @@ $(document).on(touchEvent, '#commenceGame', function(){
 });
 
 function initMarketFunc(){
-    let marketItemClasses = ['.plantPotOverlay', '.cardsAndItemContainer .marketPlantCardOverlay', '.cardsAndItemContainer .marketItemOverlay', '.cardsAndItemContainer .marketRoomCardOverlay'];
-    // console.log(`.marketColumn[column="${currentColumn}"] ${marketItemClasses[currentMarketItem]}`);
+    let marketItemClasses = ['.plantPotOverlay', '.cardsAndItemContainer .marketPlantCardOverlay', '.cardsAndItemContainer .marketItemOverlay', '.cardsAndItemContainer .marketRoomCardOverlay'];    
     $(`.marketColumn[column="${currentColumn}"] ${marketItemClasses[currentMarketItem]}`).removeClass('startingPos');
-    currentColumn--;
-    // console.log(`currentColumn = ${currentColumn}`);
-    if(currentColumn == -1 && (currentMarketItem + 1) < marketItemClasses.length) {
-        // console.log(`currentColumn == -1 && (currentMarketItem + 1) < marketItemClasses.length`);
+    currentColumn--;    
+    if(currentColumn == -1 && (currentMarketItem + 1) < marketItemClasses.length) {        
         currentColumn = 3;
         currentMarketItem++;
         clearInterval(initMarketInterval);
-        setTimeout(function(){
-            // console.log(`initMarketFunc - setTimeout(function(){}, 250)`);
+        setTimeout(function(){            
             initMarketInterval = setInterval(initMarketFunc, 200);
         }, 250)
-    } else if(currentColumn == -1 && (currentMarketItem + 1) == marketItemClasses.length) {
-        // console.log(`currentColumn == -1 && (currentMarketItem + 1) == marketItemClasses.length`);
+    } else if(currentColumn == -1 && (currentMarketItem + 1) == marketItemClasses.length) {        
         clearInterval(initMarketInterval);
         currentColumn = 3;
         currentMarketItem = 0;
-        setTimeout(function(){
-            // console.log(`initMarketFunc - setTimeout(function(){}, 1000)`);
+        setTimeout(function(){            
             initMarketFlipCardsInterval = setInterval(flipInitMarketCards, 300);    
         }, 1000);
     }
 }
 
 function flipInitMarketCards() {
-    let marketFlipCardClasses = ['.cardsAndItemContainer .flip-plant .flip-card-inner', '.cardsAndItemContainer .flip-room .flip-card-inner'];
-    // console.log(`.marketColumn[column="${currentColumn}"] ${marketFlipCardClasses[currentMarketItem]}`);
+    let marketFlipCardClasses = ['.cardsAndItemContainer .flip-plant .flip-card-inner', '.cardsAndItemContainer .flip-room .flip-card-inner'];    
     $(`.marketColumn[column="${currentColumn}"] ${marketFlipCardClasses[currentMarketItem]}`).css('transform', 'rotateY(180deg) translate3d(0, 0, 1px)'); 
-    currentColumn--;
-    // console.log(`currentColumn = ${currentColumn}`);
-    // console.log(`marketFlipCardClasses.length = ${marketFlipCardClasses.length}`);
-    // console.log(`currentMarketItem = ${currentMarketItem}`);
-    if(currentColumn == -1 && (currentMarketItem + 1) < marketFlipCardClasses.length) {
-        // console.log(`currentColumn == -1 && (currentMarketItem + 1) < marketFlipCardClasses.length`);
+    currentColumn--;            
+    if(currentColumn == -1 && (currentMarketItem + 1) < marketFlipCardClasses.length) {        
         currentColumn = 3;
         currentMarketItem++;
-    } else if(currentColumn == -1 && (currentMarketItem + 1) == marketFlipCardClasses.length) {
-        // console.log(`currentColumn == -1 && (currentMarketItem + 1) == marketFlipCardClasses.length`);
+    } else if(currentColumn == -1 && (currentMarketItem + 1) == marketFlipCardClasses.length) {        
         clearInterval(initMarketFlipCardsInterval);
-        setTimeout(function(){
-            // console.log(`flipInitMarketCards - setTimeout(function(){}, 550)`);
+        setTimeout(function(){            
             isolateFlipCardContents();
-            setTimeout(function(){
-                // console.log(`flipInitMarketCards - setTimeout(function(){}, 300)`);
+            setTimeout(function(){                
                 initPlayersHome();
             }, 300);
         }, 550);
@@ -242,20 +219,17 @@ function flipInitMarketCards() {
 
 function isolateFlipCardContents() {
     $('.cardsAndItemContainer .flip-plant .flip-card-inner .flip-card-back .cardContainer').each(function(){
-        let columnNum = $(this).closest('.marketColumn').attr('column');
-        // console.log(`columnNum = ${columnNum}`);
+        let columnNum = $(this).closest('.marketColumn').attr('column');        
         $(this).prependTo(`.marketColumn[column="${columnNum}"] .cardsAndItemContainer .marketPlantCardOverlay`);
     });
 
     $('.cardsAndItemContainer .flip-room .flip-card-inner .flip-card-back .cardContainer').each(function(){
-        let columnNum = $(this).closest('.marketColumn').attr('column');
-        // console.log(`columnNum = ${columnNum}`);
+        let columnNum = $(this).closest('.marketColumn').attr('column');        
         $(this).appendTo(`.marketColumn[column="${columnNum}"] .cardsAndItemContainer .marketRoomCardOverlay`);
     });
     
     $('.flip-card').remove();
-    setTimeout(function(){
-        // console.log(`isolateFlipCardContents - setTimeout(function(){}, 20)`);
+    setTimeout(function(){        
         $('.initBoxShadow').removeClass('initBoxShadow');
     }, 20);
 }
@@ -269,27 +243,22 @@ function initPlayersHome() {
     swapActiveMainSection();
 
     if(!$('#container').hasClass('desktopView')) initPlayersHomeTimeout = 800;
-
-    // console.log(`initPlayersHomeTimeout = ${initPlayersHomeTimeout}`);
-    setTimeout(function(){
-        // console.log(`initPlayersHome - setTimeout(function(){}, ${initPlayersHomeTimeout})`);
+    
+    setTimeout(function(){        
         chooseStartingPlayerCards();
     }, initPlayersHomeTimeout);
     
-    setTimeout(function(){
-        // console.log(`initPlayersHome - setTimeout(function(){}, ${initPlayersHomeTimeout + 200})`);
+    setTimeout(function(){        
         animateElem($('#playerInfoContainer #cardToPlace .flip-plant'), 'tableauStartingPos');
         animateElem($('#mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room'), 'tableauStartingPos');
     }, (initPlayersHomeTimeout + 200));
 
-    setTimeout(function(){
-        // console.log(`initPlayersHome - setTimeout(function(){}, ${initPlayersHomeTimeout + 2500})`);
+    setTimeout(function(){        
         $('#playerInfoContainer #cardToPlace .flip-plant .flip-card-inner').css('transform', 'rotateY(180deg) translate3d(0, 0, 1px)'); 
         $('#mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room .flip-card-inner').css('transform', 'rotateY(180deg) translate3d(0, 0, 1px)'); 
     }, (initPlayersHomeTimeout + 2500)); 
 
-    setTimeout(function(){
-        // console.log(`initPlayersHome - setTimeout(function(){}, ${initPlayersHomeTimeout + 3050})`);
+    setTimeout(function(){        
         $('#homeContentContainer #playerInfoContainer #cardToPlace .flip-plant .flip-card-inner .flip-card-back .cardContainer').appendTo('#homeContentContainer #playerInfoContainer #cardToPlace');
         $('#homeContentContainer #playerInfoContainer #cardToPlace .flip-plant').remove();
         $('#homeContentContainer #mapContainer #mapHiddenOverlay #row-2-column-4 .flip-room .flip-card-inner .flip-card-back .cardContainer').appendTo('#homeContentContainer #mapContainer #mapHiddenOverlay #row-2-column-4');
@@ -303,8 +272,7 @@ function initPlayersHome() {
 
 $(document).on(touchEvent, '#placeFirstPlantCardBtn', function(){
     showPossibleMapPlacements('card');
-    lockMap = false;
-    // console.log('lockMap = false');
+    lockMap = false;    
 });
 
 function chooseStartingPlayerCards() {
@@ -489,9 +457,7 @@ function setupInitialCardsAndItems() {
 
 
 function generateCard(thisCard, cardType, mode, thisSection) {
-
-    // console.log(`generateCard(thisCard, cardType, mode, thisSection)`);
-    // console.log(`generateCard(${thisCard}, ${cardType}, ${mode}, ${thisSection})`);
+        
 
     // 0:
     //     cardType: "plant"
@@ -629,9 +595,7 @@ function generateCard(thisCard, cardType, mode, thisSection) {
 }
 
 function generateItem(thisItem, mode) {
-
-    // console.log(`generateItem(thisItem, mode)`);
-    // console.log(`generateItem(${thisItem}, ${mode})`);
+        
 
     // itemDetails[0] = itemsNurture
     // itemDetails[1] = trowel
@@ -704,8 +668,7 @@ function setupGreenThumbAction(thisAction) {
         animateElem($('#mapContainer #addOneVerdancyOption'), 'showAddOneVerdancyOption');
         toggleMapVerdancy('show');
         $('#verdancyVisibilityContainer').addClass('disableInteraction');
-        $('#swapItemsBtnContainer .swapItemsBtn').attr('disabled', 'disabled');
-        // console.log(`'#useItemBtnContainer .useItemsBtn'`);
+        $('#swapItemsBtnContainer .swapItemsBtn').attr('disabled', 'disabled');        
 
         nurtureItemMapRecipients('plant', 'addOneVerdancy');
 
@@ -714,8 +677,7 @@ function setupGreenThumbAction(thisAction) {
     }
 }
 
-$(document).on(touchEvent,'#addOneVerdancyOption #cancelAddOneVerdancyAction',function(){
-    // console.log(`#cancelNurtureItemAction.button`);
+$(document).on(touchEvent,'#addOneVerdancyOption #cancelAddOneVerdancyAction',function(){    
 
     toggleMapVerdancy('hide');
 
@@ -746,13 +708,11 @@ $(document).on(touchEvent,'#addOneVerdancyOption #cancelAddOneVerdancyAction',fu
         if($('#cardToPlace .cardContainer.inactivePlacement').length) {
             $('#cardToPlace .cardContainer.inactivePlacement').addClass('activePlacement').removeClass('inactivePlacement');
             showPotentialCardPlacements();
-        } else if($('#chosenItemContainer .itemToken.inactivePlacement').length) {
-            // console.log(`$('#chosenItemContainer .itemToken.inactivePlacement').length`);
+        } else if($('#chosenItemContainer .itemToken.inactivePlacement').length) {            
             $('#chosenItemContainer .itemToken.inactivePlacement').attr('style', '');
             $('#chosenItemContainer .itemToken.inactivePlacement').addClass('activePlacement').removeClass('inactivePlacement');
             checkChosenItemType();
-        } else {
-            // console.log(`!$('#chosenItemContainer .itemToken.inactivePlacement').length`);
+        } else {            
             $('#undoNextRoundBtnContainer #undoAction').removeAttr('disabled');
             activateNextRoundBtn();
         }
@@ -762,20 +722,17 @@ $(document).on(touchEvent,'#addOneVerdancyOption #cancelAddOneVerdancyAction',fu
 });
 
 
-$(document).on('mouseenter','#mapContainer .mapTileContainer.potentialNurtureItemTarget.addOneVerdancyPotentialTarget',function(){
-    // console.log(`'mouseenter','#mapContainer .mapTileContainer.potentialNurtureItemTarget.addOneVerdancyPotentialTarget'`);
+$(document).on('mouseenter','#mapContainer .mapTileContainer.potentialNurtureItemTarget.addOneVerdancyPotentialTarget',function(){    
     $(this).append(`
         <img class="previewAddOneVerdancyImg previewNurtureItemIcon" src="img/itemsNurture/addOneVerdancy-icon.png" />
     `);
 });
 
-$(document).on('mouseleave','#mapContainer .mapTileContainer.potentialNurtureItemTarget.addOneVerdancyPotentialTarget',function(){
-    // console.log(`'mouseleave','#mapContainer .mapTileContainer.potentialNurtureItemTarget.addOneVerdancyPotentialTarget'`);
+$(document).on('mouseleave','#mapContainer .mapTileContainer.potentialNurtureItemTarget.addOneVerdancyPotentialTarget',function(){    
     $('.potentialNurtureItemTarget .previewAddOneVerdancyImg:not(.lockedInIcon)').remove();
 });
 
-$(document).on(touchEvent,'#mapContainer .mapTileContainer.potentialNurtureItemTarget.addOneVerdancyPotentialTarget',function(){    
-    // console.log(`#mapContainer .mapTileContainer.potentialNurtureItemTarget.addOneVerdancyPotentialTarget`);
+$(document).on(touchEvent,'#mapContainer .mapTileContainer.potentialNurtureItemTarget.addOneVerdancyPotentialTarget',function(){        
 
     $('.verdancyPulseAnimation').removeClass('verdancyPulseAnimation');
 
@@ -790,8 +747,7 @@ $(document).on(touchEvent,'#mapContainer .mapTileContainer.potentialNurtureItemT
 });
 
 
-$(document).on(touchEvent,'#addOneVerdancyOption #confirmAddOneVerdancyAction',function(){
-    // console.log('addOneVerdancyOption #confirmAddOneVerdancyAction');   
+$(document).on(touchEvent,'#addOneVerdancyOption #confirmAddOneVerdancyAction',function(){    
 
     $('#cancelAddOneVerdancyAction.button').attr('disabled', 'disabled');
     $('#confirmAddOneVerdancyAction.button').attr('disabled', 'disabled');
@@ -818,8 +774,7 @@ $(document).on(touchEvent,'#addOneVerdancyOption #confirmAddOneVerdancyAction',f
 
     setTimeout(function(){
         $('.mapTileContainer[cardtype="plant"][plant-pot="none"] .cardContainer .verdancyIconsAndVPLayer').each(function(){
-            let newCompletedVerdancy = $(this).find('.verdancyIconContainer.completeVerdancy').length;
-            // console.log(`newCompletedVerdancy = ${newCompletedVerdancy}`);
+            let newCompletedVerdancy = $(this).find('.verdancyIconContainer.completeVerdancy').length;            
             $(this).attr('verdancy-completed', newCompletedVerdancy);
         });
         greenThumbAmountStatus('actionDeduction');
@@ -842,12 +797,12 @@ $(document).on(touchEvent,'#addOneVerdancyOption #confirmAddOneVerdancyAction',f
     //     $('#cardToPlace .cardContainer.inactivePlacement').addClass('activePlacement').removeClass('inactivePlacement');
     //     showPotentialCardPlacements();
     // } else if($('#chosenItemContainer .itemToken.inactivePlacement').length) {
-        // // console.log(`$('#chosenItemContainer .itemToken.inactivePlacement').length`);
+    // 
     //     $('#chosenItemContainer .itemToken.inactivePlacement').attr('style', '');
     //     $('#chosenItemContainer .itemToken.inactivePlacement').addClass('activePlacement').removeClass('inactivePlacement');
     //     checkChosenItemType();
     // } else {
-        // // console.log(`!$('#chosenItemContainer .itemToken.inactivePlacement').length`);
+    // 
     //     $('#undoNextRoundBtnContainer #undoAction').removeAttr('disabled');
     //     activateNextRoundBtn();
     // }
@@ -860,6 +815,13 @@ function checkPlayersGreenThumbAmount() {
         return true;
     } else if(greenThumbAmount < 2) {
         return false;
+    }
+}
+
+function endTurnGreenThumbMaxEnforced() {
+    let greenThumbAmount = parseInt($('#infoBarStats #greenThumbsAmountContainer #greenThumbsAmountInfo').text());
+    if(greenThumbAmount > 5) {
+        greenThumbAmountStatus('endTurnDeduction');
     }
 }
 
@@ -878,40 +840,46 @@ function greenThumbAmountStatus(mode) {
         
     } else if(mode == 'actionDeduction') {
         // show green thumb amount being reduced by 2
-
-        let currentGreenThumbAmount = parseInt($('#infoBarStats #greenThumbsAmountContainer #greenThumbsAmountInfo').text());
-        let newGreenThumbAmount = currentGreenThumbAmount - 2;
-
-        $('#infoBarStats #greenThumbsAmountContainer').addClass('infoChange');
-
-        setTimeout(function(){
-            $('#infoBarStats #greenThumbsAmountContainer #greenThumbsUpdateInfo').addClass('subtractVal');
-            $('#infoBarStats #greenThumbsAmountContainer #greenThumbsUpdateInfo').html('2');
-            $('#infoBarStats #greenThumbsAmountContainer #greenThumbsUpdateInfo').fadeIn();
-        }, 500);
-
-        setTimeout(function(){
-            $('#infoBarStats #greenThumbsAmountContainer #greenThumbsAmountInfo').fadeOut();
-        }, 1500);
-
-        setTimeout(function(){
-            $('#infoBarStats #greenThumbsAmountContainer #greenThumbsAmountInfo').html(newGreenThumbAmount)
-            $('#infoBarStats #greenThumbsAmountContainer #greenThumbsAmountInfo').fadeIn();
-        }, 1900);
-
-        setTimeout(function(){
-            $('#infoBarStats #greenThumbsAmountContainer').removeClass('infoChange');
-            $('#infoBarStats #greenThumbsAmountContainer #greenThumbsUpdateInfo').fadeOut();
-        }, 2500);
-
-        setTimeout(function(){
-            $('.subtractVal').removeClass('subtractVal');
-        }, 2900);
-
+        animateGreenThumbRemoval(2);
+    } else if(mode == 'endTurnDeduction') {
+        // show green thumb amount being reduced by 2
+        let greenThumbAmount = parseInt($('#infoBarStats #greenThumbsAmountContainer #greenThumbsAmountInfo').text());
+        let greenThumbDifToRemove = greenThumbAmount - 5;
+        animateGreenThumbRemoval(greenThumbDifToRemove);
     }
     
-
     // blink green thumb amount in and out and highlight in red to show that the player does not have enough green thumbs to carry out the action!
+}
+
+function animateGreenThumbRemoval(removalAmount){
+    let currentGreenThumbAmount = parseInt($('#infoBarStats #greenThumbsAmountContainer #greenThumbsAmountInfo').text());
+    let newGreenThumbAmount = currentGreenThumbAmount - removalAmount;
+
+    $('#infoBarStats #greenThumbsAmountContainer').addClass('infoChange');
+
+    setTimeout(function(){
+        $('#infoBarStats #greenThumbsAmountContainer #greenThumbsUpdateInfo').addClass('subtractVal');
+        $('#infoBarStats #greenThumbsAmountContainer #greenThumbsUpdateInfo').html(removalAmount);
+        $('#infoBarStats #greenThumbsAmountContainer #greenThumbsUpdateInfo').fadeIn();
+    }, 500);
+
+    setTimeout(function(){
+        $('#infoBarStats #greenThumbsAmountContainer #greenThumbsAmountInfo').fadeOut();
+    }, 1500);
+
+    setTimeout(function(){
+        $('#infoBarStats #greenThumbsAmountContainer #greenThumbsAmountInfo').html(newGreenThumbAmount)
+        $('#infoBarStats #greenThumbsAmountContainer #greenThumbsAmountInfo').fadeIn();
+    }, 1900);
+
+    setTimeout(function(){
+        $('#infoBarStats #greenThumbsAmountContainer').removeClass('infoChange');
+        $('#infoBarStats #greenThumbsAmountContainer #greenThumbsUpdateInfo').fadeOut();
+    }, 2500);
+
+    setTimeout(function(){
+        $('#infoBarStats #greenThumbsAmountContainer #greenThumbsUpdateInfo.subtractVal').removeClass('subtractVal');
+    }, 2900);
 }
 
 
@@ -921,14 +889,12 @@ $(document).on(touchEvent,'#cancelReplaceMarketItemsAction',function(){
     $('#replaceMarketItemsInstructionsAndBtns #confirmReplaceMarketItemsAction').attr('disabled', 'disabled');
 });
 
-$(document).on(touchEvent,'#gameSectionsParent[current-phase="market-selection"] .gameSection.replaceMarketItemsGreenThumbAction .gameSectionContent > #marketCardColumns .marketColumn .marketItemOverlay:not(.potentialItemToReplace)',function(){
-    // console.log(`'#gameSectionsParent[current-phase="market-selection"] .gameSectionContent > #marketCardColumns .marketColumn.activeColumn .cardContainer.potentialMarketCardChoice`);
+$(document).on(touchEvent,'#gameSectionsParent[current-phase="market-selection"] .gameSection.replaceMarketItemsGreenThumbAction .gameSectionContent > #marketCardColumns .marketColumn .marketItemOverlay:not(.potentialItemToReplace)',function(){    
     $(this).addClass('potentialItemToReplace');
     $('#replaceMarketItemsInstructionsAndBtns #confirmReplaceMarketItemsAction').removeAttr('disabled');
 });
 
-$(document).on(touchEvent,'#gameSectionsParent[current-phase="market-selection"] .gameSection.replaceMarketItemsGreenThumbAction .gameSectionContent > #marketCardColumns .marketColumn .marketItemOverlay.potentialItemToReplace',function(){
-    // console.log(`'#gameSectionsParent[current-phase="market-selection"] .gameSectionContent > #marketCardColumns .marketColumn.activeColumn .cardContainer.potentialMarketCardChoice`);
+$(document).on(touchEvent,'#gameSectionsParent[current-phase="market-selection"] .gameSection.replaceMarketItemsGreenThumbAction .gameSectionContent > #marketCardColumns .marketColumn .marketItemOverlay.potentialItemToReplace',function(){    
     $(this).removeClass('potentialItemToReplace');
 
     if(!$('.marketItemOverlay.potentialItemToReplace').length) {
@@ -1065,7 +1031,7 @@ $(document).on(touchEvent,'#confirmChooseAnyMarketCardItemAction',function(){
 
 
 // $(document).on(touchEvent,'#confirmChosenColumnContainer.marketActionContainer .btnContainer #confirmColumnChoice',function(){
-    // // console.log(`'#confirmChosenColumnContainer.marketActionContainer .btnContainer #confirmColumnChoice'`);
+// 
 //     processChosenAndItems();
 
 //     let potentialCardType = $('.marketCardOverlay.potentialCardOverlayParent .cardContainer').attr('cardtype');
@@ -1092,21 +1058,18 @@ $(document).on('mouseleave','#marketSection.gameSection .marketColumn .cardsAndI
 });
 
 
-$(document).on('mouseenter',' #gameSectionsParent[current-phase="market-selection"] .gameSection:not(.marketGreenThumbAction) .gameSectionContent > #marketCardColumns .marketColumn .cardContainer',function(){
-    // console.log(`'mouseenter','#gameSectionsParent[current-phase="market-selection"] .gameSection:not(.marketGreenThumbAction) .gameSectionContent > #marketCardColumns .marketColumn .cardContainer`);
+$(document).on('mouseenter',' #gameSectionsParent[current-phase="market-selection"] .gameSection:not(.marketGreenThumbAction) .gameSectionContent > #marketCardColumns .marketColumn .cardContainer',function(){    
 
     $(this).addClass('potentialMarketCardChoice');
     $(this).parent().addClass('potentialCardOverlayParent');
     $(this).closest('.marketColumn').addClass('activeColumn');
 
-    setTimeout(function(){
-        // console.log(`'mouseenter','#gameSectionsParent[current-phase="market-selection"] .gameSection:not(.marketGreenThumbAction) .gameSectionContent > #marketCardColumns .marketColumn .cardContainer' - setTimeout(function(){}, 10)`);
+    setTimeout(function(){        
         $('.marketColumn.activeColumn .cardsAndItemContainer .marketItemOverlay .itemToken').addClass('potentialMarketItemChoice');
         $('.marketColumn.activeColumn .cardsAndItemContainer .marketItemOverlay').addClass('potentialItemOverlayParent');
     }, 10);
 
-    setTimeout(function(){
-        // console.log(`'mouseenter','#gameSectionsParent[current-phase="market-selection"] .gameSection:not(.marketGreenThumbAction) .gameSectionContent > #marketCardColumns .marketColumn .cardContainer' - setTimeout(function(){}, 20)`);
+    setTimeout(function(){        
         let tempGreenThumb = `
             <div class="potentialGreenThumbContainer">
                 <p class="plusGreenThumbText">+</p>
@@ -1116,27 +1079,23 @@ $(document).on('mouseenter',' #gameSectionsParent[current-phase="market-selectio
         $('.marketColumn.activeColumn .cardsAndItemContainer .marketCardOverlay:not(.potentialCardOverlayParent) .cardContainer').append(tempGreenThumb);
     }, 20);
 
-    setTimeout(function(){
-        // console.log(`'mouseenter','#gameSectionsParent[current-phase="market-selection"] .gameSection:not(.marketGreenThumbAction) .gameSectionContent > #marketCardColumns .marketColumn .cardContainer' - setTimeout(function(){}, 30)`);
+    setTimeout(function(){        
         $('.marketColumn.activeColumn .cardsAndItemContainer .marketCardOverlay:not(.potentialCardOverlayParent) .cardContainer .potentialGreenThumbContainer').addClass('showPotentialGreenThumb');
     }, 30);
     
 });
 
-$(document).on('mouseleave','#gameSectionsParent[current-phase="market-selection"] .gameSection:not(.marketGreenThumbAction) .gameSectionContent > #marketCardColumns .marketColumn.activeColumn .cardContainer',function(){
-    // console.log(`'mouseleave','#gameSectionsParent[current-phase="market-selection"] .gameSection:not(.marketGreenThumbAction) .gameSectionContent > #marketCardColumns .marketColumn.activeColumn .cardContainer`);
+$(document).on('mouseleave','#gameSectionsParent[current-phase="market-selection"] .gameSection:not(.marketGreenThumbAction) .gameSectionContent > #marketCardColumns .marketColumn.activeColumn .cardContainer',function(){    
 
     resetPotentialMarketSelections();
     $('.activeColumn').removeClass('activeColumn');
     $('#gameSectionsParent[current-phase="market-selection"] .gameSection:not(.marketGreenThumbAction) .gameSectionContent > #marketCardColumns .marketColumn:not(.activeColumn) .cardContainer .potentialGreenThumbContainer.showPotentialGreenThumb').removeClass('showPotentialGreenThumb');
-    setTimeout(function(){
-        // console.log(`'mouseleave','#gameSectionsParent[current-phase="market-selection"] .gameSection:not(.marketGreenThumbAction) .gameSectionContent > #marketCardColumns .marketColumn.activeColumn .cardContainer - setTimeout(function(){}, 300)`);
+    setTimeout(function(){        
         $('#gameSectionsParent[current-phase="market-selection"] .gameSection:not(.marketGreenThumbAction) .gameSectionContent > #marketCardColumns .marketColumn:not(.activeColumn) .cardContainer .potentialGreenThumbContainer').remove();
     }, 300);
 });
 
-function resetPotentialMarketSelections(){
-    // console.log(`resetPotentialMarketSelections()`);
+function resetPotentialMarketSelections(){    
 
     $('.potentialMarketCardChoice').removeClass('potentialMarketCardChoice');
     $('.potentialCardOverlayParent').removeClass('potentialCardOverlayParent');
@@ -1147,12 +1106,10 @@ function resetPotentialMarketSelections(){
 var currentChosenColumn = '';
 var currentChosenCardType = '';
 
-$(document).on(touchEvent,'#gameSectionsParent[current-phase="market-selection"] .gameSection:not(.marketGreenThumbAction) .gameSectionContent > #marketCardColumns .marketColumn.activeColumn .cardContainer.potentialMarketCardChoice',function(){
-    // console.log(`'#gameSectionsParent[current-phase="market-selection"] .gameSectionContent > #marketCardColumns .marketColumn.activeColumn .cardContainer.potentialMarketCardChoice`);
+$(document).on(touchEvent,'#gameSectionsParent[current-phase="market-selection"] .gameSection:not(.marketGreenThumbAction) .gameSectionContent > #marketCardColumns .marketColumn.activeColumn .cardContainer.potentialMarketCardChoice',function(){    
 
     $('.potentialGreenThumbContainer.showPotentialGreenThumb').removeClass('showPotentialGreenThumb');
-    setTimeout(function(){
-        // console.log(`'#gameSectionsParent[current-phase="market-selection"] .gameSectionContent > #marketCardColumns .marketColumn.activeColumn .cardContainer.potentialMarketCardChoice - setTimeout(function(){}, 300)`);
+    setTimeout(function(){        
         $('.potentialGreenThumbContainer').remove();
     }, 300);
 
@@ -1160,9 +1117,7 @@ $(document).on(touchEvent,'#gameSectionsParent[current-phase="market-selection"]
 
     currentChosenColumn = $('.marketColumn.potentialChosenColumn').attr('column')
     currentChosenCardType = $(this).attr('cardtype');
-
-    // console.log(`currentChosenColumn = ${currentChosenColumn}`);
-    // console.log(`currentChosenCardType = ${currentChosenCardType}`);
+        
 
     $('.gameSectionContent > #marketCardColumns').clone().appendTo('#confirmChosenColumnContainer #columnToConfirm');
     $('#confirmChosenColumnContainer #columnToConfirm #marketCardColumns').attr('id', 'marketCardColumnsToConfirm');
@@ -1176,8 +1131,7 @@ $(document).on(touchEvent,'#gameSectionsParent[current-phase="market-selection"]
 });
 
 
-$(document).on(touchEvent,'#confirmChosenColumnContainer.marketActionContainer .zoomedColumnNavArrow',function(){  
-    // console.log(`'#confirmChosenColumnContainer.marketActionContainer .zoomedColumnNavArrow'`);
+$(document).on(touchEvent,'#confirmChosenColumnContainer.marketActionContainer .zoomedColumnNavArrow',function(){      
 
     resetPotentialMarketSelections();
     $('.potentialChosenColumn').removeClass('potentialChosenColumn');
@@ -1206,41 +1160,35 @@ $(document).on(touchEvent,'#confirmChosenColumnContainer.marketActionContainer .
     
 });
 
-$(document).on(touchEvent,'#confirmChosenColumnContainer.marketActionContainer .btnContainer #cancelColumnChoice',function(){   
-    // console.log(`'#confirmChosenColumnContainer.marketActionContainer .btnContainer #cancelColumnChoice'`);
+$(document).on(touchEvent,'#confirmChosenColumnContainer.marketActionContainer .btnContainer #cancelColumnChoice',function(){       
 
     closeConfirmChosenColumnContainer();
 });
 
-$(document).on(touchEvent,'#marketInactiveOverlay',function(){    
-    // console.log(`'#marketInactiveOverlay'`);
+$(document).on(touchEvent,'#marketInactiveOverlay',function(){        
 
     closeConfirmChosenColumnContainer();
 });
 
-$(document).on(touchEvent,'#confirmChosenColumnContainer.marketActionContainer .delete.closeMarketActionTrigger',function(){    
-    // console.log(`'#confirmChosenColumnContainer.marketActionContainer .delete.closeMarketActionTrigger'`);
+$(document).on(touchEvent,'#confirmChosenColumnContainer.marketActionContainer .delete.closeMarketActionTrigger',function(){        
 
     closeConfirmChosenColumnContainer();
 });
 
-function closeConfirmChosenColumnContainer(){
-    // console.log(`closeConfirmChosenColumnContainer()`);
+function closeConfirmChosenColumnContainer(){    
 
     $('#confirmChosenColumnContainer.marketActionContainer').fadeOut();
     $('#marketInactiveOverlay').fadeOut();
     $('.potentialChosenColumn').removeClass('potentialChosenColumn');
     resetPotentialMarketSelections();
-    setTimeout(function(){
-        // console.log(`closeConfirmChosenColumnContainer() - setTimeout(function(){}, 400)`);
+    setTimeout(function(){        
         $('#confirmChosenColumnContainer #columnToConfirm').html('');
     }, 400);
 }
 
 let currentRoundActionLog = [];
 
-$(document).on(touchEvent,'#confirmChosenColumnContainer.marketActionContainer .btnContainer #confirmColumnChoice',function(){
-    // console.log(`'#confirmChosenColumnContainer.marketActionContainer .btnContainer #confirmColumnChoice'`);
+$(document).on(touchEvent,'#confirmChosenColumnContainer.marketActionContainer .btnContainer #confirmColumnChoice',function(){    
     // processChosenAndItems();
 
     let potentialCardType = $('.marketCardOverlay.potentialCardOverlayParent .cardContainer').attr('cardtype');
@@ -1281,16 +1229,12 @@ function processChosenAndItems(){
         let chosenCardsGreenThumbs = parseInt($('.lockedInCardOverlay .cardContainer .newGreenThumbMasterContainer').attr('total-green-thumbs'));
         let currentGreenThumbs = parseInt($('#infoBarStats #greenThumbsAmountContainer #greenThumbsAmountInfo').html());
         let newGreenThumbAmount = chosenCardsGreenThumbs + currentGreenThumbs;
-
-        // console.log(`chosenCardsGreenThumbs = ${chosenCardsGreenThumbs}`);
-        // console.log(`currentGreenThumbs = ${currentGreenThumbs}`);
-        // console.log(`newGreenThumbAmount = ${newGreenThumbAmount}`);
+                        
 
         let extraTimeout = 0;
         
         if(chosenCardsGreenThumbs > 0) {
-            extraTimeout = 2550;
-            // console.log(`chosenCardsGreenThumbs > 0`);
+            extraTimeout = 2550;            
             // $(`.lockedInCardOverlay .greenThumbMarketContainer`).fadeOut();
 
             setTimeout(function(){
@@ -1304,22 +1248,19 @@ function processChosenAndItems(){
             }, 200);
             
 
-            setTimeout(function(){
-                // console.log(`'processChosenAndItems() FUNCTION' - setTimeout(function(){}, 450)`);
+            setTimeout(function(){                
                 $('#infoBarStats #greenThumbsAmountContainer').addClass('infoChange')
             }, 1050);
             
 
-            setTimeout(function(){
-                // console.log(`'processChosenAndItems() FUNCTION' - setTimeout(function(){}, 450)`);
+            setTimeout(function(){                
                 $('#infoBarStats #greenThumbsAmountContainer #greenThumbsEndPoint').html('');
                 $('#infoBarStats #greenThumbsAmountContainer #greenThumbsAmountInfo').html(newGreenThumbAmount);
                 $('#infoBarStats #greenThumbsAmountContainer #greenThumbsUpdateInfo').addClass('addVal').html(chosenCardsGreenThumbs);
                 $('#infoBarStats #greenThumbsAmountContainer #greenThumbsUpdateInfo').fadeIn();
             }, 1550);
 
-            setTimeout(function(){
-                // console.log(`'processChosenAndItems() FUNCTION' - setTimeout(function(){}, 2000)`);
+            setTimeout(function(){                
                 // $(`.lockedInCardOverlay .cardContainer .greenThumbMarketContainer`).remove();
                 $('#infoBarStats #greenThumbsAmountContainer #greenThumbsUpdateInfo').fadeOut();
                 $('#infoBarStats #greenThumbsAmountContainer').removeClass('infoChange')
@@ -1330,13 +1271,10 @@ function processChosenAndItems(){
             }, 3000);
         }
 
-        let oppositeCardGreenThumbs = parseInt($('.marketColumn.lockedInColumn .cardsAndItemContainer .marketCardOverlay:not(.lockedInCardOverlay) .cardContainer .newGreenThumbMasterContainer').attr('total-green-thumbs'));
-        // console.log(`oppositeCardGreenThumbs = ${oppositeCardGreenThumbs}`);
-        oppositeCardGreenThumbs++;
-        // console.log(`oppositeCardGreenThumbs = ${oppositeCardGreenThumbs}`);
+        let oppositeCardGreenThumbs = parseInt($('.marketColumn.lockedInColumn .cardsAndItemContainer .marketCardOverlay:not(.lockedInCardOverlay) .cardContainer .newGreenThumbMasterContainer').attr('total-green-thumbs'));        
+        oppositeCardGreenThumbs++;        
 
-        setTimeout(function(){
-            // console.log(`'processChosenAndItems() FUNCTION' - setTimeout(function(){}, 400)`);
+        setTimeout(function(){            
 
             let randomThumb = Math.floor(Math.random() * 5);
             let confirmedGreenThumbHTML = `
@@ -1350,30 +1288,25 @@ function processChosenAndItems(){
             $(`.marketColumn.lockedInColumn .cardsAndItemContainer .marketCardOverlay:not(.lockedInCardOverlay) .cardContainer .newGreenThumbMasterContainer`).attr('total-green-thumbs', oppositeCardGreenThumbs);
         }, extraTimeout + 400);
 
-        if(oppositeCardGreenThumbs > 2) {
-            // console.log(`oppositeCardGreenThumbs > 2`);
+        if(oppositeCardGreenThumbs > 2) {            
             extraTimeout = extraTimeout + 2000;
 
-            setTimeout(function(){
-                // console.log(`'processChosenAndItems() FUNCTION' - setTimeout(function(){}, 710)`);
+            setTimeout(function(){                
                 $('.marketColumn.lockedInColumn .cardsAndItemContainer .marketCardOverlay:not(.lockedInCardOverlay) .cardContainer .newGreenThumbMasterContainer').addClass('removeAllGreenThumbs');
             }, 710);
 
-            setTimeout(function(){
-                // console.log(`'processChosenAndItems() FUNCTION' - setTimeout(function(){}, 1020)`);
+            setTimeout(function(){                
                 $('.marketColumn.lockedInColumn .cardsAndItemContainer .marketCardOverlay:not(.lockedInCardOverlay) .cardContainer .newGreenThumbMasterContainer .newGreenThumbContainer').fadeOut();
             }, 1720);
 
-            setTimeout(function(){
-                // console.log(`'processChosenAndItems() FUNCTION' - setTimeout(function(){}, 1330)`);
+            setTimeout(function(){                
                 $('.marketColumn.lockedInColumn .cardsAndItemContainer .marketCardOverlay:not(.lockedInCardOverlay) .cardContainer .newGreenThumbMasterContainer .newGreenThumbContainer').remove();
                 $('.marketColumn.lockedInColumn .cardsAndItemContainer .marketCardOverlay:not(.lockedInCardOverlay) .cardContainer .newGreenThumbMasterContainer').attr('total-green-thumbs', '0');
             }, 2030);
 
         }
 
-        setTimeout(function(){
-            // console.log(`'processChosenAndItems() FUNCTION' - setTimeout(function(){}, ${extraTimeout +  2000})`);
+        setTimeout(function(){            
             
             $('.newGreenThumbContainer.new-green-thumb-animation').removeClass('new-green-thumb-animation');
             
@@ -1383,13 +1316,11 @@ function processChosenAndItems(){
             $('.itemToken.chosenMarketItem').parentToAnimate($('#tableauSection #homeContentContainer #playerInfoContainer #chosenItemParentContainer #chosenItemContainer'), 1000);
         }, extraTimeout + 2000);
 
-        setTimeout(function(){
-            // console.log(`'processChosenAndItems() FUNCTION' - setTimeout(function(){}, ${extraTimeout +  2350})`);
+        setTimeout(function(){            
             animateElem($('#tableauSection #undoNextRoundBtnContainer'), 'showRoundEndOptions');
         }, extraTimeout +  2350);
 
-        setTimeout(function(){
-            // console.log(`'processChosenAndItems() FUNCTION' - setTimeout(function(){}, ${extraTimeout +  3350})`);
+        setTimeout(function(){            
             $('#undoNextRoundBtnContainer #undoAction').removeAttr('disabled');
 
             $('#cardToPlace .cardContainer').attr('style', '');
@@ -1405,19 +1336,15 @@ function processChosenAndItems(){
     }
 }
 
-$(document).on(touchEvent,'#undoNextRoundBtnContainer #undoAction.button',function(){
-    // console.log(`'#undoNextRoundBtnContainer #undoAction.button'`);
+$(document).on(touchEvent,'#undoNextRoundBtnContainer #undoAction.button',function(){    
 
 
-    var undoAction = currentRoundActionLog.pop();
-    // console.log(`undoAction = ${undoAction}`);
-    setTimeout(function(){
-        // console.log(`'#undoNextRoundBtnContainer #undoAction.button' - setTimeout(function(){}, 10)`);
+    var undoAction = currentRoundActionLog.pop();    
+    setTimeout(function(){        
         auditSwapItemBtnText('swapItems');
     }, 10);
 
-    if(undoAction == 'market-selection') {
-        // console.log(`undoAction == 'market-selection'`);
+    if(undoAction == 'market-selection') {        
         swapActiveMainSection();
 
         $('.activePlacement').removeClass('activePlacement');
@@ -1433,28 +1360,24 @@ $(document).on(touchEvent,'#undoNextRoundBtnContainer #undoAction.button',functi
         $('.mapTileContainer.activePotentialCardPlacement').addClass('animatingElem mediumTransitionAll');
         $('.mapTileContainer.activePotentialItemPlacement').addClass('animatingElem mediumTransitionAll');
 
-        setTimeout(function(){
-            // console.log(`'#undoNextRoundBtnContainer #undoAction.button' - setTimeout(function(){}, 50)`);
+        setTimeout(function(){            
             $('.mapTileContainer.activePotentialCardPlacement').removeClass('activePotentialCardPlacement');
             $('.mapTileContainer.activePotentialItemPlacement').removeClass('activePotentialItemPlacement');
         }, 50);
 
-        setTimeout(function(){
-            // console.log(`'#undoNextRoundBtnContainer #undoAction.button' - setTimeout(function(){}, 800)`);
+        setTimeout(function(){            
             $('.mapTileContainer.potentialCardPlacement').removeClass('potentialCardPlacement');
             $('.mapTileContainer.potentialItemPlacement').removeClass('potentialItemPlacement');
         }, 800);
 
-        setTimeout(function(){
-            // console.log(`'#undoNextRoundBtnContainer #undoAction.button' - setTimeout(function(){}, 850)`);
+        setTimeout(function(){            
             $('.mapTileContainer.animatingElem.mediumTransitionAll').removeClass('animatingElem mediumTransitionAll');
             $('.mapTileContainer.animatingElem.mediumTransitionAll').removeClass('animatingElem mediumTransitionAll');
         }, 850);
         
         animateElem($('#tableauSection #undoNextRoundBtnContainer'), 'hideRoundEndOptions');
 
-        setTimeout(function(){
-            // console.log(`'#undoNextRoundBtnContainer #undoAction.button' - setTimeout(function(){}, 1010)`);
+        setTimeout(function(){            
             $('.lockedInColumn').removeClass('lockedInColumn');
             $('.chosenMarketCard').removeClass('chosenMarketCard');
             $('.lockedInCardOverlay').removeClass('lockedInCardOverlay');
@@ -1491,7 +1414,6 @@ let currentMarketItem = 0;
 
 
 let lockMap = true;
-// console.log('lockMap = true;');
 
 let allDirections = ['up', 'down', 'left', 'right'];
 
@@ -1786,11 +1708,9 @@ function calculateViewableCardLimits() {
 $(document).keydown(function(e){
 
 	if(!lockMap) {
-		lockMap = true;
-        // console.log('lockMap = true;');
+		lockMap = true;        
 		setTimeout(function(){
-			lockMap = false;
-            // console.log('lockMap = false');
+			lockMap = false;            
 		}, 220);
 
         if (e.which == 81) { 
@@ -1834,60 +1754,47 @@ $(document).on(touchEvent,'#mapNavControls .arrowImg',function(){
 	processMapMovement(thisDirection);
 });
 
-$(document).on('mouseenter','#mapContainer .mapTileContainer.potentialCardPlacement.activePotentialCardPlacement:not(.temporaryCardPlacement)',function(){
-    // console.log(`'mouseenter','#mapContainer .mapTileContainer.potentialCardPlacement.activePotentialCardPlacement:not(.temporaryCardPlacement)`);
+$(document).on('mouseenter','#mapContainer .mapTileContainer.potentialCardPlacement.activePotentialCardPlacement:not(.temporaryCardPlacement)',function(){    
 
-    if(!lockMap) {
-        // console.log(`!lockMap`);
+    if(!lockMap) {        
         $(this).addClass('cardPlacementPreview');
         var thisMapTile = $(this);
         $('.cardContainer.activePlacement').clone().appendTo(thisMapTile);
     }
 });
 
-$(document).on('mouseleave','#mapContainer .mapTileContainer.potentialCardPlacement.activePotentialCardPlacement.cardPlacementPreview:not(.temporaryCardPlacement)',function(){    
-    // console.log(`'mouseleave','#mapContainer .mapTileContainer.potentialCardPlacement.activePotentialCardPlacement.cardPlacementPreview:not(.temporaryCardPlacement)'`);
+$(document).on('mouseleave','#mapContainer .mapTileContainer.potentialCardPlacement.activePotentialCardPlacement.cardPlacementPreview:not(.temporaryCardPlacement)',function(){        
 
-    if(!lockMap) {
-        // console.log(`!lockMap`);
+    if(!lockMap) {        
         $(this).removeClass('cardPlacementPreview');
         $('#mapContainer .mapTileContainer.potentialCardPlacement:not(.temporaryCardPlacement) .cardContainer').remove();
     }
 });
 
-$(document).on(touchEvent,'#mapContainer .mapTileContainer.potentialCardPlacement.activePotentialCardPlacement:not(.temporaryCardPlacement)',function(){    
-    // console.log(`'#mapContainer .mapTileContainer.potentialCardPlacement.activePotentialCardPlacement:not(.temporaryCardPlacement)'`);
+$(document).on(touchEvent,'#mapContainer .mapTileContainer.potentialCardPlacement.activePotentialCardPlacement:not(.temporaryCardPlacement)',function(){        
     
-    if(!lockMap) {
-        // console.log(`!lockMap`);
+    if(!lockMap) {        
         $('#undoNextRoundBtnContainer #undoAction').attr('disabled', 'disabled');
-        lockMap = true;
-        // console.log('lockMap = true;');
+        lockMap = true;        
         toggleMapVerdancy('hide');
-        if($('#mapContainer .mapTileContainer.potentialCardPlacement:not(.temporaryCardPlacement) .cardContainer').length) {
-            // console.log(`if $('#mapContainer .mapTileContainer.potentialCardPlacement:not(.temporaryCardPlacement) .cardContainer').length`);
+        if($('#mapContainer .mapTileContainer.potentialCardPlacement:not(.temporaryCardPlacement) .cardContainer').length) {            
             $('#mapContainer .mapTileContainer.potentialCardPlacement:not(.temporaryCardPlacement) .cardContainer').remove();
         }
         $('.cardPlacementPreview').removeClass('cardPlacementPreview');
         var targID = $(this).attr('id');
         $('#mapContainer .mapTileContainer.potentialCardPlacement.temporaryCardPlacement').addClass('activePotentialCardPlacement').removeClass('temporaryCardPlacement');
-        temporarilyLockMap(1000);
-        // console.log('temporarilyLockMap(1000)');
+        temporarilyLockMap(1000);        
 
         $('.cardContainer.activePlacement').parentToAnimate($(`#${targID}`), 1000);
 
-        setTimeout(function(){
-            // console.log(`'#mapContainer .mapTileContainer.potentialCardPlacement.activePotentialCardPlacement:not(.temporaryCardPlacement) - setTimeout(function(){}, 450)`);
+        setTimeout(function(){            
             animateElem($('#mapContainer #placedCardOptions'), 'showCardOptions');
         }, 450)
 
-        setTimeout(function(){
-            // console.log(`'#mapContainer .mapTileContainer.potentialCardPlacement.activePotentialCardPlacement:not(.temporaryCardPlacement) - setTimeout(function(){}, 950)`);
+        setTimeout(function(){            
             $(`#${targID}`).removeClass('activePotentialCardPlacement').addClass('temporaryCardPlacement');
-            if(startingPlacement) {
-                // console.log(`startingPlacement`);
-                if($('#verdancyVisibilityContainer.disableVerdancyVisibility').length) {
-                    // console.log(`$('#verdancyVisibilityContainer.disableVerdancyVisibility').length`);
+            if(startingPlacement) {                
+                if($('#verdancyVisibilityContainer.disableVerdancyVisibility').length) {                    
                     $('#verdancyVisibilityContainer.disableVerdancyVisibility').removeClass('disableVerdancyVisibility');
                 }
             }
@@ -1896,8 +1803,7 @@ $(document).on(touchEvent,'#mapContainer .mapTileContainer.potentialCardPlacemen
     }
 });
 
-$(document).on(touchEvent,'#cancelCardPlacement.button',function(){
-    // console.log(`'#cancelCardPlacement.button'`);
+$(document).on(touchEvent,'#cancelCardPlacement.button',function(){    
 
     animateElem($('#mapContainer #placedCardOptions'), 'hideCardOptions');
     $('.cardContainer.activePlacement').parentToAnimate($('#playerInfoContainer #cardToPlace'), 1000);
@@ -1905,23 +1811,19 @@ $(document).on(touchEvent,'#cancelCardPlacement.button',function(){
     if(startingPlacement) {
         $('#verdancyVisibilityContainer').addClass('disableVerdancyVisibility');
     }
-    setTimeout(function(){
-        // console.log(`'#cancelCardPlacement.button' - setTimeout(function(){}, 1000)`);
+    setTimeout(function(){        
         $('#undoNextRoundBtnContainer #undoAction').removeAttr('disabled');
     }, 1000);
 });
 
 
 $(document).on(touchEvent,'#confirmCardPlacement.button',function(){
-// console.log(`'#confirmCardPlacement.button'`);
 
-    lockMap = true;
-    // console.log('lockMap = true;');
+    lockMap = true;    
 
     currentRoundActionLog.push('card-placement');
 
-    if($('#viewPotScoringBtn').hasClass('hidePotScoringLayer')) {
-        // console.log(`$('#viewPotScoringBtn').hasClass('hidePotScoringLayer')`);
+    if($('#viewPotScoringBtn').hasClass('hidePotScoringLayer')) {        
         togglePotScoringLayerVisibility('hide');
     }
 
@@ -1930,18 +1832,12 @@ $(document).on(touchEvent,'#confirmCardPlacement.button',function(){
 
     let placedCardRow = $('.mapTileContainer.temporaryCardPlacement').data('map-row');
     let placedCardColumn = $('.mapTileContainer.temporaryCardPlacement').data('map-column');
+                
 
-    // console.log(`placedMapID = ${placedMapID}`);
-    // console.log(`placedCardType = ${placedCardType}`);
-    // console.log(`placedCardRow = ${placedCardRow}`);
-    // console.log(`placedCardColumn = ${placedCardColumn}`);
-
-    if(placedCardType == 'room') {
-        // console.log(`placedCardType == 'room'`);
+    if(placedCardType == 'room') {        
         $(`#${placedMapID}`).attr('cardtype', 'room');
         $(`#${placedMapID}`).attr('placed-item', 'none');
-    } else {
-        // console.log(`placedCardType != 'room'`);
+    } else {        
         $(`#${placedMapID}`).attr('cardtype', 'plant');
         $(`#${placedMapID}`).attr('plant-pot', 'none');
     }
@@ -1951,15 +1847,12 @@ $(document).on(touchEvent,'#confirmCardPlacement.button',function(){
 
     $('.mapTileContainer.potentialCardPlacement').addClass('animatingElem mediumTransitionAll');
 
-    setTimeout(function(){
-        // console.log(`#confirmCardPlacement.button - setTimeout(function(){}, 50)`);
+    setTimeout(function(){        
         $('.mapTileContainer.activePotentialCardPlacement').removeClass('activePotentialCardPlacement');
     }, 50);
 
-    setTimeout(function(){
-        // console.log(`#confirmCardPlacement.button - setTimeout(function(){}, 300)`);
-        if(!startingPlacement) {
-            // console.log(`if !startingPlacement`);
+    setTimeout(function(){        
+        if(!startingPlacement) {            
             $('.mapTileContainer.temporaryCardPlacement').addClass('confirmedCardPlacement');
             $('.mapTileContainer.temporaryCardPlacement .cardContainer.activePlacement').addClass('placedCard').removeClass('activePlacement');
         }
@@ -1967,13 +1860,11 @@ $(document).on(touchEvent,'#confirmCardPlacement.button',function(){
 
     }, 300);
 
-    setTimeout(function(){
-        // console.log(`#confirmCardPlacement.button - setTimeout(function(){}, 800)`);
+    setTimeout(function(){        
         $('.mapTileContainer.animatingElem.mediumTransitionAll').removeClass('animatingElem mediumTransitionAll');
     }, 800);
 
-    setTimeout(function(){
-        // console.log(`#confirmCardPlacement.button - setTimeout(function(){}, 850)`);
+    setTimeout(function(){        
         $('.mapTileContainer.potentialCardPlacement').removeClass('potentialCardPlacement');
         updatePlayersTableauLimits(placedCardRow, placedCardColumn);
     }, 850);
@@ -1983,10 +1874,8 @@ let lightingMatches = [];
 let showLightingMatchesInterval;
 let lightingMatchCount = 0;
 
-function checkLightingMatches(mapID) {
-    // console.log(`checkLightingMatches(mapID)`);
-
-    // console.log(`mapID = ${mapID}`);
+function checkLightingMatches(mapID) {    
+    
 
     lightingMatches = [];
     lightingMatchCount = 0;
@@ -1994,11 +1883,7 @@ function checkLightingMatches(mapID) {
     var cardType = $card.attr('cardtype');
     var thisRow = $card.closest('.mapTileContainer').data('map-row');
     var thisColumn =  $card.closest('.mapTileContainer').data('map-column');
-
-    // console.log(`$card = ${$card}`);
-    // console.log(`cardType = ${cardType}`);
-    // console.log(`thisRow = ${thisRow}`);
-    // console.log(`thisColumn = ${thisColumn}`);
+                
 
     var plantCardID = '';
 
@@ -2009,29 +1894,20 @@ function checkLightingMatches(mapID) {
 
         let plantLightingNum = parseInt($card.data('lighting-num'));
         let plantLightingData = $card.data('lighting-types');
-
-        // console.log(`plantLightingNum = ${plantLightingNum}`);
-        // console.log(`plantLightingData = ${plantLightingData}`);
+                
         
         let allPlantLighting = [];
 
-        if(plantLightingNum > 1) {
-            // console.log(`if plantLightingNum > 1`);
-            let splitLightingData = plantLightingData.split(' ');
-            // console.log(`splitLightingData`, splitLightingData);
+        if(plantLightingNum > 1) {            
+            let splitLightingData = plantLightingData.split(' ');            
             allPlantLighting.push(...splitLightingData);
-        } else if(plantLightingNum == 1){
-            // console.log(`plantLightingNum == 1`);
+        } else if(plantLightingNum == 1){            
             allPlantLighting.push(plantLightingData);
         }
-
-        // console.log(`allNeighbours`, allNeighbours);
-        // console.log(`allPlantLighting`, allPlantLighting);
+                
 
         for (const [key, value] of Object.entries(allNeighbours)) {
-
-            // console.log(`key = ${key}`);
-            // console.log(`value = ${value}`);
+                        
 
             let touchingLightingIcon = $(`${key}.mapTileContainer .cardContainer`).data(`lighting-${oppositePos[value]}`);
             if(allPlantLighting.indexOf(touchingLightingIcon) !== -1) {
@@ -2043,18 +1919,13 @@ function checkLightingMatches(mapID) {
                 );
             }
         }
-    } else if(cardType == 'room') {
-        // console.log(`cardType == 'room'`);
-
-        // console.log(`allNeighbours`, allNeighbours);
+    } else if(cardType == 'room') {        
+        
 
         for (const [key, value] of Object.entries(allNeighbours)) {
+                        
 
-            // console.log(`key = ${key}`);
-            // console.log(`value = ${value}`);
-
-            let cardPlantPotInfo = $(`${key}.mapTileContainer`).attr('plant-pot');
-            // console.log(`cardPlantPotInfo = ${cardPlantPotInfo}`);
+            let cardPlantPotInfo = $(`${key}.mapTileContainer`).attr('plant-pot');            
 
             if (typeof cardPlantPotInfo !== typeof undefined && cardPlantPotInfo !== false) {
                 if(cardPlantPotInfo != 'none') {
@@ -2066,28 +1937,21 @@ function checkLightingMatches(mapID) {
 
             let plantLightingNum = parseInt($(`${key}.mapTileContainer .cardContainer`).data('lighting-num'));
             let plantLightingData = $(`${key}.mapTileContainer .cardContainer`).data('lighting-types');
-
-            // console.log(`plantLightingNum = ${plantLightingNum}`);
-            // console.log(`plantLightingData = ${plantLightingData}`);
+                        
 
             let allPlantLighting = [];
 
-            if(plantLightingNum > 1) {
-                // console.log(`plantLightingNum > 1`);
+            if(plantLightingNum > 1) {                
                 let splitLightingData = plantLightingData.split(' ');
                 allPlantLighting.push(...splitLightingData);
+                
 
-                // console.log(`splitLightingData`, splitLightingData);
-
-            } else if(plantLightingNum == 1){
-                // console.log(`plantLightingNum == 1`);
+            } else if(plantLightingNum == 1){                
                 allPlantLighting.push(plantLightingData);
             }
+            
 
-            // console.log(`allPlantLighting`, allPlantLighting);
-
-            if(allPlantLighting.indexOf(touchingLightingIcon) !== -1) {
-                // console.log(`allPlantLighting.indexOf(touchingLightingIcon) !== -1`);
+            if(allPlantLighting.indexOf(touchingLightingIcon) !== -1) {                
                 lightingMatches.push(
                     [
                         `${mapID}.mapTileContainer .cardContainer .lightingIconContainer-${value} .lightingIcon`, // room = [0] index
@@ -2097,46 +1961,34 @@ function checkLightingMatches(mapID) {
             }
         };
     }
+    
 
-    // console.log(`lightingMatches = ${lightingMatches}`);
-
-    if(lightingMatches.length !== 0) {
-        // console.log(`lightingMatches.length != 0`);
+    if(lightingMatches.length !== 0) {        
         toggleMapVerdancy('hide');
-        setTimeout(function(){  
-            // console.log(`checkLightingMatches(mapID) - setTimeout(function(){}, 10)`);
+        setTimeout(function(){              
             for (let i = 0; i < lightingMatches.length; i++) {
                 let thisPlantCard = lightingMatches[i][1];
                 let splitPlantCard = thisPlantCard.split(' ');
-
-                // console.log(`thisPlantCard = ${thisPlantCard}`);
-                // console.log(`splitPlantCard`, splitPlantCard);                
-                // console.log(`${splitPlantCard[0]} ${splitPlantCard[1]} ${splitPlantCard[2]}`);
+                                                
 
                 $(`${splitPlantCard[0]} ${splitPlantCard[1]} ${splitPlantCard[2]}`).addClass('showIndividualVerdancyLayer');
             }
         }, 10);
-        setTimeout(function(){
-            // console.log(`checkLightingMatches(mapID) - setTimeout(function(){}, 720)`);
+        setTimeout(function(){            
             showLightingMatchesFunc();
         }, 720);
-    } else {
-        // console.log(`lightingMatches.length == 0`);
-        if(startingPlacement) {
-            // console.log(`if startingPlacement`);
+    } else {        
+        if(startingPlacement) {            
             startFirstRound();
-        } else {
-            // console.log(`!startingPlacement`);
+        } else {            
             toggleMapVerdancy('hide');
             $('.showIndividualVerdancyLayer').removeClass('showIndividualVerdancyLayer');
-            if($('#chosenItemContainer .itemToken.inactivePlacement').length) {
-                // console.log(`$('#chosenItemContainer .itemToken.inactivePlacement').length`);
+            if($('#chosenItemContainer .itemToken.inactivePlacement').length) {                
                 $('#chosenItemContainer .itemToken.inactivePlacement').attr('style', '');
                 $('#chosenItemContainer .itemToken.inactivePlacement').addClass('activePlacement').removeClass('inactivePlacement');
                 checkChosenItemType();
                 lockMap = false;
-            } else {
-                // console.log(`!$('#chosenItemContainer .itemToken.inactivePlacement').length`);
+            } else {                
                 $('#undoNextRoundBtnContainer #undoAction').removeAttr('disabled');
                 activateNextRoundBtn();
                 lockMap = false;
@@ -2148,26 +2000,18 @@ function checkLightingMatches(mapID) {
 function showLightingMatchesFunc() {
 
     completedPlantsThisTurn = [];
-
-    // console.log(`showLightingMatchesFunc()`);
+    
     
     // lightingMatches[0] = room
     // lightingMatches[1] = plant
-
-    // console.log(`lightingMatchCount = ${lightingMatchCount}`);
+    
 
     let splitPlantCardID = lightingMatches[lightingMatchCount][1].split(' ');
     let plantCardID = splitPlantCardID[0];
     let splitRoomCardID = lightingMatches[lightingMatchCount][0].split(' ');
     let lightingSymbolPos = splitRoomCardID[2].split('-');
-
-    // console.log(`splitPlantCardID`, splitPlantCardID);
-    // console.log(`plantCardID = ${plantCardID}`);
-    // console.log(`splitRoomCardID`, splitRoomCardID);
-    // console.log(`lightingSymbolPos = ${lightingSymbolPos}`);
-
-    // console.log(`${lightingMatches[lightingMatchCount][0]}`);
-    // console.log(`${lightingMatches[lightingMatchCount][1]}`);
+                
+        
 
     $(`${lightingMatches[lightingMatchCount][0]}`).attr('style', `transform-origin: ${lightingSymbolPos[1]}`);
     $(`${lightingMatches[lightingMatchCount][1]}`).attr('style', '');
@@ -2175,59 +2019,43 @@ function showLightingMatchesFunc() {
     $(`${lightingMatches[lightingMatchCount][0]}`).addClass('matchedLighting');
     $(`${lightingMatches[lightingMatchCount][1]}`).addClass('matchedLighting');
 
-    setTimeout(function(){
-        // console.log(`showLightingMatchesFunc() - setTimeout(function(){}, 410)`);
+    setTimeout(function(){        
         $(`${lightingMatches[lightingMatchCount][0]}.matchedLighting`).addClass('matchedLightingAnimation');
         $(`${lightingMatches[lightingMatchCount][1]}.matchedLighting`).addClass('matchedLightingAnimation');
     }, 410);
 
-    setTimeout(function(){
-        // console.log(`showLightingMatchesFunc() - setTimeout(function(){}, 1310)`);
+    setTimeout(function(){        
         // let currentVerdancy = $(`${plantCardID}`).addClass('confirmedVerdancyAddition');
         let currentVerdancy = $(`${plantCardID} .cardContainer .verdancyIconsAndVPLayer`).attr('verdancy-completed');
-
-        // console.log(`${plantCardID} .cardContainer .verdancyIconsAndVPLayer .verdancyIconContainer[data-verdancy-icon-num="${currentVerdancy}"]`);
+        
         $(`${plantCardID} .cardContainer .verdancyIconsAndVPLayer .verdancyIconContainer[data-verdancy-icon-num="${currentVerdancy}"]`).addClass('completeVerdancy').removeClass('incompleteVerdancy');
-
-        // console.log(`currentVerdancy = ${currentVerdancy}`);
-        currentVerdancy++;
-        // console.log(`currentVerdancy = ${currentVerdancy}`);
-
-        // console.log(`${plantCardID} .cardContainer .verdancyIconsAndVPLayer`);
+        
+        currentVerdancy++;        
+        
         $(`${plantCardID} .cardContainer .verdancyIconsAndVPLayer`).attr('verdancy-completed', currentVerdancy);
     }, 1310);
 
-    setTimeout(function(){
-        // console.log(`showLightingMatchesFunc() - setTimeout(function(){}, 1720)`);
+    setTimeout(function(){        
         $(`${lightingMatches[lightingMatchCount][0]}.matchedLighting.matchedLightingAnimation`).removeClass('matchedLightingAnimation');
         $(`${lightingMatches[lightingMatchCount][1]}.matchedLighting.matchedLightingAnimation`).removeClass('matchedLightingAnimation');
     }, 1720);
 
-    setTimeout(function(){
-        // console.log(`showLightingMatchesFunc() - setTimeout(function(){}, 2420)`);
+    setTimeout(function(){        
         $(`${lightingMatches[lightingMatchCount][0]}.matchedLighting`).removeClass('matchedLighting');
         $(`${lightingMatches[lightingMatchCount][1]}.matchedLighting`).removeClass('matchedLighting');
 
         lightingMatchCount++;
+                
+        
 
-        // console.log(`lightingMatchCount = ${lightingMatchCount}`);
-        // console.log(`lightingMatches.length = ${lightingMatches.length}`);
-
-        // console.log(`lightingMatches`, lightingMatches);
-
-        if(lightingMatchCount < lightingMatches.length) {
-            // console.log(`if lightingMatchCount < lightingMatches.length`);
-            setTimeout(function(){
-                // console.log(`showLightingMatchesFunc() - setTimeout(function(){}, 300)`);
+        if(lightingMatchCount < lightingMatches.length) {            
+            setTimeout(function(){                
                 showLightingMatchesFunc();
             }, 300);
-        } else {
-            // console.log(`if lightingMatchCount >= lightingMatches.length`);
-            if(startingPlacement) {
-                // console.log(`if startingPlacement`);
+        } else {            
+            if(startingPlacement) {                
                 startFirstRound();
-            } else {
-                // console.log(`if !startingPlacement`);
+            } else {                
 
                 completedPlantsThisTurn = checkForCompletedPlants();
 
@@ -2237,14 +2065,12 @@ function showLightingMatchesFunc() {
                     gainPlantPots();
                 } else {
                     $('.showIndividualVerdancyLayer').removeClass('showIndividualVerdancyLayer');
-                    if($('#chosenItemContainer .itemToken.inactivePlacement').length) {
-                        // console.log(`$('#chosenItemContainer .itemToken.inactivePlacement').length`);
+                    if($('#chosenItemContainer .itemToken.inactivePlacement').length) {                        
                         $('#chosenItemContainer .itemToken.inactivePlacement').attr('style', '');
                         $('#chosenItemContainer .itemToken.inactivePlacement').addClass('activePlacement').removeClass('inactivePlacement');
                         checkChosenItemType();
                         lockMap = false;
-                    } else {
-                        // console.log(`!$('#chosenItemContainer .itemToken.inactivePlacement').length`);
+                    } else {                        
                         $('#undoNextRoundBtnContainer #undoAction').removeAttr('disabled');
                         activateNextRoundBtn();
                         lockMap = false;
@@ -2256,26 +2082,19 @@ function showLightingMatchesFunc() {
 }
 
 
-function checkForCompletedPlants() {
-    // console.log(`checkForCompletedPlants() func`);
+function checkForCompletedPlants() {    
     let completedPlants = [];
     $(`#mapHiddenOverlay .mapTileContainer[cardtype="plant"][plant-pot="none"] .cardContainer .verdancyIconsAndVPLayer`).each(function(){
-        let thisID = $(this).closest('.mapTileContainer').attr('id');
-        // console.log(`thisID = ${thisID}`);
-        // console.log(`$(this).attr('verdancy-icons') = ${$(this).attr('verdancy-icons')}`);
-        // console.log(`$(this).attr('verdancy-completed') = ${$(this).attr('verdancy-completed')}`);
+        let thisID = $(this).closest('.mapTileContainer').attr('id');                        
         if($(this).attr('verdancy-completed') >= $(this).attr('verdancy-icons')) {
-            $(this).closest('.mapTileContainer').addClass('pendingPlantPot');
-            // console.log(`thisID = ${thisID}`);
+            $(this).closest('.mapTileContainer').addClass('pendingPlantPot');            
             completedPlants.push(thisID);
         }
-    });
-    // console.log(`completedPlants`, completedPlants);
+    });    
     return completedPlants;
 }
 
-function gainPlantPots() {
-    // console.log(`gainPlantPots() func`);
+function gainPlantPots() {    
 
     toggleMapVerdancy('hide');
 
@@ -2299,13 +2118,10 @@ function gainPlantPots() {
         let nextActivePotTrigger = false;
         
         for (let i = 0; i < completedPlantsThisTurn.length; i++) {
-            nextActivePotTrigger = false;
-            // console.log(`currentActivePotNum = ${currentActivePotNum}`);
+            nextActivePotTrigger = false;            
 
-            while(!nextActivePotTrigger) {
-                // console.log(`currentActivePotNum = ${currentActivePotNum}`);
-                if($(`.availableScoringPlantPot[plant-pot-priority="${currentActivePotNum}"] .plantPotContainer`).length) {
-                    // console.log(`$('.availableScoringPlantPot[plant-pot-priority="${currentActivePotNum}"] .plantPotContainer').length == true`);
+            while(!nextActivePotTrigger) {                
+                if($(`.availableScoringPlantPot[plant-pot-priority="${currentActivePotNum}"] .plantPotContainer`).length) {                    
                     nextActivePotTrigger = true;
                 } else {
                     currentActivePotNum++;
@@ -2315,8 +2131,7 @@ function gainPlantPots() {
 
             let plantPotType = $(`.availableScoringPlantPot[plant-pot-priority="${currentActivePotNum}"] .plantPotContainer`).data('pot-type');
 
-            $(`#${completedPlantsThisTurn[i]}`).attr('plant-pot', plantPotType);
-            // console.log(`plantPotType = ${plantPotType}`);
+            $(`#${completedPlantsThisTurn[i]}`).attr('plant-pot', plantPotType);            
 
             let verdancyLayerPlantPointsIcon = `
                 <img class="completedVerdancyIcon verdancyLayerImg" src="img/completed-verdancy.png" />
@@ -2329,8 +2144,7 @@ function gainPlantPots() {
                     <img class="plantPotScoring" src="img/pots/${plantPotType}.png" alt="" />
                 </div>
             `;
-        
-            // console.log('verdancyLayerPotPoints', verdancyLayerPotPoints);
+                    
         
             $(`#${completedPlantsThisTurn[i]} .verdancyIconsParentContainer`).html(verdancyLayerPotPoints);
 
@@ -2355,12 +2169,9 @@ function gainPlantPots() {
         $('.mapTileContainer[cardtype="plant"]:not([plant-pot="none"]) .earnedPlantPotContainer .plantPotContainer .plantPotScoring').remove();
         $('.mapTileContainer[cardtype="plant"]:not([plant-pot="none"]) .earnedPlantPotContainer .plantPotContainer').removeClass('hideScoring showScoring');
         auditSwapItemBtnText('swapItems');
+                
 
-        // console.log(`$('#potDiscardPile .potDiscardSlot .plantPotContainer').length = ${$('#potDiscardPile .potDiscardSlot .plantPotContainer').length}`);
-        // console.log(`$('#potDiscardPile .potDiscardSlot[data-pot-discard-slot="0"] .plantPotContainer').length = ${$('#potDiscardPile .potDiscardSlot[data-pot-discard-slot="0"] .plantPotContainer').length}`);
-
-        if($('#potDiscardPile .potDiscardSlot .plantPotContainer').length > 0 && !$('#potDiscardPile .potDiscardSlot[data-pot-discard-slot="0"] .plantPotContainer').length) {
-            // console.log(`!$('#potDiscardPile .potDiscardSlot[data-pot-discard-slot="0"]').length`);
+        if($('#potDiscardPile .potDiscardSlot .plantPotContainer').length > 0 && !$('#potDiscardPile .potDiscardSlot[data-pot-discard-slot="0"] .plantPotContainer').length) {            
             removeDiscardPotSpaces(completedPlantsThisTurn.length);
             updateDiscardPotTotal();
         }
@@ -2370,32 +2181,25 @@ function gainPlantPots() {
 
 }
 
-function removeDiscardPotSpaces(amountOfPots) {
-    // console.log(`removeDiscardPotSpaces(${amountOfPots}) func`);
+function removeDiscardPotSpaces(amountOfPots) {    
 
     let amountToShiftPotsUp = 0;
 
     if($(`#potDiscardPile .potDiscardSlot.availableScoringPlantPot[plant-pot-priority="${amountOfPots}"] .plantPotContainer`).length) {
-
-        // console.log(`$('#potDiscardPile .potDiscardSlot.availableScoringPlantPot[plant-pot-priority="${amountOfPots}"] .plantPotContainer').length = ${$(`#potDiscardPile .potDiscardSlot.availableScoringPlantPot[plant-pot-priority="${amountOfPots}"] .plantPotContainer`).length}`);
+        
         amountToShiftPotsUp = amountOfPots - 1;
 
-    } else if($(`#potDiscardPile .potDiscardSlot.availableScoringPlantPot[plant-pot-priority="${amountOfPots + 1}"] .plantPotContainer`).length) {
-        // console.log(`$('#potDiscardPile .potDiscardSlot.availableScoringPlantPot[plant-pot-priority="${amountOfPots + 1}"] .plantPotContainer').length = ${$(`#potDiscardPile .potDiscardSlot.availableScoringPlantPot[plant-pot-priority="${amountOfPots + 1}"] .plantPotContainer`).length}`);
+    } else if($(`#potDiscardPile .potDiscardSlot.availableScoringPlantPot[plant-pot-priority="${amountOfPots + 1}"] .plantPotContainer`).length) {        
         amountToShiftPotsUp = amountOfPots;
     }
-
-    // console.log(`amountToShiftPotsUp = ${amountToShiftPotsUp}`);
+    
     
     $(`#potDiscardPile .potDiscardSlot.availableScoringPlantPot .plantPotContainer`).each(function(){
-        let currentPos = $(this).closest('.potDiscardSlot').data('pot-discard-slot');
-        // console.log(`currentPos = ${currentPos}`);
+        let currentPos = $(this).closest('.potDiscardSlot').data('pot-discard-slot');        
 
-        let newPos = currentPos - amountToShiftPotsUp;
-        // console.log(`newPos = ${newPos}`);
+        let newPos = currentPos - amountToShiftPotsUp;        
 
-        $(this).appendTo(`#potDiscardPile .potDiscardSlot.availableScoringPlantPot[data-pot-discard-slot="${newPos}"]`);
-        // console.log(`$(this).appendTo('.potDiscardSlot.availableScoringPlantPot[data-pot-discard-slot="${newPos}"]')`);
+        $(this).appendTo(`#potDiscardPile .potDiscardSlot.availableScoringPlantPot[data-pot-discard-slot="${newPos}"]`);        
     });
 }
 
@@ -2404,19 +2208,15 @@ function updateDiscardPotTotal(){
     $('#potScoringInfoContainer').attr('discarded-pots', discardPotsNum);
 }
 
-function activateNextRoundBtn(){
-    // console.log(`activateNextRoundBtn()`);
+function activateNextRoundBtn(){    
     
-    var nextRoundDisabled = $('#undoNextRoundBtnContainer #nextRound').attr('disabled');
-    // console.log(`nextRoundDisabled = ${nextRoundDisabled}`);
+    var nextRoundDisabled = $('#undoNextRoundBtnContainer #nextRound').attr('disabled');    
 
-    if (typeof nextRoundDisabled !== typeof undefined && nextRoundDisabled !== false) {
-        // console.log(`typeof nextRoundDisabled !== typeof undefined && nextRoundDisabled !== false`);
+    if (typeof nextRoundDisabled !== typeof undefined && nextRoundDisabled !== false) {        
         $('#undoNextRoundBtnContainer #nextRound').removeAttr('disabled');
         $('#undoNextRoundBtnContainer #nextRound').addClass('next-round-animation');
     
-        setTimeout(function(){
-            // console.log(`activateNextRoundBtn() - setTimeout(function(){}, 2500)`);
+        setTimeout(function(){            
             $('#undoNextRoundBtnContainer #nextRound').removeClass('next-round-animation');
         }, 2500);
     }
@@ -2426,10 +2226,8 @@ let leafCountdownInterval;
 
 $(document).on(touchEvent,'#undoNextRoundBtnContainer #nextRound',function(){
 
-    lockMap = true;
-    // console.log('lockMap = true;');
-
-    // console.log(`'#undoNextRoundBtnContainer #nextRound'`);
+    lockMap = true;    
+    
 
     if($(this).hasClass('finalScoring')) {
         $('#finalScoringModal').addClass('is-active');
@@ -2445,35 +2243,22 @@ $(document).on(touchEvent,'#undoNextRoundBtnContainer #nextRound',function(){
 
     let cardColumnToReplace = parseInt($('.lockedInCardOverlay').closest('.marketColumn').attr('column'));
     let itemColumnToReplace = parseInt($('.lockedInItemOverlay').closest('.marketColumn').attr('column'));
+        
 
-    // console.log(`cardColumnToReplace = ${cardColumnToReplace}`);
-    // console.log(`itemColumnToReplace = ${itemColumnToReplace}`);
-
-    if($('.lockedInCardOverlay').hasClass('marketPlantCardOverlay')) {
-        // console.log(`if $('.lockedInCardOverlay').hasClass('marketPlantCardOverlay')`);
+    if($('.lockedInCardOverlay').hasClass('marketPlantCardOverlay')) {        
         cardTypeToReplace = 'plant';
-        if(cardColumnToReplace != 3) {
-            // console.log(`if cardColumnToReplace != 3`);
-            // console.log(`cardColumnToReplace = ${cardColumnToReplace + 1}`);
-            replacementPlantCardColumns.push(cardColumnToReplace + 1);
-            // console.log(`replacementPlantCardColumns`, replacementPlantCardColumns);
+        if(cardColumnToReplace != 3) {                        
+            replacementPlantCardColumns.push(cardColumnToReplace + 1);            
         }
-    } else if($('.lockedInCardOverlay').hasClass('marketRoomCardOverlay')) {
-        // console.log(`if $('.lockedInCardOverlay').hasClass('marketRoomCardOverlay')`);
+    } else if($('.lockedInCardOverlay').hasClass('marketRoomCardOverlay')) {        
         cardTypeToReplace = 'room';
-        if(cardColumnToReplace != 3) {
-            // console.log(`if cardColumnToReplace != 3`);
-            // console.log(`cardColumnToReplace = ${cardColumnToReplace + 1}`);
-            replacementRoomCardColumns.push(cardColumnToReplace + 1);
-            // console.log(`replacementPlantCardColumns`, replacementPlantCardColumns);
+        if(cardColumnToReplace != 3) {                        
+            replacementRoomCardColumns.push(cardColumnToReplace + 1);            
         }
     }
 
-    if(itemColumnToReplace != 3) {
-        // console.log(`if itemColumnToReplace != 3`);
-        // console.log(`itemColumnToReplace = ${itemColumnToReplace + 1}`);
-        replacementItemTokenColumns.push(itemColumnToReplace + 1);
-        // console.log(`replacementItemTokenColumns`, replacementItemTokenColumns);
+    if(itemColumnToReplace != 3) {                
+        replacementItemTokenColumns.push(itemColumnToReplace + 1);        
     }
 
     let multipleMarketReplacementsTimeout = 0;
@@ -2511,14 +2296,12 @@ $(document).on(touchEvent,'#undoNextRoundBtnContainer #nextRound',function(){
 
     let nextRoundProcessTimeout = 10;
 
-    if($('#viewPotScoringBtn').hasClass('hidePotScoringLayer')) {
-        // console.log(`$('#viewPotScoringBtn').hasClass('hidePotScoringLayer')`);
+    if($('#viewPotScoringBtn').hasClass('hidePotScoringLayer')) {        
         togglePotScoringLayerVisibility('hide');
         nextRoundProcessTimeout = 710;
     };
 
-    setTimeout(function(){
-        // console.log(`'#undoNextRoundBtnContainer #nextRound' - setTimeout(function(){}, ${nextRoundProcessTimeout})`);
+    setTimeout(function(){        
         swapActiveMainSection();
     }, nextRoundProcessTimeout);
 
@@ -2532,84 +2315,56 @@ $(document).on(touchEvent,'#undoNextRoundBtnContainer #nextRound',function(){
     let nextAvailableColumnRoom = '';
     let nextAvailableColumnRoomGreenThumbs = '';
 
-    if($(`.marketColumn[column="3"] .marketPlantCardOverlay .cardContainer`).length) {
-        // console.log(`IF STATEMENT = .marketColumn[column="3"] .marketPlantCardOverlay .cardContainer`);
-        columnFourPlantGreenThumbs = parseInt($(`.marketColumn[column="3"] .marketPlantCardOverlay .cardContainer .newGreenThumbMasterContainer`).attr('total-green-thumbs'));
-        // console.log(`columnFourPlantGreenThumbs = ${columnFourPlantGreenThumbs}`);
-        if($(`.marketColumn[column="2"] .marketPlantCardOverlay .cardContainer`).length) {
-            // console.log(`IF STATEMENT = .marketColumn[column="2"] .marketPlantCardOverlay .cardContainer`);
+    if($(`.marketColumn[column="3"] .marketPlantCardOverlay .cardContainer`).length) {        
+        columnFourPlantGreenThumbs = parseInt($(`.marketColumn[column="3"] .marketPlantCardOverlay .cardContainer .newGreenThumbMasterContainer`).attr('total-green-thumbs'));        
+        if($(`.marketColumn[column="2"] .marketPlantCardOverlay .cardContainer`).length) {            
             nextAvailableColumnPlant = '2';
-            nextAvailableColumnPlantGreenThumbs = parseInt($(`.marketColumn[column="2"] .marketPlantCardOverlay .cardContainer .newGreenThumbMasterContainer`).attr('total-green-thumbs'));
-            // console.log(`nextAvailableColumnPlant = ${nextAvailableColumnPlant}`);
-            // console.log(`nextAvailableColumnPlantGreenThumbs = ${nextAvailableColumnPlantGreenThumbs}`);
-        } else if($(`.marketColumn[column="1"] .marketPlantCardOverlay .cardContainer`).length) {
-            // console.log(`IF STATEMENT = .marketColumn[column="1"] .marketPlantCardOverlay .cardContainer`);
+            nextAvailableColumnPlantGreenThumbs = parseInt($(`.marketColumn[column="2"] .marketPlantCardOverlay .cardContainer .newGreenThumbMasterContainer`).attr('total-green-thumbs'));                        
+        } else if($(`.marketColumn[column="1"] .marketPlantCardOverlay .cardContainer`).length) {            
             nextAvailableColumnPlant = '1';
-            nextAvailableColumnPlantGreenThumbs = parseInt($(`.marketColumn[column="1"] .marketPlantCardOverlay .cardContainer .newGreenThumbMasterContainer`).attr('total-green-thumbs'));
-            // console.log(`nextAvailableColumnPlant = ${nextAvailableColumnPlant}`);
-            // console.log(`nextAvailableColumnPlantGreenThumbs = ${nextAvailableColumnPlantGreenThumbs}`);
-        } else if($(`.marketColumn[column="0"] .marketPlantCardOverlay .cardContainer`).length) {
-            // console.log(`IF STATEMENT = .marketColumn[column="0"] .marketPlantCardOverlay .cardContainer`);
+            nextAvailableColumnPlantGreenThumbs = parseInt($(`.marketColumn[column="1"] .marketPlantCardOverlay .cardContainer .newGreenThumbMasterContainer`).attr('total-green-thumbs'));                        
+        } else if($(`.marketColumn[column="0"] .marketPlantCardOverlay .cardContainer`).length) {            
             nextAvailableColumnPlant = '0';
-            nextAvailableColumnPlantGreenThumbs = parseInt($(`.marketColumn[column="0"] .marketPlantCardOverlay .cardContainer .newGreenThumbMasterContainer`).attr('total-green-thumbs'));
-            // console.log(`nextAvailableColumnPlant = ${nextAvailableColumnPlant}`);
-            // console.log(`nextAvailableColumnPlantGreenThumbs = ${nextAvailableColumnPlantGreenThumbs}`);
+            nextAvailableColumnPlantGreenThumbs = parseInt($(`.marketColumn[column="0"] .marketPlantCardOverlay .cardContainer .newGreenThumbMasterContainer`).attr('total-green-thumbs'));                        
         }
     }
 
-    if($(`.marketColumn[column="3"] .marketRoomCardOverlay .cardContainer`).length) {
-        // console.log(`IF STATEMENT = .marketColumn[column="3"] .marketRoomCardOverlay .cardContainer`);
-        columnFourRoomGreenThumbs = parseInt($(`.marketColumn[column="3"] .marketRoomCardOverlay .cardContainer .newGreenThumbMasterContainer`).attr('total-green-thumbs'));
-        // console.log(`columnFourRoomGreenThumbs = ${columnFourRoomGreenThumbs}`);
-        if($(`.marketColumn[column="2"] .marketRoomCardOverlay .cardContainer`).length) {
-            // console.log(`IF STATEMENT = .marketColumn[column="2"] .marketRoomCardOverlay .cardContainer`);
+    if($(`.marketColumn[column="3"] .marketRoomCardOverlay .cardContainer`).length) {        
+        columnFourRoomGreenThumbs = parseInt($(`.marketColumn[column="3"] .marketRoomCardOverlay .cardContainer .newGreenThumbMasterContainer`).attr('total-green-thumbs'));        
+        if($(`.marketColumn[column="2"] .marketRoomCardOverlay .cardContainer`).length) {            
             nextAvailableColumnRoom = '2';
-            nextAvailableColumnRoomGreenThumbs = parseInt($(`.marketColumn[column="2"] .marketRoomCardOverlay .cardContainer .newGreenThumbMasterContainer`).attr('total-green-thumbs'));
-            // console.log(`nextAvailableColumnRoom = ${nextAvailableColumnRoom}`);
-            // console.log(`nextAvailableColumnRoomGreenThumbs = ${nextAvailableColumnRoomGreenThumbs}`);
-        } else if($(`.marketColumn[column="1"] .marketRoomCardOverlay .cardContainer`).length) {
-            // console.log(`IF STATEMENT = .marketColumn[column="1"] .marketRoomCardOverlay .cardContainer`);
+            nextAvailableColumnRoomGreenThumbs = parseInt($(`.marketColumn[column="2"] .marketRoomCardOverlay .cardContainer .newGreenThumbMasterContainer`).attr('total-green-thumbs'));                        
+        } else if($(`.marketColumn[column="1"] .marketRoomCardOverlay .cardContainer`).length) {            
             nextAvailableColumnRoom = '1';
-            nextAvailableColumnRoomGreenThumbs = parseInt($(`.marketColumn[column="1"] .marketRoomCardOverlay .cardContainer .newGreenThumbMasterContainer`).attr('total-green-thumbs'));
-            // console.log(`nextAvailableColumnRoom = ${nextAvailableColumnRoom}`);
-            // console.log(`nextAvailableColumnRoomGreenThumbs = ${nextAvailableColumnRoomGreenThumbs}`);
-        } else if($(`.marketColumn[column="0"] .marketRoomCardOverlay .cardContainer`).length) {
-            // console.log(`IF STATEMENT = .marketColumn[column="0"] .marketRoomCardOverlay .cardContainer`);
+            nextAvailableColumnRoomGreenThumbs = parseInt($(`.marketColumn[column="1"] .marketRoomCardOverlay .cardContainer .newGreenThumbMasterContainer`).attr('total-green-thumbs'));                        
+        } else if($(`.marketColumn[column="0"] .marketRoomCardOverlay .cardContainer`).length) {            
             nextAvailableColumnRoom = '0';
-            nextAvailableColumnRoomGreenThumbs = parseInt($(`.marketColumn[column="0"] .marketRoomCardOverlay .cardContainer .newGreenThumbMasterContainer`).attr('total-green-thumbs'));
-            // console.log(`nextAvailableColumnRoom = ${nextAvailableColumnRoom}`);
-            // console.log(`nextAvailableColumnRoomGreenThumbs = ${nextAvailableColumnRoomGreenThumbs}`);
+            nextAvailableColumnRoomGreenThumbs = parseInt($(`.marketColumn[column="0"] .marketRoomCardOverlay .cardContainer .newGreenThumbMasterContainer`).attr('total-green-thumbs'));                        
         }
     }
     
     let clearSecondToLastPlantGreenThumbLimit = false;
 
-    if(columnFourPlantGreenThumbs > 0 || columnFourRoomGreenThumbs > 0) {
-        // console.log(`IF STATEMENT = columnFourPlantGreenThumbs > 0 || columnFourRoomGreenThumbs > 0`);
+    if(columnFourPlantGreenThumbs > 0 || columnFourRoomGreenThumbs > 0) {        
         nextRoundProcessTimeout = nextRoundProcessTimeout + 900;
     }
     
-    if(columnFourPlantGreenThumbs > 0) {
-        // console.log(`IF STATEMENT = columnFourPlantGreenThumbs > 0`);
+    if(columnFourPlantGreenThumbs > 0) {        
         let newNextAvailableColumnPlantGreenThumbs = columnFourPlantGreenThumbs + nextAvailableColumnPlantGreenThumbs;
-
-        // console.log(`newNextAvailableColumnPlantGreenThumbs = ${newNextAvailableColumnPlantGreenThumbs}`);
+        
 
         $(`.marketColumn[column="${nextAvailableColumnPlant}"] .marketPlantCardOverlay .cardContainer .newGreenThumbMasterContainer`)
         $(`.marketColumn[column="${nextAvailableColumnPlant}"] .marketPlantCardOverlay .cardContainer .newGreenThumbMasterContainer`).attr('total-green-thumbs', newNextAvailableColumnPlantGreenThumbs);
 
-        if(columnFourPlantGreenThumbs == 1) {
-            // console.log(`IF STATEMENT = columnFourPlantGreenThumbs == 1`);
+        if(columnFourPlantGreenThumbs == 1) {            
             $(`.marketColumn[column="3"] .marketPlantCardOverlay .cardContainer .newGreenThumbMasterContainer .newGreenThumbParentContainer[green-thumb-container="1"] .newGreenThumbContainer`).parentToAnimate($(`.marketColumn[column="${nextAvailableColumnPlant}"] .marketPlantCardOverlay .cardContainer .newGreenThumbMasterContainer .newGreenThumbParentContainer[green-thumb-container="${nextAvailableColumnPlantGreenThumbs + 1}"]`), 1000);
 
-        } else if(columnFourPlantGreenThumbs == 2){
-            // console.log(`IF STATEMENT = columnFourPlantGreenThumbs == 2`);
+        } else if(columnFourPlantGreenThumbs == 2){            
             $(`.marketColumn[column="3"] .marketPlantCardOverlay .cardContainer .newGreenThumbMasterContainer .newGreenThumbParentContainer[green-thumb-container="1"] .newGreenThumbContainer`).parentToAnimate($(`.marketColumn[column="${nextAvailableColumnPlant}"] .marketPlantCardOverlay .cardContainer .newGreenThumbMasterContainer .newGreenThumbParentContainer[green-thumb-container="${nextAvailableColumnPlantGreenThumbs + 1}"]`), 1000);
 
             $(`.marketColumn[column="3"] .marketPlantCardOverlay .cardContainer .newGreenThumbMasterContainer .newGreenThumbParentContainer[green-thumb-container="2"] .newGreenThumbContainer`).parentToAnimate($(`.marketColumn[column="${nextAvailableColumnPlant}"] .marketPlantCardOverlay .cardContainer .newGreenThumbMasterContainer .newGreenThumbParentContainer[green-thumb-container="${nextAvailableColumnPlantGreenThumbs + 2}"]`), 1000);
 
-        } else if(columnFourPlantGreenThumbs == 3) {
-            // console.log(`IF STATEMENT = columnFourPlantGreenThumbs == 3`);
+        } else if(columnFourPlantGreenThumbs == 3) {            
             $(`.marketColumn[column="3"] .marketPlantCardOverlay .cardContainer .newGreenThumbMasterContainer .newGreenThumbParentContainer[green-thumb-container="1"] .newGreenThumbContainer`).parentToAnimate($(`.marketColumn[column="${nextAvailableColumnPlant}"] .marketPlantCardOverlay .cardContainer .newGreenThumbMasterContainer .newGreenThumbParentContainer[green-thumb-container="${nextAvailableColumnPlantGreenThumbs + 1}"]`), 1000);
 
             $(`.marketColumn[column="3"] .marketPlantCardOverlay .cardContainer .newGreenThumbMasterContainer .newGreenThumbParentContainer[green-thumb-container="2"] .newGreenThumbContainer`).parentToAnimate($(`.marketColumn[column="${nextAvailableColumnPlant}"] .marketPlantCardOverlay .cardContainer .newGreenThumbMasterContainer .newGreenThumbParentContainer[green-thumb-container="${nextAvailableColumnPlantGreenThumbs + 2}"]`), 1000);
@@ -2618,8 +2373,7 @@ $(document).on(touchEvent,'#undoNextRoundBtnContainer #nextRound',function(){
             
         }
 
-        if(newNextAvailableColumnPlantGreenThumbs >= 3) {
-            // console.log(`IF STATEMENT = newNextAvailableColumnPlantGreenThumbs >= 3`);
+        if(newNextAvailableColumnPlantGreenThumbs >= 3) {            
 
             nextRoundProcessTimeout = nextRoundProcessTimeout + 1500;
 
@@ -2643,29 +2397,23 @@ $(document).on(touchEvent,'#undoNextRoundBtnContainer #nextRound',function(){
         
     } // GREEN THUMB IF STATEMENT END
 
-    if(columnFourRoomGreenThumbs > 0) {
-        // console.log(`IF STATEMENT = columnFourRoomGreenThumbs > 0`);
+    if(columnFourRoomGreenThumbs > 0) {        
         let nextAvailableColumnRoomGreenThumbs = parseInt($(`.marketColumn[column="${nextAvailableColumnRoom}"] .marketRoomCardOverlay .cardContainer .newGreenThumbMasterContainer`).attr('total-green-thumbs'));
         let newNextAvailableColumnRoomGreenThumbs = columnFourRoomGreenThumbs + nextAvailableColumnRoomGreenThumbs;
-
-        // console.log(`nextAvailableColumnRoomGreenThumbs = ${nextAvailableColumnRoomGreenThumbs}`);
-        // console.log(`newNextAvailableColumnRoomGreenThumbs = ${newNextAvailableColumnRoomGreenThumbs}`);
+                
 
 
         $(`.marketColumn[column="${nextAvailableColumnRoom}"] .marketRoomCardOverlay .cardContainer .newGreenThumbMasterContainer`).attr('total-green-thumbs', newNextAvailableColumnRoomGreenThumbs);
 
-        if(columnFourRoomGreenThumbs == 1) {
-            // console.log(`IF STATEMENT = columnFourRoomGreenThumbs == 1`);
+        if(columnFourRoomGreenThumbs == 1) {            
             $(`.marketColumn[column="3"] .marketRoomCardOverlay .cardContainer .newGreenThumbMasterContainer .newGreenThumbParentContainer[green-thumb-container="1"] .newGreenThumbContainer`).parentToAnimate($(`.marketColumn[column="${nextAvailableColumnRoom}"] .marketRoomCardOverlay .cardContainer .newGreenThumbMasterContainer .newGreenThumbParentContainer[green-thumb-container="${nextAvailableColumnRoomGreenThumbs + 1}"]`), 1000);
 
-        } else if(columnFourRoomGreenThumbs == 2){
-            // console.log(`IF STATEMENT = columnFourRoomGreenThumbs == 2`);
+        } else if(columnFourRoomGreenThumbs == 2){            
             $(`.marketColumn[column="3"] .marketRoomCardOverlay .cardContainer .newGreenThumbMasterContainer .newGreenThumbParentContainer[green-thumb-container="1"] .newGreenThumbContainer`).parentToAnimate($(`.marketColumn[column="${nextAvailableColumnRoom}"] .marketRoomCardOverlay .cardContainer .newGreenThumbMasterContainer .newGreenThumbParentContainer[green-thumb-container="${nextAvailableColumnRoomGreenThumbs + 1}"]`), 1000);
 
             $(`.marketColumn[column="3"] .marketRoomCardOverlay .cardContainer .newGreenThumbMasterContainer .newGreenThumbParentContainer[green-thumb-container="2"] .newGreenThumbContainer`).parentToAnimate($(`.marketColumn[column="${nextAvailableColumnRoom}"] .marketRoomCardOverlay .cardContainer .newGreenThumbMasterContainer .newGreenThumbParentContainer[green-thumb-container="${nextAvailableColumnRoomGreenThumbs + 2}"]`), 1000);
 
-        } else if(columnFourRoomGreenThumbs == 3) {
-            // console.log(`IF STATEMENT = columnFourRoomGreenThumbs == 3`);
+        } else if(columnFourRoomGreenThumbs == 3) {            
             $(`.marketColumn[column="3"] .marketRoomCardOverlay .cardContainer .newGreenThumbMasterContainer .newGreenThumbParentContainer[green-thumb-container="1"] .newGreenThumbContainer`).parentToAnimate($(`.marketColumn[column="${nextAvailableColumnRoom}"] .marketRoomCardOverlay .cardContainer .newGreenThumbMasterContainer .newGreenThumbParentContainer[green-thumb-container="${nextAvailableColumnRoomGreenThumbs + 1}"]`), 1000);
 
             $(`.marketColumn[column="3"] .marketRoomCardOverlay .cardContainer .newGreenThumbMasterContainer .newGreenThumbParentContainer[green-thumb-container="2"] .newGreenThumbContainer`).parentToAnimate($(`.marketColumn[column="${nextAvailableColumnRoom}"] .marketRoomCardOverlay .cardContainer .newGreenThumbMasterContainer .newGreenThumbParentContainer[green-thumb-container="${nextAvailableColumnRoomGreenThumbs + 2}"]`), 1000);
@@ -2674,8 +2422,7 @@ $(document).on(touchEvent,'#undoNextRoundBtnContainer #nextRound',function(){
 
         }
 
-        if(newNextAvailableColumnRoomGreenThumbs >= 3) {
-            // console.log(`IF STATEMENT = newNextAvailableColumnRoomGreenThumbs >= 3`);
+        if(newNextAvailableColumnRoomGreenThumbs >= 3) {            
             nextRoundProcessTimeout = nextRoundProcessTimeout + 1500;
 
             setTimeout(function(){
@@ -2699,8 +2446,7 @@ $(document).on(touchEvent,'#undoNextRoundBtnContainer #nextRound',function(){
     } // GREEN THUMB IF STATEMENT END
     
 
-    setTimeout(function(){
-        // console.log(`'#undoNextRoundBtnContainer #nextRound' - setTimeout(function(){}, ${710 + nextRoundProcessTimeout})`);
+    setTimeout(function(){        
         // 1600ms -> remove-market-cards-and-item-alt
         if($(`.marketColumn[column="3"] .cardsAndItemContainer .marketPlantCardOverlay .cardContainer`).length) {
             $(`.marketColumn[column="3"] .cardsAndItemContainer .marketPlantCardOverlay .cardContainer`).attr('style', 'transform-origin: center;');
@@ -2732,8 +2478,7 @@ $(document).on(touchEvent,'#undoNextRoundBtnContainer #nextRound',function(){
 
     }, 710 + nextRoundProcessTimeout);
 
-    setTimeout(function(){
-        // console.log(`'#undoNextRoundBtnContainer #nextRound' - setTimeout(function(){}, ${2900 + nextRoundProcessTimeout} (2900 + ${nextRoundProcessTimeout}))`);
+    setTimeout(function(){        
         $('.remove-market-cards-and-item-alt').remove();
 
         let plantsRequiredColumns = [];
@@ -2754,12 +2499,7 @@ $(document).on(touchEvent,'#undoNextRoundBtnContainer #nextRound',function(){
             let thisPlantCardHTML = generateCard(thisPlantCard[0], 'plant', 'market', 'market');
             $(`.marketColumn[column="${replacementPlantCardColumns[i]}"] .cardsAndItemContainer .marketPlantCardOverlay`).append(thisPlantCardHTML);
             $(`.marketColumn[column="${replacementPlantCardColumns[i]}"] .cardsAndItemContainer .marketPlantCardOverlay .newCardContainer`).addClass(`${columnOffsetClasses[replacementPlantCardColumns[i]]} startingPosAnimate startingPos`);
-
-            // console.log(`/* ------------------------------------------------------------------------------- */`);
-            // console.log(`thisPlantCard = ${thisPlantCard[0].id}`);
-            // console.log(`/* APPEND TO: */`);
-            // console.log(`.marketColumn[column="${replacementPlantCardColumns[i]}"] .cardsAndItemContainer .marketPlantCardOverlay`);
-            // console.log(`/* ------------------------------------------------------------------------------- */`);
+                                                            
 
         }
 
@@ -2769,12 +2509,7 @@ $(document).on(touchEvent,'#undoNextRoundBtnContainer #nextRound',function(){
             $(`.marketColumn[column="${replacementItemTokenColumns[i]}"] .cardsAndItemContainer .marketItemOverlay`).append(thisItemTokenHTML);
             $(`.marketColumn[column="${replacementItemTokenColumns[i]}"] .cardsAndItemContainer .marketItemOverlay .newItemToken`).addClass(`${columnOffsetClasses[replacementItemTokenColumns[i]]} startingPosAnimate startingPos`);
 
-
-            // console.log(`/* ------------------------------------------------------------------------------- */`);
-            // console.log(`thisItemToken = ${thisItemToken[0]}`);
-            // console.log(`/* APPEND TO: */`);
-            // console.log(`.marketColumn[column="${replacementItemTokenColumns[i]}"] .cardsAndItemContainer .marketItemOverlay .newItemToken`);
-            // console.log(`/* ------------------------------------------------------------------------------- */`);
+                                                            
         }
 
         for (let i = 0; i < replacementRoomCardColumns.length; i++) {
@@ -2782,12 +2517,7 @@ $(document).on(touchEvent,'#undoNextRoundBtnContainer #nextRound',function(){
             let thisRoomCardHTML = generateCard(thisRoomCard[0], 'room', 'market', 'market');   
             $(`.marketColumn[column="${replacementRoomCardColumns[i]}"] .cardsAndItemContainer .marketRoomCardOverlay`).append(thisRoomCardHTML);
             $(`.marketColumn[column="${replacementRoomCardColumns[i]}"] .cardsAndItemContainer .marketRoomCardOverlay .newCardContainer`).addClass(`${columnOffsetClasses[replacementRoomCardColumns[i]]} startingPosAnimate startingPos`);
-
-            // console.log(`/* ------------------------------------------------------------------------------- */`);
-            // console.log(`thisRoomCard = ${thisRoomCard[0].img} (top = ${thisRoomCard[0].lighting[0]}, right = ${thisRoomCard[0].lighting[1]}, bottom = ${thisRoomCard[0].lighting[2]}, left = ${thisRoomCard[0].lighting[3]})`);
-            // console.log(`/* APPEND TO: */`);
-            // console.log(`.marketColumn[column="${replacementRoomCardColumns[i]}"] .cardsAndItemContainer .marketPlantCardOverlay`);
-            // console.log(`/* ------------------------------------------------------------------------------- */`);
+                                                            
         }
 
         let columnShiftDetails = [
@@ -2800,62 +2530,45 @@ $(document).on(touchEvent,'#undoNextRoundBtnContainer #nextRound',function(){
             for (let j = 0; j < columnShiftDetails.length; j++) {
                 if($(`.marketColumn[column="${i}"] .cardsAndItemContainer ${columnShiftDetails[j][0]} ${columnShiftDetails[j][1]}:not(.${columnShiftDetails[j][2]})`).length) {
                     $(`.marketColumn[column="${i}"] .cardsAndItemContainer ${columnShiftDetails[j][0]} ${columnShiftDetails[j][1]}:not(.${columnShiftDetails[j][2]})`).addClass(`${columnShiftDetails[j][2]} oneColumnOffset startingPosAnimate startingPos`).appendTo(`.marketColumn[column="${i + 1}"] .cardsAndItemContainer ${columnShiftDetails[j][0]}`);
-
-                    // console.log(`/* ------------------------------------------------------------------------------- */`);
-                    // console.log(`.marketColumn[column="${i}"] .cardsAndItemContainer ${columnShiftDetails[j][0]} ${columnShiftDetails[j][1]}:not(.${columnShiftDetails[j][2]})`);
-                    // console.log(`/* APPEND TO: */`);
-                    // console.log(`.marketColumn[column="${i + 1}"] .cardsAndItemContainer ${columnShiftDetails[j][0]}`);
-                    // console.log(`/* ------------------------------------------------------------------------------- */`);
+                                                                                                    
                 }
             }
         }
 
-        setTimeout(function(){
-            // console.log(`'#undoNextRoundBtnContainer #nextRound' - setTimeout(function(){}, ${50})`);
+        setTimeout(function(){            
             $('.oneColumnOffset.startingPos').removeClass('startingPos');
         }, 50);
 
-        setTimeout(function(){
-            // console.log(`'#undoNextRoundBtnContainer #nextRound' - setTimeout(function(){}, ${2900 + nextRoundProcessTimeout})`);
+        setTimeout(function(){            
             $('.startingPos').removeClass('startingPos');
         }, 1550);
 
     }, 2900 + nextRoundProcessTimeout);
 
-    setTimeout(function(){
-        // console.log(`'#undoNextRoundBtnContainer #nextRound' - setTimeout(function(){}, ${4450 + nextRoundProcessTimeout + multipleMarketReplacementsTimeout} (4450 + ${nextRoundProcessTimeout} + ${multipleMarketReplacementsTimeout}))`);
+    setTimeout(function(){        
         togglePotScoringLayerVisibility('show');
     }, 4450 + nextRoundProcessTimeout + multipleMarketReplacementsTimeout);
 
-    setTimeout(function(){
-        // console.log(`'#undoNextRoundBtnContainer #nextRound' - setTimeout(function(){}, ${5700 + nextRoundProcessTimeout + multipleMarketReplacementsTimeout}) (5700 + ${nextRoundProcessTimeout} + ${multipleMarketReplacementsTimeout})`);
+    setTimeout(function(){        
            
         let discardPilePots = $(`#potDiscardPile .potDiscardSlot .plantPotContainer`).length;
         let drawPilePots = $(`#potDrawPile .potDrawSlot .plantPotContainer`).length;
-
-        // console.log(`discardPilePots = ${discardPilePots}`);
-        // console.log(`drawPilePots = ${drawPilePots}`);
+                
 
         let emptyFourthColumnPot = false; 
-        if(!$(`#marketCardColumns .marketColumn[column="3"] .plantPotOverlay .plantPotContainer:not(.newPlantPot)`).length) {
-            // console.log(`IF STATEMENT = !$(#marketCardColumns .marketColumn[column="3"] .plantPotOverlay .plantPotContainer:not(.newPlantPot)).length`);
+        if(!$(`#marketCardColumns .marketColumn[column="3"] .plantPotOverlay .plantPotContainer:not(.newPlantPot)`).length) {            
             emptyFourthColumnPot = true;
-        }
-        // console.log(`emptyFourthColumnPot = ${emptyFourthColumnPot}`);
+        }        
 
-        if(discardPilePots > 0 && !emptyFourthColumnPot) {
-            // console.log(`IF STATEMENT = discardPilePots > 0 && !emptyFourthColumnPot`);
+        if(discardPilePots > 0 && !emptyFourthColumnPot) {            
             for (let i = discardPilePots - 1; i >= 0; i--) {
-                if($(`#potDiscardPile .potDiscardSlot[data-pot-discard-slot="${i}"] .plantPotContainer:not(.newPlantPot)`).length) {
-                    // console.log(`$(#potDiscardPile .potDiscardSlot[data-pot-discard-slot="${i}"] .plantPotContainer:not(.newPlantPot)).length`);
+                if($(`#potDiscardPile .potDiscardSlot[data-pot-discard-slot="${i}"] .plantPotContainer:not(.newPlantPot)`).length) {                    
                     $(`#potDiscardPile .potDiscardSlot[data-pot-discard-slot="${i}"] .plantPotContainer:not(.newPlantPot)`).addClass(`newPlantPot discardPileOffset startingPosAnimate startingPos`).appendTo(`#potDiscardPile .potDiscardSlot[data-pot-discard-slot="${(i + 1)}"]`);
                 }
             }
         }
 
-        if(!emptyFourthColumnPot) {
-            // console.log(`if !emptyFourthColumnPot`);
-            // console.log(`if $(#marketCardColumns .marketColumn[column="3"] .plantPotOverlay .plantPotContainer:not(.newPlantPot)).length`);
+        if(!emptyFourthColumnPot) {                        
             $(`#marketCardColumns .marketColumn[column="3"] .plantPotOverlay .plantPotContainer:not(.newPlantPot)`).addClass(`newPlantPot discardPileOffset startingPosAnimate startingPos`).appendTo(`#potDiscardPile .potDiscardSlot[data-pot-discard-slot="0"]`);
         }
         
@@ -2865,18 +2578,15 @@ $(document).on(touchEvent,'#undoNextRoundBtnContainer #nextRound',function(){
 
         $(`#potDrawPile .potDrawSlot[data-pot-draw-slot="0"] .plantPotContainer:not(.newPlantPot)`).addClass(`newPlantPot drawPileOffset startingPosAnimate startingPos`).appendTo(`#marketCardColumns .marketColumn[column="0"] .plantPotOverlay`);
 
-        if(drawPilePots > 1) {
-            // console.log(`if drawPilePots > 1`);
+        if(drawPilePots > 1) {            
             for (let i = 1; i < drawPilePots; i++) {
-                if($(`#potDrawPile .potDrawSlot[data-pot-draw-slot="${i}"] .plantPotContainer:not(.newPlantPot)`).length) {
-                    // console.log(`$(#potDrawPile .potDrawSlot[data-pot-draw-slot="${i}"] .plantPotContainer:not(.newPlantPot)).length`);
+                if($(`#potDrawPile .potDrawSlot[data-pot-draw-slot="${i}"] .plantPotContainer:not(.newPlantPot)`).length) {                    
                     $(`#potDrawPile .potDrawSlot[data-pot-draw-slot="${i}"] .plantPotContainer:not(.newPlantPot)`).addClass(`newPlantPot drawPileOffset startingPosAnimate startingPos`).appendTo(`#potDrawPile .potDrawSlot[data-pot-draw-slot="${(i - 1)}"]`);
                 }
             }
         }
 
-        setTimeout(function(){
-            // console.log(`'#undoNextRoundBtnContainer #nextRound' - setTimeout(function(){}, ${300})`);
+        setTimeout(function(){            
             $('.startingPos').removeClass('startingPos');
         }, 300);
 
@@ -2884,8 +2594,7 @@ $(document).on(touchEvent,'#undoNextRoundBtnContainer #nextRound',function(){
 
     // 6000 - trigger removing startingPos from pots
 
-    setTimeout(function(){
-        // console.log(`'#undoNextRoundBtnContainer #nextRound' - setTimeout(function(){}, ${7700 + nextRoundProcessTimeout + multipleMarketReplacementsTimeout}) (7700 + ${nextRoundProcessTimeout} + ${multipleMarketReplacementsTimeout})`);
+    setTimeout(function(){        
         $('.marketActionButton').removeAttr('disabled')
         $('.lockedInColumn').removeClass('lockedInColumn');
         $('.lockedInCardOverlay').removeClass('lockedInCardOverlay');
@@ -2910,15 +2619,12 @@ $(document).on(touchEvent,'#undoNextRoundBtnContainer #nextRound',function(){
         
     }, 7700 + nextRoundProcessTimeout + multipleMarketReplacementsTimeout);
 
-    setTimeout(function(){
-        // console.log(`'#undoNextRoundBtnContainer #nextRound' - setTimeout(function(){}, ${8800 + nextRoundProcessTimeout + multipleMarketReplacementsTimeout}) (8800 + ${nextRoundProcessTimeout} + ${multipleMarketReplacementsTimeout})`);
+    setTimeout(function(){        
         $('#infoBarStats #turnsRemainingContainer').addClass('infoChange');
     }, 8800 + nextRoundProcessTimeout + multipleMarketReplacementsTimeout);
 
-    setTimeout(function(){
-        // console.log(`'#undoNextRoundBtnContainer #nextRound' - setTimeout(function(){}, ${9800 + nextRoundProcessTimeout + multipleMarketReplacementsTimeout}) (9800 + ${nextRoundProcessTimeout} + ${multipleMarketReplacementsTimeout})`);
-        turnsRemaining--;
-        // console.log(`turnsRemaining = ${turnsRemaining}`);
+    setTimeout(function(){        
+        turnsRemaining--;        
 
         if(turnsRemaining == 1) {
             let finalScoringBtnHTML = `
@@ -2934,25 +2640,24 @@ $(document).on(touchEvent,'#undoNextRoundBtnContainer #nextRound',function(){
             $('#undoNextRoundBtnContainer #nextRound').addClass('finalScoring');
         }
 
+        endTurnGreenThumbMaxEnforced();
+
         $('#gameSectionsParent').attr('turns-left', turnsRemaining);
         $('#infoBarStats #turnsRemainingContainer #turnsRemainingUpdateInfo.infoBarUpdateData.subtractVal').fadeIn();
     }, 9800 + nextRoundProcessTimeout + multipleMarketReplacementsTimeout);
 
-    setTimeout(function(){
-        // console.log(`'#undoNextRoundBtnContainer #nextRound' - setTimeout(function(){}, ${11100 + nextRoundProcessTimeout + multipleMarketReplacementsTimeout}) (11100 + ${nextRoundProcessTimeout} + ${multipleMarketReplacementsTimeout})`);
+    setTimeout(function(){        
         $('#infoBarStats #turnsRemainingContainer #turnsRemainingInfo.infoBarStatData').html(turnsRemaining);
     }, 11100 + nextRoundProcessTimeout + multipleMarketReplacementsTimeout);
 
-    setTimeout(function(){
-        // console.log(`'#undoNextRoundBtnContainer #nextRound' - setTimeout(function(){}, ${12070 + nextRoundProcessTimeout + multipleMarketReplacementsTimeout}) (12070 + ${nextRoundProcessTimeout} + ${multipleMarketReplacementsTimeout})`);
+    setTimeout(function(){        
 
         $('#infoBarStats #turnsRemainingContainer').removeClass('infoChange');
         $('#infoBarStats #turnsRemainingContainer #turnsRemainingUpdateInfo.infoBarUpdateData.subtractVal').fadeOut();
 
     }, 11470 + nextRoundProcessTimeout + multipleMarketReplacementsTimeout);
 
-    setTimeout(function(){
-        // console.log(`'#undoNextRoundBtnContainer #nextRound' - setTimeout(function(){}, ${12070 + nextRoundProcessTimeout + multipleMarketReplacementsTimeout}) (12070 + ${nextRoundProcessTimeout} + ${multipleMarketReplacementsTimeout})`);
+    setTimeout(function(){        
 
         let actionRequiredHTML = `
             <div class="actionRequiredContainer">
@@ -2961,30 +2666,23 @@ $(document).on(touchEvent,'#undoNextRoundBtnContainer #nextRound',function(){
         `;
         $('#marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer').append(actionRequiredHTML);
         updateDiscardPotTotal();
-        lockMap = false;
-        // console.log('lockMap = false');
+        lockMap = false;        
     }, 12770 + nextRoundProcessTimeout + multipleMarketReplacementsTimeout);
 
-    setTimeout(function(){
-        // console.log(`'#undoNextRoundBtnContainer #nextRound' - setTimeout(function(){}, ${14650 + nextRoundProcessTimeout + multipleMarketReplacementsTimeout}) (14650 + ${nextRoundProcessTimeout} + ${multipleMarketReplacementsTimeout})`);
+    setTimeout(function(){        
         $('#marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer .actionRequiredContainer').remove();
     }, 14650 + nextRoundProcessTimeout + multipleMarketReplacementsTimeout);
 
 });
 
-function checkChosenItemType(){
-    // console.log(`checkChosenItemType()`);
+function checkChosenItemType(){    
 
-    let itemType = $('.itemToken.activePlacement').attr('item-type');
-    // console.log(`itemType = ${itemType}`);
+    let itemType = $('.itemToken.activePlacement').attr('item-type');    
 
-    if(itemType == 'normal') {
-        // console.log(`itemType == 'normal'`);
+    if(itemType == 'normal') {        
         showPossibleMapPlacements('item');
-    } else if(itemType == 'nurture') {
-        // console.log(`itemType == 'nurture'`);
-        let itemName = $('.itemToken.activePlacement').attr('item-name');
-        // console.log(`itemName = ${itemName}`);
+    } else if(itemType == 'nurture') {        
+        let itemName = $('.itemToken.activePlacement').attr('item-name');        
         resetPotentialMapPlacements('resetAll');
         
         $('#useItemBtnContainer').addClass('showUseItemsBtn');
@@ -3017,15 +2715,12 @@ $(document).on(touchEvent,'#useItemBtnContainer .useItemsBtn',function(){
     $('#useItemBtnContainer .useItemsBtn').addClass('disableInteraction');
 
     $('#swapItemsBtnContainer .swapItemsBtn').attr('disabled', 'disabled');
-
-    // console.log(`'#useItemBtnContainer .useItemsBtn'`);
+    
 
     let thisNurtureItem = $(this).attr('item-to-use');
     if(thisNurtureItem == 'watering-can') thisNurtureItem = 'wateringCan';
-
-    // console.log(`thisNurtureItem = ${thisNurtureItem}`);
-
-    // console.log(`$(#${thisNurtureItem}-instructions).addClass('showInstructions')`);
+    
+    
 
     $(`#${thisNurtureItem}-instructions`).addClass('showInstructions');
     $('#confirmNurtureItemAction.button').attr('nurture-item-action', thisNurtureItem);
@@ -3040,8 +2735,7 @@ $(document).on(touchEvent,'#useItemBtnContainer .useItemsBtn',function(){
 
 });
 
-$(document).on(touchEvent,'#cancelNurtureItemAction.button',function(){    
-    // console.log(`#cancelNurtureItemAction.button`);
+$(document).on(touchEvent,'#cancelNurtureItemAction.button',function(){        
 
     $('#swapItemsBtnContainer .swapItemsBtn').removeAttr('disabled');
 
@@ -3077,25 +2771,21 @@ $(document).on(touchEvent,'#cancelNurtureItemAction.button',function(){
 // FERTILIZER
 
 function fertilizerInitFunc() {
-    // Add 3 Verdancy to one plant
-    // console.log(`fertilizerInitFunc()`);
+    // Add 3 Verdancy to one plant    
     nurtureItemMapRecipients('plant', 'fertilizer');
 }
 
-$(document).on('mouseenter','#mapContainer .mapTileContainer.potentialNurtureItemTarget.fertilizerPotentialTarget',function(){
-    // console.log(`'mouseenter','#mapContainer .mapTileContainer.potentialNurtureItemTarget.fertilizerPotentialTarget'`);
+$(document).on('mouseenter','#mapContainer .mapTileContainer.potentialNurtureItemTarget.fertilizerPotentialTarget',function(){    
     $(this).append(`
         <img class="previewNurtureItemIcon fertilizerItemIcon" src="img/itemsNurture/fertilizer-icon.png" />
     `);
 });
 
-$(document).on('mouseleave','#mapContainer .mapTileContainer.potentialNurtureItemTarget.fertilizerPotentialTarget',function(){
-    // console.log(`'mouseleave','#mapContainer .mapTileContainer.potentialNurtureItemTarget.fertilizerPotentialTarget'`);
+$(document).on('mouseleave','#mapContainer .mapTileContainer.potentialNurtureItemTarget.fertilizerPotentialTarget',function(){    
     $('.potentialNurtureItemTarget .fertilizerItemIcon:not(.lockedInIcon)').remove();
 });
 
-$(document).on(touchEvent,'#mapContainer .mapTileContainer.potentialNurtureItemTarget.fertilizerPotentialTarget',function(){    
-    // console.log(`#mapContainer .mapTileContainer.potentialNurtureItemTarget.fertilizerPotentialTarget`);
+$(document).on(touchEvent,'#mapContainer .mapTileContainer.potentialNurtureItemTarget.fertilizerPotentialTarget',function(){        
 
     $('.verdancyPulseAnimation').removeClass('verdancyPulseAnimation');
 
@@ -3110,8 +2800,7 @@ $(document).on(touchEvent,'#mapContainer .mapTileContainer.potentialNurtureItemT
 });
 
 
-$(document).on(touchEvent,'#nurtureItemOptions #confirmNurtureItemAction[nurture-item-action="fertilizer"]',function(){
-    // console.log('#nurtureItemOptions #confirmNurtureItemAction func()');
+$(document).on(touchEvent,'#nurtureItemOptions #confirmNurtureItemAction[nurture-item-action="fertilizer"]',function(){    
 
     finalizeNurtureItemVerdancy();
     animateElem($('#mapContainer #nurtureItemOptions'), 'hideNurtureItemOptions');
@@ -3150,30 +2839,25 @@ function trowelInitFunc() {
 
     totalPotentialCardsForTrowelAction = 0;
     plantsCardsSelectedForTrowelAction = 0;
-
-    // console.log(`trowelInitFunc()`);
+    
     nurtureItemMapRecipients('plant', 'trowel');
 
     totalPotentialCardsForTrowelAction = $('#mapContainer .mapTileContainer.potentialNurtureItemTarget.trowelPotentialTarget').length;
-
-    // console.log(`totalPotentialCardsForTrowelAction = ${totalPotentialCardsForTrowelAction}`);
+    
 }
 
 
-$(document).on('mouseenter','#mapContainer .mapTileContainer.potentialNurtureItemTarget.trowelPotentialTarget',function(){
-    // console.log(`'mouseenter','#mapContainer .mapTileContainer.potentialNurtureItemTarget.trowelPotentialTarget'`);
+$(document).on('mouseenter','#mapContainer .mapTileContainer.potentialNurtureItemTarget.trowelPotentialTarget',function(){    
     $(this).append(`
         <img class="previewNurtureItemIcon trowelItemIcon" src="img/itemsNurture/trowel-icon.png" />
     `);
 });
 
-$(document).on('mouseleave','#mapContainer .mapTileContainer.potentialNurtureItemTarget.trowelPotentialTarget',function(){
-    // console.log(`'mouseleave','#mapContainer .mapTileContainer.potentialNurtureItemTarget.trowelPotentialTarget'`);
+$(document).on('mouseleave','#mapContainer .mapTileContainer.potentialNurtureItemTarget.trowelPotentialTarget',function(){    
     $('.potentialNurtureItemTarget .trowelItemIcon:not(.lockedInIcon)').remove();
 });
 
-$(document).on(touchEvent,'#mapContainer .mapTileContainer.potentialNurtureItemTarget.trowelPotentialTarget',function(){    
-    // console.log(`#mapContainer .mapTileContainer.potentialNurtureItemTarget.trowelPotentialTarget`);
+$(document).on(touchEvent,'#mapContainer .mapTileContainer.potentialNurtureItemTarget.trowelPotentialTarget',function(){        
 
     $(this).addClass('trowelPreviewAction').removeClass('trowelPotentialTarget');
     $('.mapTileContainer.potentialNurtureItemTarget.trowelPreviewAction .trowelItemIcon').addClass('lockedInIcon');
@@ -3189,8 +2873,7 @@ $(document).on(touchEvent,'#mapContainer .mapTileContainer.potentialNurtureItemT
 
 });
 
-$(document).on(touchEvent,'#nurtureItemOptions #confirmNurtureItemAction[nurture-item-action="trowel"]',function(){
-    // console.log('#nurtureItemOptions #confirmNurtureItemAction func()');
+$(document).on(touchEvent,'#nurtureItemOptions #confirmNurtureItemAction[nurture-item-action="trowel"]',function(){    
     finalizeNurtureItemVerdancy();
     animateElem($('#mapContainer #nurtureItemOptions'), 'hideNurtureItemOptions');
     $('#useItemBtnContainer.showUseItemsBtn').removeClass('showUseItemsBtn');
@@ -3220,26 +2903,22 @@ $(document).on(touchEvent,'#nurtureItemOptions #confirmNurtureItemAction[nurture
 
 // WATERING CAN
 
-function wateringCanInitFunc() {
-    // console.log(`wateringCanInitFunc()`);
+function wateringCanInitFunc() {    
     nurtureItemMapRecipients('room', 'wateringCan');
     $('.mapTileContainer.potentialNurtureItemTarget').addClass('wateringCanPotentialTarget');
 }
 
-$(document).on('mouseenter','#mapContainer .mapTileContainer.potentialNurtureItemTarget.wateringCanPotentialTarget',function(){
-    // console.log(`'mouseenter','#mapContainer .mapTileContainer.potentialNurtureItemTarget.wateringCanPotentialTarget'`);
+$(document).on('mouseenter','#mapContainer .mapTileContainer.potentialNurtureItemTarget.wateringCanPotentialTarget',function(){    
     $(this).append(`
         <img class="previewNurtureItemIcon wateringCanItemIcon" src="img/itemsNurture/watering-can-icon.png" />
     `);
 });
 
-$(document).on('mouseleave','#mapContainer .mapTileContainer.potentialNurtureItemTarget.wateringCanPotentialTarget',function(){
-    // console.log(`'mouseleave','#mapContainer .mapTileContainer.potentialNurtureItemTarget.wateringCanPotentialTarget'`);
+$(document).on('mouseleave','#mapContainer .mapTileContainer.potentialNurtureItemTarget.wateringCanPotentialTarget',function(){    
     $('.potentialNurtureItemTarget .previewNurtureItemIcon:not(.lockedInIcon)').remove();
 });
 
-$(document).on(touchEvent,'#mapContainer .mapTileContainer.potentialNurtureItemTarget.wateringCanPotentialTarget',function(){    
-    // console.log(`#mapContainer .mapTileContainer.potentialNurtureItemTarget.wateringCanPotentialTarget`);
+$(document).on(touchEvent,'#mapContainer .mapTileContainer.potentialNurtureItemTarget.wateringCanPotentialTarget',function(){        
 
     $('.verdancyPulseAnimation').removeClass('verdancyPulseAnimation');
     $('.mapTileContainer.potentialNurtureItemTarget .wateringCanItemIcon.lockedInIcon').remove();
@@ -3251,16 +2930,11 @@ $(document).on(touchEvent,'#mapContainer .mapTileContainer.potentialNurtureItemT
 
     let thisRow = $(this).data('map-row');
     let thisColumn = $(this).data('map-column');
-
-    // console.log(`thisRow = ${thisRow}`);
-    // console.log(`thisColumn = ${thisColumn}`);
+        
 
     let mapNeighbours = findMapNeighbours(thisRow, thisColumn, 'plant', true);
-    if(JSON.stringify(mapNeighbours) !== '{}') {
-        // console.log(`JSON.stringify(mapNeighbours) !== '{}'`);
-        for (const [key, value] of Object.entries(mapNeighbours)) {
-            // console.log(`key = ${key}`);
-            // console.log(`value = ${value}`);
+    if(JSON.stringify(mapNeighbours) !== '{}') {        
+        for (const [key, value] of Object.entries(mapNeighbours)) {                        
             $(`${key}`).addClass('wateringCanNurtureItemRecipient');
             previewNurtureItemVerdancy($(`${key}`), 1);
         }
@@ -3270,8 +2944,7 @@ $(document).on(touchEvent,'#mapContainer .mapTileContainer.potentialNurtureItemT
 
 });
 
-$(document).on(touchEvent,'#nurtureItemOptions #confirmNurtureItemAction[nurture-item-action="wateringCan"]',function(){
-    // console.log('#nurtureItemOptions #confirmNurtureItemAction func()');
+$(document).on(touchEvent,'#nurtureItemOptions #confirmNurtureItemAction[nurture-item-action="wateringCan"]',function(){    
 
     finalizeNurtureItemVerdancy();
     animateElem($('#mapContainer #nurtureItemOptions'), 'hideNurtureItemOptions');
@@ -3302,12 +2975,10 @@ $(document).on(touchEvent,'#nurtureItemOptions #confirmNurtureItemAction[nurture
 });
 
 
-function nurtureItemMapRecipients(cardTypeToActivate, actionType) {
-    // console.log(`nurtureItemMapRecipients(${cardTypeToActivate}, ${actionType})`);
+function nurtureItemMapRecipients(cardTypeToActivate, actionType) {    
 
     $('.mapTileContainer').each(function(){
-        let placedCardType = $(this).attr('cardtype');
-        // console.log(`placedCardType = ${placedCardType}`);
+        let placedCardType = $(this).attr('cardtype');        
         if (typeof placedCardType !== 'undefined' && placedCardType !== false) {
             if($(this).attr('cardtype') == 'plant') {
                 if($(this).attr('plant-pot') != 'none') {
@@ -3315,15 +2986,12 @@ function nurtureItemMapRecipients(cardTypeToActivate, actionType) {
                 }
             }
             if(placedCardType == cardTypeToActivate) {
-                if(actionType == 'wateringCan') {
-                    // console.log(`placedCardType == cardTypeToActivate`);
+                if(actionType == 'wateringCan') {                    
                     $(this).addClass(`potentialNurtureItemTarget ${actionType}PotentialTarget`);
                 } else {
                     let totalVerdancy = $(this).find('.verdancyIconsAndVPLayer').attr('verdancy-icons');
                     let currentVerdancy = $(this).find('.verdancyIconsAndVPLayer').attr('verdancy-completed');
-
-                    // console.log(`totalVerdancy = ${totalVerdancy}`);
-                    // console.log(`currentVerdancy = ${currentVerdancy}`);
+                                        
 
                     if(currentVerdancy < totalVerdancy) {
                         $(this).addClass(`potentialNurtureItemTarget ${actionType}PotentialTarget`);
@@ -3333,8 +3001,7 @@ function nurtureItemMapRecipients(cardTypeToActivate, actionType) {
         }
     });
 
-    setTimeout(function(){
-        // console.log(`'nurtureItemMapRecipients(${cardTypeToActivate}, ${actionType})' - setTimeout(function(){}, 400)`);
+    setTimeout(function(){        
         let actionRequiredHTML = `
             <div class="actionRequiredContainer">
                 <div class="actionRequiredAnimation"></div>
@@ -3345,37 +3012,29 @@ function nurtureItemMapRecipients(cardTypeToActivate, actionType) {
     }, 400);
 
 
-    setTimeout(function(){
-        // console.log(`'nurtureItemMapRecipients(${cardTypeToActivate}, ${actionType})' - setTimeout(function(){}, 2550)`);
+    setTimeout(function(){        
         $('.mapTileContainer.potentialNurtureItemTarget .cardContainer .actionRequiredContainer').remove();
     }, 2550);
     
 }
 
-function previewNurtureItemVerdancy(thisCard, verdancyToAdd) {
-    // console.log(`previewNurtureItemVerdancy(${thisCard}, ${verdancyToAdd})`);
+function previewNurtureItemVerdancy(thisCard, verdancyToAdd) {    
     let verdancyInfo = $(thisCard).find('.verdancyIconsAndVPLayer');
     let totalVerdancy = $(verdancyInfo).attr('verdancy-icons');
     let currentVerdancy = $(verdancyInfo).attr('verdancy-completed');
-
-    // console.log(`verdancyInfo = ${verdancyInfo}`);
-    // console.log(`totalVerdancy = ${totalVerdancy}`);
-    // console.log(`currentVerdancy = ${currentVerdancy}`);
+            
 
     let verdancyAddedNum = 0;
     while(currentVerdancy < totalVerdancy) {
         $(verdancyInfo).find(`.verdancyIconContainer[data-verdancy-icon-num="${currentVerdancy}"] .verdancyIconPosContainer .completeVerdancyIcon`).addClass('verdancyPulseAnimation');
         currentVerdancy++;
-        verdancyAddedNum++;
-        // console.log(`currentVerdancy = ${currentVerdancy}`);
-        // console.log(`verdancyAddedNum = ${verdancyAddedNum}`);
+        verdancyAddedNum++;                
         if (verdancyAddedNum == verdancyToAdd) break;
     }
 }
 
 
-function finalizeNurtureItemVerdancy() {
-    // console.log('finalizeNurtureItemVerdancy()');
+function finalizeNurtureItemVerdancy() {    
 
     $('.verdancyPulseAnimation').each(function(){
         $(this).closest('.verdancyIconContainer').addClass('tempVerdancyMarker');
@@ -3388,8 +3047,7 @@ function finalizeNurtureItemVerdancy() {
 
     setTimeout(function(){
         $('.mapTileContainer[cardtype="plant"][plant-pot="none"] .cardContainer .verdancyIconsAndVPLayer').each(function(){
-            let newCompletedVerdancy = $(this).find('.verdancyIconContainer.completeVerdancy').length;
-            // console.log(`newCompletedVerdancy = ${newCompletedVerdancy}`);
+            let newCompletedVerdancy = $(this).find('.verdancyIconContainer.completeVerdancy').length;            
             $(this).attr('verdancy-completed', newCompletedVerdancy);
         });
     }, 800);
@@ -3405,89 +3063,73 @@ function finalizeNurtureItemVerdancy() {
 
 }
 
-$(document).on('mouseenter','#mapContainer .mapTileContainer.potentialItemPlacement.activePotentialItemPlacement:not(.temporaryItemPlacement)',function(){
-    // console.log(`'mouseenter','#mapContainer .mapTileContainer.potentialItemPlacement.activePotentialItemPlacement:not(.temporaryItemPlacement)'`);
+$(document).on('mouseenter','#mapContainer .mapTileContainer.potentialItemPlacement.activePotentialItemPlacement:not(.temporaryItemPlacement)',function(){    
 
-    if(!lockMap) {
-        // console.log(`!lockMap`);
+    if(!lockMap) {        
         $(this).addClass('itemPlacementPreview');
         var thisItemTokenContainer = $(this).find('.roomCardItemContainer');
         $('.itemToken.activePlacement').clone().removeClass('activePlacement').appendTo(thisItemTokenContainer);
     }
 });
 
-$(document).on('mouseleave','#mapContainer .mapTileContainer.potentialItemPlacement.activePotentialItemPlacement.itemPlacementPreview:not(.temporaryItemPlacement)',function(){
-    // console.log(`'mouseleave','#mapContainer .mapTileContainer.potentialItemPlacement.activePotentialItemPlacement.itemPlacementPreview:not(.temporaryItemPlacement)'`);
+$(document).on('mouseleave','#mapContainer .mapTileContainer.potentialItemPlacement.activePotentialItemPlacement.itemPlacementPreview:not(.temporaryItemPlacement)',function(){    
 
-    if(!lockMap) {
-        // console.log(`!lockMap`);
+    if(!lockMap) {        
         $('#mapContainer .mapTileContainer.itemPlacementPreview .itemToken').remove();
         $('#mapContainer .mapTileContainer.itemPlacementPreview').removeClass('itemPlacementPreview');
     }
 });
 
-$(document).on(touchEvent,'#mapContainer .mapTileContainer.potentialItemPlacement.activePotentialItemPlacement:not(.temporaryItemPlacement)',function(){    
-    // console.log(`'#mapContainer .mapTileContainer.potentialItemPlacement.activePotentialItemPlacement:not(.temporaryItemPlacement)'`);
+$(document).on(touchEvent,'#mapContainer .mapTileContainer.potentialItemPlacement.activePotentialItemPlacement:not(.temporaryItemPlacement)',function(){        
 
-    if(!lockMap) {
-        // console.log(`!lockMap`);
+    if(!lockMap) {        
         $('#swapItemsBtnContainer .swapItemsBtn').attr('disabled', 'disabled');
-        temporarilyLockMap(1000);
-        // console.log('temporarilyLockMap(1000)');
+        temporarilyLockMap(1000);        
         $('#undoNextRoundBtnContainer #undoAction').attr('disabled', 'disabled');
-        if($('#mapContainer .mapTileContainer.potentialItemPlacement:not(.temporaryItemPlacement) .roomCardItemContainer .itemToken').length) {
-            // console.log(`if $('#mapContainer .mapTileContainer.potentialItemPlacement:not(.temporaryItemPlacement) .roomCardItemContainer .itemToken').length`);
+        if($('#mapContainer .mapTileContainer.potentialItemPlacement:not(.temporaryItemPlacement) .roomCardItemContainer .itemToken').length) {            
             $('#mapContainer .mapTileContainer.potentialItemPlacement:not(.temporaryItemPlacement) .roomCardItemContainer .itemToken').remove();
         }
 
         var targID = $(this).attr('id');
-
-        // console.log(`targID = ${targID}`);
+        
 
         $('.itemToken.activePlacement').parentToAnimate($(`#${targID} .roomCardItemContainer`), 1000);
         
-        if($('#mapContainer .mapTileContainer.temporaryItemPlacement').length) {
-            // console.log(`if $('#mapContainer .mapTileContainer.temporaryItemPlacement').length`);
+        if($('#mapContainer .mapTileContainer.temporaryItemPlacement').length) {            
             $('#mapContainer .mapTileContainer.temporaryItemPlacement').addClass('activePotentialItemPlacement').removeClass('temporaryItemPlacement');
         }
 
         $('.itemPlacementPreview').removeClass('itemPlacementPreview');
 
-        setTimeout(function(){
-            // console.log(`'#mapContainer .mapTileContainer.potentialItemPlacement.activePotentialItemPlacement:not(.temporaryItemPlacement)' - setTimeout(function(){}, 450)`);
+        setTimeout(function(){            
             animateElem($('#mapContainer #placedItemOptions'), 'showItemOptions');
         }, 450);
 
-        setTimeout(function(){
-            // console.log(`'#mapContainer .mapTileContainer.potentialItemPlacement.activePotentialItemPlacement:not(.temporaryItemPlacement)' - setTimeout(function(){}, 950)`);
+        setTimeout(function(){            
             $(`#${targID}`).removeClass('activePotentialItemPlacement').addClass('temporaryItemPlacement');
         }, 950);
         
     }
 });
 
-$(document).on(touchEvent,'#cancelItemPlacement.button',function(){
-    // console.log(`'#cancelItemPlacement.button'`);
+$(document).on(touchEvent,'#cancelItemPlacement.button',function(){    
 
     animateElem($('#mapContainer #placedItemOptions'), 'hideItemOptions');
     $('.itemToken.activePlacement').parentToAnimate($('#tableauSection #homeContentContainer #playerInfoContainer #chosenItemParentContainer #chosenItemContainer'), 1000);
     resetPotentialMapPlacements('resetItemToPlace');
 
-    setTimeout(function(){
-        // console.log(`'#cancelItemPlacement.button' - setTimeout(function(){}, 1000)`);
+    setTimeout(function(){        
         $('#undoNextRoundBtnContainer #undoAction').removeAttr('disabled');
     }, 1000);
 
-    setTimeout(function(){
-        // console.log(`'#cancelItemPlacement.button' - setTimeout(function(){}, 1050)`);
+    setTimeout(function(){        
         auditSwapItemBtnText('swapItems');
     }, 1050);
     
 });
 
 
-$(document).on(touchEvent,'#confirmItemPlacement.button',function(){
-    // console.log(`'#confirmItemPlacement.button'`);
+$(document).on(touchEvent,'#confirmItemPlacement.button',function(){    
 
     
     currentRoundActionLog.push('item-placement');
@@ -3503,25 +3145,19 @@ $(document).on(touchEvent,'#confirmItemPlacement.button',function(){
     let splitItemName = placedItemName.split('-');
     $(`#${placedMapID}`).attr('item-room-type', splitItemName[0]);
     $(`#${placedMapID}`).attr('furniture-pet-name', splitItemName[1]);
-
-    // console.log(`placedMapID = ${placedMapID}`);
-    // console.log(`placedItemName = ${placedItemName}`);
-    // console.log(`#${placedMapID} .cardContainer .roomCardItemContainer .itemToken`);
+            
 
     animateElem($('#mapContainer #placedItemOptions'), 'hideItemOptions');
 
-    setTimeout(function(){
-        // console.log(`'#confirmItemPlacement.button' - setTimeout(function(){}, 50)`);
+    setTimeout(function(){        
         $('.mapTileContainer.potentialItemPlacement.temporaryItemPlacement').addClass('confirmedItemPlacement').removeClass('temporaryItemPlacement"');
     }, 50);
 
-    setTimeout(function(){
-        // console.log(`'#confirmItemPlacement.button' - setTimeout(function(){}, 60)`);
+    setTimeout(function(){        
         resetPotentialMapPlacements('resetAll');
     }, 60);
 
-    setTimeout(function(){
-        // console.log(`'#confirmItemPlacement.button' - setTimeout(function(){}, 900)`);
+    setTimeout(function(){        
         auditSwapItemBtnText('swapItems');
     }, 900);
 });
@@ -3529,30 +3165,25 @@ $(document).on(touchEvent,'#confirmItemPlacement.button',function(){
 $(document).on(touchEvent,'#swapItemsBtnContainer .swapItemsBtn',function(){
 
     $('.activePlacement').addClass('inactivePlacement').removeClass('activePlacement');
-
-    // console.log(`'#swapItemsBtnContainer .swapItemsBtn'`);
+    
 
     $('#undoNextRoundBtnContainer #nextRound').attr('disabled', 'disabled');
     $('#swapItemsBtnContainer .swapItemsBtn').attr('disabled', 'disabled');
     $('#useItemBtnContainer .useItemsBtn').attr('disabled', 'disabled');
     $('#useItemBtnContainer').removeClass('showUseItemsBtn');
 
-    if($('#chosenItemParentContainer #chosenItemContainer .itemToken:not(.swapAnimation)').length) {
-        // console.log(`$('#chosenItemParentContainer #chosenItemContainer .itemToken:not(.swapAnimation)').length`);
+    if($('#chosenItemParentContainer #chosenItemContainer .itemToken:not(.swapAnimation)').length) {        
         $('#chosenItemParentContainer #chosenItemContainer .itemToken:not(.swapAnimation)').addClass('swapAnimation').parentToAnimate($('#storedItemParentContainer #storedItemContainer'), 1000);
     }
 
-    if($('#storedItemParentContainer #storedItemContainer .itemToken:not(.swapAnimation)').length) {
-        // console.log(`$('#storedItemParentContainer #storedItemContainer .itemToken:not(.swapAnimation)').length`);
+    if($('#storedItemParentContainer #storedItemContainer .itemToken:not(.swapAnimation)').length) {        
         $('#storedItemParentContainer #storedItemContainer .itemToken:not(.swapAnimation)').addClass('swapAnimation').parentToAnimate($('#chosenItemParentContainer #chosenItemContainer'), 1000);
     }
 
-    setTimeout(function(){
-        // console.log(`'#swapItemsBtnContainer .swapItemsBtn' - setTimeout(function(){}, 1100)`);
+    setTimeout(function(){        
         auditSwapItemBtnText('swapItems');
         $('.swapAnimation').removeClass('swapAnimation');
-        lockMap = false;
-        // console.log('lockMap = false');
+        lockMap = false;        
     }, 1100);
 
 });
@@ -3562,38 +3193,30 @@ function auditSwapItemBtnText(mode) {
     $('#addOneVerdancyToPlantBtn').removeClass('disableInteraction');
     $('#useItemBtnContainer .useItemsBtn').removeClass('disableInteraction');
     $('#swapItemsBtnContainer .swapItemsBtn').removeClass('disableInteraction');
+        
 
-    // console.log(`auditSwapItemBtnText(mode)`);
-    // console.log(`mode = ${mode}`);
-
-    if($('#chosenItemParentContainer #chosenItemContainer .itemToken').length && $('#storedItemParentContainer #storedItemContainer .itemToken').length) {
-        // console.log(`$('#chosenItemParentContainer #chosenItemContainer .itemToken').length && $('#storedItemParentContainer #storedItemContainer .itemToken').length`);
+    if($('#chosenItemParentContainer #chosenItemContainer .itemToken').length && $('#storedItemParentContainer #storedItemContainer .itemToken').length) {        
 
         $('#swapItemsBtnContainer .swapItemsBtn').removeAttr('disabled');
         $('#swapItemsBtnContainer .swapItemsBtn').html('Swap Items <span>&#8597;</span>');
         $('#undoNextRoundBtnContainer #nextRound').attr('disabled', 'disabled');
 
-        if(mode == 'swapItems') {
-            // console.log(`if mode == 'swapItems'`);
-            if(!$('#chosenItemParentContainer #chosenItemContainer .itemToken').hasClass('activePlacement')) {
-                // console.log(`!$('#chosenItemParentContainer #chosenItemContainer .itemToken').hasClass('activePlacement')`);
+        if(mode == 'swapItems') {            
+            if(!$('#chosenItemParentContainer #chosenItemContainer .itemToken').hasClass('activePlacement')) {                
                 $('.activePlacement').addClass('inactivePlacement').removeClass('activePlacement');
                 $('#chosenItemParentContainer #chosenItemContainer .itemToken').addClass('activePlacement').removeClass('inactivePlacement');
                 checkChosenItemType();
             }
         }
         
-    } else if($('#chosenItemParentContainer #chosenItemContainer .itemToken').length && !$('#storedItemParentContainer #storedItemContainer .itemToken').length) {
-        // console.log(`$('#chosenItemParentContainer #chosenItemContainer .itemToken').length && !$('#storedItemParentContainer #storedItemContainer .itemToken').length`);
+    } else if($('#chosenItemParentContainer #chosenItemContainer .itemToken').length && !$('#storedItemParentContainer #storedItemContainer .itemToken').length) {        
 
         $('#swapItemsBtnContainer .swapItemsBtn').removeAttr('disabled');
         $('#swapItemsBtnContainer .swapItemsBtn').html('Store Item <span>&#8595;</span>');
         $('#undoNextRoundBtnContainer #nextRound').attr('disabled', 'disabled');
 
-        if(mode == 'swapItems') {
-            // console.log(`if mode == 'swapItems'`);
-            if(!$('#chosenItemParentContainer #chosenItemContainer .itemToken').hasClass('activePlacement')) {
-                // console.log(`!$('#chosenItemParentContainer #chosenItemContainer .itemToken').hasClass('activePlacement')`);
+        if(mode == 'swapItems') {            
+            if(!$('#chosenItemParentContainer #chosenItemContainer .itemToken').hasClass('activePlacement')) {                
                 $('.activePlacement').addClass('inactivePlacement').removeClass('activePlacement');
                 $('#chosenItemParentContainer #chosenItemContainer .itemToken').attr('style', '');
                 $('#chosenItemParentContainer #chosenItemContainer .itemToken').addClass('activePlacement').removeClass('inactivePlacement');
@@ -3601,8 +3224,7 @@ function auditSwapItemBtnText(mode) {
             }
         }
 
-    } else if(!$('#chosenItemParentContainer #chosenItemContainer .itemToken').length && $('#storedItemParentContainer #storedItemContainer .itemToken').length) {
-        // console.log(`!$('#chosenItemParentContainer #chosenItemContainer .itemToken').length && $('#storedItemParentContainer #storedItemContainer .itemToken').length`);
+    } else if(!$('#chosenItemParentContainer #chosenItemContainer .itemToken').length && $('#storedItemParentContainer #storedItemContainer .itemToken').length) {        
 
         $('#swapItemsBtnContainer .swapItemsBtn').removeAttr('disabled');
         $('#swapItemsBtnContainer .swapItemsBtn').html('Retrieve Item <span>&#8593;</span>');
@@ -3612,17 +3234,14 @@ function auditSwapItemBtnText(mode) {
             $('#storedItemParentContainer #storedItemContainer .itemToken').addClass('inactivePlacement').removeClass('activePlacement');
         }
 
-        if(mode == 'swapItems') {
-            // console.log(`if mode == 'swapItems'`);
+        if(mode == 'swapItems') {            
             resetPotentialMapPlacements('resetAll');
             activateNextRoundBtn();
         }
 
-    } else if(!$('#chosenItemParentContainer #chosenItemContainer .itemToken').length && !$('#storedItemParentContainer #storedItemContainer .itemToken').length) {
-        // console.log(`!$('#chosenItemParentContainer #chosenItemContainer .itemToken').length && !$('#storedItemParentContainer #storedItemContainer .itemToken').length`);
+    } else if(!$('#chosenItemParentContainer #chosenItemContainer .itemToken').length && !$('#storedItemParentContainer #storedItemContainer .itemToken').length) {        
 
-        if(mode == 'swapItems') {
-            // console.log(`if mode == 'swapItems'`);
+        if(mode == 'swapItems') {            
             $('#swapItemsBtnContainer .swapItemsBtn').attr('disabled', 'disabled');
 
             resetPotentialMapPlacements('resetAll');
@@ -3631,17 +3250,14 @@ function auditSwapItemBtnText(mode) {
     }
 }
 
-function startFirstRound() {
-    // console.log(`startFirstRound()`);
+function startFirstRound() {    
     startingPlacement = false;
 
     resetPotentialMapPlacements('nextRound');
-    setTimeout(function(){
-        // console.log(`startFirstRound() - setTimeout(function(){}, 600)`);
+    setTimeout(function(){        
         swapActiveMainSection();
     }, 600);
-    setTimeout(function(){
-        // console.log(`startFirstRound() - setTimeout(function(){}, 1400)`);
+    setTimeout(function(){        
         $('#startFirstTurnModal').addClass('is-active');
         $('#gameSectionsParent').attr('current-phase', 'market-selection');
 
@@ -3650,8 +3266,7 @@ function startFirstRound() {
     }, 1400);
 };
 
-$(document).on(touchEvent,'#startFirstTurnBtn',function(){    
-    // console.log(`'#startFirstTurnBtn'`);
+$(document).on(touchEvent,'#startFirstTurnBtn',function(){        
 
     let actionRequiredHTML = `
         <div class="actionRequiredContainer">
@@ -3665,77 +3280,61 @@ $(document).on(touchEvent,'#startFirstTurnBtn',function(){
         lockMap = false;
     }, 500);
 
-    setTimeout(function(){
-        // console.log(`'#startFirstTurnBtn' - setTimeout(function(){}, 2150)`);
+    setTimeout(function(){        
         $('#marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer .actionRequiredContainer').remove();
     }, 2150);
 
 });
 
-function resetPotentialMapPlacements(mode) {
-    // console.log(`resetPotentialMapPlacements(${mode})`);
+function resetPotentialMapPlacements(mode) {    
 
     toggleMapVerdancy('hide');
     $('.verdancyIconsAndVPLayer.showIndividualVerdancyLayer').removeClass('showIndividualVerdancyLayer');
 
-   if(mode == 'resetCardToPlace'){
-        // console.log(`mode == 'resetCardToPlace'`);
+   if(mode == 'resetCardToPlace'){        
         $('.mapTileContainer.temporaryCardPlacement').addClass('activePotentialCardPlacement').removeClass('temporaryCardPlacement');
 
-    } else if(mode == 'resetItemToPlace'){
-        // console.log(`mode == 'resetItemToPlace'`);
+    } else if(mode == 'resetItemToPlace'){        
         $('.mapTileContainer.temporaryItemPlacement').addClass('activePotentialItemPlacement').removeClass('temporaryItemPlacement');
 
-    } else if(mode == 'resetAll'){
-        // console.log(`mode == 'resetAll'`);
-        if($('.mapTileContainer.potentialCardPlacement').length) {
-            // console.log(`if $('.mapTileContainer.potentialCardPlacement').length`);
+    } else if(mode == 'resetAll'){        
+        if($('.mapTileContainer.potentialCardPlacement').length) {            
             $('.mapTileContainer.potentialCardPlacement').addClass('animatingElem mediumTransitionAll');
-            setTimeout(function(){
-                // console.log(`resetPotentialMapPlacements(mode) - setTimeout(function(){}, 50)`);
+            setTimeout(function(){                
                 $('.mapTileContainer.activePotentialCardPlacement').removeClass('activePotentialCardPlacement');
             }, 50);
-            setTimeout(function(){
-                // console.log(`resetPotentialMapPlacements(mode) - setTimeout(function(){}, 800)`);
+            setTimeout(function(){                
                 $('.mapTileContainer.animatingElem.mediumTransitionAll').removeClass('animatingElem mediumTransitionAll');
             }, 800);
-            setTimeout(function(){
-                // console.log(`resetPotentialMapPlacements(mode) - setTimeout(function(){}, 850)`);
+            setTimeout(function(){                
                 $('.mapTileContainer.potentialCardPlacement').removeClass('potentialCardPlacement');
             }, 850);
 
         }
 
-        if($('.mapTileContainer.potentialItemPlacement').length) {
-            // console.log(`if IF STATEMENT`);
+        if($('.mapTileContainer.potentialItemPlacement').length) {            
             $('.mapTileContainer.potentialItemPlacement.activePotentialItemPlacement .roomCardItemContainer').addClass('animatingElem mediumTransitionAll');
-            setTimeout(function(){
-                // console.log(`resetPotentialMapPlacements(mode) - setTimeout(function(){}, 50)`);
+            setTimeout(function(){                
                 $('.mapTileContainer.potentialItemPlacement.activePotentialItemPlacement').removeClass('activePotentialItemPlacement');
             }, 50);
-            setTimeout(function(){
-                // console.log(`resetPotentialMapPlacements(mode) - setTimeout(function(){}, 800)`);
+            setTimeout(function(){                
                 $('.mapTileContainer.potentialItemPlacement .roomCardItemContainer.animatingElem.mediumTransitionAll').removeClass('animatingElem mediumTransitionAll');
             }, 800);
 
-            setTimeout(function(){
-                // console.log(`resetPotentialMapPlacements(mode) - setTimeout(function(){}, 850)`);
+            setTimeout(function(){                
                 $('.mapTileContainer.potentialItemPlacement').removeClass('potentialItemPlacement');
             }, 850);
 
         }
 
-    } else if(mode == 'nextRound') {
-        // console.log(`mode == 'nextRound'`);
+    } else if(mode == 'nextRound') {        
         finalizeMapPlacement('card');
     }
 }
 
-function finalizeMapPlacement(mode) {
-    // console.log(`finalizeMapPlacement(${mode})`);
+function finalizeMapPlacement(mode) {    
 
-    if(mode =='card') {
-        // console.log(`mode =='card'`);
+    if(mode =='card') {        
         let placedCardType = $('.mapTileContainer .cardContainer.activePlacement').attr('cardtype');
         let mapElID = $('.mapTileContainer .cardContainer.activePlacement').closest('.mapTileContainer').attr('id');
         $(`#${mapElID}`).attr('cardtype', placedCardType);
@@ -3744,38 +3343,31 @@ function finalizeMapPlacement(mode) {
         let thisColumn = $(`#${mapElID}`).data('map-column'); //data-map-column
 
         updatePlayersTableauLimits(thisRow, thisColumn);
-
-        // console.log(`placedCardType = ${placedCardType}`);
-        // console.log(`mapElID = ${mapElID}`);
+                
 
         $('.mapTileContainer .cardContainer.activePlacement').removeClass('activePlacement');
         $('.mapTileContainer.temporaryCardPlacement').removeClass('temporaryCardPlacement');
 
         $('.mapTileContainer.activePotentialCardPlacement').addClass('animatingElem mediumTransitionAll');
 
-        setTimeout(function(){
-            // console.log(`finalizeMapPlacement(mode) - setTimeout(function(){}, 50)`);
+        setTimeout(function(){            
             $('.mapTileContainer.activePotentialCardPlacement').removeClass('activePotentialCardPlacement');
         }, 50);
         
-        setTimeout(function(){
-            // console.log(`finalizeMapPlacement(mode) - setTimeout(function(){}, 800)`);
+        setTimeout(function(){            
             $('.mapTileContainer.animatingElem.mediumTransitionAll').removeClass('animatingElem mediumTransitionAll');
         }, 800);
 
-        setTimeout(function(){
-            // console.log(`finalizeMapPlacement(mode) - setTimeout(function(){}, 850)`);
+        setTimeout(function(){            
             $('.mapTileContainer.potentialCardPlacement').removeClass('potentialCardPlacement');
         }, 850);
     }
 }
 
-function updatePlayersTableauLimits(cardRow, cardColumn) {
-    // console.log(`updatePlayersTableauLimits(${cardRow}, ${cardColumn}) func`);
+function updatePlayersTableauLimits(cardRow, cardColumn) {    
 
     let columnRowChanges = false;
-
-    // console.log(`
+    
     //          ${placedCardsRange.rows.locked ? `X` : ``}
     //          ${placedCardsRange.rows.low}
     //          ^
@@ -3784,44 +3376,27 @@ function updatePlayersTableauLimits(cardRow, cardColumn) {
     //          ${placedCardsRange.rows.high}
     //          ${placedCardsRange.rows.locked ? `X` : ``}
     // `);
-
-    // console.log(`placedCardsRange.rows.low = ${placedCardsRange.rows.low}`);
-    // console.log(`cardRow = ${cardRow}`);
-    if(cardRow < placedCardsRange.rows.low) {
-        // console.log(`!CHANGE DETECTED!`);
-        // console.log(`cardRow < placedCardsRange.rows.low`);
+        
+    if(cardRow < placedCardsRange.rows.low) {                
         placedCardsRange.rows.low = cardRow;
         columnRowChanges = 'row';
     }
-    
-    // console.log(`placedCardsRange.rows.high = ${placedCardsRange.rows.high}`);
-    // console.log(`cardRow = ${cardRow}`);
-    if(cardRow > placedCardsRange.rows.high) {
-        // console.log(`!CHANGE DETECTED!`);
-        // console.log(`cardRow > placedCardsRange.rows.high`);
+            
+    if(cardRow > placedCardsRange.rows.high) {                
         placedCardsRange.rows.high = cardRow;
         columnRowChanges = 'row';
     }
-
-    // console.log(`placedCardsRange.columns.low = ${placedCardsRange.columns.low}`);
-    // console.log(`cardColumn = ${cardColumn}`);
-    if(cardColumn < placedCardsRange.columns.low) {
-        // console.log(`!CHANGE DETECTED!`);
-        // console.log(`cardColumn < placedCardsRange.columns.low`);
+        
+    if(cardColumn < placedCardsRange.columns.low) {                
         placedCardsRange.columns.low = cardColumn;
         columnRowChanges = 'column';
     }
-
-    // console.log(`placedCardsRange.columns.high = ${placedCardsRange.columns.high}`);
-    // console.log(`cardColumn = ${cardColumn}`);
-    if(cardColumn > placedCardsRange.columns.high) {
-        // console.log(`!CHANGE DETECTED!`);
-        // console.log(`cardColumn > placedCardsRange.columns.high`);
+        
+    if(cardColumn > placedCardsRange.columns.high) {                
         placedCardsRange.columns.high = cardColumn;
         columnRowChanges = 'column';
     }
-
-    // console.log(`columnRowChanges = ${columnRowChanges}`);
+    
 
     if(columnRowChanges == 'row' || columnRowChanges == 'column') {
         checkPlayersTableauLimits(columnRowChanges);
@@ -3829,28 +3404,17 @@ function updatePlayersTableauLimits(cardRow, cardColumn) {
 
 }
 
-function checkPlayersTableauLimits(limitToChange) {
-    // console.log(`checkPlayersTableauLimits(${limitToChange}) func`);
+function checkPlayersTableauLimits(limitToChange) {    
 
-    if(limitToChange == 'row') {
-        // console.log(`placedCardsRange.rows.high = ${placedCardsRange.rows.high}`);
-        // console.log(`placedCardsRange.rows.low = ${placedCardsRange.rows.low}`);
-    
-        // console.log(`placedCardsRange.rows.currentRange (OLD) = ${placedCardsRange.rows.currentRange}`);
-        placedCardsRange.rows.currentRange = (placedCardsRange.rows.high - placedCardsRange.rows.low) + 1;
-        // console.log(`placedCardsRange.rows.currentRange (NEW) = ${placedCardsRange.rows.currentRange}`);
-    
-        // console.log(`placedCardsRange.rows.limit = ${placedCardsRange.rows.limit}`);
+    if(limitToChange == 'row') {                
+            
+        placedCardsRange.rows.currentRange = (placedCardsRange.rows.high - placedCardsRange.rows.low) + 1;        
+            
         if(placedCardsRange.rows.currentRange >= placedCardsRange.rows.limit) placedCardsRange.rows.locked = true;
-    } else if(limitToChange == 'column') {
-        // console.log(`placedCardsRange.columns.high = ${placedCardsRange.columns.high}`);
-        // console.log(`placedCardsRange.columns.low = ${placedCardsRange.columns.low}`);
-    
-        // console.log(`placedCardsRange.columns.currentRange (OLD) = ${placedCardsRange.columns.currentRange}`);
-        placedCardsRange.columns.currentRange = (placedCardsRange.columns.high - placedCardsRange.columns.low) + 1;
-        // console.log(`placedCardsRange.columns.currentRange (NEW) = ${placedCardsRange.columns.currentRange}`);
-    
-        // console.log(`placedCardsRange.columns.limit = ${placedCardsRange.columns.limit}`);
+    } else if(limitToChange == 'column') {                
+            
+        placedCardsRange.columns.currentRange = (placedCardsRange.columns.high - placedCardsRange.columns.low) + 1;        
+            
         if(placedCardsRange.columns.currentRange >= placedCardsRange.columns.limit) placedCardsRange.columns.locked = true;
     }
 
@@ -3858,70 +3422,51 @@ function checkPlayersTableauLimits(limitToChange) {
 
 }
 
-$(document).on(touchEvent,'#mapContainer #verdancyVisibilityContainer:not(.disableVerdancyVisibility)',function(){    
-    // console.log(`'#mapContainer #verdancyVisibilityContainer:not(.disableVerdancyVisibility)`);
+$(document).on(touchEvent,'#mapContainer #verdancyVisibilityContainer:not(.disableVerdancyVisibility)',function(){        
     toggleMapVerdancy('none');
 });
 
-function toggleMapVerdancy(mode) {
-    // console.log(`toggleMapVerdancy(${mode})`);
-    // console.log(`mapVerdancyVisible = ${mapVerdancyVisible}`);
+function toggleMapVerdancy(mode) {        
 
-    if(mode != 'none') {
-        // console.log(`mode != 'none'`);
-        if(mode == 'show') {
-            // console.log(`if mode == 'show'`);
+    if(mode != 'none') {        
+        if(mode == 'show') {            
             mapVerdancyVisible = true
-        } else if(mode == 'hide') {
-            // console.log(`if mode == 'hide'`);
+        } else if(mode == 'hide') {            
             mapVerdancyVisible = false
-        }
-        // console.log(`mapVerdancyVisible = ${mapVerdancyVisible}`);
-    } else {
-        // console.log(`mode == 'none'`);
+        }        
+    } else {        
         !mapVerdancyVisible ? mapVerdancyVisible = true : mapVerdancyVisible = false;
     }
+    
 
-    // console.log(`mapVerdancyVisible = ${mapVerdancyVisible}`);
-
-    if(mapVerdancyVisible) {
-        // console.log(`mapVerdancyVisible`);
+    if(mapVerdancyVisible) {        
         $('#verdancyVisibilityContainer').addClass('hideVerdancy').removeClass('showVerdancy');
         $('#mapHiddenOverlay').addClass('showVerdancyLayer');
-    } else if(!mapVerdancyVisible) {
-        // console.log(`!mapVerdancyVisible`);
+    } else if(!mapVerdancyVisible) {        
         $('#verdancyVisibilityContainer').addClass('showVerdancy').removeClass('hideVerdancy');
         $('#mapHiddenOverlay').removeClass('showVerdancyLayer');
     }
 }
 
-function temporarilyLockMap(timePeriod) {
-    // console.log(`temporarilyLockMap(${timePeriod})`);
+function temporarilyLockMap(timePeriod) {    
 
-	lockMap = true;
-    // console.log('lockMap = true;');
+	lockMap = true;    
     $('#mapContainer').addClass('mapLocked');
-	setTimeout(function(){
-        // console.log(`temporarilyLockMap(timePeriod) - setTimeout(function(){}, ${timePeriod})`);
+	setTimeout(function(){        
         $('#mapContainer').removeClass('mapLocked');
-		lockMap = false;
-        // console.log('lockMap = false');
+		lockMap = false;        
 	}, timePeriod);
 }
 
-function processMapMovement(thisDirection){
-    // console.log(`processMapMovement(${thisDirection})`);
+function processMapMovement(thisDirection){    
 
     $('#mapContainer .mapTileContainer.potentialCardPlacement.cardPlacementPreview:not(.temporaryCardPlacement) .cardContainer').remove();
     $('.cardPlacementPreview').removeClass('cardPlacementPreview');
 
-	if(thisDirection == 'up' || thisDirection == 'down') {	
-        // console.log(`thisDirection == 'up' || thisDirection == 'down'`);
-		if(thisDirection == 'up') {
-            // console.log(`if thisDirection == 'up'`);
+	if(thisDirection == 'up' || thisDirection == 'down') {	        
+		if(thisDirection == 'up') {            
 			mapMoveAmount.cardPos.top++;
-		} else if(thisDirection == 'down') {	
-            // console.log(`thisDirection == 'down'`);
+		} else if(thisDirection == 'down') {	            
 			mapMoveAmount.cardPos.top--;
 		}
 		// checkMapLimits('vertical', thisDirection, mapMoveAmount.cardPos.top);
@@ -3929,13 +3474,10 @@ function processMapMovement(thisDirection){
 		updateMapPosition('vertical');
 	}
 
-	if(thisDirection == 'left' || thisDirection == 'right') {
-        // console.log(`thisDirection == 'left' || thisDirection == 'right'`);	
-		if(thisDirection == 'left') {
-            // console.log(`if thisDirection == 'left'`);
+	if(thisDirection == 'left' || thisDirection == 'right') {        
+		if(thisDirection == 'left') {            
 			mapMoveAmount.cardPos.left++;
-		} else if(thisDirection == 'right') {	
-            // console.log(`thisDirection == 'right'`);
+		} else if(thisDirection == 'right') {	            
 			mapMoveAmount.cardPos.left--;
 		}
 		// checkMapLimits('horizontal', thisDirection, mapMoveAmount.cardPos.left);
@@ -3944,23 +3486,19 @@ function processMapMovement(thisDirection){
 	}
 
 	$(`#mapNavControls #${thisDirection}Arrow`).addClass('activeArrow');
-	setTimeout(function(){
-        // console.log(`processMapMovement(${thisDirection}) - setTimeout(function(){}, 100)`);
+	setTimeout(function(){        
 		$('.activeArrow').removeClass('activeArrow');
 	}, 100);
 }
 
-function updateMapPosition(moveDirection) {
-    // console.log(`updateMapPosition(${moveDirection})`);
+function updateMapPosition(moveDirection) {    
 
-	if(moveDirection == 'horizontal') {
-        // console.log(`moveDirection == 'horizontal'`);
+	if(moveDirection == 'horizontal') {        
 		let newLeftPosNum = (mapMoveAmount.cardPos.left * mapMoveAmount.view[currentView].zoomIncs[zoomLevel].horizontal);
 		let newLeftPos = newLeftPosNum + mapMoveAmount.view[currentView].unit;
 		$('#mapContainer #mapHiddenOverlay').css('left', newLeftPos);
         // animateMap(startTop, startLeft, endTop, endLeft);
-	} else if(moveDirection == 'vertical') {
-        // console.log(`moveDirection == 'vertical'`);
+	} else if(moveDirection == 'vertical') {        
 		let newTopPosNum = (mapMoveAmount.cardPos.top * mapMoveAmount.view[currentView].zoomIncs[zoomLevel].vertical);
 		let newTopPos = newTopPosNum + mapMoveAmount.view[currentView].unit;
 		$('#mapContainer #mapHiddenOverlay').css('top', newTopPos);
@@ -3968,29 +3506,22 @@ function updateMapPosition(moveDirection) {
 	}
 }
 
-function checkMapLimits(){
-    // console.log(`checkMapLimits()`);
+function checkMapLimits(){    
     
     for (let i = 0; i < allDirections.length; i++) {
-        if(allDirections[i] == 'up' || allDirections[i] == 'down') {
-            // console.log(`if allDirections[i] == 'up' || allDirections[i] == 'down'`);
-            if(mapMoveAmount.cardPos.top == mapStats.viewableTileLimits[allDirections[i]]) {
-                // console.log(`mapMoveAmount.cardPos.top == mapStats.viewableTileLimits[allDirections[i]]`);
+        if(allDirections[i] == 'up' || allDirections[i] == 'down') {            
+            if(mapMoveAmount.cardPos.top == mapStats.viewableTileLimits[allDirections[i]]) {                
                 mapStats.directionStatus[allDirections[i]] = 'mapLimit-locked';
                 $(`#mapNavControls #${allDirections[i]}Arrow`).hide();
-            } else {
-                // console.log(`mapMoveAmount.cardPos.top != mapStats.viewableTileLimits[allDirections[i]]`);
+            } else {                
                 mapStats.directionStatus[allDirections[i]] = 'unlocked';
                 $(`#mapNavControls #${[allDirections[i]]}Arrow`).show();
             }
-        } else if(allDirections[i] == 'left' || allDirections[i] == 'right') {
-            // console.log(`if allDirections[i] == 'left' || allDirections[i] == 'right'`);
-            if(mapMoveAmount.cardPos.left == mapStats.viewableTileLimits[allDirections[i]]) {
-                // console.log(`mapMoveAmount.cardPos.left == mapStats.viewableTileLimits[allDirections[i]]`);
+        } else if(allDirections[i] == 'left' || allDirections[i] == 'right') {            
+            if(mapMoveAmount.cardPos.left == mapStats.viewableTileLimits[allDirections[i]]) {                
                 $(`#mapNavControls #${allDirections[i]}Arrow`).hide();
                 mapStats.directionStatus[allDirections[i]] = 'mapLimit-locked';
-            } else {
-                // console.log(`mapMoveAmount.cardPos.left != mapStats.viewableTileLimits[allDirections[i]]`);
+            } else {                
                 mapStats.directionStatus[allDirections[i]] = 'unlocked';
                 $(`#mapNavControls #${[allDirections[i]]}Arrow`).show();
             }
@@ -3998,15 +3529,12 @@ function checkMapLimits(){
     }
 }
 
-$(document).on(touchEvent,'#mapZoomControls .zoomIcon.activeZoom',function(){
-    // console.log(`'#mapZoomControls .zoomIcon.activeZoom'`);
+$(document).on(touchEvent,'#mapZoomControls .zoomIcon.activeZoom',function(){    
 
 
-	if(!lockFunction) {
-        // console.log(`!lockFunction`);
+	if(!lockFunction) {        
 		lockFunction = true;
-		setTimeout(function(){
-            // console.log(`FUNC - setTimeout(function(){}, 220)`);
+		setTimeout(function(){            
 			lockFunction = false;
 		}, 220);
 		let zoomOption = $(this).data('zoom-mode');
@@ -4018,40 +3546,29 @@ function configureNewZoom(zoomMode) {
 
     $('#mapContainer .mapTileContainer.potentialCardPlacement.cardPlacementPreview:not(.temporaryCardPlacement) .cardContainer').remove();
     $('.cardPlacementPreview').removeClass('cardPlacementPreview');
-
-    // console.log(`configureNewZoom(${zoomMode})`);
+    
 
     let zoomInLimit = 13;
 	let zoomOutLimit = 4;
 
     zoomMode == 'zoomIn' ? zoomLevel++ : zoomLevel--;
+                
 
-    // console.log(`zoomInLimit = ${zoomInLimit}`);
-    // console.log(`zoomOutLimit = ${zoomOutLimit}`);
-    // console.log(`zoomMode = ${zoomMode}`);
-    // console.log(`zoomLevel = ${zoomLevel}`);
-
-    if(zoomLevel == zoomInLimit) {
-        // console.log(`zoomLevel == zoomInLimit`);
+    if(zoomLevel == zoomInLimit) {        
         $('#mapZoomControls .zoomInIcon').removeClass('activeZoom').addClass('inactiveZoom');
         $('#mapZoomControls .zoomInIcon').attr('src', 'img/map/zoomIn-inactive.png')
-    } else if(zoomLevel == zoomOutLimit) {
-        // console.log(`zoomLevel == zoomOutLimit`);
+    } else if(zoomLevel == zoomOutLimit) {        
         $('#mapZoomControls .zoomOutIcon').attr('src', 'img/map/zoomOut-inactive.png')
         $('#mapZoomControls .zoomOutIcon').removeClass('activeZoom').addClass('inactiveZoom');
     } else {
-        if(zoomLevel < zoomInLimit) {
-            // console.log(`if zoomLevel < zoomInLimit`);
-            if($('#mapZoomControls .zoomInIcon').hasClass('inactiveZoom')) {
-                // console.log(`$('#mapZoomControls .zoomInIcon').hasClass('inactiveZoom')`);
+        if(zoomLevel < zoomInLimit) {            
+            if($('#mapZoomControls .zoomInIcon').hasClass('inactiveZoom')) {                
                 $('#mapZoomControls .zoomInIcon').removeClass('inactiveZoom').addClass('activeZoom');
                 $('#mapZoomControls .zoomInIcon').attr('src', 'img/map/zoomIn.png')
             }
         }
-        if(zoomLevel > zoomOutLimit) {
-            // console.log(`if zoomLevel > zoomOutLimit`);
-            if($('#mapZoomControls .zoomOutIcon').hasClass('inactiveZoom')) {
-                // console.log(`$('#mapZoomControls .zoomOutIcon').hasClass('inactiveZoom')`);
+        if(zoomLevel > zoomOutLimit) {            
+            if($('#mapZoomControls .zoomOutIcon').hasClass('inactiveZoom')) {                
                 $('#mapZoomControls .zoomOutIcon').removeClass('inactiveZoom').addClass('activeZoom');
                 $('#mapZoomControls .zoomOutIcon').attr('src', 'img/map/zoomOut.png')
             }
@@ -4063,17 +3580,14 @@ function configureNewZoom(zoomMode) {
     $('#mapHiddenOverlay').attr('animation-scale-amount', (zoomLevel / 10))
 }
 
-function setZoom(newZoom, el) {
-    // console.log(`setZoom(${newZoom}, ${el})`);
+function setZoom(newZoom, el) {    
 
 
 	let transformOriginPercentages = '';
 
-	if(currentView == 'desktopView') {
-        // console.log(`currentView == 'desktopView'`);
+	if(currentView == 'desktopView') {        
 		transformOriginPercentages = '50% 50%';
-	} else if(currentView == 'mobileView') {
-        // console.log(`currentView == 'mobileView'`);
+	} else if(currentView == 'mobileView') {        
 		transformOriginPercentages = '50% 50%';
 	}
 
@@ -4093,53 +3607,42 @@ function setZoom(newZoom, el) {
 	calculateViewableCardLimits();
 }
 
-function showPossibleMapPlacements(type){
-    // console.log(`showPossibleMapPlacements(${type})`);
+function showPossibleMapPlacements(type){    
 
     let showPlacementsTimeout = 10;
 
-    if(type == 'card' && !$('.potentialCardPlacement').length) {
-        // console.log(`type == 'card' && !$('.potentialCardPlacement').length`);
-        if($('.potentialItemPlacement').length) {
-            // console.log(`if $('.potentialItemPlacement').length`);
+    if(type == 'card' && !$('.potentialCardPlacement').length) {        
+        if($('.potentialItemPlacement').length) {            
             resetPotentialMapPlacements('resetAll');
             showPlacementsTimeout = 810;
         }
 
-        setTimeout(function(){
-            // console.log(`showPossibleMapPlacements(${type}) - setTimeout(function(){}, ${showPlacementsTimeout})`);
-            let cardTypeToPlace = $('.cardContainer.activePlacement').attr('cardtype');
-            // console.log(`cardTypeToPlace = ${cardTypeToPlace}`);
+        setTimeout(function(){            
+            let cardTypeToPlace = $('.cardContainer.activePlacement').attr('cardtype');            
             checkPotentialCardPlacements(cardTypeToPlace, 'showPossibleMapPlacements');
             showPotentialCardPlacements();
         }, showPlacementsTimeout);
 
         
-    } else if(type == 'item' && !$('.potentialItemPlacement').length) {
-        // console.log(`type == 'item' && !$('.potentialItemPlacement').length`);
-        if($('.potentialCardPlacement').length) {
-            // console.log(`if $('.potentialCardPlacement').length`);
+    } else if(type == 'item' && !$('.potentialItemPlacement').length) {        
+        if($('.potentialCardPlacement').length) {            
             resetPotentialMapPlacements('resetAll');
             showPlacementsTimeout = 810;
         }
 
-        setTimeout(function(){
-            // console.log(`showPossibleMapPlacements(${type}) - setTimeout(function(){}, ${0 + showPlacementsTimeout})`);
+        setTimeout(function(){            
             $('.mapTileContainer[cardtype="room"][placed-item="none"]').addClass('potentialItemPlacement');
         }, 0 + showPlacementsTimeout);
 
-        setTimeout(function(){
-            // console.log(`showPossibleMapPlacements(${type}) - setTimeout(function(){}, ${10 + showPlacementsTimeout})`);
+        setTimeout(function(){            
             $('.mapTileContainer.potentialItemPlacement .roomCardItemContainer').addClass('animatingElem mediumTransitionAll');
         }, 10 + showPlacementsTimeout);
 
-        setTimeout(function(){
-            // console.log(`showPossibleMapPlacements(${type}) - setTimeout(function(){}, ${20 + showPlacementsTimeout})`);
+        setTimeout(function(){            
             $('.mapTileContainer.potentialItemPlacement').addClass('activePotentialItemPlacement');
         }, 20 + showPlacementsTimeout);
 
-        setTimeout(function(){
-            // console.log(`showPossibleMapPlacements(${type}) - setTimeout(function(){}, ${100 + showPlacementsTimeout})`);
+        setTimeout(function(){            
             let actionRequiredHTML = `
                 <div class="actionRequiredContainer">
                     <div class="actionRequiredAnimation"></div>
@@ -4149,15 +3652,12 @@ function showPossibleMapPlacements(type){
             $('.mapTileContainer.potentialItemPlacement.activePotentialItemPlacement .roomCardItemContainer').append(actionRequiredHTML);
         }, 100 + showPlacementsTimeout);
 
-        setTimeout(function(){
-            // console.log(`showPossibleMapPlacements(${type}) - setTimeout(function(){}, ${800 + showPlacementsTimeout})`);
+        setTimeout(function(){            
             $('.mapTileContainer.potentialItemPlacement.activePotentialItemPlacement .roomCardItemContainer.animatingElem.mediumTransitionAll').removeClass('animatingElem mediumTransitionAll');
-            lockMap = false;
-            // console.log('lockMap = false');
+            lockMap = false;            
         }, 800 + showPlacementsTimeout);
 
-        setTimeout(function(){
-            // console.log(`showPossibleMapPlacements(${type}) - setTimeout(function(){}, ${2250 + showPlacementsTimeout})`);
+        setTimeout(function(){            
             $('.mapTileContainer.potentialItemPlacement.activePotentialItemPlacement .roomCardItemContainer .actionRequiredContainer').remove();
         }, 2250 + showPlacementsTimeout);
     }
@@ -4170,16 +3670,13 @@ function checkPotentialCardPlacements(currentCardType, mode) {
 
     // mode = marketCardSelection
     // mode = showPossibleMapPlacements
-
-    // console.log(`checkPotentialCardPlacements(${currentCardType}, ${mode})`);
+    
 
     validNeighbourIDs = [];
     $('.mapTileContainer').each(function(){
         let placedCardType = $(this).attr('cardtype');
         if (typeof placedCardType !== 'undefined' && placedCardType !== false) {
-            if(placedCardType == oppositeType[currentCardType]) {
-                // console.log(`placedCardType == oppositeType[currentCardType]`);
-                // console.log(`${placedCardType} == oppositeType[${currentCardType}]`);
+            if(placedCardType == oppositeType[currentCardType]) {                                
                 mapNeighbours = [];
                 mapNeighbours = findMapNeighbours($(this).data('map-row'), $(this).data('map-column'), 'empty', false);
                 if(mapNeighbours.length != 0) {
@@ -4191,11 +3688,9 @@ function checkPotentialCardPlacements(currentCardType, mode) {
 
     if(validNeighbourIDs.length == 0) {
         return false;
-    } else {
-        // console.log(`if(validNeighbourIDs.length == 0)`);
+    } else {        
 
-        let uniquePlacementIDs = validNeighbourIDs.filter(onlyUnique);
-        // console.log(`uniquePlacementIDs: `, uniquePlacementIDs);
+        let uniquePlacementIDs = validNeighbourIDs.filter(onlyUnique);        
         for (let i = 0; i < uniquePlacementIDs.length; i++) {
             $(`${uniquePlacementIDs[i]}`).addClass('pendingPotentialCardPlacement');
         }
@@ -4209,18 +3704,15 @@ function showPotentialCardPlacements(){
 
     $('.mapTileContainer.pendingPotentialCardPlacement').addClass('animatingElem mediumTransitionAll').removeClass('pendingPotentialCardPlacement');
     
-    setTimeout(function(){
-        // console.log(`showPotentialCardPlacements() - setTimeout(function(){}, 10)`);
+    setTimeout(function(){        
         $('.mapTileContainer.animatingElem.mediumTransitionAll').addClass('potentialCardPlacement');
     }, 10);
 
-    setTimeout(function(){
-        // console.log(`showPotentialCardPlacements() - setTimeout(function(){}, 20)`);
+    setTimeout(function(){        
         $('.mapTileContainer.animatingElem.mediumTransitionAll.potentialCardPlacement').addClass('activePotentialCardPlacement');
     }, 20);
 
-    setTimeout(function(){
-        // console.log(`showPotentialCardPlacements() - setTimeout(function(){}, 100)`);
+    setTimeout(function(){        
         let actionRequiredHTML = `
             <div class="actionRequiredContainer">
                 <div class="actionRequiredAnimation"></div>
@@ -4230,121 +3722,87 @@ function showPotentialCardPlacements(){
         $('.mapTileContainer.animatingElem.mediumTransitionAll.potentialCardPlacement.activePotentialCardPlacement').append(actionRequiredHTML);
     }, 100);
 
-    setTimeout(function(){
-        // console.log(`showPotentialCardPlacements() - setTimeout(function(){}, 800)`);
+    setTimeout(function(){        
         $('.mapTileContainer.animatingElem.mediumTransitionAll.potentialCardPlacement.activePotentialCardPlacement').removeClass('animatingElem mediumTransitionAll');
     }, 800);
 
-    setTimeout(function(){
-        // console.log(`showPotentialCardPlacements() - setTimeout(function(){}, 2250)`);
+    setTimeout(function(){        
         $('.mapTileContainer.potentialCardPlacement.activePotentialCardPlacement .actionRequiredContainer').remove();
     }, 2250);
 }
 
-function findMapNeighbours(thisRow, thisColumn, criteria, returnPositions){
-    // console.log(`findMapNeighbours(${thisRow}, ${thisColumn}, ${criteria}, ${returnPositions})`);
+function findMapNeighbours(thisRow, thisColumn, criteria, returnPositions){    
     
     // placedCardsRange.rows.currentRange = placedCardsRange.rows.high - placedCardsRange.rows.low;
     // placedCardsRange.columns.currentRange = placedCardsRange.columns.high - placedCardsRange.columns.low;
 
     // if(placedCardsRange.rows.currentRange >= placedCardsRange.rows.limit) placedCardsRange.rows.locked = true;
     // if(placedCardsRange.columns.currentRange >= placedCardsRange.columns.limit) placedCardsRange.columns.locked = true;
-
-    // console.log('placedCardsRange', placedCardsRange);
+    
 
     let allMapNeighbours = [];
-
-    // console.log(`thisRow = ${thisRow}`);
-    // console.log(`placedCardsRange.rows.low = ${placedCardsRange.rows.low}`);
-    // console.log(`placedCardsRange.rows.high = ${placedCardsRange.rows.high}`);
-
-    // console.log(`thisColumn = ${thisColumn}`);
-    // console.log(`placedCardsRange.columns.low = ${placedCardsRange.columns.low}`);
-    // console.log(`placedCardsRange.columns.high = ${placedCardsRange.columns.high}`);
+            
+            
 
     // let lightingContainerPositions = ['top', 'right', 'bottom', 'left'];
 
-    if(criteria == 'empty') {
-        // console.log(`if criteria == 'empty'`);
+    if(criteria == 'empty') {        
         
-        if(placedCardsRange.rows.locked) {
-            // console.log(`if placedCardsRange.rows.locked`);
-            if((thisRow - 1) >= placedCardsRange.rows.low) {
-                // console.log(`if (thisRow - 1) >= placedCardsRange.rows.low)`);
+        if(placedCardsRange.rows.locked) {            
+            if((thisRow - 1) >= placedCardsRange.rows.low) {                
                 allMapNeighbours.push(`#row-${thisRow - 1}-column-${thisColumn}`);
             }
-        } else {
-            // console.log(`if !placedCardsRange.rows.locked`);
+        } else {            
             allMapNeighbours.push(`#row-${thisRow - 1}-column-${thisColumn}`);
         }
     
-        if(placedCardsRange.columns.locked) {
-            // console.log(`if placedCardsRange.columns.locked`);
-            if ((thisColumn + 1) <= placedCardsRange.columns.high) {
-                // console.log(`if (thisColumn + 1) <= placedCardsRange.columns.high)`);
+        if(placedCardsRange.columns.locked) {            
+            if ((thisColumn + 1) <= placedCardsRange.columns.high) {                
                 allMapNeighbours.push(`#row-${thisRow}-column-${thisColumn + 1}`);
             }
-        } else {
-            // console.log(`if !placedCardsRange.columns.locked`);
+        } else {            
             allMapNeighbours.push(`#row-${thisRow}-column-${thisColumn + 1}`);
         }
     
-        if(placedCardsRange.rows.locked) {
-            // console.log(`if placedCardsRange.rows.locked`);
-            if ((thisRow + 1) <= placedCardsRange.rows.high) {
-                // console.log(`if (thisRow + 1) <= placedCardsRange.rows.high)`);
+        if(placedCardsRange.rows.locked) {            
+            if ((thisRow + 1) <= placedCardsRange.rows.high) {                
                 allMapNeighbours.push(`#row-${thisRow + 1}-column-${thisColumn}`);
             }
-        } else {
-            // console.log(`if !placedCardsRange.rows.locked`);
+        } else {            
             allMapNeighbours.push(`#row-${thisRow + 1}-column-${thisColumn}`);
         }
     
-        if(placedCardsRange.columns.locked) {
-            // console.log(`if placedCardsRange.columns.locked`);
-            if((thisColumn - 1) >= placedCardsRange.columns.low) {
-                // console.log(`if (thisColumn - 1) >= placedCardsRange.columns.low)`);
+        if(placedCardsRange.columns.locked) {            
+            if((thisColumn - 1) >= placedCardsRange.columns.low) {                
                 allMapNeighbours.push(`#row-${thisRow}-column-${thisColumn - 1}`);
             }
-        } else {
-            // console.log(`if !placedCardsRange.columns.locked`);
+        } else {            
             allMapNeighbours.push(`#row-${thisRow}-column-${thisColumn - 1}`);
         }
-    } else {
-        // console.log(`if criteria != 'empty'`);
+    } else {        
         allMapNeighbours.push(`#row-${thisRow - 1}-column-${thisColumn}`);
         allMapNeighbours.push(`#row-${thisRow}-column-${thisColumn + 1}`);
         allMapNeighbours.push(`#row-${thisRow + 1}-column-${thisColumn}`);
         allMapNeighbours.push(`#row-${thisRow}-column-${thisColumn - 1}`);
     }
+    
 
-    // console.log(`allMapNeighbours`, allMapNeighbours);
-
-    if(!returnPositions) {
-        // console.log(`!returnPositions`);
+    if(!returnPositions) {        
         let validMapNeighbours = [];
 
         for (let i = 0; i < allMapNeighbours.length; i++) {
     
-            if($(`${allMapNeighbours[i]}`).length) {
-                // console.log(`$(${allMapNeighbours[i]}).length`);
+            if($(`${allMapNeighbours[i]}`).length) {                
                 let thisAttr = $(`${allMapNeighbours[i]}`).attr('cardtype');
-
-                // console.log(`thisAttr = ${thisAttr}`);
+                
     
-                if (criteria == 'empty') {
-                    // console.log(`criteria == 'empty'`);
-                    if (typeof thisAttr === 'undefined' || thisAttr === false) {
-                        // console.log(`typeof thisAttr === 'undefined' || thisAttr === false`);
+                if (criteria == 'empty') {                    
+                    if (typeof thisAttr === 'undefined' || thisAttr === false) {                        
                         validMapNeighbours.push(allMapNeighbours[i]);
                     };
-                } else if(thisAttr == criteria){
-                    // console.log(`thisAttr == criteria`);
-                    if(criteria == 'plant') {
-                        // console.log(`criteria == 'plant'`);
-                        // console.log($(`${allMapNeighbours[i]}`).attr('plant-pot'));
-                        if($(`${allMapNeighbours[i]}`).attr('plant-pot') != 'none') {
-                            // console.log(`${allMapNeighbours[i]}').attr('plant-pot') != 'none'`);
+                } else if(thisAttr == criteria){                    
+                    if(criteria == 'plant') {                                                
+                        if($(`${allMapNeighbours[i]}`).attr('plant-pot') != 'none') {                            
                             return true;
                         } else {
                             validMapNeighbours.push(allMapNeighbours[i]);
@@ -4352,29 +3810,22 @@ function findMapNeighbours(thisRow, thisColumn, criteria, returnPositions){
                     }
                 } 
             }
-        }
-        // console.log(`validMapNeighbours`, validMapNeighbours);
+        }        
         return validMapNeighbours;
-    } else if(returnPositions){
-        // console.log(`returnPositions`);
+    } else if(returnPositions){        
         let validMapNeighbours = {};
         for (let i = 0; i < allMapNeighbours.length; i++) {
-            if($(`${allMapNeighbours[i]}`).length) {
-                // console.log(`$(${allMapNeighbours[i]}).length`);
+            if($(`${allMapNeighbours[i]}`).length) {                
                 let thisAttr = $(`${allMapNeighbours[i]}`).attr('cardtype');
-                if (criteria == 'empty') {
-                    // console.log(`criteria == 'empty'`);
-                    if (typeof thisAttr === 'undefined' || thisAttr === false) {
-                        // console.log(`typeof thisAttr === 'undefined' || thisAttr === false`);
+                if (criteria == 'empty') {                    
+                    if (typeof thisAttr === 'undefined' || thisAttr === false) {                        
                         validMapNeighbours[`${allMapNeighbours[i]}`] = lightingContainerPositions[i];
                     };
-                } else if(thisAttr == criteria){
-                    // console.log(`thisAttr == criteria`);
+                } else if(thisAttr == criteria){                    
                     validMapNeighbours[`${allMapNeighbours[i]}`] = lightingContainerPositions[i];
                 } 
             }
-        }
-        // console.log(`validMapNeighbours`, validMapNeighbours);
+        }        
         return validMapNeighbours;
     }
 }
@@ -4472,11 +3923,9 @@ function finalScoringCalculation() {
 
     $('#finalMap .mapTileContainer[cardtype="plant"]:not([plant-pot="none"]) .cardContainer').each(function(){
         let thisCompletedPlantVPs = parseInt($(this).attr('plant-vps'));
-        completedPlantsFinalVPs = completedPlantsFinalVPs + thisCompletedPlantVPs;
-        // console.log(`completedPlantsFinalVPs = ${completedPlantsFinalVPs}`);
+        completedPlantsFinalVPs = completedPlantsFinalVPs + thisCompletedPlantVPs;        
     });
-
-    // console.log(`FINAL completedPlantsFinalVPs = ${completedPlantsFinalVPs}`);
+    
     
     $('#fs-completedPlants').html(completedPlantsFinalVPs);
 
@@ -4487,27 +3936,19 @@ function finalScoringCalculation() {
     let totalLeftOverVerdancy = 0;
 
     $('#finalMap .mapTileContainer[cardtype="plant"][plant-pot="none"] .cardContainer .finalScoringVerdancyEarned').each(function(){
-        let thisCardLeftOverVerdancy = parseInt($(this).attr('final-scoring-verdancy-amount'));
-        // console.log(`thisCardLeftOverVerdancy = ${thisCardLeftOverVerdancy}`);
-        totalLeftOverVerdancy = totalLeftOverVerdancy + thisCardLeftOverVerdancy;
-        // console.log(`totalLeftOverVerdancy = ${totalLeftOverVerdancy}`);
+        let thisCardLeftOverVerdancy = parseInt($(this).attr('final-scoring-verdancy-amount'));        
+        totalLeftOverVerdancy = totalLeftOverVerdancy + thisCardLeftOverVerdancy;        
     });
-
-    // console.log(`FINAL totalLeftOverVerdancy = ${totalLeftOverVerdancy}`);
-    leftOverVerdancyFinalVPs = Math.floor(totalLeftOverVerdancy / 2);
-    // console.log(`leftOverVerdancy = ${leftOverVerdancyFinalVPs}`);
+    
+    leftOverVerdancyFinalVPs = Math.floor(totalLeftOverVerdancy / 2);    
     $('#fs-leftOverVerdancy').html(leftOverVerdancyFinalVPs);
 
 
     let potPointsRange = ['terracotta', 'porcelain', 'wood', 'concrete']; // index = plant pot points
 
     $('#finalMap .mapTileContainer[cardtype="plant"]:not([plant-pot="none"])').each(function(){
-        let thisPlantPotType = $(this).attr('plant-pot');
-        // console.log(`thisPlantPotType = ${thisPlantPotType}`);
-        // console.log(`potPointsRange.indexOf(thisPlantPotType) = ${potPointsRange.indexOf(thisPlantPotType)}`);
-        // console.log(`potPointsFinalVPs = ${potPointsFinalVPs}`);
-        potPointsFinalVPs = potPointsFinalVPs + potPointsRange.indexOf(thisPlantPotType);
-        // console.log(`potPointsFinalVPs = ${potPointsFinalVPs}`);
+        let thisPlantPotType = $(this).attr('plant-pot');                        
+        potPointsFinalVPs = potPointsFinalVPs + potPointsRange.indexOf(thisPlantPotType);        
     });
 
     $('#fs-potPoints').html(potPointsFinalVPs);
@@ -4516,87 +3957,62 @@ function finalScoringCalculation() {
     // roomPoints
     
     $('#finalMap .mapTileContainer[cardtype="room"]').each(function(){
-
-        // console.log(`/----------------NEW ROOM------------------/`);
+        
 
         let thisRow = $(this).data('map-row');
         let thisColumn = $(this).data('map-column');
-
-        // console.log(`thisRow = ${thisRow}`)
-        // console.log(`thisColumn = ${thisColumn}`)
+                
 
         let thisRoomType = $(this).find('.cardContainer').attr('room-type');
         let thisPlacedItemType = $(this).attr('item-room-type');
         let thisRoomMatchingPoints = 1;
-
-        // console.log(`thisRoomType = ${thisRoomType}`);
-        // console.log(`thisPlacedItemType = ${thisPlacedItemType}`);
+                
 
         if (typeof thisPlacedItemType !== typeof undefined && thisPlacedItemType !== false) {
-            if(thisRoomType == thisPlacedItemType) {
-                // console.log(`IF (thisRoomType == thisPlacedItemType)`)
+            if(thisRoomType == thisPlacedItemType) {                
                 thisRoomMatchingPoints = 2;
             }
         }
-
-        // console.log(`thisRoomMatchingPoints = ${thisRoomMatchingPoints}`)
+        
 
         let roomAndPlantTypeMatches = 0;
     
-        if($(`#row-${thisRow - 1}-column-${thisColumn}`).length) {
-            // console.log(`IF($('#row-${thisRow - 1}-column-${thisColumn}').length)`);
-            let firstNeighbourPlantType = $(`#row-${thisRow - 1}-column-${thisColumn} .cardContainer`).attr('plant-type');
-            // console.log(`firstNeighbourPlantType = ${firstNeighbourPlantType}`);
-            if(firstNeighbourPlantType == thisRoomType) {
-                // console.log(`IF (firstNeighbourPlantType == thisRoomType)`);
+        if($(`#row-${thisRow - 1}-column-${thisColumn}`).length) {            
+            let firstNeighbourPlantType = $(`#row-${thisRow - 1}-column-${thisColumn} .cardContainer`).attr('plant-type');            
+            if(firstNeighbourPlantType == thisRoomType) {                
                 roomAndPlantTypeMatches++;
             }
         }
         
-        if($(`#row-${thisRow}-column-${thisColumn + 1}`).length) {
-            // console.log(`IF($('#row-${thisRow}-column-${thisColumn + 1}').length)`);
-            let secondNeighbourPlantType = $(`#row-${thisRow}-column-${thisColumn + 1} .cardContainer`).attr('plant-type');
-            // console.log(`secondNeighbourPlantType = ${secondNeighbourPlantType}`);
-            if(secondNeighbourPlantType == thisRoomType) {
-                // console.log(`IF (secondNeighbourPlantType == thisRoomType)`);
+        if($(`#row-${thisRow}-column-${thisColumn + 1}`).length) {            
+            let secondNeighbourPlantType = $(`#row-${thisRow}-column-${thisColumn + 1} .cardContainer`).attr('plant-type');            
+            if(secondNeighbourPlantType == thisRoomType) {                
                 roomAndPlantTypeMatches++;
             }
         }
         
-        if($(`#row-${thisRow + 1}-column-${thisColumn}`).length) {
-            // console.log(`IF($('#row-${thisRow + 1}-column-${thisColumn}').length)`);
-            let thirdNeighbourPlantType = $(`#row-${thisRow + 1}-column-${thisColumn} .cardContainer`).attr('plant-type');
-            // console.log(`thirdNeighbourPlantType = ${thirdNeighbourPlantType}`);
-            if(thirdNeighbourPlantType == thisRoomType) {
-                // console.log(`IF (thirdNeighbourPlantType == thisRoomType)`);
+        if($(`#row-${thisRow + 1}-column-${thisColumn}`).length) {            
+            let thirdNeighbourPlantType = $(`#row-${thisRow + 1}-column-${thisColumn} .cardContainer`).attr('plant-type');            
+            if(thirdNeighbourPlantType == thisRoomType) {                
                 roomAndPlantTypeMatches++;
             }
         }
         
-        if($(`#row-${thisRow}-column-${thisColumn - 1}`).length) {
-            // console.log(`IF ($('#row-${thisRow}-column-${thisColumn - 1}').length)`);
-            let fourthNeighbourPlantType = $(`#row-${thisRow}-column-${thisColumn - 1} .cardContainer`).attr('plant-type');
-            // console.log(`fourthNeighbourPlantType = ${fourthNeighbourPlantType}`);
-            if(fourthNeighbourPlantType == thisRoomType) {
-                // console.log(`IF (fourthNeighbourPlantType == thisRoomType)`);
+        if($(`#row-${thisRow}-column-${thisColumn - 1}`).length) {            
+            let fourthNeighbourPlantType = $(`#row-${thisRow}-column-${thisColumn - 1} .cardContainer`).attr('plant-type');            
+            if(fourthNeighbourPlantType == thisRoomType) {                
                 roomAndPlantTypeMatches++;
             }
         }
+        
 
-        // console.log(`roomAndPlantTypeMatches = ${roomAndPlantTypeMatches}`)
-
-        if(roomAndPlantTypeMatches != 0) {
-            // console.log(`roomAndPlantTypeMatches = ${roomAndPlantTypeMatches}`);
-            // console.log(`thisRoomMatchingPoints = ${thisRoomMatchingPoints}`);
-            let totalMatchedRoomAndPlantsPoints = roomAndPlantTypeMatches * thisRoomMatchingPoints
-            // console.log(`totalMatchedRoomAndPlantsPoints = ${totalMatchedRoomAndPlantsPoints}`);
-            roomPointsFinalVPs = roomPointsFinalVPs + totalMatchedRoomAndPlantsPoints;
-            // console.log(`roomPointsFinalVPs = ${roomPointsFinalVPs}`);
+        if(roomAndPlantTypeMatches != 0) {                        
+            let totalMatchedRoomAndPlantsPoints = roomAndPlantTypeMatches * thisRoomMatchingPoints            
+            roomPointsFinalVPs = roomPointsFinalVPs + totalMatchedRoomAndPlantsPoints;            
         }
 
     });
-
-    // console.log(`roomPointsFinalVPs = ${roomPointsFinalVPs}`);
+    
 
     $('#fs-roomPoints').html(roomPointsFinalVPs);
 
@@ -4606,25 +4022,19 @@ function finalScoringCalculation() {
     let uniqueFurnitureAndPetsScoringRange = [0, 1, 3, 6, 9, 12, 16, 20, 25];
 
     let allFurnitureAndPets = [];
-    $('#finalMap .mapTileContainer[placed-item]:not([placed-item="none"])').each(function(){
-        // console.log(`$(this).attr('furniture-pet-name') = ${$(this).attr('furniture-pet-name')}`);
+    $('#finalMap .mapTileContainer[placed-item]:not([placed-item="none"])').each(function(){        
         allFurnitureAndPets.push($(this).attr('furniture-pet-name'));
     });
 
-    let uniqueFurnitureAndPets = allFurnitureAndPets.filter(onlyUnique);
-    // console.log(`uniqueFurnitureAndPets = ${uniqueFurnitureAndPets}`);
-    // console.log(`uniqueFurnitureAndPets.length = ${uniqueFurnitureAndPets.length}`);
-    // console.log(`uniqueFurnitureAndPetsScoringRange = ${uniqueFurnitureAndPetsScoringRange}`);
-    uniquePetsFurnitureFinalVPs = uniqueFurnitureAndPetsScoringRange[uniqueFurnitureAndPets.length];
-    // console.log(`uniquePetsFurnitureFinalVPs = ${uniquePetsFurnitureFinalVPs}`);
+    let uniqueFurnitureAndPets = allFurnitureAndPets.filter(onlyUnique);            
+    uniquePetsFurnitureFinalVPs = uniqueFurnitureAndPetsScoringRange[uniqueFurnitureAndPets.length];    
 
     $('#fs-uniquePetsFurniture').html(uniquePetsFurnitureFinalVPs);
 
     // plantCollectorBonus
     let allPlantTypes = [];
 
-    $('#finalMap .mapTileContainer[cardtype="plant"] .cardContainer').each(function(){
-        // console.log(`$(this).attr('plant-type') = ${$(this).attr('plant-type')}`)
+    $('#finalMap .mapTileContainer[cardtype="plant"] .cardContainer').each(function(){        
         allPlantTypes.push($(this).attr('plant-type'));
     });
 
@@ -4636,8 +4046,7 @@ function finalScoringCalculation() {
     // decoratorBonus
     let allRoomTypes = [];
 
-    $('#finalMap .mapTileContainer[cardtype="room"] .cardContainer').each(function(){
-        // console.log(`$(this).attr('room-type') = ${$(this).attr('room-type')}`)
+    $('#finalMap .mapTileContainer[cardtype="room"] .cardContainer').each(function(){        
         allRoomTypes.push($(this).attr('room-type'));
     });
 
