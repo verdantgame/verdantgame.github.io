@@ -5583,8 +5583,7 @@ p.mapDebug {
 
 #container #scoringLayer #mapAndFinalScoreContainer #finalScore {
     width: 173px;
-    height: 573px;
-    padding: 10px;
+    height: 582px;
     position: absolute;
     top: 76px;
     left: 18px;
