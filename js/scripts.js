@@ -1316,18 +1316,18 @@ function processChosenAndItems(){
             setTimeout(function(){              
                 console.log(`IF (oppositeCardGreenThumbs > 2) setTimeout(function(){}, 710)`);     
                 $('.marketColumn.lockedInColumn .cardsAndItemContainer .marketCardOverlay:not(.lockedInCardOverlay) .cardContainer .newGreenThumbMasterContainer').addClass('removeAllGreenThumbs');
-            }, 710);
+            }, extraTimeout + 710);
 
             setTimeout(function(){      
                 console.log(`IF (oppositeCardGreenThumbs > 2) setTimeout(function(){}, 1720)`);               
                 $('.marketColumn.lockedInColumn .cardsAndItemContainer .marketCardOverlay:not(.lockedInCardOverlay) .cardContainer .newGreenThumbMasterContainer .newGreenThumbContainer').fadeOut();
-            }, 1720);
+            }, extraTimeout + 1720);
 
             setTimeout(function(){                
                 console.log(`IF (oppositeCardGreenThumbs > 2) setTimeout(function(){}, 2030)`);     
                 $('.marketColumn.lockedInColumn .cardsAndItemContainer .marketCardOverlay:not(.lockedInCardOverlay) .cardContainer .newGreenThumbMasterContainer .newGreenThumbContainer').remove();
                 $('.marketColumn.lockedInColumn .cardsAndItemContainer .marketCardOverlay:not(.lockedInCardOverlay) .cardContainer .newGreenThumbMasterContainer').attr('total-green-thumbs', '0');
-            }, 2030);
+            }, extraTimeout + 2030);
 
         }
 
