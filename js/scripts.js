@@ -1153,12 +1153,9 @@ function processChosenCardAndItem(){
     let potentialCardType = $('.marketCardOverlay.potentialCardOverlayParent .cardContainer').attr('cardtype');
     let validCardPlacements = checkPotentialCardPlacements(potentialCardType, 'marketCardSelection');
 
-    if(!validCardPlacements) {
-        console.log(`IF (!validCardPlacements)`);
+    if(!validCardPlacements) {        
         $(`#${potentialCardType}PlacementsExhaustedModal`).addClass('is-active');
-    } else {
-        console.log(`IF (validCardPlacements)`);
-
+    } else {        
         currentRoundActionLog = ['market-selection'];
 
         $('.potentialChosenColumn').addClass('lockedInColumn').removeClass('potentialChosenColumn');
@@ -1173,67 +1170,52 @@ function processChosenCardAndItem(){
         let chosenCardsGreenThumbs = parseInt($('.lockedInCardOverlay .cardContainer .newGreenThumbMasterContainer').attr('total-green-thumbs'));
         let currentGreenThumbs = parseInt($('#infoBarStats #greenThumbsAmountContainer #greenThumbsAmountInfo').html());
         let newGreenThumbAmount = chosenCardsGreenThumbs + currentGreenThumbs;
-                        
-        console.log(`chosenCardsGreenThumbs = ${chosenCardsGreenThumbs}`);
-        console.log(`currentGreenThumbs = ${currentGreenThumbs}`);
-        console.log(`newGreenThumbAmount = ${newGreenThumbAmount}`);
-
+                                                
         let extraTimeout = 0;
 
-        if(chosenCardsGreenThumbs > 0) {
-            console.log(`IF (oppositeCardGreenThumbs > 0)`);
+        if(chosenCardsGreenThumbs > 0) {            
             extraTimeout = 2550;            
 
-            setTimeout(function(){
-                console.log(`IF (validCardPlacements && chosenCardsGreenThumbs > 0) setTimeout(function(){}, 200)`);
-                if($(`.lockedInCardOverlay .newGreenThumbParentContainer[green-thumb-container="1"] .newGreenThumbContainer`).length) {
-                    console.log(`IF (validCardPlacements && chosenCardsGreenThumbs > 0 && $('.lockedInCardOverlay .newGreenThumbParentContainer[green-thumb-container="1"] .newGreenThumbContainer').length)`);
+            setTimeout(function(){                
+                if($(`.lockedInCardOverlay .newGreenThumbParentContainer[green-thumb-container="1"] .newGreenThumbContainer`).length) {                    
                     $(`.lockedInCardOverlay .newGreenThumbParentContainer[green-thumb-container="1"] .newGreenThumbContainer`).parentToAnimate($('#greenThumbsAmountContainer #greenThumbsEndPoint'), 1300);
                 }
         
-                if($(`.lockedInCardOverlay .newGreenThumbParentContainer[green-thumb-container="2"] .newGreenThumbContainer`).length) {
-                    console.log(`IF (validCardPlacements && chosenCardsGreenThumbs > 0 && $('.lockedInCardOverlay .newGreenThumbParentContainer[green-thumb-container="2"] .newGreenThumbContainer').length)`);
+                if($(`.lockedInCardOverlay .newGreenThumbParentContainer[green-thumb-container="2"] .newGreenThumbContainer`).length) {                    
                     $(`.lockedInCardOverlay .newGreenThumbParentContainer[green-thumb-container="2"] .newGreenThumbContainer`).parentToAnimate($('#greenThumbsAmountContainer #greenThumbsEndPoint'), 1300);
                 }
             }, 200);
 
-            setTimeout(function(){       
-                console.log(`IF (chosenCardsGreenThumbs > 0) setTimeout(function(){}, 1050)`);         
+            setTimeout(function(){                       
                 $('#infoBarStats #greenThumbsAmountContainer').addClass('infoChange')
             }, 1050);
             
-            setTimeout(function(){                
-                console.log(`IF (chosenCardsGreenThumbs > 0) setTimeout(function(){}, 1550)`);         
+            setTimeout(function(){                                
                 $('#infoBarStats #greenThumbsAmountContainer #greenThumbsEndPoint').html('');
                 $('#infoBarStats #greenThumbsAmountContainer #greenThumbsAmountInfo').html(newGreenThumbAmount);
                 $('#infoBarStats #greenThumbsAmountContainer #greenThumbsUpdateInfo').addClass('addVal').html(chosenCardsGreenThumbs);
                 $('#infoBarStats #greenThumbsAmountContainer #greenThumbsUpdateInfo').fadeIn();
             }, 1550);
 
-            setTimeout(function(){
-                console.log(`IF (chosenCardsGreenThumbs > 0) setTimeout(function(){}, 2550)`);                     
+            setTimeout(function(){                
                 // $(`.lockedInCardOverlay .cardContainer .greenThumbMarketContainer`).remove();
                 $('#infoBarStats #greenThumbsAmountContainer #greenThumbsUpdateInfo').fadeOut();
                 $('#infoBarStats #greenThumbsAmountContainer').removeClass('infoChange')
             }, 2550);
 
-            setTimeout(function(){
-                console.log(`IF (chosenCardsGreenThumbs > 0) setTimeout(function(){}, 3000)`);        
+            setTimeout(function(){                
                 $('.addVal').removeClass('addVal');
             }, 3000);
         }
 
         let oppositeCardGreenThumbs = parseInt($('.marketColumn.lockedInColumn .cardsAndItemContainer .marketCardOverlay:not(.lockedInCardOverlay) .cardContainer .newGreenThumbMasterContainer').attr('total-green-thumbs'));        
         oppositeCardGreenThumbs++;        
-
-        console.log(`oppositeCardGreenThumbs = ${oppositeCardGreenThumbs}`);
+        
 
         setTimeout(function(){            
 
             let randomThumb = Math.floor(Math.random() * 5);
-
-            console.log(`randomThumb = ${randomThumb}`);
-
+            
             let confirmedGreenThumbHTML = `
                 <div class="newGreenThumbContainer new-green-thumb-animation">
                     <img class="greenThumb thumbImg" src="img/thumbs/${randomThumb}.png">
@@ -1245,33 +1227,27 @@ function processChosenCardAndItem(){
             $(`.marketColumn.lockedInColumn .cardsAndItemContainer .marketCardOverlay:not(.lockedInCardOverlay) .cardContainer .newGreenThumbMasterContainer`).attr('total-green-thumbs', oppositeCardGreenThumbs);
         }, extraTimeout + 400);
 
-        if(oppositeCardGreenThumbs > 2) {            
-            console.log(`IF (oppositeCardGreenThumbs > 2)`);
+        if(oppositeCardGreenThumbs > 2) {                        
 
             extraTimeout = extraTimeout + 1000;
 
-            setTimeout(function(){              
-                console.log(`IF (oppositeCardGreenThumbs > 2) setTimeout(function(){}, extraTimeout + 710)`);     
+            setTimeout(function(){                              
                 $('.marketColumn.lockedInColumn .cardsAndItemContainer .marketCardOverlay:not(.lockedInCardOverlay) .cardContainer .newGreenThumbMasterContainer').addClass('removeAllGreenThumbs');
             }, extraTimeout + 710);
 
-            setTimeout(function(){      
-                console.log(`IF (oppositeCardGreenThumbs > 2) setTimeout(function(){}, extraTimeout + 1720)`);               
+            setTimeout(function(){                      
                 $('.marketColumn.lockedInColumn .cardsAndItemContainer .marketCardOverlay:not(.lockedInCardOverlay) .cardContainer .newGreenThumbMasterContainer .newGreenThumbContainer').fadeOut();
             }, extraTimeout + 1720);
 
-            setTimeout(function(){                
-                console.log(`IF (oppositeCardGreenThumbs > 2) setTimeout(function(){}, extraTimeout + 2030)`);     
+            setTimeout(function(){                                
                 $('.marketColumn.lockedInColumn .cardsAndItemContainer .marketCardOverlay:not(.lockedInCardOverlay) .cardContainer .newGreenThumbMasterContainer .newGreenThumbContainer').remove();
                 $('.marketColumn.lockedInColumn .cardsAndItemContainer .marketCardOverlay:not(.lockedInCardOverlay) .cardContainer .newGreenThumbMasterContainer').attr('total-green-thumbs', '0');
             }, extraTimeout + 2030);
 
         }
+        
 
-        console.log(`extraTimeout = ${extraTimeout}`);     
-
-        setTimeout(function(){            
-            console.log(`setTimeout(function(){}, ${extraTimeout} + 2500 = ${extraTimeout + 2500})`);     
+        setTimeout(function(){                        
             
             $('.newGreenThumbContainer.new-green-thumb-animation').removeClass('new-green-thumb-animation');
             
@@ -1281,13 +1257,11 @@ function processChosenCardAndItem(){
             $('.itemToken.chosenMarketItem').parentToAnimate($('#tableauSection #homeContentContainer #playerInfoContainer #chosenItemParentContainer #chosenItemContainer'), 1000);
         }, extraTimeout + 2500);
 
-        setTimeout(function(){           
-            console.log(`setTimeout(function(){}, ${extraTimeout} + 2850 = ${extraTimeout + 2850})`);      
+        setTimeout(function(){                       
             animateElem($('#tableauSection #undoNextRoundBtnContainer'), 'showRoundEndOptions');
         }, extraTimeout +  2850);
 
-        setTimeout(function(){      
-            console.log(`setTimeout(function(){}, ${extraTimeout} + 3850 = ${extraTimeout + 3850})`);           
+        setTimeout(function(){                  
             $('#undoNextRoundBtnContainer #undoAction').removeAttr('disabled');
 
             $('#cardToPlace .cardContainer').attr('style', '');
@@ -3957,6 +3931,9 @@ function finalScoringProcess() {
         $(this).find('.completeVerdancy').appendTo(finalScoringVerdancyEarnedContainer);
     });
 
+    let endGameGreenThumbs = $('#greenThumbsAmountContainer #greenThumbsAmountInfo').html();
+    $('#mapAndFinalScoreContainer #greenThumbsLeft #greenThumbsLeftInfo #greenThumbsLeftNum').html(endGameGreenThumbs);
+
     setupCarousel();
     finalScoringCalculation();
 }
@@ -4143,7 +4120,7 @@ function initSlideshow(container, animation){
     var slidesNumber = 22;
     var sliderHeight = 188;
     var slideWidth = 152;
-    var totalAnimationWidth = 2093;
+    var totalAnimationWidth = 2380;
     let containerWidth = 258;
     // detect number of visible slides
     var slidesVisible = containerWidth / slideWidth;	
