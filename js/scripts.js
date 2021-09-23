@@ -64,7 +64,7 @@ function checkIOS() {
 
 var rulesURL = 'files/rules.pdf';
 
-$(document).on(touchEvent, '#frontPageGameInstructionsButton', function(){
+$(document).on(touchEvent, '.showFullInstructionsButton.button', function(){
 	openInNewTab(rulesURL);
 });
 
@@ -358,8 +358,6 @@ function generateModalButtonNums() {
 // 	if(changeOfView) currentView = newView;
 // }
 
-
-
 function setupInitialCardsAndItems() {
 
 	// since there are 4 tiles to be generated, the below loop is actioned 4 times
@@ -649,8 +647,8 @@ $(document).on(touchEvent,'#addOneVerdancyToPlantBtn:not([disabled])',function()
     } else {
         $('.activePlacement').addClass('inactivePlacement').removeClass('activePlacement')
         $(this).addClass('disableInteraction');
-        $('#useItemBtnContainer .useItemsBtn').addClass('disableInteraction');
-        $('#swapItemsBtnContainer .swapItemsBtn').addClass('disableInteraction');
+        $('#playerInfoContainer #useItemsBtn').addClass('disableInteraction');
+        $('#playerInfoContainer #swapItemsBtn').addClass('disableInteraction');
         $('.mapTileContainer.potentialCardPlacement').addClass('pendingPotentialCardPlacement');
         $('#undoNextRoundBtnContainer #nextRound').attr('disabled', 'disabled');
         resetPotentialMapPlacements('resetAll');
@@ -665,8 +663,8 @@ function setupGreenThumbAction(thisAction) {
         animateElem($('#mapContainer #addOneVerdancyOption'), 'showAddOneVerdancyOption');
         toggleMapVerdancy('show');
         $('#verdancyVisibilityContainer').addClass('disableInteraction');
-        $('#swapItemsBtnContainer .swapItemsBtn').attr('disabled', 'disabled');        
-
+        $('#playerInfoContainer #swapItemsBtn').attr('disabled', 'disabled');        
+        $('#playerInfoContainer #discardItemsBtn').attr('disabled', 'disabled');
         nurtureItemMapRecipients('plant', 'addOneVerdancy');
 
         // addOneVerdancyPotentialTarget
@@ -686,9 +684,9 @@ $(document).on(touchEvent,'#addOneVerdancyOption #cancelAddOneVerdancyAction',fu
 
     setTimeout(function(){
 
-        $('#addOneVerdancyToPlantBtn').removeClass('disableInteraction');
-        $('#useItemBtnContainer .useItemsBtn').removeClass('disableInteraction');
-        $('#swapItemsBtnContainer .swapItemsBtn').removeClass('disableInteraction');
+        $('#playerInfoContainer #addOneVerdancyToPlantBtn').removeClass('disableInteraction');
+        $('#playerInfoContainer #useItemsBtn').removeClass('disableInteraction');
+        $('#playerInfoContainer #swapItemsBtn').removeClass('disableInteraction');
 
         $('#cancelAddOneVerdancyAction.button').attr('disabled', 'disabled');
         $('#confirmAddOneVerdancyAction.button').attr('disabled', 'disabled');
@@ -708,7 +706,8 @@ $(document).on(touchEvent,'#addOneVerdancyOption #cancelAddOneVerdancyAction',fu
         } else if($('#chosenItemContainer .itemToken.inactivePlacement').length) {            
             $('#chosenItemContainer .itemToken.inactivePlacement').attr('style', '');
             $('#chosenItemContainer .itemToken.inactivePlacement').addClass('activePlacement').removeClass('inactivePlacement');
-            checkChosenItemType();
+            roundState('roundCheck');
+            roundState('roundCheck');
         } else {            
             $('#undoNextRoundBtnContainer #undoAction').removeAttr('disabled');
             activateNextRoundBtn();
@@ -748,6 +747,7 @@ $(document).on(touchEvent,'#addOneVerdancyOption #confirmAddOneVerdancyAction',f
 
     $('#cancelAddOneVerdancyAction.button').attr('disabled', 'disabled');
     $('#confirmAddOneVerdancyAction.button').attr('disabled', 'disabled');
+
     animateElem($('#mapContainer #addOneVerdancyOption'), 'hideAddOneVerdancyOption');
 
     $('.previewAddOneVerdancyImg.previewNurtureItemIcon.lockedInIcon').fadeOut();
@@ -777,7 +777,6 @@ $(document).on(touchEvent,'#addOneVerdancyOption #confirmAddOneVerdancyAction',f
         greenThumbAmountStatus('actionDeduction');
     }, 800);
 
-
     setTimeout(function(){
         toggleMapVerdancy('hide');
         $('#verdancyVisibilityContainer').removeClass('disableInteraction');
@@ -785,7 +784,7 @@ $(document).on(touchEvent,'#addOneVerdancyOption #confirmAddOneVerdancyAction',f
         if(completedPlantsThisTurn.length != 0) {
             gainPlantPots();
         } else {
-            auditSwapItemBtnText('swapItems');
+            roundState('roundCheck');
         }
     }, 3200);
 
@@ -1249,7 +1248,7 @@ function processChosenAndItems(){
         if(oppositeCardGreenThumbs > 2) {            
             console.log(`IF (oppositeCardGreenThumbs > 2)`);
 
-            extraTimeout = extraTimeout + 2000;
+            extraTimeout = extraTimeout + 1000;
 
             setTimeout(function(){              
                 console.log(`IF (oppositeCardGreenThumbs > 2) setTimeout(function(){}, extraTimeout + 710)`);     
@@ -1297,7 +1296,7 @@ function processChosenAndItems(){
             $('#chosenItemContainer .itemToken').attr('style', '');
             $('#chosenItemContainer .itemToken').addClass('inactivePlacement');
             
-            $('#addOneVerdancyToPlantBtn').removeAttr('disabled');
+            $('#playerInfoContainer #addOneVerdancyToPlantBtn').removeAttr('disabled');
 
             showPotentialCardPlacements();
         }, extraTimeout +  3850);
@@ -1309,7 +1308,7 @@ $(document).on(touchEvent,'#undoNextRoundBtnContainer #undoAction.button',functi
 
     var undoAction = currentRoundActionLog.pop();    
     setTimeout(function(){        
-        auditSwapItemBtnText('swapItems');
+        roundState('swapItems');
     }, 10);
 
     if(undoAction == 'market-selection') {        
@@ -1355,9 +1354,9 @@ $(document).on(touchEvent,'#undoNextRoundBtnContainer #undoAction.button',functi
             $('#gameSectionsParent').attr('current-phase', 'market-selection');
         }, 1010);
 
-        $('#useItemBtnContainer .useItemsBtn').attr('disabled', 'disabled');
-        $('#useItemBtnContainer').removeClass('showUseItemsBtn');
-        $('#useItemBtnContainer .useItemsBtn').removeAttr('item-to-use');
+        $('#playerInfoContainer #useItemsBtn').attr('disabled', 'disabled');
+        $('#playerInfoContainer').removeClass('nurtureItemActive');
+        $('#playerInfoContainer #useItemsBtn').removeAttr('item-to-use');
 
     } else if(undoAction == 'card-placement') {
         
@@ -1954,7 +1953,8 @@ function checkLightingMatches(mapID) {
             if($('#chosenItemContainer .itemToken.inactivePlacement').length) {                
                 $('#chosenItemContainer .itemToken.inactivePlacement').attr('style', '');
                 $('#chosenItemContainer .itemToken.inactivePlacement').addClass('activePlacement').removeClass('inactivePlacement');
-                checkChosenItemType();
+                roundState('roundCheck');
+                roundState('roundCheck');
                 lockMap = false;
             } else {                
                 $('#undoNextRoundBtnContainer #undoAction').removeAttr('disabled');
@@ -2036,7 +2036,8 @@ function showLightingMatchesFunc() {
                     if($('#chosenItemContainer .itemToken.inactivePlacement').length) {                        
                         $('#chosenItemContainer .itemToken.inactivePlacement').attr('style', '');
                         $('#chosenItemContainer .itemToken.inactivePlacement').addClass('activePlacement').removeClass('inactivePlacement');
-                        checkChosenItemType();
+                        roundState('roundCheck');
+                        roundState('roundCheck');
                         lockMap = false;
                     } else {                        
                         $('#undoNextRoundBtnContainer #undoAction').removeAttr('disabled');
@@ -2136,9 +2137,9 @@ function gainPlantPots() {
     setTimeout(function(){
         $('.mapTileContainer[cardtype="plant"]:not([plant-pot="none"]) .earnedPlantPotContainer .plantPotContainer .plantPotScoring').remove();
         $('.mapTileContainer[cardtype="plant"]:not([plant-pot="none"]) .earnedPlantPotContainer .plantPotContainer').removeClass('hideScoring showScoring');
-        auditSwapItemBtnText('swapItems');
-                
 
+        roundState('roundCheck');
+                
         if($('#potDiscardPile .potDiscardSlot .plantPotContainer').length > 0 && !$('#potDiscardPile .potDiscardSlot[data-pot-discard-slot="0"] .plantPotContainer').length) {            
             removeDiscardPotSpaces(completedPlantsThisTurn.length);
             updateDiscardPotTotal();
@@ -2236,7 +2237,7 @@ $(document).on(touchEvent,'#undoNextRoundBtnContainer #nextRound',function(){
     }
 
     $('#undoNextRoundBtnContainer #nextRound').attr('disabled', 'disabled');
-    $('#addOneVerdancyToPlantBtn').attr('disabled', 'disabled');
+    $('#playerInfoContainer #addOneVerdancyToPlantBtn').attr('disabled', 'disabled');
     
     $('.confirmedCardPlacement').removeClass('confirmedCardPlacement');
     $('.chosenMarketCard').removeClass('chosenMarketCard');
@@ -2247,15 +2248,16 @@ $(document).on(touchEvent,'#undoNextRoundBtnContainer #nextRound',function(){
     $('.activePlacement').removeClass('activePlacement');
     $('.inactivePlacement').removeClass('inactivePlacement');
 
+    $('.chosenMarketCard').removeClass('chosenMarketCard');
+    $('.placedCard').removeClass('placedCard');
     $('.chosenMarketItem').removeClass('chosenMarketItem');
     $('.placedItem').removeClass('placedItem');
 
-    $('.chosenMarketCard').removeClass('chosenMarketCard');
-    $('.placedCard').removeClass('placedCard');
+    $('.nurtureItemActive').removeClass('nurtureItemActive');
 
-    $('#useItemBtnContainer .useItemsBtn').attr('disabled', 'disabled');
-    $('#useItemBtnContainer').removeClass('showUseItemsBtn');
-    $('#swapItemsBtnContainer .swapItemsBtn').attr('disabled', 'disabled');
+    $('#playerInfoContainer #useItemsBtn').attr('disabled', 'disabled');
+    $('#playerInfoContainer #discardItemsBtn').attr('disabled', 'disabled');
+    $('#playerInfoContainer #swapItemsBtn').attr('disabled', 'disabled');
     
     let marketColumnsNum = $('#marketCardColumns .marketColumn:not(.hiddenColumn)').length;
 
@@ -2391,24 +2393,24 @@ $(document).on(touchEvent,'#undoNextRoundBtnContainer #nextRound',function(){
         }
 
         if(newNextAvailableColumnRoomGreenThumbs >= 3) {            
-            nextRoundProcessTimeout = nextRoundProcessTimeout + 1500;
+            nextRoundProcessTimeout = nextRoundProcessTimeout + 500;
 
             setTimeout(function(){
                 $(`.marketColumn[column="${nextAvailableColumnRoom}"] .marketRoomCardOverlay .cardContainer .newGreenThumbMasterContainer`).addClass(`removeAllGreenThumbs`);
-            }, 1000);
+            }, 200);
 
             setTimeout(function(){
                 $(`.marketColumn[column="${nextAvailableColumnRoom}"] .marketRoomCardOverlay .cardContainer .newGreenThumbMasterContainer .newGreenThumbContainer`).fadeOut();
-            }, 2300);
+            }, 1500);
 
             setTimeout(function(){
                 $(`.marketColumn[column="${nextAvailableColumnRoom}"] .marketRoomCardOverlay .cardContainer .newGreenThumbMasterContainer .newGreenThumbContainer`).remove();
                 $(`.marketColumn[column="${nextAvailableColumnRoom}"] .marketRoomCardOverlay .cardContainer .newGreenThumbMasterContainer`).attr('total-green-thumbs', '0');
-            }, 2800);
+            }, 2000);
 
             setTimeout(function(){
                 $(`.removeAllGreenThumbs`).removeClass(`removeAllGreenThumbs`);
-            }, 3000);
+            }, 2200);
         }
 
     } // GREEN THUMB IF STATEMENT END
@@ -2442,9 +2444,7 @@ $(document).on(touchEvent,'#undoNextRoundBtnContainer #nextRound',function(){
             }
         }, 10);
 
-        
-
-    }, 710 + nextRoundProcessTimeout);
+    }, 670 + nextRoundProcessTimeout);
 
     setTimeout(function(){        
         $('.remove-market-cards-and-item-alt').remove();
@@ -2511,11 +2511,11 @@ $(document).on(touchEvent,'#undoNextRoundBtnContainer #nextRound',function(){
             $('.startingPos').removeClass('startingPos');
         }, 1550);
 
-    }, 2900 + nextRoundProcessTimeout);
+    }, 2500 + nextRoundProcessTimeout);
 
     setTimeout(function(){        
         togglePotScoringLayerVisibility('show');
-    }, 4450 + nextRoundProcessTimeout + multipleMarketReplacementsTimeout);
+    }, 4050 + nextRoundProcessTimeout + multipleMarketReplacementsTimeout);
 
     setTimeout(function(){        
            
@@ -2558,7 +2558,7 @@ $(document).on(touchEvent,'#undoNextRoundBtnContainer #nextRound',function(){
             $('.startingPos').removeClass('startingPos');
         }, 300);
 
-    }, 5700 + nextRoundProcessTimeout + multipleMarketReplacementsTimeout);
+    }, 5300 + nextRoundProcessTimeout + multipleMarketReplacementsTimeout);
 
     // 6000 - trigger removing startingPos from pots
 
@@ -2585,13 +2585,11 @@ $(document).on(touchEvent,'#undoNextRoundBtnContainer #nextRound',function(){
         togglePotScoringLayerVisibility('hide');
         $('#gameSectionsParent').attr('current-phase', 'market-selection');
         
-    }, 7700 + nextRoundProcessTimeout + multipleMarketReplacementsTimeout);
+    }, 7400 + nextRoundProcessTimeout + multipleMarketReplacementsTimeout);
 
     setTimeout(function(){        
         $('#infoBarStats #turnsRemainingContainer').addClass('infoChange');
-    }, 8800 + nextRoundProcessTimeout + multipleMarketReplacementsTimeout);
 
-    setTimeout(function(){        
         turnsRemaining--;        
 
         if(turnsRemaining == 1) {
@@ -2612,18 +2610,20 @@ $(document).on(touchEvent,'#undoNextRoundBtnContainer #nextRound',function(){
 
         $('#gameSectionsParent').attr('turns-left', turnsRemaining);
         $('#infoBarStats #turnsRemainingContainer #turnsRemainingUpdateInfo.infoBarUpdateData.subtractVal').fadeIn();
-    }, 9800 + nextRoundProcessTimeout + multipleMarketReplacementsTimeout);
+
+
+    }, 8400 + nextRoundProcessTimeout + multipleMarketReplacementsTimeout);
 
     setTimeout(function(){        
         $('#infoBarStats #turnsRemainingContainer #turnsRemainingInfo.infoBarStatData').html(turnsRemaining);
-    }, 10900 + nextRoundProcessTimeout + multipleMarketReplacementsTimeout);
+    }, 9500 + nextRoundProcessTimeout + multipleMarketReplacementsTimeout);
 
     setTimeout(function(){        
 
         $('#infoBarStats #turnsRemainingContainer').removeClass('infoChange');
         $('#infoBarStats #turnsRemainingContainer #turnsRemainingUpdateInfo.infoBarUpdateData.subtractVal').fadeOut();
 
-    }, 11070 + nextRoundProcessTimeout + multipleMarketReplacementsTimeout);
+    }, 9670 + nextRoundProcessTimeout + multipleMarketReplacementsTimeout);
 
     setTimeout(function(){        
 
@@ -2635,61 +2635,36 @@ $(document).on(touchEvent,'#undoNextRoundBtnContainer #nextRound',function(){
         $('#marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer').append(actionRequiredHTML);
         updateDiscardPotTotal();
         lockMap = false;        
-    }, 11770 + nextRoundProcessTimeout + multipleMarketReplacementsTimeout);
+    }, 10370 + nextRoundProcessTimeout + multipleMarketReplacementsTimeout);
 
     setTimeout(function(){        
         $('#marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer .actionRequiredContainer').remove();
-    }, 12650 + nextRoundProcessTimeout + multipleMarketReplacementsTimeout);
+    }, 11600 + nextRoundProcessTimeout + multipleMarketReplacementsTimeout);
 
 });
 
-function checkChosenItemType(){    
+// function roundState('roundCheck'){    
+//     roundState('roundCheck');
+//     showPossibleMapPlacements('item');
+// }
 
-    let itemType = $('.itemToken.activePlacement').attr('item-type');    
-
-    if(itemType == 'normal') {        
-        showPossibleMapPlacements('item');
-    } else if(itemType == 'nurture') {        
-        let itemName = $('.itemToken.activePlacement').attr('item-name');        
-        resetPotentialMapPlacements('resetAll');
-        
-        $('#useItemBtnContainer').addClass('showUseItemsBtn');
-        $('#useItemBtnContainer .useItemsBtn').removeAttr('disabled');
-        $('#useItemBtnContainer .useItemsBtn').attr('item-to-use', itemName);
-
-        let actionRequiredHTML = `
-            <div class="actionRequiredContainer">
-                <div class="actionRequiredAnimation"></div>
-            </div>
-        `;
-        $('#useItemBtnContainer').append(actionRequiredHTML);
-
-        setTimeout(function(){
-            $('#useItemBtnContainer .actionRequiredContainer').remove();
-        }, 1700);
-
-    }
-
-    auditSwapItemBtnText('swapItems');
-}
+// roundState('roundCheck');
 
 
-$(document).on(touchEvent,'#useItemBtnContainer .useItemsBtn:not([disabled])',function(){    
+$(document).on(touchEvent,'#playerInfoContainer #useItemsBtn:not([disabled])',function(){    
 
     toggleMapVerdancy('show');
     $('#verdancyVisibilityContainer').addClass('disableInteraction');
 
-    $('#addOneVerdancyToPlantBtn').addClass('disableInteraction');
-    $('#useItemBtnContainer .useItemsBtn').addClass('disableInteraction');
+    $('#playerInfoContainer #addOneVerdancyToPlantBtn').addClass('disableInteraction');
+    $('#playerInfoContainer #useItemsBtn').addClass('disableInteraction');
 
-    $('#swapItemsBtnContainer .swapItemsBtn').attr('disabled', 'disabled');
+    $('#playerInfoContainer #swapItemsBtn').attr('disabled', 'disabled');
+    $('#playerInfoContainer #discardItemsBtn').attr('disabled', 'disabled');
     
-
     let thisNurtureItem = $(this).attr('item-to-use');
     if(thisNurtureItem == 'watering-can') thisNurtureItem = 'wateringCan';
     
-    
-
     $(`#${thisNurtureItem}-instructions`).addClass('showInstructions');
     $('#confirmNurtureItemAction.button').attr('nurture-item-action', thisNurtureItem);
 
@@ -2705,13 +2680,14 @@ $(document).on(touchEvent,'#useItemBtnContainer .useItemsBtn:not([disabled])',fu
 
 $(document).on(touchEvent,'#cancelNurtureItemAction.button',function(){        
 
-    $('#swapItemsBtnContainer .swapItemsBtn').removeAttr('disabled');
+    $('#playerInfoContainer #swapItemsBtn').removeAttr('disabled');
+    $('#playerInfoContainer #discardItemsBtn').removeAttr('disabled');
 
     toggleMapVerdancy('hide');
     $('#verdancyVisibilityContainer').removeClass('disableInteraction');
 
-    $('#addOneVerdancyToPlantBtn').removeClass('disableInteraction');
-    $('#useItemBtnContainer .useItemsBtn').removeClass('disableInteraction');
+    $('#playerInfoContainer #addOneVerdancyToPlantBtn').removeClass('disableInteraction');
+    $('#playerInfoContainer #useItemsBtn').removeClass('disableInteraction');
 
     $('.potentialNurtureItemTarget').removeClass('potentialNurtureItemTarget');
     $('.previewWateringCanNurtureItemAction').removeClass('previewWateringCanNurtureItemAction');
@@ -2773,7 +2749,7 @@ $(document).on(touchEvent,'#nurtureItemOptions #confirmNurtureItemAction[nurture
     finalizeNurtureItemVerdancy();
     animateElem($('#mapContainer #nurtureItemOptions'), 'hideNurtureItemOptions');
 
-    $('#useItemBtnContainer.showUseItemsBtn').removeClass('showUseItemsBtn');
+    $('#playerInfoContainer #useItemsBtn').attr('disabled', 'disabled');
     $('#chosenItemContainer.itemContainer .itemToken[item-type="nurture"]').fadeOut();
     $('.mapTileContainer .fertilizerItemIcon.lockedInIcon').fadeOut();
 
@@ -2794,8 +2770,8 @@ $(document).on(touchEvent,'#nurtureItemOptions #confirmNurtureItemAction[nurture
         toggleMapVerdancy('hide');
         $('#verdancyVisibilityContainer').removeClass('disableInteraction');
         $('.mapTileContainer .fertilizerItemIcon.lockedInIcon').remove();
-        $('#addOneVerdancyToPlantBtn').removeClass('disableInteraction');
-        $('#useItemBtnContainer .useItemsBtn').removeClass('disableInteraction');
+        $('#playerInfoContainer #addOneVerdancyToPlantBtn').removeClass('disableInteraction');
+        $('#playerInfoContainer #useItemsBtn').removeClass('disableInteraction');
     }, 1900);
     
 });
@@ -2813,7 +2789,6 @@ function trowelInitFunc() {
     totalPotentialCardsForTrowelAction = $('#mapContainer .mapTileContainer.potentialNurtureItemTarget.trowelPotentialTarget').length;
     
 }
-
 
 $(document).on('mouseenter','#mapContainer .mapTileContainer.potentialNurtureItemTarget.trowelPotentialTarget',function(){    
     $(this).append(`
@@ -2844,7 +2819,8 @@ $(document).on(touchEvent,'#mapContainer .mapTileContainer.potentialNurtureItemT
 $(document).on(touchEvent,'#nurtureItemOptions #confirmNurtureItemAction[nurture-item-action="trowel"]',function(){    
     finalizeNurtureItemVerdancy();
     animateElem($('#mapContainer #nurtureItemOptions'), 'hideNurtureItemOptions');
-    $('#useItemBtnContainer.showUseItemsBtn').removeClass('showUseItemsBtn');
+    $('#playerInfoContainer #useItemsBtn').attr('disabled', 'disabled');
+    
     $('#chosenItemContainer.itemContainer .itemToken[item-type="nurture"]').fadeOut();
     $('.mapTileContainer .trowelItemIcon.lockedInIcon').fadeOut();
 
@@ -2864,8 +2840,8 @@ $(document).on(touchEvent,'#nurtureItemOptions #confirmNurtureItemAction[nurture
         toggleMapVerdancy('hide');
         $('#verdancyVisibilityContainer').removeClass('disableInteraction');
         $('.mapTileContainer .trowelItemIcon.lockedInIcon').remove();
-        $('#addOneVerdancyToPlantBtn').removeClass('disableInteraction');
-        $('#useItemBtnContainer .useItemsBtn').removeClass('disableInteraction');
+        $('#playerInfoContainer #addOneVerdancyToPlantBtn').removeClass('disableInteraction');
+        $('#playerInfoContainer #useItemsBtn').removeClass('disableInteraction');
     }, 1900);
 });
 
@@ -2916,7 +2892,7 @@ $(document).on(touchEvent,'#nurtureItemOptions #confirmNurtureItemAction[nurture
 
     finalizeNurtureItemVerdancy();
     animateElem($('#mapContainer #nurtureItemOptions'), 'hideNurtureItemOptions');
-    $('#useItemBtnContainer.showUseItemsBtn').removeClass('showUseItemsBtn');
+    $('#playerInfoContainer #useItemsBtn').attr('disabled', 'disabled');
     $('#chosenItemContainer.itemContainer .itemToken[item-type="nurture"]').fadeOut();
     $('.mapTileContainer .previewNurtureItemIcon.lockedInIcon').fadeOut();
     $('.verdancyPulseAnimation').removeClass('verdancyPulseAnimation');
@@ -2936,8 +2912,8 @@ $(document).on(touchEvent,'#nurtureItemOptions #confirmNurtureItemAction[nurture
         toggleMapVerdancy('hide');
         $('#verdancyVisibilityContainer').removeClass('disableInteraction');
         $('.mapTileContainer .previewNurtureItemIcon.lockedInIcon').remove();
-        $('#addOneVerdancyToPlantBtn').removeClass('disableInteraction');
-        $('#useItemBtnContainer .useItemsBtn').removeClass('disableInteraction');
+        $('#playerInfoContainer #addOneVerdancyToPlantBtn').removeClass('disableInteraction');
+        $('#playerInfoContainer #useItemsBtn').removeClass('disableInteraction');
     }, 1900);
 
 });
@@ -3025,7 +3001,7 @@ function finalizeNurtureItemVerdancy() {
         if(completedPlantsThisTurn.length != 0) {
             gainPlantPots();
         } else {
-            auditSwapItemBtnText('swapItems');
+            roundState('roundCheck');
         }
     }, 1950);
 
@@ -3051,7 +3027,8 @@ $(document).on('mouseleave','#mapContainer .mapTileContainer.potentialItemPlacem
 $(document).on(touchEvent,'#mapContainer .mapTileContainer.potentialItemPlacement.activePotentialItemPlacement:not(.temporaryItemPlacement)',function(){        
 
     if(!lockMap) {        
-        $('#swapItemsBtnContainer .swapItemsBtn').attr('disabled', 'disabled');
+        $('#playerInfoContainer #swapItemsBtn').attr('disabled', 'disabled');
+        $('#playerInfoContainer #discardItemsBtn').attr('disabled', 'disabled');
         temporarilyLockMap(1000);        
         $('#undoNextRoundBtnContainer #undoAction').attr('disabled', 'disabled');
         if($('#mapContainer .mapTileContainer.potentialItemPlacement:not(.temporaryItemPlacement) .roomCardItemContainer .itemToken').length) {            
@@ -3091,7 +3068,7 @@ $(document).on(touchEvent,'#cancelItemPlacement.button',function(){
     }, 1000);
 
     setTimeout(function(){        
-        auditSwapItemBtnText('swapItems');
+        roundState('roundCheck');
     }, 1050);
     
 });
@@ -3099,7 +3076,6 @@ $(document).on(touchEvent,'#cancelItemPlacement.button',function(){
 
 $(document).on(touchEvent,'#confirmItemPlacement.button',function(){    
 
-    
     currentRoundActionLog.push('item-placement');
 
     // if($('#viewPotScoringBtn').hasClass('hidePotScoringLayer')) togglePotScoringLayerVisibility('hide');
@@ -3126,96 +3102,207 @@ $(document).on(touchEvent,'#confirmItemPlacement.button',function(){
     }, 60);
 
     setTimeout(function(){        
-        auditSwapItemBtnText('swapItems');
+        roundState('roundCheck');
     }, 900);
 });
 
-$(document).on(touchEvent,'#swapItemsBtnContainer .swapItemsBtn:not([disabled])',function(){
+$(document).on(touchEvent,'#playerInfoContainer #discardItemsBtn:not([disabled])',function(){
+    $('#discardItemModal .modal-content .notification .itemToDiscardPreview').html('');
+    $('#chosenItemParentContainer #chosenItemContainer.itemContainer .itemToken img').clone().appendTo('#discardItemModal .modal-content .notification .itemToDiscardPreview');
+    $('#discardItemModal').addClass('is-active');
+});
 
-    $('.activePlacement').addClass('inactivePlacement').removeClass('activePlacement');
-    
+$(document).on(touchEvent,'#discardItemModal #confirmItemDiscardBtn',function(){
+    lockMap = true;     
+    $('#startFirstTurnModal').removeClass('is-active');
 
-    $('#undoNextRoundBtnContainer #nextRound').attr('disabled', 'disabled');
-    $('#swapItemsBtnContainer .swapItemsBtn').attr('disabled', 'disabled');
-    $('#useItemBtnContainer .useItemsBtn').attr('disabled', 'disabled');
-    $('#useItemBtnContainer').removeClass('showUseItemsBtn');
+    $('#playerInfoContainer #useItemsBtn').attr('disabled', 'disabled');
+    $('#playerInfoContainer #discardItemsBtn').attr('disabled', 'disabled');
+    $('#playerInfoContainer #swapItemsBtn').attr('disabled', 'disabled');
+    $('#playerInfoContainer #addOneVerdancyToPlantBtn').addClass('disableInteraction');
 
-    if($('#chosenItemParentContainer #chosenItemContainer .itemToken:not(.swapAnimation)').length) {        
-        $('#chosenItemParentContainer #chosenItemContainer .itemToken:not(.swapAnimation)').addClass('swapAnimation').parentToAnimate($('#storedItemParentContainer #storedItemContainer'), 1000);
-    }
+    setTimeout(function(){
+        $('#chosenItemParentContainer #chosenItemContainer .itemToken').removeClass('activePlacement');
+        $('#chosenItemParentContainer #chosenItemContainer .itemToken').attr('style', '');
+    }, 200);
 
-    if($('#storedItemParentContainer #storedItemContainer .itemToken:not(.swapAnimation)').length) {        
-        $('#storedItemParentContainer #storedItemContainer .itemToken:not(.swapAnimation)').addClass('swapAnimation').parentToAnimate($('#chosenItemParentContainer #chosenItemContainer'), 1000);
-    }
+    setTimeout(function(){
+        $('#chosenItemParentContainer #chosenItemContainer .itemToken').addClass('remove-market-cards-and-item-alt');
+    }, 600);
 
-    setTimeout(function(){        
-        auditSwapItemBtnText('swapItems');
-        $('.swapAnimation').removeClass('swapAnimation');
-        lockMap = false;        
-    }, 1100);
+    setTimeout(function(){
+        $('#chosenItemParentContainer #chosenItemContainer .itemToken').remove();
+    }, 1900);
+
+    setTimeout(function(){
+        roundState('roundCheck');
+        lockMap = false;  
+    }, 2200);
 
 });
 
-function auditSwapItemBtnText(mode) {
+$(document).on(touchEvent,'#playerInfoContainer #swapItemsBtn:not([disabled])',function(){
+    roundState('swapItems');
+});
 
-    $('#addOneVerdancyToPlantBtn').removeClass('disableInteraction');
-    $('#useItemBtnContainer .useItemsBtn').removeClass('disableInteraction');
-    $('#swapItemsBtnContainer .swapItemsBtn').removeClass('disableInteraction');
-        
+let currentChosenItemType = '';
+let currentStoredItemType = '';
 
-    if($('#chosenItemParentContainer #chosenItemContainer .itemToken').length && $('#storedItemParentContainer #storedItemContainer .itemToken').length) {        
+function roundState(mode) {
+    currentChosenItemType = '';    
+    currentStoredItemType = '';    
 
-        $('#swapItemsBtnContainer .swapItemsBtn').removeAttr('disabled');
-        $('#swapItemsBtnContainer .swapItemsBtn').html('Swap Items <span>&#8597;</span>');
-        $('#undoNextRoundBtnContainer #nextRound').attr('disabled', 'disabled');
+    if($('#chosenItemParentContainer #chosenItemContainer .itemToken').length) {
+        currentChosenItemType = $('#chosenItemContainer.itemContainer .itemToken').attr('item-type');        
+    }
 
-        if(mode == 'swapItems') {            
-            if(!$('#chosenItemParentContainer #chosenItemContainer .itemToken').hasClass('activePlacement')) {                
-                $('.activePlacement').addClass('inactivePlacement').removeClass('activePlacement');
-                $('#chosenItemParentContainer #chosenItemContainer .itemToken').addClass('activePlacement').removeClass('inactivePlacement');
-                checkChosenItemType();
+    if($('#storedItemParentContainer #storedItemContainer .itemToken').length) {        
+        currentStoredItemType = $('#storedItemContainer.itemContainer .itemToken').attr('item-type');        
+    }
+
+    if(mode == 'swapItems') {
+        $('.activePlacement').addClass('inactivePlacement').removeClass('activePlacement');
+        lockMap = true;           
+        $('#playerInfoContainer #addOneVerdancyToPlantBtn').addClass('disableInteraction');        
+        $('#playerInfoContainer #swapItemsBtn').addClass('disableInteraction');        
+        $('#playerInfoContainer #discardItemsBtn').addClass('disableInteraction');        
+        $('#playerInfoContainer #useItemsBtn').addClass('disableInteraction');        
+
+        if(currentChosenItemType != '') {
+            $('#chosenItemParentContainer #chosenItemContainer .itemToken:not(.swapAnimation)').addClass('swapAnimation').parentToAnimate($('#storedItemParentContainer #storedItemContainer'), 1000);            
+            
+            if(currentChosenItemType == 'nurture' && currentStoredItemType != 'nurture') {
+                $('#playerInfoContainer').removeClass('nurtureItemActive');                
+                $('#playerInfoContainer #useItemsBtn').attr('disabled', 'disabled');                
+            } else if(currentStoredItemType == '') {
+                $('#playerInfoContainer').removeClass('nurtureItemActive');                
+                $('#playerInfoContainer #discardItemsBtn').attr('disabled', 'disabled');                
+                $('#playerInfoContainer #useItemsBtn').attr('disabled', 'disabled');                
+                $('#undoNextRoundBtnContainer #nextRound').attr('disabled', 'disabled');                
+                resetPotentialMapPlacements('resetAll');                
+                setTimeout(function(){
+                    activateNextRoundBtn();                    
+                }, 1050);                
             }
         }
-        
-    } else if($('#chosenItemParentContainer #chosenItemContainer .itemToken').length && !$('#storedItemParentContainer #storedItemContainer .itemToken').length) {        
 
-        $('#swapItemsBtnContainer .swapItemsBtn').removeAttr('disabled');
-        $('#swapItemsBtnContainer .swapItemsBtn').html('Store Item <span>&#8595;</span>');
-        $('#undoNextRoundBtnContainer #nextRound').attr('disabled', 'disabled');
-
-        if(mode == 'swapItems') {            
-            if(!$('#chosenItemParentContainer #chosenItemContainer .itemToken').hasClass('activePlacement')) {                
-                $('.activePlacement').addClass('inactivePlacement').removeClass('activePlacement');
-                $('#chosenItemParentContainer #chosenItemContainer .itemToken').attr('style', '');
-                $('#chosenItemParentContainer #chosenItemContainer .itemToken').addClass('activePlacement').removeClass('inactivePlacement');
-                checkChosenItemType();
+        if(currentStoredItemType != '') {        
+            $('#storedItemParentContainer #storedItemContainer .itemToken:not(.swapAnimation)').addClass('swapAnimation').parentToAnimate($('#chosenItemParentContainer #chosenItemContainer'), 1000);            
+            $('#undoNextRoundBtnContainer #nextRound').attr('disabled', 'disabled');            
+            resetPotentialMapPlacements('resetAll');            
+            if(currentStoredItemType == 'nurture') {
+                resetPotentialMapPlacements('resetAll');                
+                if(currentChosenItemType == 'nurture') {
+                    $('#playerInfoContainer #useItemsBtn').addClass('disableInteraction');                    
+                } else if(currentChosenItemType != 'nurture') {
+                    $('#playerInfoContainer').addClass('nurtureItemActive');                    
+                    $('#playerInfoContainer #useItemsBtn').removeAttr('disabled');                    
+                }
             }
+        };        
+
+        swapBtnTextUpdate();  
+
+        setTimeout(function(){
+            $('.swapAnimation').removeClass('swapAnimation');
+            if($('#chosenItemParentContainer #chosenItemContainer .itemToken').length) {
+                if(!$('#chosenItemParentContainer #chosenItemContainer .itemToken').hasClass('activePlacement')) {
+                    if($('.activePlacement').length) {
+                        $('.activePlacement').addClass('inactivePlacement').removeClass('activePlacement');
+                    }
+                    $('#chosenItemParentContainer #chosenItemContainer .itemToken').hasClass('activePlacement')
+                }
+                chosenItemType = $('#chosenItemContainer.itemContainer .itemToken').attr('item-type');        
+            }   
+            lockMap = false;            
+        }, 1005);        
+
+    } else if(mode == 'roundCheck') {
+        swapBtnTextUpdate();        
+    }
+}
+
+let chosenItemType = '';
+let storedItemType = '';
+
+function swapBtnTextUpdate(){
+
+    $('#playerInfoContainer #discardItemsBtn').attr('disabled', 'disabled');    
+    $('#playerInfoContainer #swapItemsBtn').attr('disabled', 'disabled');    
+    $('#playerInfoContainer #useItemsBtn').attr('disabled', 'disabled');    
+    $('#playerInfoContainer').removeClass('nurtureItemActive');    
+    
+    chosenItemType = '';    
+    storedItemType = '';    
+
+    if($('#chosenItemParentContainer #chosenItemContainer .itemToken').length) {
+        if(!$('#chosenItemParentContainer #chosenItemContainer .itemToken').hasClass('activePlacement')) {
+            if($('.activePlacement').length) {
+                $('.activePlacement').addClass('inactivePlacement').removeClass('activePlacement');
+            }
+            $('#chosenItemParentContainer #chosenItemContainer .itemToken').addClass('activePlacement')
+        }
+        chosenItemType = $('#chosenItemContainer.itemContainer .itemToken').attr('item-type');        
+    }
+
+    if($('#storedItemParentContainer #storedItemContainer .itemToken').length) {        
+        storedItemType = $('#storedItemContainer.itemContainer .itemToken').attr('item-type');        
+    }
+
+    if(chosenItemType != '') {
+
+        $('#playerInfoContainer #discardItemsBtn').removeAttr('disabled');        
+        $('#playerInfoContainer #swapItemsBtn').removeAttr('disabled');        
+
+        if(chosenItemType == 'nurture') {
+            let itemName = $('#chosenItemContainer.itemContainer .itemToken').attr('item-name');
+            $('#playerInfoContainer #useItemsBtn').attr('item-to-use', itemName);
+
+            let nurtureActionRequiredTimeout = 0;
+            if(!$('#playerInfoContainer').hasClass('nurtureItemActive')) {
+                $('#playerInfoContainer').addClass('nurtureItemActive')
+                nurtureActionRequiredTimeout = 500;
+            }
+            $('#playerInfoContainer #useItemsBtn').removeAttr('disabled');
+            setTimeout(function(){
+                let actionRequiredHTML = `
+                    <div class="actionRequiredContainer">
+                        <div class="actionRequiredAnimation"></div>
+                    </div>
+                `;
+                $('#playerInfoContainer #useItemsBtn').append(actionRequiredHTML);
+            }, nurtureActionRequiredTimeout + 50)
+            setTimeout(function(){        
+                $('#playerInfoContainer #useItemsBtn .actionRequiredContainer').remove();
+            }, nurtureActionRequiredTimeout + 1450);
+        } else {
+            showPossibleMapPlacements('item');
         }
 
-    } else if(!$('#chosenItemParentContainer #chosenItemContainer .itemToken').length && $('#storedItemParentContainer #storedItemContainer .itemToken').length) {        
-
-        $('#swapItemsBtnContainer .swapItemsBtn').removeAttr('disabled');
-        $('#swapItemsBtnContainer .swapItemsBtn').html('Retrieve Item <span>&#8593;</span>');
-
-        if($('#storedItemParentContainer #storedItemContainer .itemToken').hasClass('activePlacement')) {
-            $('#storedItemParentContainer #storedItemContainer .itemToken').attr('style', '');
-            $('#storedItemParentContainer #storedItemContainer .itemToken').addClass('inactivePlacement').removeClass('activePlacement');
+        if(storedItemType == 'normal' || storedItemType == 'nurture') {
+            $('#playerInfoContainer #swapItemsBtn').html('Swap Items');            
+        } else if(storedItemType == '') {
+            $('#playerInfoContainer #swapItemsBtn').html('Store Item');            
         }
-
-        if(mode == 'swapItems') {            
-            resetPotentialMapPlacements('resetAll');
+    } else {
+        resetPotentialMapPlacements('resetAll');
+        
+        setTimeout(function(){
             activateNextRoundBtn();
-        }
+        }, 800);
 
-    } else if(!$('#chosenItemParentContainer #chosenItemContainer .itemToken').length && !$('#storedItemParentContainer #storedItemContainer .itemToken').length) {        
-
-        if(mode == 'swapItems') {            
-            $('#swapItemsBtnContainer .swapItemsBtn').attr('disabled', 'disabled');
-
-            resetPotentialMapPlacements('resetAll');
-            activateNextRoundBtn();
+        if(storedItemType != '') {
+            $('#playerInfoContainer #swapItemsBtn').removeAttr('disabled', 'disabled');            
+            if(storedItemType == 'normal' || storedItemType == 'nurture') {
+                $('#playerInfoContainer #swapItemsBtn').html('Retrieve Item');                
+            }
         }
     }
+
+    $('#playerInfoContainer #swapItemsBtn').removeClass('disableInteraction');    
+    $('#playerInfoContainer #discardItemsBtn').removeClass('disableInteraction');    
+    $('#playerInfoContainer #useItemsBtn').removeClass('disableInteraction');    
+    $('#playerInfoContainer #addOneVerdancyToPlantBtn').removeClass('disableInteraction');      
 }
 
 function startFirstRound() {    
