@@ -37,6 +37,12 @@ canvas {
     background-repeat: repeat;
 }
 
+.button.is-orange {
+    background-color: #ffa000;
+    border-color: transparent;
+    color: rgb(255 255 255);
+}
+
 #tableauSection #mapContainer #mapHiddenOverlay .mapTileContainer.potentialCardPlacement.temporaryCardPlacement,
 #tableauSection #mapContainer #mapHiddenOverlay .mapTileContainer.potentialCardPlacement.temporaryCardPlacement .cardContainer,
 #tableauSection #mapContainer #mapHiddenOverlay .mapTileContainer.potentialItemPlacement.temporaryItemPlacement,
@@ -193,6 +199,10 @@ p.mapDebug {
     justify-content: unset!important;
 }
 
+.modal .modal-content .notification {
+    padding-top: 27px;
+}
+
 .modal.notificationModal .modal-content {
     top: 15%;
     width: 330px;
@@ -230,6 +240,11 @@ p.mapDebug {
     margin: 0 10px 10px;
 }
 
+.modal .modal-content .delete.closeModalTrigger {
+    right: 4px!important;
+    top: 4px!important;
+}
+
 .modal .modal-content .delete.closeModalTrigger.smallCloseCross {
     padding: 12px!important
 }
@@ -257,6 +272,19 @@ p.mapDebug {
     display: block;
     margin: 20px auto 0px;
     padding: 0px 30px;
+}
+
+.modal.notificationModal .modal-content[btns="2"] .button:not(.delete.closeModalTrigger) {
+    width: 111px;
+    margin: 11px 0px 0px 16px;
+}
+
+#discardItemModal .modal-content .itemToDiscardPreview {
+    width: 65px;
+    height: 65px;
+    border-radius: 10px;
+    margin: 21px auto 18px;
+    box-shadow: 2px 2px 4px #717171;
 }
 
 .collapsed {
@@ -534,11 +562,32 @@ p.mapDebug {
 
 #gameLayer #topInfoBar {
     display: block;
-    width: 662px;
+    width: 819px;
     margin: 9px auto 0px;
-    padding: 5px 0px;
+    padding: 5px 0px 5px 20px;
     border-radius: 9px;
     height: 73px;
+}
+
+#gameLayer #topInfoBar .topInfoBarBtn {
+    font-size: 17px;
+    margin: 9px 0px 0px 20px;
+    padding: 0px 0px;
+    height: 41px;
+    width: 140px;
+    letter-spacing: .4px;
+}
+
+#topInfoBar #showScoringRemindersBtn.button.is-info.topInfoBarBtn {
+    background-color: #ffad03d1;
+    border-color: transparent;
+    color: #fff;
+}
+
+#topInfoBar .button.is-primary.showFullInstructionsButton.topInfoBarBtn {
+    background-color: #ff6635;
+    border-color: transparent;
+    color: #fff;
 }
 
 #container.tabletView #gameLayer #topInfoBar {
@@ -565,7 +614,7 @@ p.mapDebug {
 #gameLayer #topInfoBar #infoBarStats {
     width: 172px;
     float: left;
-    margin: 0px 0px 0px 54px;
+    margin: 0px 0px 0px 40px;
     font-size: 18px;
     line-height: 22px;
     position: relative;
@@ -673,9 +722,9 @@ p.mapDebug {
 
 #gameLayer #topInfoBar #showScoringRemindersBtn {
     font-size: 17px;
-    margin: 9px 0px 0px 77px;
-    padding: 0px 38px;
+    margin: 9px 0px 0px 50px;
     height: 41px;
+    width: 140px;
 }
 
 #container.tabletView #gameLayer #topInfoBar #showScoringRemindersBtn {
@@ -811,7 +860,7 @@ p.mapDebug {
 
 #tableauSection #playerInfoContainer #addOneVerdancyToPlantBtn.greenThumbActionBtn {
     width: 99px;
-    height: 86px;
+    height: 75px;
     top: 0px;
     left: 22px;
 }
@@ -827,7 +876,7 @@ p.mapDebug {
     text-align: center;
     margin-top: 4px;
     position: absolute;
-    top: 43px;
+    top: 46px;
     left: 9px;
 }
 
@@ -2532,6 +2581,7 @@ p.mapDebug {
     border-radius: 30px;
     color: #FFF;
     box-shadow: 0px 0px 3px 2px #4a4a4a;
+    z-index: 2;
 }
 
 .itemToken .nurtureItemExplanation ion-icon {
@@ -2687,6 +2737,10 @@ p.mapDebug {
 .cardContainer,
 .flip-card {
     border-radius: 6px;
+}
+
+.marketCardOverlay {
+    z-index: 0;
 }
 
 .cardContainer,
@@ -3720,14 +3774,14 @@ p.mapDebug {
 
 #tableauSection #playerInfoContainer .tableauItemTitle {
     width: 59px;
-    font-size: 16px;
-    line-height: 19px;
-    text-align: center;
+    font-size: 14px;
+    line-height: 16px;
+    text-align: right;
     font-weight: bold;
     color: #3aa572;
     opacity: 1;
     position: absolute;
-    left: 11px;
+    left: 5px;
     z-index: 2;
     text-shadow: 0px 0px 5px #fff;
 }
@@ -3738,11 +3792,11 @@ p.mapDebug {
 }
 
 #tableauSection #playerInfoContainer #chosenItemTitle.tableauItemTitle {
-    top: 346px;
+    top: 370px;
 }
 
 #tableauSection #playerInfoContainer #storedItemTitle.tableauItemTitle {
-    top: 475px;
+    top: 483px;
 }
 
 /* 
@@ -3763,7 +3817,7 @@ p.mapDebug {
     position: absolute;
     width: 105px;
     height: 173px;
-    top: 105px;
+    top: 84px;
 }
 
 #tableauSection #playerInfoContainer #cardToPlace .cardToPlaceTitle {
@@ -3885,8 +3939,8 @@ p.mapDebug {
 /* CHOSEN ITEM CONTAINER */
 
 #tableauSection #playerInfoContainer #chosenItemParentContainer.itemContainerParent {
-    top: 342px;
-    left: 74px;
+    top: 361px;
+    left: 72px;
 }
 
 #container.tabletView #tableauSection #playerInfoContainer #chosenItemParentContainer.itemContainerParent {
@@ -3907,23 +3961,23 @@ p.mapDebug {
 /* STORED ITEM CONTAINER */
 
 #tableauSection #playerInfoContainer #storedItemParentContainer.itemContainerParent {
-    top: 471px;
-    left: 74px;
+    top: 474px;
+    left: 72px;
 }
 
 #container.tabletView #tableauSection #playerInfoContainer #storedItemParentContainer.itemContainerParent {
-    top: 471px;
-    left: 78px;
+    top: 474px;
+    left: 72px;
 }
 
 #container.tabletView #tableauSection #playerInfoContainer #storedItemParentContainer.itemContainerParent.expanded {
-    top: 471px;
-    left: 78px;
+    top: 474px;
+    left: 72px;
 }
 
 #container.tabletView #tableauSection #playerInfoContainer #storedItemParentContainer.itemContainerParent.collapsed {
-    top: 471px;
-    left: 78px;
+    top: 474px;
+    left: 72px;
 }
 
 #tableauSection #playerInfoContainer .itemContainerParent .itemBackground {
@@ -4055,22 +4109,94 @@ p.mapDebug {
     opacity: 1;
 }
 
-#tableauSection #playerInfoContainer #swapItemsBtnContainer .button {
-    width: 111px;
-    height: 37px;
-    padding: 0px 0px 0px 4px;
+#tableauSection #playerInfoContainer .itemAction.button {
+    transition: top 1s ease-in-out, opacity 1s ease-in-out;
+    padding: 0px;
+    font-size: 14px;
+    line-height: 14px;
+    position: absolute;
+    display: block;
+    width: 103px;
+    height: 36px;
+}
+
+#tableauSection #playerInfoContainer #discardItemsBtn {
+    top: 313px;
+    left: 21px;
+    z-index:1;
+}
+
+#tableauSection #playerInfoContainer.nurtureItemActive #discardItemsBtn {
+    top: 264px;
+}
+
+#tableauSection #playerInfoContainer #useItemsBtn {
+    top: 313px;
+    left: 21px;
+    opacity: 0;
+    z-index:0;
+}
+
+#tableauSection #playerInfoContainer.nurtureItemActive #useItemsBtn {
+    opacity: 1;
+}
+
+#tableauSection #playerInfoContainer #useItemsBtn .actionRequiredContainer {
+    top: -18px;
+    left: 15px;
+}
+
+#tableauSection #playerInfoContainer #swapItemsBtn {
+    top: 425px;
+    left: 21px;
+}
+
+/* 
+#tableauSection #playerInfoContainer #swapItemsBtnContainer {
+    position: absolute;
+    width: 112px;
+    height: 40px;
+    top: 413px;
+    left: 15px;
+    opacity: 1;
+}
+
+#tableauSection #playerInfoContainer #swapItemsBtnContainer .itemsBtn {
+    color: #fff;
+    width: 50px;
+    height: 50px;
     font-size: 14px;
     line-height: 17px;
+    padding: 0px 0px 0px 4px;
     position: absolute;
-    top: 0px;
+    border-width: 1px;
+    text-align: center;
+}
+
+#tableauSection #playerInfoContainer #swapItemsBtnContainer .itemsBtn:not[disabled] {
+    cursor:hand;
+    cursor:pointer;
+    box-shadow: 1px 1px 3px 0px #484848;
+}
+
+#tableauSection #playerInfoContainer #swapItemsBtnContainer .swapItemsBtn.itemsBtn[disabled],
+#tableauSection #playerInfoContainer #swapItemsBtnContainer .discardItemsBtn.itemsBtn[disabled] {
+    background-color: #ababab!important;
+    box-shadow: none;
+}
+
+#tableauSection #playerInfoContainer #swapItemsBtnContainer .itemsBtn.discardItemsBtn {
+    background-color: #f14668;
     left: 0px;
 }
 
-#tableauSection #playerInfoContainer #swapItemsBtnContainer .button span {
-    margin-left: 5px;
-    font-weight: bold;
-    font-size: 21px;
-}
+#tableauSection #playerInfoContainer #swapItemsBtnContainer .itemsBtn.swapItemsBtn {
+    background-color: #3273dc;
+    right: 0px;
+} */
+
+
+
 
 /* 
     __  ___                                             
@@ -5133,7 +5259,7 @@ p.mapDebug {
     left: -12px;
 }
 
-/* 1500ms total length! */
+/* 1400ms total length! */
 .actionRequiredAnimation {
     -webkit-animation-name: actionRequired; 
     -webkit-animation-delay: .2s;
@@ -5489,6 +5615,8 @@ p.mapDebug {
     display: block;
     font-size: 17px;
 }
+
+
 
 #scoringLayer {
     height: 780px;
