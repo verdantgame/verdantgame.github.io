@@ -989,7 +989,7 @@ $(document).on(touchEvent,'#confirmChooseAnyMarketCardItemAction',function(){
             $('#marketSection').removeClass('chooseAnyCardItemGreenThumbAction marketGreenThumbAction');
             $('#chooseAnyMarketCardItemBtnInstructionsAndBtns #cancelChooseAnyMarketCardItemAction').removeAttr('disabled');
             
-            processChosenAndItems();
+            processChosenCardAndItem();
         }, 2400);
     }
 
@@ -1144,11 +1144,11 @@ $(document).on(touchEvent,'#confirmChosenColumnContainer.marketActionContainer .
     } else {
         $('#confirmChosenColumnContainer.marketActionContainer').fadeOut();
         $('#marketInactiveOverlay').fadeOut();
-        processChosenAndItems();
+        processChosenCardAndItem();
     }
 });
 
-function processChosenAndItems(){
+function processChosenCardAndItem(){
 
     let potentialCardType = $('.marketCardOverlay.potentialCardOverlayParent .cardContainer').attr('cardtype');
     let validCardPlacements = checkPotentialCardPlacements(potentialCardType, 'marketCardSelection');
@@ -1295,8 +1295,6 @@ function processChosenAndItems(){
 
             $('#chosenItemContainer .itemToken').attr('style', '');
             $('#chosenItemContainer .itemToken').addClass('inactivePlacement');
-            
-            $('#playerInfoContainer #addOneVerdancyToPlantBtn').removeAttr('disabled');
 
             showPotentialCardPlacements();
         }, extraTimeout +  3850);
@@ -2013,8 +2011,6 @@ function showLightingMatchesFunc() {
         $(`${lightingMatches[lightingMatchCount][1]}.matchedLighting`).removeClass('matchedLighting');
 
         lightingMatchCount++;
-                
-        
 
         if(lightingMatchCount < lightingMatches.length) {            
             setTimeout(function(){                
@@ -2024,9 +2020,7 @@ function showLightingMatchesFunc() {
             if(startingPlacement) {                
                 startFirstRound();
             } else {                
-
                 completedPlantsThisTurn = checkForCompletedPlants();
-
                 let nextStageTimeout = 0;
                 if(completedPlantsThisTurn.length != 0) {
                     $('.showIndividualVerdancyLayer').removeClass('showIndividualVerdancyLayer');
@@ -2036,7 +2030,6 @@ function showLightingMatchesFunc() {
                     if($('#chosenItemContainer .itemToken.inactivePlacement').length) {                        
                         $('#chosenItemContainer .itemToken.inactivePlacement').attr('style', '');
                         $('#chosenItemContainer .itemToken.inactivePlacement').addClass('activePlacement').removeClass('inactivePlacement');
-                        roundState('roundCheck');
                         roundState('roundCheck');
                         lockMap = false;
                     } else {                        
@@ -3299,10 +3292,13 @@ function swapBtnTextUpdate(){
         }
     }
 
+    $('#playerInfoContainer #addOneVerdancyToPlantBtn').removeAttr('disabled');
+
     $('#playerInfoContainer #swapItemsBtn').removeClass('disableInteraction');    
     $('#playerInfoContainer #discardItemsBtn').removeClass('disableInteraction');    
     $('#playerInfoContainer #useItemsBtn').removeClass('disableInteraction');    
     $('#playerInfoContainer #addOneVerdancyToPlantBtn').removeClass('disableInteraction');      
+    
 }
 
 function startFirstRound() {    
