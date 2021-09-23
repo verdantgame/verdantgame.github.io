@@ -569,25 +569,33 @@ p.mapDebug {
     height: 73px;
 }
 
+
+
 #gameLayer #topInfoBar .topInfoBarBtn {
     font-size: 17px;
-    margin: 9px 0px 0px 20px;
     padding: 0px 0px;
     height: 41px;
     width: 140px;
-    letter-spacing: .4px;
+    letter-spacing: .6px;
+    text-shadow: 0px 0px 1px #353535bf;
+    border-color: transparent;
+    margin-top: 9px;
+    margin-right: 0px;
+    margin-bottom: 0px;
 }
 
-#topInfoBar #showScoringRemindersBtn.button.is-info.topInfoBarBtn {
-    background-color: #ffad03d1;
-    border-color: transparent;
-    color: #fff;
+#topInfoBar #showScoringRemindersBtn.button.is-primary.is-light.topInfoBarBtn {
+    background-color: #ebfffc;
+    color: #00947e;
+    margin-left:0px;
+    margin-left: 50px;
 }
 
-#topInfoBar .button.is-primary.showFullInstructionsButton.topInfoBarBtn {
-    background-color: #ff6635;
-    border-color: transparent;
-    color: #fff;
+#topInfoBar .button.is-link.is-light.showFullInstructionsButton.topInfoBarBtn {
+    background-color: #eef3fc;
+    color: #2160c4b5;
+    margin: 9px 0px 0px 20px;
+    margin-left: 20px;
 }
 
 #container.tabletView #gameLayer #topInfoBar {
@@ -5636,29 +5644,54 @@ p.mapDebug {
     margin-left: 9px;
 }
 
+#container #scoringLayer #mapAndFinalScoreContainer #greenThumbsLeft {
+    width: 114px;
+    position: absolute;
+    top: 20px;
+    left: 57px;
+}
+
+#container #scoringLayer #mapAndFinalScoreContainer #greenThumbsLeft #greenThumbsLeftImg {
+    width: 60px;
+}
+
+#container #scoringLayer #mapAndFinalScoreContainer #greenThumbsLeft #greenThumbsLeftInfo {
+    position: absolute;
+    top: -3px;
+    right: 0px;
+    font-family: 'Architects Daughter', cursive;
+    font-size: 34px;
+    font-weight: normal;
+    letter-spacing: 5px;
+}
+
 #container #scoringLayer #mapAndFinalScoreContainer #scoringTable {
-    width: 836px;
+    width: 659px;
     position: absolute;
     top: 13px;
-    left: 33px;
-    font-size: 20px;
-    font-weight: bold;
+    left: 229px;
 }
 
 #container #scoringLayer #mapAndFinalScoreContainer #scoringTable p {
     float: left;
-    margin: 0px 43px 0px 0px;
+    margin: 0px 21px 0px 0px;
     padding: 7px 9px;
-    font-size: 19px;
+    font-size: 17px;
     line-height: 23px;
-    opacity: 0.4;
     text-align: center;
+    letter-spacing: -0.2px;
+}
+
+#container #scoringLayer #mapAndFinalScoreContainer #scoringTable p:not(.currentScoreRanking) {
+    font-weight: normal;
+    opacity: 0.8;
 }
 
 #container #scoringLayer #mapAndFinalScoreContainer #scoringTable p.currentScoreRanking {
     opacity: 1;
     color: #115116;
-    text-shadow: 0px 0px 8px #fbff00;
+    text-shadow: 0px 0px 7px #fbff00;
+    font-weight: bold;
 }
 
 #container #scoringLayer #mapAndFinalScoreContainer #scoringTable p:last-child {
