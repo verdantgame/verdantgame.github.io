@@ -61,7 +61,7 @@
 
 		<div id="setupLayer" class="layer">
 
-			<p id="mainVerdantTitle" class="title">
+			<p id="mainVerdantTitle" class="Verdant title">
 				<a href="http://www.verdantgame.com" target="_blank">
 					<img src="img/title.png" title="Verdant Title" alt="Verdant Title" />
 				</a>
@@ -70,7 +70,7 @@
 			<p class="subtitle is-6">Verdant is a puzzly spatial card and token drafting game about houseplant collection and care, for 1-5 players, ages 10+.</p>
 
 			<div id="homepageButtonContainer" class="buttons">
-				<button id="frontPageGameInstructionsButton" class="button is-info" title="Instructions Button">Instructions</button>
+				<button class="showFullInstructionsButton button is-info" title="Instructions Button">Instructions</button>
 				<button id="startGame" class="button is-success startCommenceButton" title="Start Game">Start Game</button>
 			</div>
 
@@ -94,7 +94,7 @@
 			<div id="topInfoBar">
 				<p id="secondaryVerdantTitle" class="title">
 					<a href="http://www.verdantgame.com" target="_blank">
-						<img src="img/title.png" alt="Verdant Title">
+						<img src="img/title.png" alt="Verdant Title Image">
 					</a>
 				</p>
 
@@ -117,7 +117,8 @@
 
 				</div>
 
-				<button id="showScoringRemindersBtn" class="button is-warning">Scoring</button>
+				<button id="showScoringRemindersBtn" class="button is-info topInfoBarBtn" title="Scoring Aid Button">Scoring Aid</button>
+				<button class="button is-primary showFullInstructionsButton topInfoBarBtn" title="Instructions Button">Instructions</button>
 
 				<ion-icon id="maximizeScreenIcon" name="expand" role="img" class="hydrated md gameLayerElement gameLayer-mobileElement" aria-label="expand"></ion-icon>
 				<ion-icon id="minimizeScreenIcon" name="contract" role="img" class="hydrated md gameLayerElement gameLayer-mobileElement" aria-label="contract"></ion-icon>
@@ -138,29 +139,29 @@
 									<p id="marketTitle" class="title is-3 has-text-centered">Market</p>
 								</div>
 
-								<button id="replaceMarketItemsBtn" class="button is-success greenThumbActionBtn marketActionButton" title="Instructions Button" disabled>
+								<button id="replaceMarketItemsBtn" class="button is-success greenThumbActionBtn marketActionButton" title="Replace one to four market items button" disabled>
 									<img class="twoThumbsImg" src="img/thumbs/dual.png">
 									<p>Replace 1-4<br />market items</p>
 								</button>
 
-								<button id="viewPotScoringBtn" class="button is-info showPotScoringLayer marketActionButton" title="Instructions Button" disabled>
+								<button id="viewPotScoringBtn" class="button is-info showPotScoringLayer marketActionButton" title="View pot scoring information button" disabled>
 									<img class="allPotsImg" src="img/pots/allPotsImg.png">
 									<p>View Pot<br />scoring info</p>
 								</button>
 
-								<button id="chooseAnyMarketCardItemBtn" class="button is-success greenThumbActionBtn marketActionButton" title="Instructions Button" disabled>
+								<button id="chooseAnyMarketCardItemBtn" class="button is-success greenThumbActionBtn marketActionButton" title="Choose any card and item combination button" disabled>
 									<img class="twoThumbsImg" src="img/thumbs/dual.png">
 									<p>Choose any<br />card + item</p>
 								</button>
 
 								<div id="replaceMarketItemsInstructionsAndBtns" class="greenThumbActionInstructionsContainer">
 									<p>Select up to four market items tokens to replace.</p>
-									<button id="cancelReplaceMarketItemsAction" class="cancelMarketGreenThumbAction greenThumbInstructionsBtn button is-danger"><span>Cancel</span>
+									<button id="cancelReplaceMarketItemsAction" class="cancelMarketGreenThumbAction greenThumbInstructionsBtn button is-danger" title="Cancel replacing market items button"><span>Cancel</span>
 										<span class="icon">
 											<ion-icon name="close-circle-outline"></ion-icon>
 										</span>
 									</button>
-									<button id="confirmReplaceMarketItemsAction" class="confirmMarketGreenThumbAction greenThumbInstructionsBtn button is-success" disabled="">
+									<button id="confirmReplaceMarketItemsAction" class="confirmMarketGreenThumbAction greenThumbInstructionsBtn button is-success" disabled title="Confirm replacing market items button">
 										<span>Confirm</span>
 										<span class="icon">
 											<ion-icon name="checkmark-circle-outline"></ion-icon>
@@ -170,12 +171,12 @@
 
 								<div id="chooseAnyMarketCardItemBtnInstructionsAndBtns" class="greenThumbActionInstructionsContainer">
 									<p>Select an item and card from different columns.</p>
-									<button id="cancelChooseAnyMarketCardItemAction" class="cancelMarketGreenThumbAction greenThumbInstructionsBtn button is-danger"><span>Cancel</span>
+									<button id="cancelChooseAnyMarketCardItemAction" class="cancelMarketGreenThumbAction greenThumbInstructionsBtn button is-danger" title="Cancel choosing any card and item combination"><span>Cancel</span>
 										<span class="icon">
 											<ion-icon name="close-circle-outline"></ion-icon>
 										</span>
 									</button>
-									<button id="confirmChooseAnyMarketCardItemAction" class="confirmMarketGreenThumbAction greenThumbInstructionsBtn button is-success" disabled="">
+									<button id="confirmChooseAnyMarketCardItemAction" class="confirmMarketGreenThumbAction greenThumbInstructionsBtn button is-success" title="Confirm choosing any card and item combination" disabled>
 										<span>Confirm</span>
 										<span class="icon">
 											<ion-icon name="checkmark-circle-outline"></ion-icon>
@@ -187,7 +188,7 @@
 
 								<div id="confirmChosenColumnContainer" class="marketActionContainer" view-category="plant" view-column="0">
 
-									<button class="delete closeMarketActionTrigger" aria-label="close" title="Close button image"></button>
+									<button class="delete closeMarketActionTrigger" aria-label="close" title="Close market choice popup"></button>
 
 									<div class="bg"></div>
 
@@ -201,13 +202,13 @@
 									<p arrow-direction="left" id="leftZoomColumnArrow" class="zoomedColumnNavArrow">&#8249;</p>
 
 									<div class="btnContainer">
-										<button id="cancelColumnChoice" class="columnChoiceConfirmationBtn button is-danger">
+										<button id="cancelColumnChoice" class="columnChoiceConfirmationBtn button is-danger" title="Cancel market card and item selection">
 											<span>Cancel</span>
 											<span class="icon">
 												<ion-icon name="close-circle-outline"></ion-icon>
 											</span>
 										</button>
-										<button id="confirmColumnChoice" class="columnChoiceConfirmationBtn button is-success">
+										<button id="confirmColumnChoice" class="columnChoiceConfirmationBtn button is-success" title="Confirm market card and item selection">
 											<span>Confirm</span>
 											<span class="icon">
 												<ion-icon name="checkmark-circle-outline"></ion-icon>
@@ -276,14 +277,14 @@
 								<div data-animation-group="tableau" id="homeContentContainer" class="collapsed">
 
 									<div id="undoNextRoundBtnContainer" class="collapsed disableUndoBtn">
-										<button id="undoAction" class="button is-danger">
+										<button id="undoAction" class="button is-danger" title="Undo button">
 											<span class="icon">
 												<ion-icon name="arrow-undo"></ion-icon>
 											</span>
 											<span class="btnText">Undo Action</span>
 										</button>
 
-										<button id="nextRound" class="button is-success" disabled>
+										<button id="nextRound" class="button is-success" disabled title="Next round button">
 											<span class="btnText">Next Round</span>
 											<span class="icon">
 												<ion-icon name="play-forward"></ion-icon>
@@ -293,9 +294,9 @@
 
 									<div data-animation-group="tableau" id="playerInfoContainer" class="animatingElem mediumTransition collapsed" style="transform-origin: left top;" animation-scale-amount="1">
 
-										<button id="addOneVerdancyToPlantBtn" class="button is-success greenThumbActionBtn" title="Instructions Button" disabled>
+										<button id="addOneVerdancyToPlantBtn" class="button is-success greenThumbActionBtn" title="Instructions Button" disabled title="Add one verdancy to any plant button">
 											<img class="twoThumbsImg" src="img/thumbs/dual.png">
-											<p>+1 Verdancy<br>to any plant</p>
+											<p>+1 Verdancy</p>
 										</button>
 
 										<div data-animation-group="tableau" id="cardToPlace" class="collapsed">
@@ -303,22 +304,20 @@
 											<img data-animation-group="tableau" id="chosenCardBackground" class="collapsed" src="img/card-storage.png">
 										</div>
 
-										<div data-animation-group="tableau" id="useItemBtnContainer" class="animatingElem mediumTransition expanded" title="Use Item Button Container">
-											<button data-animation-group="tableau" class="button is-success useItemsBtn expanded" title="Use Item Button" disabled>Use Nurture<br>Item Action</button>
-										</div>
-
-										<p data-animation-group="tableau" id="chosenItemTitle" class="tableauItemTitle">Chosen<br>Item</p>
+										<p data-animation-group="tableau" id="chosenItemTitle" class="tableauItemTitle">Active<br />Item</p>
 
 										<div data-animation-group="tableau" id="chosenItemParentContainer" class="itemContainerParent collapsed">
 											<img data-animation-group="tableau" id="chosenItemBackground" class="itemBackground collapsed" src="img/item-storage.png">
 											<div id="chosenItemContainer" class="itemContainer"></div>
 										</div>
 
-										<div data-animation-group="tableau" id="swapItemsBtnContainer" class="animatingElem mediumTransition expanded" title="Swap Item Button Container">
-											<button data-animation-group="tableau" class="button is-link swapItemsBtn expanded" title="Swap Item Button" disabled>Store Item <span>&#8595;</span></button>
-										</div>
+										<button data-animation-group="tableau" id="discardItemsBtn" disabled class="button is-danger itemAction expanded animatingElem mediumTransition" title="Discard Item Button" style="transform-origin: left top;">Discard Item</button>
 
-										<p data-animation-group="tableau" id="storedItemTitle" class="tableauItemTitle">Stored<br>Item</p>
+										<button data-animation-group="tableau" id="useItemsBtn" disabled class="button is-success itemAction expanded animatingElem mediumTransition" title="Use Item Button" style="transform-origin: left top;">Use Item</button>
+
+										<button data-animation-group="tableau" id="swapItemsBtn" disabled class="button is-link itemAction expanded animatingElem mediumTransition" title="Swap Item Button" style="transform-origin: left top;">Store Item</button>
+
+										<p data-animation-group="tableau" id="storedItemTitle" class="tableauItemTitle">Stored<br />Item</p>
 
 										<div data-animation-group="tableau" id="storedItemParentContainer" class="itemContainerParent collapsed">
 											<img data-animation-group="tableau" id="storedItemBackground" class="itemBackground collapsed" src="img/item-storage.png">
@@ -371,14 +370,14 @@
 												</div>
 
 												<div id="placedCardOptions" class="collapsed">
-													<button id="cancelCardPlacement" class="button is-danger">
+													<button id="cancelCardPlacement" class="button is-danger" title="Cancel card placement">
 														<span>Cancel</span>
 														<span class="icon">
 															<ion-icon name="close-circle-outline"></ion-icon>
 														</span>
 													</button>
 
-													<button id="confirmCardPlacement" class="button is-success">
+													<button id="confirmCardPlacement" class="button is-success" title="Confirm card placement">
 														<span>Confirm</span>
 														<span class="icon">
 															<ion-icon name="checkmark-circle-outline"></ion-icon>
@@ -387,14 +386,14 @@
 												</div>
 
 												<div id="placedItemOptions" class="collapsed">
-													<button id="cancelItemPlacement" class="button is-danger">
+													<button id="cancelItemPlacement" class="button is-danger" title="Confirm item placement">
 														<span>Cancel</span>
 														<span class="icon">
 															<ion-icon name="close-circle-outline"></ion-icon>
 														</span>
 													</button>
 
-													<button id="confirmItemPlacement" class="button is-success">
+													<button id="confirmItemPlacement" class="button is-success" title="Cancel item placement">
 														<span>Confirm</span>
 														<span class="icon">
 															<ion-icon name="checkmark-circle-outline"></ion-icon>
@@ -409,14 +408,14 @@
 													<p id="trowel-instructions" class="nurtureItemInstructions">Select up to three plant cards<br />to add one verdancy to.</p>
 													<p id="fertilizer-instructions" class="nurtureItemInstructions">Select one plant card to add up<br />to three verdancy to.</p>
 
-													<button id="cancelNurtureItemAction" class="button is-danger">
+													<button id="cancelNurtureItemAction" class="button is-danger" title="Cancel nurture item placement">
 														<span>Cancel</span>
 														<span class="icon">
 															<ion-icon name="close-circle-outline"></ion-icon>
 														</span>
 													</button>
 
-													<button nurture-item-action="none" id="confirmNurtureItemAction" class="button is-success" disabled>
+													<button nurture-item-action="none" id="confirmNurtureItemAction" class="button is-success" disabled title="Confirm nurture item placement">
 														<span>Confirm</span>
 														<span class="icon">
 															<ion-icon name="checkmark-circle-outline"></ion-icon>
@@ -428,21 +427,20 @@
 
 													<p id="addOneVerdancy-instructions">Select a plant card to add one verdancy to.</p>
 
-													<button id="cancelAddOneVerdancyAction" class="button is-danger">
+													<button id="cancelAddOneVerdancyAction" class="button is-danger" title="Cancel adding one verdancy to any plant button">
 														<span>Cancel</span>
 														<span class="icon">
 															<ion-icon name="close-circle-outline"></ion-icon>
 														</span>
 													</button>
 
-													<button id="confirmAddOneVerdancyAction" class="button is-success" disabled>
+													<button id="confirmAddOneVerdancyAction" class="button is-success" disabled title="Confirm adding one verdancy to any plant button">
 														<span>Confirm</span>
 														<span class="icon">
 															<ion-icon name="checkmark-circle-outline"></ion-icon>
 														</span>
 													</button>
 												</div>
-
 											</div>
 										</div>
 									</div>
@@ -475,7 +473,7 @@
 
 				<div id="finalScore">
 					<img id="finalScoreBgImg" src="img/scorepad.jpg" />
-					<p id="fs-name" class="finalScoreText">GAVIN</p>
+					<p id="fs-name" class="finalScoreText"></p>
 					<p id="fs-completedPlants" class="finalScoreText vpText finalScoreVPs"></p>
 					<p id="fs-leftOverVerdancy" class="finalScoreText vpText finalScoreVPs"></p>
 					<p id="fs-potPoints" class="finalScoreText vpText finalScoreVPs"></p>
@@ -498,7 +496,7 @@
 				<div id="shareInstructionsContent">
 					<img id="shareInstructionsVerdantTitleImg" src="img/box-cover.png" alt="Verdant Title">
 					<p>Share a screenshot of your completed home and challenge your friends to beat your high score! #VerdantGame @flatoutgames</p>
-					<button id="scoringRemindersFinalScoreBtn" class="button is-warning">Scoring</button>
+					<button id="scoringRemindersFinalScoreBtn" class="button is-warning">Scoring Aid</button>
 					<p>This online demo <span style="font-weight: bold; text-decoration: underline">only contains a sample</span> of the content available in the full game! Back today to get access to the following plant and goals cards and more!</p>
 					<div class="slideshow-block">
 						<div class="slideshow-animation"></div>
@@ -572,6 +570,19 @@
 				<button class="delete closeModalTrigger mediumCloseCross" aria-label="close" title="Close button image"></button>
 				<p class="has-text-centered">There is no valid room card placements available in your tableau. Please pick a plant card to place instead.</p>
 				<button class="button is-danger closeModalTrigger button-is-centered" title="Close modal button">Close</button>
+			</div>
+		</div>
+	</div>
+
+	<div id="discardItemModal" class="modal notificationModal">
+		<div class="modal-background closableModalBackground"></div>
+		<div class="modal-content">
+			<div class="notification">
+				<button class="delete closeModalTrigger mediumCloseCross" aria-label="close" title="Close button image"></button>
+				<p class="has-text-centered">Are you sure you want to discard this item from the game without using it?</p>
+				<div class="itemToDiscardPreview"></div>
+				<button class="button is-danger closeModalTrigger button-is-centered" title="Close modal button">Cancel</button>
+				<button id="confirmItemDiscardBtn" class="button is-success closeModalTrigger button-is-centered" title="Close modal button">Confirm</button>
 			</div>
 		</div>
 	</div>
