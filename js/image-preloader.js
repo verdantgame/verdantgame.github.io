@@ -209,6 +209,7 @@ const preload = src => new Promise(function(resolve, reject) {
     'img/completed-verdancy.png',
     'img/card-storage.png',
     'img/item-storage.png',
+    'img/new-scoring-aid.jpg',
     'img/scoring-aid.jpg',
     'img/scorepad.jpg',
     'img/title.png',
