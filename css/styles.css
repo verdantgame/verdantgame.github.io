@@ -258,15 +258,24 @@ p.mapDebug {
 }
 
 #scoringReminderModal.modal.notificationModal .modal-content {
-    top: 2%;
-    width: 530px;
+    top: 1%;
+    width: 670px;
+}
+
+#scoringReminderModal.modal.notificationModal .modal-content .notification {
+    padding: 0px 0px 0px 0px;
+    border-radius: 20px;
 }
 
 #scoringReminderModal.modal.notificationModal .modal-content #scoringAidImg {
-    width: 370px;
     display: block;
-    margin: 0 auto;
+    margin: 0px auto 0px;
+    border-radius: 20px;
 }
+
+
+
+
 
 .modal.notificationModal .modal-content[btns="1"] .button:not(.delete.closeModalTrigger) {
     display: block;
@@ -4429,7 +4438,7 @@ p.mapDebug {
     z-index: 14;
     bottom: 0px;
     left: 0px;
-    background-color: #000000bf;
+    background-color: #00000099;
     transition: all .7s ease-in-out;
 }
 
@@ -4485,7 +4494,7 @@ p.mapDebug {
     z-index: 14;
     bottom: 0px;
     left: 0px;
-    background-color: #000000bf;
+    background-color: #00000099;
     transition: all .7s ease-in-out;
 }
 
