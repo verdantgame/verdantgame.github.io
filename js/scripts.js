@@ -2746,7 +2746,11 @@ $(document).on(touchEvent,'#nurtureItemOptions #confirmNurtureItemAction[nurture
 let totalPotentialCardsForTrowelAction = 0;
 let plantsCardsSelectedForTrowelAction = 0;
 
+let trowelMapIDs = [];
+
 function trowelInitFunc() {
+
+    trowelMapIDs = [];
 
     totalPotentialCardsForTrowelAction = 0;
     plantsCardsSelectedForTrowelAction = 0;
@@ -2767,24 +2771,30 @@ $(document).on('mouseleave','#mapContainer .mapTileContainer.potentialNurtureIte
     $('.potentialNurtureItemTarget .trowelItemIcon:not(.lockedInIcon)').remove();
 });
 
-$(document).on(touchEvent,'#mapContainer .mapTileContainer.potentialNurtureItemTarget.trowelPotentialTarget',function(){        
 
+$(document).on(touchEvent,'#mapContainer .mapTileContainer.potentialNurtureItemTarget.trowelPotentialTarget',function(){   
+    let thisID = $(this).attr('id');
+    trowelMapIDs.push(thisID);
     $(this).addClass('trowelPreviewAction').removeClass('trowelPotentialTarget');
     $('.mapTileContainer.potentialNurtureItemTarget.trowelPreviewAction .trowelItemIcon').addClass('lockedInIcon');
-
-    let plantCardsSelected = $('.mapTileContainer.potentialNurtureItemTarget.trowelPreviewAction').length;
-
     previewNurtureItemVerdancy($(this), 1);
-
-    if(plantCardsSelected == totalPotentialCardsForTrowelAction || plantCardsSelected == 3) {
+    if(trowelMapIDs.length >= totalPotentialCardsForTrowelAction || trowelMapIDs.length >= 3) {
         $('#nurtureItemOptions #confirmNurtureItemAction').removeAttr('disabled');  
         $('#mapContainer .mapTileContainer.trowelPreviewAction').addClass('lockedInTrowelAction').removeClass('trowelPreviewAction');
     }
-
+    if(trowelMapIDs.length > 3) {
+        let removedTrowelID = trowelMapIDs.shift();
+        $(`#${removedTrowelID}`).removeClass('trowelPreviewAction').addClass('trowelPotentialTarget');
+        $(`#${removedTrowelID} .verdancyPulseAnimation`).removeClass('verdancyPulseAnimation');
+        $(`#${removedTrowelID} .trowelItemIcon`).remove();
+    }
 });
 
+
 $(document).on(touchEvent,'#nurtureItemOptions #confirmNurtureItemAction[nurture-item-action="trowel"]',function(){    
+
     finalizeNurtureItemVerdancy();
+
     animateElem($('#mapContainer #nurtureItemOptions'), 'hideNurtureItemOptions');
     $('#playerInfoContainer #useItemsBtn').attr('disabled', 'disabled');
     
