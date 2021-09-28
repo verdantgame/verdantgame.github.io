@@ -161,6 +161,7 @@ $(document).on(touchEvent, '#startGame', function(){
 });
 
 $(document).on(touchEvent, '#commenceGame', function(){
+	$('.badge-wrapper').remove();
 	$('.layer').fadeOut();
     setTimeout(function(){        
         $('body').addClass('gameView');
