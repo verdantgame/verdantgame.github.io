@@ -197,7 +197,7 @@ function initMarketFunc(){
 function flipInitMarketCards() {
     let marketFlipCardClasses = ['.cardsAndItemContainer .flip-plant .flip-card-inner', '.cardsAndItemContainer .flip-room .flip-card-inner'];    
     $(`.marketColumn[column="${currentColumn}"] ${marketFlipCardClasses[currentMarketItem]}`).css('transform', 'rotateY(180deg) translate3d(0, 0, 1px)'); 
-    currentColumn--;            
+    currentColumn--;       
     if(currentColumn == -1 && (currentMarketItem + 1) < marketFlipCardClasses.length) {        
         currentColumn = 3;
         currentMarketItem++;
@@ -214,12 +214,12 @@ function flipInitMarketCards() {
 
 function isolateFlipCardContents() {
     $('.cardsAndItemContainer .flip-plant .flip-card-inner .flip-card-back .cardContainer').each(function(){
-        let columnNum = $(this).closest('.marketColumn').attr('column');        
+        let columnNum = $(this).closest('.marketColumn').attr('column');   
         $(this).prependTo(`.marketColumn[column="${columnNum}"] .cardsAndItemContainer .marketPlantCardOverlay`);
     });
 
     $('.cardsAndItemContainer .flip-room .flip-card-inner .flip-card-back .cardContainer').each(function(){
-        let columnNum = $(this).closest('.marketColumn').attr('column');        
+        let columnNum = $(this).closest('.marketColumn').attr('column');   
         $(this).appendTo(`.marketColumn[column="${columnNum}"] .cardsAndItemContainer .marketRoomCardOverlay`);
     });
     
@@ -663,7 +663,7 @@ function setupGreenThumbAction(thisAction) {
         animateElem($('#mapContainer #addOneVerdancyOption'), 'showAddOneVerdancyOption');
         toggleMapVerdancy('show');
         $('#verdancyVisibilityContainer').addClass('disableInteraction');
-        $('#playerInfoContainer #swapItemsBtn').attr('disabled', 'disabled');        
+        $('#playerInfoContainer #swapItemsBtn').attr('disabled', 'disabled');   
         $('#playerInfoContainer #discardItemsBtn').attr('disabled', 'disabled');
         nurtureItemMapRecipients('plant', 'addOneVerdancy');
 
@@ -771,7 +771,7 @@ $(document).on(touchEvent,'#addOneVerdancyOption #confirmAddOneVerdancyAction',f
 
     setTimeout(function(){
         $('.mapTileContainer[cardtype="plant"][plant-pot="none"] .cardContainer .verdancyIconsAndVPLayer').each(function(){
-            let newCompletedVerdancy = $(this).find('.verdancyIconContainer.completeVerdancy').length;            
+            let newCompletedVerdancy = $(this).find('.verdancyIconContainer.completeVerdancy').length;       
             $(this).attr('verdancy-completed', newCompletedVerdancy);
         });
         greenThumbAmountStatus('actionDeduction');
@@ -1174,7 +1174,7 @@ function processChosenCardAndItem(){
         let extraTimeout = 0;
 
         if(chosenCardsGreenThumbs > 0) {            
-            extraTimeout = 2550;            
+            extraTimeout = 2550;       
 
             setTimeout(function(){                
                 if($(`.lockedInCardOverlay .newGreenThumbParentContainer[green-thumb-container="1"] .newGreenThumbContainer`).length) {                    
@@ -1208,8 +1208,8 @@ function processChosenCardAndItem(){
             }, 3000);
         }
 
-        let oppositeCardGreenThumbs = parseInt($('.marketColumn.lockedInColumn .cardsAndItemContainer .marketCardOverlay:not(.lockedInCardOverlay) .cardContainer .newGreenThumbMasterContainer').attr('total-green-thumbs'));        
-        oppositeCardGreenThumbs++;        
+        let oppositeCardGreenThumbs = parseInt($('.marketColumn.lockedInColumn .cardsAndItemContainer .marketCardOverlay:not(.lockedInCardOverlay) .cardContainer .newGreenThumbMasterContainer').attr('total-green-thumbs'));   
+        oppositeCardGreenThumbs++;   
         
 
         setTimeout(function(){            
@@ -1647,9 +1647,9 @@ function calculateViewableCardLimits() {
 $(document).keydown(function(e){
 
 	if(!lockMap) {
-		lockMap = true;        
+		lockMap = true;   
 		setTimeout(function(){
-			lockMap = false;            
+			lockMap = false;       
 		}, 220);
 
         if (e.which == 81) { 
@@ -1714,7 +1714,7 @@ $(document).on(touchEvent,'#mapContainer .mapTileContainer.potentialCardPlacemen
     
     if(!lockMap) {        
         $('#undoNextRoundBtnContainer #undoAction').attr('disabled', 'disabled');
-        lockMap = true;        
+        lockMap = true;   
         toggleMapVerdancy('hide');
         if($('#mapContainer .mapTileContainer.potentialCardPlacement:not(.temporaryCardPlacement) .cardContainer').length) {            
             $('#mapContainer .mapTileContainer.potentialCardPlacement:not(.temporaryCardPlacement) .cardContainer').remove();
@@ -1722,7 +1722,7 @@ $(document).on(touchEvent,'#mapContainer .mapTileContainer.potentialCardPlacemen
         $('.cardPlacementPreview').removeClass('cardPlacementPreview');
         var targID = $(this).attr('id');
         $('#mapContainer .mapTileContainer.potentialCardPlacement.temporaryCardPlacement').addClass('activePotentialCardPlacement').removeClass('temporaryCardPlacement');
-        temporarilyLockMap(1000);        
+        temporarilyLockMap(1000);   
 
         $('.cardContainer.activePlacement').parentToAnimate($(`#${targID}`), 1000);
 
@@ -1838,7 +1838,7 @@ function checkLightingMatches(mapID) {
         let allPlantLighting = [];
 
         if(plantLightingNum > 1) {            
-            let splitLightingData = plantLightingData.split(' ');            
+            let splitLightingData = plantLightingData.split(' ');       
             allPlantLighting.push(...splitLightingData);
         } else if(plantLightingNum == 1){            
             allPlantLighting.push(plantLightingData);
@@ -1864,7 +1864,7 @@ function checkLightingMatches(mapID) {
         for (const [key, value] of Object.entries(allNeighbours)) {
                         
 
-            let cardPlantPotInfo = $(`${key}.mapTileContainer`).attr('plant-pot');            
+            let cardPlantPotInfo = $(`${key}.mapTileContainer`).attr('plant-pot');       
 
             if (typeof cardPlantPotInfo !== typeof undefined && cardPlantPotInfo !== false) {
                 if(cardPlantPotInfo != 'none') {
@@ -1970,7 +1970,7 @@ function showLightingMatchesFunc() {
         
         $(`${plantCardID} .cardContainer .verdancyIconsAndVPLayer .verdancyIconContainer[data-verdancy-icon-num="${currentVerdancy}"]`).addClass('completeVerdancy').removeClass('incompleteVerdancy');
         
-        currentVerdancy++;        
+        currentVerdancy++;   
         
         $(`${plantCardID} .cardContainer .verdancyIconsAndVPLayer`).attr('verdancy-completed', currentVerdancy);
     }, 1310);
@@ -2021,9 +2021,9 @@ function showLightingMatchesFunc() {
 function checkForCompletedPlants() {    
     let completedPlants = [];
     $(`#mapHiddenOverlay .mapTileContainer[cardtype="plant"][plant-pot="none"] .cardContainer .verdancyIconsAndVPLayer`).each(function(){
-        let thisID = $(this).closest('.mapTileContainer').attr('id');                        
+        let thisID = $(this).closest('.mapTileContainer').attr('id');                   
         if($(this).attr('verdancy-completed') >= $(this).attr('verdancy-icons')) {
-            $(this).closest('.mapTileContainer').addClass('pendingPlantPot');            
+            $(this).closest('.mapTileContainer').addClass('pendingPlantPot');       
             completedPlants.push(thisID);
         }
     });    
@@ -2054,7 +2054,7 @@ function gainPlantPots() {
         let nextActivePotTrigger = false;
         
         for (let i = 0; i < completedPlantsThisTurn.length; i++) {
-            nextActivePotTrigger = false;            
+            nextActivePotTrigger = false;       
 
             while(!nextActivePotTrigger) {                
                 if($(`.availableScoringPlantPot[plant-pot-priority="${currentActivePotNum}"] .plantPotContainer`).length) {                    
@@ -2067,7 +2067,7 @@ function gainPlantPots() {
 
             let plantPotType = $(`.availableScoringPlantPot[plant-pot-priority="${currentActivePotNum}"] .plantPotContainer`).data('pot-type');
 
-            $(`#${completedPlantsThisTurn[i]}`).attr('plant-pot', plantPotType);            
+            $(`#${completedPlantsThisTurn[i]}`).attr('plant-pot', plantPotType);       
 
             let verdancyLayerPlantPointsIcon = `
                 <img class="completedVerdancyIcon verdancyLayerImg" src="img/completed-verdancy.png" />
@@ -2131,11 +2131,11 @@ function removeDiscardPotSpaces(amountOfPots) {
     
     
     $(`#potDiscardPile .potDiscardSlot.availableScoringPlantPot .plantPotContainer`).each(function(){
-        let currentPos = $(this).closest('.potDiscardSlot').data('pot-discard-slot');        
+        let currentPos = $(this).closest('.potDiscardSlot').data('pot-discard-slot');   
 
-        let newPos = currentPos - amountToShiftPotsUp;        
+        let newPos = currentPos - amountToShiftPotsUp;   
 
-        $(this).appendTo(`#potDiscardPile .potDiscardSlot.availableScoringPlantPot[data-pot-discard-slot="${newPos}"]`);        
+        $(this).appendTo(`#potDiscardPile .potDiscardSlot.availableScoringPlantPot[data-pot-discard-slot="${newPos}"]`);   
     });
 }
 
@@ -2184,17 +2184,17 @@ $(document).on(touchEvent,'#undoNextRoundBtnContainer #nextRound',function(){
     if($('.lockedInCardOverlay').hasClass('marketPlantCardOverlay')) {        
         cardTypeToReplace = 'plant';
         if(cardColumnToReplace != 3) {                        
-            replacementPlantCardColumns.push(cardColumnToReplace + 1);            
+            replacementPlantCardColumns.push(cardColumnToReplace + 1);       
         }
     } else if($('.lockedInCardOverlay').hasClass('marketRoomCardOverlay')) {        
         cardTypeToReplace = 'room';
         if(cardColumnToReplace != 3) {                        
-            replacementRoomCardColumns.push(cardColumnToReplace + 1);            
+            replacementRoomCardColumns.push(cardColumnToReplace + 1);       
         }
     }
 
     if(itemColumnToReplace != 3) {                
-        replacementItemTokenColumns.push(itemColumnToReplace + 1);        
+        replacementItemTokenColumns.push(itemColumnToReplace + 1);   
     }
 
     let multipleMarketReplacementsTimeout = 0;
@@ -2253,30 +2253,30 @@ $(document).on(touchEvent,'#undoNextRoundBtnContainer #nextRound',function(){
     let nextAvailableColumnRoomGreenThumbs = '';
 
     if($(`.marketColumn[column="3"] .marketPlantCardOverlay .cardContainer`).length) {        
-        columnFourPlantGreenThumbs = parseInt($(`.marketColumn[column="3"] .marketPlantCardOverlay .cardContainer .newGreenThumbMasterContainer`).attr('total-green-thumbs'));        
+        columnFourPlantGreenThumbs = parseInt($(`.marketColumn[column="3"] .marketPlantCardOverlay .cardContainer .newGreenThumbMasterContainer`).attr('total-green-thumbs'));   
         if($(`.marketColumn[column="2"] .marketPlantCardOverlay .cardContainer`).length) {            
             nextAvailableColumnPlant = '2';
-            nextAvailableColumnPlantGreenThumbs = parseInt($(`.marketColumn[column="2"] .marketPlantCardOverlay .cardContainer .newGreenThumbMasterContainer`).attr('total-green-thumbs'));                        
+            nextAvailableColumnPlantGreenThumbs = parseInt($(`.marketColumn[column="2"] .marketPlantCardOverlay .cardContainer .newGreenThumbMasterContainer`).attr('total-green-thumbs'));                   
         } else if($(`.marketColumn[column="1"] .marketPlantCardOverlay .cardContainer`).length) {            
             nextAvailableColumnPlant = '1';
-            nextAvailableColumnPlantGreenThumbs = parseInt($(`.marketColumn[column="1"] .marketPlantCardOverlay .cardContainer .newGreenThumbMasterContainer`).attr('total-green-thumbs'));                        
+            nextAvailableColumnPlantGreenThumbs = parseInt($(`.marketColumn[column="1"] .marketPlantCardOverlay .cardContainer .newGreenThumbMasterContainer`).attr('total-green-thumbs'));                   
         } else if($(`.marketColumn[column="0"] .marketPlantCardOverlay .cardContainer`).length) {            
             nextAvailableColumnPlant = '0';
-            nextAvailableColumnPlantGreenThumbs = parseInt($(`.marketColumn[column="0"] .marketPlantCardOverlay .cardContainer .newGreenThumbMasterContainer`).attr('total-green-thumbs'));                        
+            nextAvailableColumnPlantGreenThumbs = parseInt($(`.marketColumn[column="0"] .marketPlantCardOverlay .cardContainer .newGreenThumbMasterContainer`).attr('total-green-thumbs'));                   
         }
     }
 
     if($(`.marketColumn[column="3"] .marketRoomCardOverlay .cardContainer`).length) {        
-        columnFourRoomGreenThumbs = parseInt($(`.marketColumn[column="3"] .marketRoomCardOverlay .cardContainer .newGreenThumbMasterContainer`).attr('total-green-thumbs'));        
+        columnFourRoomGreenThumbs = parseInt($(`.marketColumn[column="3"] .marketRoomCardOverlay .cardContainer .newGreenThumbMasterContainer`).attr('total-green-thumbs'));   
         if($(`.marketColumn[column="2"] .marketRoomCardOverlay .cardContainer`).length) {            
             nextAvailableColumnRoom = '2';
-            nextAvailableColumnRoomGreenThumbs = parseInt($(`.marketColumn[column="2"] .marketRoomCardOverlay .cardContainer .newGreenThumbMasterContainer`).attr('total-green-thumbs'));                        
+            nextAvailableColumnRoomGreenThumbs = parseInt($(`.marketColumn[column="2"] .marketRoomCardOverlay .cardContainer .newGreenThumbMasterContainer`).attr('total-green-thumbs'));                   
         } else if($(`.marketColumn[column="1"] .marketRoomCardOverlay .cardContainer`).length) {            
             nextAvailableColumnRoom = '1';
-            nextAvailableColumnRoomGreenThumbs = parseInt($(`.marketColumn[column="1"] .marketRoomCardOverlay .cardContainer .newGreenThumbMasterContainer`).attr('total-green-thumbs'));                        
+            nextAvailableColumnRoomGreenThumbs = parseInt($(`.marketColumn[column="1"] .marketRoomCardOverlay .cardContainer .newGreenThumbMasterContainer`).attr('total-green-thumbs'));                   
         } else if($(`.marketColumn[column="0"] .marketRoomCardOverlay .cardContainer`).length) {            
             nextAvailableColumnRoom = '0';
-            nextAvailableColumnRoomGreenThumbs = parseInt($(`.marketColumn[column="0"] .marketRoomCardOverlay .cardContainer .newGreenThumbMasterContainer`).attr('total-green-thumbs'));                        
+            nextAvailableColumnRoomGreenThumbs = parseInt($(`.marketColumn[column="0"] .marketRoomCardOverlay .cardContainer .newGreenThumbMasterContainer`).attr('total-green-thumbs'));                   
         }
     }
     
@@ -2439,8 +2439,8 @@ $(document).on(touchEvent,'#undoNextRoundBtnContainer #nextRound',function(){
         }
 
         for (let i = 0; i < replacementItemTokenColumns.length; i++) {
-            let thisItemToken = allItemTokens.splice(0, 1);            
-            let thisItemTokenHTML = generateItem(thisItemToken[0], 'market');            
+            let thisItemToken = allItemTokens.splice(0, 1);       
+            let thisItemTokenHTML = generateItem(thisItemToken[0], 'market');       
             $(`.marketColumn[column="${replacementItemTokenColumns[i]}"] .cardsAndItemContainer .marketItemOverlay`).append(thisItemTokenHTML);
             $(`.marketColumn[column="${replacementItemTokenColumns[i]}"] .cardsAndItemContainer .marketItemOverlay .newItemToken`).addClass(`${columnOffsetClasses[replacementItemTokenColumns[i]]} startingPosAnimate startingPos`);
 
@@ -2448,7 +2448,7 @@ $(document).on(touchEvent,'#undoNextRoundBtnContainer #nextRound',function(){
         }
 
         for (let i = 0; i < replacementRoomCardColumns.length; i++) {
-            let thisRoomCard = allRoomCards.splice(0, 1);                
+            let thisRoomCard = allRoomCards.splice(0, 1);           
             let thisRoomCardHTML = generateCard(thisRoomCard[0], 'room', 'market', 'market');   
             $(`.marketColumn[column="${replacementRoomCardColumns[i]}"] .cardsAndItemContainer .marketRoomCardOverlay`).append(thisRoomCardHTML);
             $(`.marketColumn[column="${replacementRoomCardColumns[i]}"] .cardsAndItemContainer .marketRoomCardOverlay .newCardContainer`).addClass(`${columnOffsetClasses[replacementRoomCardColumns[i]]} startingPosAnimate startingPos`);
@@ -2557,7 +2557,7 @@ $(document).on(touchEvent,'#undoNextRoundBtnContainer #nextRound',function(){
     setTimeout(function(){        
         $('#infoBarStats #turnsRemainingContainer').addClass('infoChange');
 
-        turnsRemaining--;        
+        turnsRemaining--;   
 
         if(turnsRemaining == 1) {
             let finalScoringBtnHTML = `
@@ -2601,7 +2601,7 @@ $(document).on(touchEvent,'#undoNextRoundBtnContainer #nextRound',function(){
         `;
         $('#marketCardColumns .marketColumn .cardsAndItemContainer .cardContainer').append(actionRequiredHTML);
         updateDiscardPotTotal();
-        lockMap = false;        
+        lockMap = false;   
     }, 10370 + nextRoundProcessTimeout + multipleMarketReplacementsTimeout);
 
     setTimeout(function(){        
@@ -2899,7 +2899,7 @@ $(document).on(touchEvent,'#nurtureItemOptions #confirmNurtureItemAction[nurture
 function nurtureItemMapRecipients(cardTypeToActivate, actionType) {    
 
     $('.mapTileContainer').each(function(){
-        let placedCardType = $(this).attr('cardtype');        
+        let placedCardType = $(this).attr('cardtype');   
         if (typeof placedCardType !== 'undefined' && placedCardType !== false) {
             if($(this).attr('cardtype') == 'plant') {
                 if($(this).attr('plant-pot') != 'none') {
@@ -2949,7 +2949,7 @@ function previewNurtureItemVerdancy(thisCard, verdancyToAdd) {
     while(currentVerdancy < totalVerdancy) {
         $(verdancyInfo).find(`.verdancyIconContainer[data-verdancy-icon-num="${currentVerdancy}"] .verdancyIconPosContainer .completeVerdancyIcon`).addClass('verdancyPulseAnimation');
         currentVerdancy++;
-        verdancyAddedNum++;                
+        verdancyAddedNum++;           
         if (verdancyAddedNum == verdancyToAdd) break;
     }
 }
@@ -2968,7 +2968,7 @@ function finalizeNurtureItemVerdancy() {
 
     setTimeout(function(){
         $('.mapTileContainer[cardtype="plant"][plant-pot="none"] .cardContainer .verdancyIconsAndVPLayer').each(function(){
-            let newCompletedVerdancy = $(this).find('.verdancyIconContainer.completeVerdancy').length;            
+            let newCompletedVerdancy = $(this).find('.verdancyIconContainer.completeVerdancy').length;       
             $(this).attr('verdancy-completed', newCompletedVerdancy);
         });
     }, 800);
@@ -3006,7 +3006,7 @@ $(document).on(touchEvent,'#mapContainer .mapTileContainer.potentialItemPlacemen
     if(!lockMap) {        
         $('#playerInfoContainer #swapItemsBtn').attr('disabled', 'disabled');
         $('#playerInfoContainer #discardItemsBtn').attr('disabled', 'disabled');
-        temporarilyLockMap(1000);        
+        temporarilyLockMap(1000);   
         $('#undoNextRoundBtnContainer #undoAction').attr('disabled', 'disabled');
         if($('#mapContainer .mapTileContainer.potentialItemPlacement:not(.temporaryItemPlacement) .roomCardItemContainer .itemToken').length) {            
             $('#mapContainer .mapTileContainer.potentialItemPlacement:not(.temporaryItemPlacement) .roomCardItemContainer .itemToken').remove();
@@ -3052,10 +3052,7 @@ $(document).on(touchEvent,'#cancelItemPlacement.button',function(){
 
 
 $(document).on(touchEvent,'#confirmItemPlacement.button',function(){    
-
     currentRoundActionLog.push('item-placement');
-
-    // if($('#viewPotScoringBtn').hasClass('hidePotScoringLayer')) togglePotScoringLayerVisibility('hide');
 
     let placedMapID = $('.mapTileContainer.temporaryItemPlacement').attr('id');
     let placedItemName = $('.mapTileContainer.temporaryItemPlacement .cardContainer .roomCardItemContainer .itemToken').attr('item-name');
@@ -3090,7 +3087,7 @@ $(document).on(touchEvent,'#playerInfoContainer #discardItemsBtn:not([disabled])
 });
 
 $(document).on(touchEvent,'#discardItemModal #confirmItemDiscardBtn',function(){
-    lockMap = true;     
+    lockMap = true;
     $('#startFirstTurnModal').removeClass('is-active');
 
     $('#playerInfoContainer #useItemsBtn').attr('disabled', 'disabled');
@@ -3125,77 +3122,78 @@ $(document).on(touchEvent,'#playerInfoContainer #swapItemsBtn:not([disabled])',f
 let currentChosenItemType = '';
 let currentStoredItemType = '';
 
-function roundState(mode) {
+function roundState(mode) {    
     currentChosenItemType = '';    
     currentStoredItemType = '';    
 
     if($('#chosenItemParentContainer #chosenItemContainer .itemToken').length) {
-        currentChosenItemType = $('#chosenItemContainer.itemContainer .itemToken').attr('item-type');        
+        currentChosenItemType = $('#chosenItemContainer.itemContainer .itemToken').attr('item-type');   
     }
 
     if($('#storedItemParentContainer #storedItemContainer .itemToken').length) {        
-        currentStoredItemType = $('#storedItemContainer.itemContainer .itemToken').attr('item-type');        
+        currentStoredItemType = $('#storedItemContainer.itemContainer .itemToken').attr('item-type');   
     }
 
     if(mode == 'swapItems') {
         $('.activePlacement').addClass('inactivePlacement').removeClass('activePlacement');
-        lockMap = true;           
-        $('#playerInfoContainer #addOneVerdancyToPlantBtn').addClass('disableInteraction');        
-        $('#playerInfoContainer #swapItemsBtn').addClass('disableInteraction');        
-        $('#playerInfoContainer #discardItemsBtn').addClass('disableInteraction');        
-        $('#playerInfoContainer #useItemsBtn').addClass('disableInteraction');        
-
-        if(currentChosenItemType != '') {
-            $('#chosenItemParentContainer #chosenItemContainer .itemToken:not(.swapAnimation)').addClass('swapAnimation').parentToAnimate($('#storedItemParentContainer #storedItemContainer'), 1000);            
+        lockMap = true;      
+        $('#playerInfoContainer #addOneVerdancyToPlantBtn').addClass('disableInteraction');   
+        $('#playerInfoContainer #swapItemsBtn').addClass('disableInteraction');   
+        $('#playerInfoContainer #discardItemsBtn').addClass('disableInteraction');   
+        $('#playerInfoContainer #useItemsBtn').addClass('disableInteraction');   
+                
+        if(currentChosenItemType != '') {            
+            $('#chosenItemParentContainer #chosenItemContainer .itemToken:not(.swapAnimation)').addClass('swapAnimation').parentToAnimate($('#storedItemParentContainer #storedItemContainer'), 1000);       
             
-            if(currentChosenItemType == 'nurture' && currentStoredItemType != 'nurture') {
-                $('#playerInfoContainer').removeClass('nurtureItemActive');                
-                $('#playerInfoContainer #useItemsBtn').attr('disabled', 'disabled');                
-            } else if(currentStoredItemType == '') {
-                $('#playerInfoContainer').removeClass('nurtureItemActive');                
-                $('#playerInfoContainer #discardItemsBtn').attr('disabled', 'disabled');                
-                $('#playerInfoContainer #useItemsBtn').attr('disabled', 'disabled');                
-                $('#undoNextRoundBtnContainer #nextRound').attr('disabled', 'disabled');                
-                resetPotentialMapPlacements('resetAll');                
-                setTimeout(function(){
-                    activateNextRoundBtn();                    
-                }, 1050);                
+            if(currentChosenItemType == 'nurture' && currentStoredItemType != 'nurture') {                
+                $('#playerInfoContainer').removeClass('nurtureItemActive');           
+                $('#playerInfoContainer #useItemsBtn').attr('disabled', 'disabled');           
+            } else if(currentStoredItemType == '') {                
+                $('#playerInfoContainer').removeClass('nurtureItemActive');           
+                $('#playerInfoContainer #discardItemsBtn').attr('disabled', 'disabled');           
+                $('#playerInfoContainer #useItemsBtn').attr('disabled', 'disabled');           
+                $('#undoNextRoundBtnContainer #nextRound').attr('disabled', 'disabled');           
+                resetPotentialMapPlacements('resetAll');           
+                setTimeout(function(){                    
+                    activateNextRoundBtn();               
+                }, 1050);           
             }
         }
 
-        if(currentStoredItemType != '') {        
-            $('#storedItemParentContainer #storedItemContainer .itemToken:not(.swapAnimation)').addClass('swapAnimation').parentToAnimate($('#chosenItemParentContainer #chosenItemContainer'), 1000);            
-            $('#undoNextRoundBtnContainer #nextRound').attr('disabled', 'disabled');            
-            resetPotentialMapPlacements('resetAll');            
-            if(currentStoredItemType == 'nurture') {
-                resetPotentialMapPlacements('resetAll');                
-                if(currentChosenItemType == 'nurture') {
-                    $('#playerInfoContainer #useItemsBtn').addClass('disableInteraction');                    
-                } else if(currentChosenItemType != 'nurture') {
-                    $('#playerInfoContainer').addClass('nurtureItemActive');                    
-                    $('#playerInfoContainer #useItemsBtn').removeAttr('disabled');                    
+        if(currentStoredItemType != '') {              
+            $('#storedItemParentContainer #storedItemContainer .itemToken:not(.swapAnimation)').addClass('swapAnimation').parentToAnimate($('#chosenItemParentContainer #chosenItemContainer'), 1000);       
+            $('#undoNextRoundBtnContainer #nextRound').attr('disabled', 'disabled');       
+            resetPotentialMapPlacements('resetAll');       
+            if(currentStoredItemType == 'nurture') {                
+                resetPotentialMapPlacements('resetAll');           
+                if(currentChosenItemType == 'nurture') {                    
+                    $('#playerInfoContainer #useItemsBtn').addClass('disableInteraction');               
+                } else if(currentChosenItemType != 'nurture') {                    
+                    $('#playerInfoContainer').addClass('nurtureItemActive');               
+                    $('#playerInfoContainer #useItemsBtn').removeAttr('disabled');               
                 }
             }
-        };        
+        };   
 
         swapBtnTextUpdate();  
 
-        setTimeout(function(){
+        setTimeout(function(){            
             $('.swapAnimation').removeClass('swapAnimation');
-            if($('#chosenItemParentContainer #chosenItemContainer .itemToken').length) {
-                if(!$('#chosenItemParentContainer #chosenItemContainer .itemToken').hasClass('activePlacement')) {
-                    if($('.activePlacement').length) {
+            if($('#chosenItemParentContainer #chosenItemContainer .itemToken').length) {                
+                if(!$('#chosenItemParentContainer #chosenItemContainer .itemToken').hasClass('activePlacement')) {                    
+                    if($('.activePlacement').length) {                        
                         $('.activePlacement').addClass('inactivePlacement').removeClass('activePlacement');
                     }
                     $('#chosenItemParentContainer #chosenItemContainer .itemToken').hasClass('activePlacement')
                 }
-                chosenItemType = $('#chosenItemContainer.itemContainer .itemToken').attr('item-type');        
+                chosenItemType = $('#chosenItemContainer.itemContainer .itemToken').attr('item-type');   
             }   
-            lockMap = false;            
-        }, 1005);        
+            swapBtnTextUpdate();
+            lockMap = false;       
+        }, 1005);   
 
     } else if(mode == 'roundCheck') {
-        swapBtnTextUpdate();        
+        swapBtnTextUpdate();   
     }
 }
 
@@ -3212,36 +3210,38 @@ function swapBtnTextUpdate(){
     chosenItemType = '';    
     storedItemType = '';    
 
-    if($('#chosenItemParentContainer #chosenItemContainer .itemToken').length) {
-        if(!$('#chosenItemParentContainer #chosenItemContainer .itemToken').hasClass('activePlacement')) {
-            if($('.activePlacement').length) {
+    if($('#chosenItemParentContainer #chosenItemContainer .itemToken').length) {        
+        if(!$('#chosenItemParentContainer #chosenItemContainer .itemToken').hasClass('activePlacement')) {            
+            if($('.activePlacement').length) {                
                 $('.activePlacement').addClass('inactivePlacement').removeClass('activePlacement');
             }
             $('#chosenItemParentContainer #chosenItemContainer .itemToken').addClass('activePlacement')
         }
-        chosenItemType = $('#chosenItemContainer.itemContainer .itemToken').attr('item-type');        
+        chosenItemType = $('#chosenItemContainer.itemContainer .itemToken').attr('item-type');   
+        
     }
 
     if($('#storedItemParentContainer #storedItemContainer .itemToken').length) {        
-        storedItemType = $('#storedItemContainer.itemContainer .itemToken').attr('item-type');        
+        storedItemType = $('#storedItemContainer.itemContainer .itemToken').attr('item-type');   
     }
+            
 
     if(chosenItemType != '') {
 
-        $('#playerInfoContainer #discardItemsBtn').removeAttr('disabled');        
-        $('#playerInfoContainer #swapItemsBtn').removeAttr('disabled');        
+        $('#playerInfoContainer #discardItemsBtn').removeAttr('disabled');   
+        $('#playerInfoContainer #swapItemsBtn').removeAttr('disabled');   
 
-        if(chosenItemType == 'nurture') {
+        if(chosenItemType == 'nurture') {            
             let itemName = $('#chosenItemContainer.itemContainer .itemToken').attr('item-name');
             $('#playerInfoContainer #useItemsBtn').attr('item-to-use', itemName);
 
             let nurtureActionRequiredTimeout = 0;
-            if(!$('#playerInfoContainer').hasClass('nurtureItemActive')) {
+            if(!$('#playerInfoContainer').hasClass('nurtureItemActive')) {                
                 $('#playerInfoContainer').addClass('nurtureItemActive')
                 nurtureActionRequiredTimeout = 500;
             }
             $('#playerInfoContainer #useItemsBtn').removeAttr('disabled');
-            setTimeout(function(){
+            setTimeout(function(){                
                 let actionRequiredHTML = `
                     <div class="actionRequiredContainer">
                         <div class="actionRequiredAnimation"></div>
@@ -3249,29 +3249,29 @@ function swapBtnTextUpdate(){
                 `;
                 $('#playerInfoContainer #useItemsBtn').append(actionRequiredHTML);
             }, nurtureActionRequiredTimeout + 50)
-            setTimeout(function(){        
+            setTimeout(function(){                      
                 $('#playerInfoContainer #useItemsBtn .actionRequiredContainer').remove();
             }, nurtureActionRequiredTimeout + 1450);
-        } else {
+        } else {            
             showPossibleMapPlacements('item');
         }
 
-        if(storedItemType == 'normal' || storedItemType == 'nurture') {
-            $('#playerInfoContainer #swapItemsBtn').html('Swap Items');            
-        } else if(storedItemType == '') {
-            $('#playerInfoContainer #swapItemsBtn').html('Store Item');            
+        if(storedItemType == 'normal' || storedItemType == 'nurture') {            
+            $('#playerInfoContainer #swapItemsBtn').html('Swap Items');       
+        } else if(storedItemType == '') {            
+            $('#playerInfoContainer #swapItemsBtn').html('Store Item');       
         }
-    } else {
+    } else {        
         resetPotentialMapPlacements('resetAll');
         
-        setTimeout(function(){
+        setTimeout(function(){            
             activateNextRoundBtn();
         }, 800);
 
-        if(storedItemType != '') {
-            $('#playerInfoContainer #swapItemsBtn').removeAttr('disabled', 'disabled');            
-            if(storedItemType == 'normal' || storedItemType == 'nurture') {
-                $('#playerInfoContainer #swapItemsBtn').html('Retrieve Item');                
+        if(storedItemType != '') {            
+            $('#playerInfoContainer #swapItemsBtn').removeAttr('disabled', 'disabled');       
+            if(storedItemType == 'normal' || storedItemType == 'nurture') {                
+                $('#playerInfoContainer #swapItemsBtn').html('Retrieve Item');           
             }
         }
     }
@@ -3281,7 +3281,7 @@ function swapBtnTextUpdate(){
     $('#playerInfoContainer #swapItemsBtn').removeClass('disableInteraction');    
     $('#playerInfoContainer #discardItemsBtn').removeClass('disableInteraction');    
     $('#playerInfoContainer #useItemsBtn').removeClass('disableInteraction');    
-    $('#playerInfoContainer #addOneVerdancyToPlantBtn').removeClass('disableInteraction');      
+    $('#playerInfoContainer #addOneVerdancyToPlantBtn').removeClass('disableInteraction'); 
     
 }
 
@@ -3322,6 +3322,7 @@ $(document).on(touchEvent,'#startFirstTurnBtn',function(){
 });
 
 function resetPotentialMapPlacements(mode) {    
+    
 
     toggleMapVerdancy('hide');
     $('.verdancyIconsAndVPLayer.showIndividualVerdancyLayer').removeClass('showIndividualVerdancyLayer');
@@ -3443,12 +3444,12 @@ function checkPlayersTableauLimits(limitToChange) {
 
     if(limitToChange == 'row') {                
             
-        placedCardsRange.rows.currentRange = (placedCardsRange.rows.high - placedCardsRange.rows.low) + 1;        
+        placedCardsRange.rows.currentRange = (placedCardsRange.rows.high - placedCardsRange.rows.low) + 1;   
             
         if(placedCardsRange.rows.currentRange >= placedCardsRange.rows.limit) placedCardsRange.rows.locked = true;
     } else if(limitToChange == 'column') {                
             
-        placedCardsRange.columns.currentRange = (placedCardsRange.columns.high - placedCardsRange.columns.low) + 1;        
+        placedCardsRange.columns.currentRange = (placedCardsRange.columns.high - placedCardsRange.columns.low) + 1;   
             
         if(placedCardsRange.columns.currentRange >= placedCardsRange.columns.limit) placedCardsRange.columns.locked = true;
     }
@@ -3489,7 +3490,7 @@ function temporarilyLockMap(timePeriod) {
     $('#mapContainer').addClass('mapLocked');
 	setTimeout(function(){        
         $('#mapContainer').removeClass('mapLocked');
-		lockMap = false;        
+		lockMap = false;   
 	}, timePeriod);
 }
 
@@ -3643,6 +3644,7 @@ function setZoom(newZoom, el) {
 }
 
 function showPossibleMapPlacements(type){    
+    
 
     let showPlacementsTimeout = 10;
 
@@ -3653,7 +3655,7 @@ function showPossibleMapPlacements(type){
         }
 
         setTimeout(function(){            
-            let cardTypeToPlace = $('.cardContainer.activePlacement').attr('cardtype');            
+            let cardTypeToPlace = $('.cardContainer.activePlacement').attr('cardtype');       
             checkPotentialCardPlacements(cardTypeToPlace, 'showPossibleMapPlacements');
             showPotentialCardPlacements();
         }, showPlacementsTimeout);
@@ -3689,7 +3691,7 @@ function showPossibleMapPlacements(type){
 
         setTimeout(function(){            
             $('.mapTileContainer.potentialItemPlacement.activePotentialItemPlacement .roomCardItemContainer.animatingElem.mediumTransitionAll').removeClass('animatingElem mediumTransitionAll');
-            lockMap = false;            
+            lockMap = false;       
         }, 800 + showPlacementsTimeout);
 
         setTimeout(function(){            
@@ -3725,7 +3727,7 @@ function checkPotentialCardPlacements(currentCardType, mode) {
         return false;
     } else {        
 
-        let uniquePlacementIDs = validNeighbourIDs.filter(onlyUnique);        
+        let uniquePlacementIDs = validNeighbourIDs.filter(onlyUnique);   
         for (let i = 0; i < uniquePlacementIDs.length; i++) {
             $(`${uniquePlacementIDs[i]}`).addClass('pendingPotentialCardPlacement');
         }
@@ -3961,7 +3963,7 @@ function finalScoringCalculation() {
 
     $('#finalMap .mapTileContainer[cardtype="plant"]:not([plant-pot="none"]) .cardContainer').each(function(){
         let thisCompletedPlantVPs = parseInt($(this).attr('plant-vps'));
-        completedPlantsFinalVPs = completedPlantsFinalVPs + thisCompletedPlantVPs;        
+        completedPlantsFinalVPs = completedPlantsFinalVPs + thisCompletedPlantVPs;   
     });
     
     
@@ -3974,8 +3976,8 @@ function finalScoringCalculation() {
     let totalLeftOverVerdancy = 0;
 
     $('#finalMap .mapTileContainer[cardtype="plant"][plant-pot="none"] .cardContainer .finalScoringVerdancyEarned').each(function(){
-        let thisCardLeftOverVerdancy = parseInt($(this).attr('final-scoring-verdancy-amount'));        
-        totalLeftOverVerdancy = totalLeftOverVerdancy + thisCardLeftOverVerdancy;        
+        let thisCardLeftOverVerdancy = parseInt($(this).attr('final-scoring-verdancy-amount'));   
+        totalLeftOverVerdancy = totalLeftOverVerdancy + thisCardLeftOverVerdancy;   
     });
     
     leftOverVerdancyFinalVPs = Math.floor(totalLeftOverVerdancy / 2);    
@@ -3985,8 +3987,8 @@ function finalScoringCalculation() {
     let potPointsRange = ['terracotta', 'porcelain', 'wood', 'concrete']; // index = plant pot points
 
     $('#finalMap .mapTileContainer[cardtype="plant"]:not([plant-pot="none"])').each(function(){
-        let thisPlantPotType = $(this).attr('plant-pot');                        
-        potPointsFinalVPs = potPointsFinalVPs + potPointsRange.indexOf(thisPlantPotType);        
+        let thisPlantPotType = $(this).attr('plant-pot');                   
+        potPointsFinalVPs = potPointsFinalVPs + potPointsRange.indexOf(thisPlantPotType);   
     });
 
     $('#fs-potPoints').html(potPointsFinalVPs);
@@ -4016,28 +4018,28 @@ function finalScoringCalculation() {
         let roomAndPlantTypeMatches = 0;
     
         if($(`#row-${thisRow - 1}-column-${thisColumn}`).length) {            
-            let firstNeighbourPlantType = $(`#row-${thisRow - 1}-column-${thisColumn} .cardContainer`).attr('plant-type');            
+            let firstNeighbourPlantType = $(`#row-${thisRow - 1}-column-${thisColumn} .cardContainer`).attr('plant-type');       
             if(firstNeighbourPlantType == thisRoomType) {                
                 roomAndPlantTypeMatches++;
             }
         }
         
         if($(`#row-${thisRow}-column-${thisColumn + 1}`).length) {            
-            let secondNeighbourPlantType = $(`#row-${thisRow}-column-${thisColumn + 1} .cardContainer`).attr('plant-type');            
+            let secondNeighbourPlantType = $(`#row-${thisRow}-column-${thisColumn + 1} .cardContainer`).attr('plant-type');       
             if(secondNeighbourPlantType == thisRoomType) {                
                 roomAndPlantTypeMatches++;
             }
         }
         
         if($(`#row-${thisRow + 1}-column-${thisColumn}`).length) {            
-            let thirdNeighbourPlantType = $(`#row-${thisRow + 1}-column-${thisColumn} .cardContainer`).attr('plant-type');            
+            let thirdNeighbourPlantType = $(`#row-${thisRow + 1}-column-${thisColumn} .cardContainer`).attr('plant-type');       
             if(thirdNeighbourPlantType == thisRoomType) {                
                 roomAndPlantTypeMatches++;
             }
         }
         
         if($(`#row-${thisRow}-column-${thisColumn - 1}`).length) {            
-            let fourthNeighbourPlantType = $(`#row-${thisRow}-column-${thisColumn - 1} .cardContainer`).attr('plant-type');            
+            let fourthNeighbourPlantType = $(`#row-${thisRow}-column-${thisColumn - 1} .cardContainer`).attr('plant-type');       
             if(fourthNeighbourPlantType == thisRoomType) {                
                 roomAndPlantTypeMatches++;
             }
@@ -4046,7 +4048,7 @@ function finalScoringCalculation() {
 
         if(roomAndPlantTypeMatches != 0) {                        
             let totalMatchedRoomAndPlantsPoints = roomAndPlantTypeMatches * thisRoomMatchingPoints            
-            roomPointsFinalVPs = roomPointsFinalVPs + totalMatchedRoomAndPlantsPoints;            
+            roomPointsFinalVPs = roomPointsFinalVPs + totalMatchedRoomAndPlantsPoints;       
         }
 
     });
@@ -4064,7 +4066,7 @@ function finalScoringCalculation() {
         allFurnitureAndPets.push($(this).attr('furniture-pet-name'));
     });
 
-    let uniqueFurnitureAndPets = allFurnitureAndPets.filter(onlyUnique);            
+    let uniqueFurnitureAndPets = allFurnitureAndPets.filter(onlyUnique);       
     uniquePetsFurnitureFinalVPs = uniqueFurnitureAndPetsScoringRange[uniqueFurnitureAndPets.length];    
 
     $('#fs-uniquePetsFurniture').html(uniquePetsFurnitureFinalVPs);
