@@ -594,14 +594,14 @@ p.mapDebug {
 }
 
 #topInfoBar #showScoringRemindersBtn.button.is-primary.is-light.topInfoBarBtn {
-    background-color: #ebfffc;
+    background-color: #cff9f2;
     color: #00947e;
     margin-left:0px;
     margin-left: 50px;
 }
 
 #topInfoBar .button.is-link.is-light.showFullInstructionsButton.topInfoBarBtn {
-    background-color: #eef3fc;
+    background-color: #cddfff;
     color: #2160c4b5;
     margin: 9px 0px 0px 20px;
     margin-left: 20px;
